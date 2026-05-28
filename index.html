@@ -1832,7 +1832,6 @@
 
       // ── 1. PayPal Wallet Button ──────────────────────────────
       paypal.Buttons({
-        fundingSource: paypal.FUNDING.PAYPAL,
         createOrder: () => createOrderServerSide(),
         onApprove: async (data) => {
           await captureOrderServerSide(data.orderID);
