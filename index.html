@@ -1768,22 +1768,32 @@
         if (data.success) {
           registeredEmail = email;
           const refCode = data.refCode || ('CC30-' + Math.abs([...email].reduce((h, c) => Math.imul(31, h) + c.charCodeAt(0) | 0, 0)) % 1000000).toString().padStart(6, '0');
-          document.getElementById('transfer-ref').textContent = refCode;
+          
+          const refEl = document.getElementById('transfer-ref');
+          if (refEl) refEl.textContent = refCode;
+
           // Update QR code with actual ref
           const qrImg = document.getElementById('qr-img');
           if (qrImg) qrImg.src = `https://img.vietqr.io/image/MB-468166168-compact2.png?amount=168000&addInfo=${encodeURIComponent(refCode)}&accountName=NGUYEN%20QUANG%20KHAI`;
 
           // Show payment info
-          document.getElementById('trust-badges').style.display = 'none';
+          const badgesEl = document.getElementById('trust-badges');
+          if (badgesEl) badgesEl.style.display = 'none';
+
           if (method === 'bank') {
-            document.getElementById('bank-info').classList.add('show');
-            document.getElementById('paypal-info').style.display = 'none';
+            const bankInfoEl = document.getElementById('bank-info');
+            if (bankInfoEl) bankInfoEl.classList.add('show');
+            const paypalInfoEl = document.getElementById('paypal-info');
+            if (paypalInfoEl) paypalInfoEl.style.display = 'none';
             // Start polling for payment confirmation
-            document.getElementById('poll-status').style.display = 'block';
+            const pollStatusEl = document.getElementById('poll-status');
+            if (pollStatusEl) pollStatusEl.style.display = 'block';
             startPolling(refCode);
           } else {
-            document.getElementById('paypal-info').classList.add('show');
-            document.getElementById('bank-info').style.display = 'none';
+            const paypalInfoEl = document.getElementById('paypal-info');
+            if (paypalInfoEl) paypalInfoEl.classList.add('show');
+            const bankInfoEl = document.getElementById('bank-info');
+            if (bankInfoEl) bankInfoEl.style.display = 'none';
             initPayPal(name, email);
           }
           showMsg('✅ Details recorded! Please finalize your payment.', 'success');
