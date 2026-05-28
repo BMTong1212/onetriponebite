@@ -671,7 +671,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
 // ============================================================
 // CONFIG — Cập nhật các giá trị này
 // ============================================================
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbzLpOS-rfBF0luOIRBs4z8KyffbG5CWwGljEbv7wrSjH0MalcLzLdSmoD7Cbxd_UG-9/exec';
+const GAS_URL = '/api/register';
 const PAYPAL_AMOUNT = '7.00';
 
 // ============================================================
@@ -741,8 +741,9 @@ form.addEventListener('submit', async (e) => {
   btn.textContent = 'Processing...';
 
   try {
-    const res = await fetch(GAS_URL, {
+    const res = await fetch('/api/register', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'register', name, email, phone, method })
     });
     const data = await res.json();
@@ -936,7 +937,7 @@ async function checkPaymentStatus() {
     return;
   }
   try {
-    const res = await fetch(`${GAS_URL}?action=check&ref=${encodeURIComponent(currentRef)}`);
+    const res = await fetch(`/api/check-payment?ref=${encodeURIComponent(currentRef)}`);
     const data = await res.json();
     if (data.paid) {
       clearInterval(pollTimer);
