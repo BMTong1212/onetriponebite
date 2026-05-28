@@ -1791,7 +1791,8 @@
           showMsg('❌ Error: ' + (data.error || 'Please try again later'), 'error');
         }
       } catch (err) {
-        showMsg('⚠️ Connection failed. Please contact support via email.', 'error');
+        console.error('Registration fetch error:', err);
+        showMsg('⚠️ Connection failed (' + err.toString() + '). Please contact support via email.', 'error');
       }
 
       btn.disabled = false;
