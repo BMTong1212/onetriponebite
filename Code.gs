@@ -429,7 +429,7 @@ function sendTelegramMessage(text) {
   const chatId = CONFIG.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
   try {
-    UrlFetchApp.fetch(
+    const res = UrlFetchApp.fetch(
       'https://api.telegram.org/bot' + token + '/sendMessage',
       {
         method: 'post',
@@ -438,6 +438,7 @@ function sendTelegramMessage(text) {
         muteHttpExceptions: true
       }
     );
+    Logger.log('Telegram response: ' + res.getContentText());
   } catch (err) {
     Logger.log('Telegram error: ' + err.toString());
   }
