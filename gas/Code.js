@@ -17,13 +17,13 @@ const CONFIG = {
   SHEET_ID: '1sNVtWsh6bA8rklzp8fqMYlcH8m2OU3fUgTwyP1jfnU0',
   SHEET_ORDERS: 'Orders',
 
-  PRODUCT_NAME: 'Content Calendar 30 Ngày Marketing',
+  PRODUCT_NAME: '30-Day Marketing Content Calendar',
   PRODUCT_PRICE_VND: '168,000đ',
-  PRODUCT_PRICE_USD: '$7 USD',
+  PRODUCT_PRICE_USD: '$7',
 
   DOWNLOAD_LINK: 'https://drive.google.com/drive/folders/1xf5-8Of5eGaXv-nsnMpl9vZk4u_h5o9M?usp=sharing',
 
-  SUPPORT_EMAIL: 'phukien168.com@gmail.com',
+  SUPPORT_EMAIL: 'support@onetriponebite.com',
   SENDER_NAME: 'ContentPro',
 
   BANK_NAME: 'MB Bank',
@@ -33,7 +33,7 @@ const CONFIG = {
   // Set these in GAS PropertiesService instead of hardcoding here
   TELEGRAM_BOT_TOKEN: PropertiesService.getScriptProperties().getProperty('TELEGRAM_BOT_TOKEN') || 'YOUR_TELEGRAM_BOT_TOKEN_HERE',
   TELEGRAM_CHAT_ID:   PropertiesService.getScriptProperties().getProperty('TELEGRAM_CHAT_ID') || 'YOUR_TELEGRAM_CHAT_ID_HERE',
-  PRODUCT_PRICE_RAW:  168000,
+  PRODUCT_PRICE_RAW:  7.00,
 };
 
 // ============================================================
@@ -54,8 +54,8 @@ const COLS = {
 };
 
 const HEADER = [
-  'Timestamp', 'Mã Ref', 'Họ Tên', 'Email', 'SĐT',
-  'Phương Thức', 'Trạng Thái', 'Thời gian TT', 'Transaction ID', 'Nội Dung CK'
+  'Timestamp', 'Ref Code', 'Name', 'Email', 'Phone',
+  'Payment Method', 'Status', 'Payment Time', 'Transaction ID', 'Transfer Content'
 ];
 
 // ============================================================
@@ -206,18 +206,18 @@ function handlePaypalComplete(body) {
     ]);
   }
 
-  sendDeliveryEmail(email, name || 'Bạn', 'paypal', txId || '');
+  sendDeliveryEmail(email, name || 'Customer', 'paypal', txId || '');
 
-  const paidAtPP = Utilities.formatDate(now, 'Asia/Ho_Chi_Minh', 'HH:mm - dd/MM/yyyy');
+  const paidAtPP = Utilities.formatDate(now, 'America/New_York', 'HH:mm - MM/dd/yyyy');
   sendTelegramMessage(
-    '🎉 ĐƠN HÀNG MỚI - THANH TOÁN THÀNH CÔNG\n\n' +
-    '📦 Sản phẩm: ' + CONFIG.PRODUCT_NAME + '\n' +
-    '👤 Khách hàng: ' + (name || 'N/A') + '\n' +
+    '🎉 NEW ORDER - PAYMENT SUCCESSFUL\n\n' +
+    '📦 Product: ' + CONFIG.PRODUCT_NAME + '\n' +
+    '👤 Customer: ' + (name || 'N/A') + '\n' +
     '📧 Email: ' + email + '\n' +
-    '💳 Phương thức: PayPal\n' +
-    '💰 Giá trị: ' + CONFIG.PRODUCT_PRICE_USD + '\n' +
-    '🔖 Mã giao dịch: ' + (txId || 'N/A') + '\n' +
-    '⏰ Thời gian: ' + paidAtPP
+    '💳 Method: PayPal\n' +
+    '💰 Amount: ' + CONFIG.PRODUCT_PRICE_USD + '\n' +
+    '🔖 Transaction ID: ' + (txId || 'N/A') + '\n' +
+    '⏰ Time: ' + paidAtPP
   );
 
   return jsonResponse({ success: true });
@@ -262,17 +262,17 @@ function handleSepayWebhook(payload) {
       sendDeliveryEmail(toEmail, toName, 'bank', ref);
       Logger.log('Confirmed PAID_BANK: ref=' + ref + ' email=' + toEmail);
 
-      const paidAt = Utilities.formatDate(now, 'Asia/Ho_Chi_Minh', 'HH:mm - dd/MM/yyyy');
+      const paidAt = Utilities.formatDate(now, 'America/New_York', 'HH:mm - MM/dd/yyyy');
       sendTelegramMessage(
-        '🎉 ĐƠN HÀNG MỚI - THANH TOÁN THÀNH CÔNG\n\n' +
-        '📦 Sản phẩm: ' + CONFIG.PRODUCT_NAME + '\n' +
-        '👤 Khách hàng: ' + toName + '\n' +
+        '🎉 NEW ORDER - PAYMENT SUCCESSFUL\n\n' +
+        '📦 Product: ' + CONFIG.PRODUCT_NAME + '\n' +
+        '👤 Customer: ' + toName + '\n' +
         '📧 Email: ' + toEmail + '\n' +
-        '📱 SĐT: ' + (data[i][COLS.PHONE - 1] || 'N/A') + '\n' +
-        '💳 Phương thức: Chuyển khoản ' + CONFIG.BANK_NAME + '\n' +
-        '💰 Giá trị: ' + CONFIG.PRODUCT_PRICE_VND + '\n' +
-        '🔖 Mã đơn: ' + ref + '\n' +
-        '⏰ Thời gian: ' + paidAt
+        '📱 Phone: ' + (data[i][COLS.PHONE - 1] || 'N/A') + '\n' +
+        '💳 Method: Bank Transfer ' + CONFIG.BANK_NAME + '\n' +
+        '💰 Amount: ' + CONFIG.PRODUCT_PRICE_USD + '\n' +
+        '🔖 Ref Code: ' + ref + '\n' +
+        '⏰ Time: ' + paidAt
       );
 
       // Delete remaining duplicate PENDING rows with same ref
@@ -357,10 +357,10 @@ function handleCheckPayment(ref) {
 
 function sendDeliveryEmail(toEmail, toName, method, ref) {
   try {
-    const subject = '🎉 [ContentPro] File của bạn đã sẵn sàng tải về!';
+    const subject = '🎉 [ContentPro] Your file is ready for download!';
     const methodLabel = method === 'paypal'
-      ? 'PayPal (Mã GD: ' + ref + ')'
-      : 'Chuyển khoản MB Bank (Mã: ' + ref + ')';
+      ? 'PayPal (TXN ID: ' + ref + ')'
+      : 'Bank Transfer (Ref: ' + ref + ')';
 
     const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>'
       + '<body style="margin:0;padding:0;background:#f0f4f8;font-family:Arial,sans-serif;font-size:16px;">'
@@ -369,38 +369,38 @@ function sendDeliveryEmail(toEmail, toName, method, ref) {
       + '<tr><td style="background:linear-gradient(135deg,#06142f,#0b3778);padding:40px 32px;text-align:center;">'
       + '<div style="font-size:48px;margin-bottom:14px;">🗓️</div>'
       + '<h1 style="color:#fff;margin:0;font-size:30px;font-weight:900;letter-spacing:-0.5px;">ContentPro</h1>'
-      + '<p style="color:rgba(255,255,255,.75);margin:10px 0 0;font-size:16px;">Cảm ơn bạn đã tin tưởng!</p>'
+      + '<p style="color:rgba(255,255,255,.75);margin:10px 0 0;font-size:16px;">Thank you for your purchase!</p>'
       + '</td></tr>'
       + '<tr><td style="padding:36px 32px;">'
-      + '<h2 style="color:#06142f;font-size:24px;font-weight:900;margin:0 0 10px;">Xin chào ' + escapeHtml(toName) + '! 🎉</h2>'
-      + '<p style="color:#4a5568;font-size:17px;line-height:1.7;margin:0 0 28px;">Thanh toán đã được xác nhận. File <strong style="color:#06142f;">' + CONFIG.PRODUCT_NAME + '</strong> đã sẵn sàng để tải về.</p>'
+      + '<h2 style="color:#06142f;font-size:24px;font-weight:900;margin:0 0 10px;">Hi ' + escapeHtml(toName) + '! 🎉</h2>'
+      + '<p style="color:#4a5568;font-size:17px;line-height:1.7;margin:0 0 28px;">Your payment has been successfully confirmed. Your file, <strong style="color:#06142f;">' + CONFIG.PRODUCT_NAME + '</strong>, is now ready for download.</p>'
       + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;"><tr><td align="center">'
       + '<a href="' + CONFIG.DOWNLOAD_LINK + '" style="display:inline-block;background:linear-gradient(135deg,#1d6fe3,#0f55c8);color:#fff;text-decoration:none;padding:20px 48px;border-radius:14px;font-weight:900;font-size:18px;box-shadow:0 8px 24px rgba(21,94,208,.35);letter-spacing:-0.3px;">'
-      + '📥 Tải Xuống File Ngay</a>'
+      + '📥 Download Your File Now</a>'
       + '</td></tr></table>'
       + '<table width="100%" cellpadding="0" cellspacing="0" style="background:#eaf3ff;border-radius:14px;margin-bottom:28px;"><tr><td style="padding:22px 26px;">'
-      + '<p style="margin:0 0 14px;color:#06142f;font-weight:800;font-size:16px;">📋 Thông tin đơn hàng</p>'
+      + '<p style="margin:0 0 14px;color:#06142f;font-weight:800;font-size:16px;">📋 Order Details</p>'
       + '<table width="100%" style="border-collapse:collapse;">'
-      + '<tr><td style="color:#4a5568;font-size:15px;padding:6px 0;border-bottom:1px solid #d0e4f7;">Sản phẩm</td><td style="color:#06142f;font-size:15px;font-weight:700;text-align:right;border-bottom:1px solid #d0e4f7;">' + CONFIG.PRODUCT_NAME + '</td></tr>'
-      + '<tr><td style="color:#4a5568;font-size:15px;padding:6px 0;border-bottom:1px solid #d0e4f7;">Email nhận file</td><td style="color:#06142f;font-size:15px;font-weight:700;text-align:right;border-bottom:1px solid #d0e4f7;">' + escapeHtml(toEmail) + '</td></tr>'
-      + '<tr><td style="color:#4a5568;font-size:15px;padding:6px 0;">Phương thức</td><td style="color:#06142f;font-size:15px;font-weight:700;text-align:right;">' + methodLabel + '</td></tr>'
+      + '<tr><td style="color:#4a5568;font-size:15px;padding:6px 0;border-bottom:1px solid #d0e4f7;">Product</td><td style="color:#06142f;font-size:15px;font-weight:700;text-align:right;border-bottom:1px solid #d0e4f7;">' + CONFIG.PRODUCT_NAME + '</td></tr>'
+      + '<tr><td style="color:#4a5568;font-size:15px;padding:6px 0;border-bottom:1px solid #d0e4f7;">Delivery Email</td><td style="color:#06142f;font-size:15px;font-weight:700;text-align:right;border-bottom:1px solid #d0e4f7;">' + escapeHtml(toEmail) + '</td></tr>'
+      + '<tr><td style="color:#4a5568;font-size:15px;padding:6px 0;">Payment Method</td><td style="color:#06142f;font-size:15px;font-weight:700;text-align:right;">' + methodLabel + '</td></tr>'
       + '</table></td></tr></table>'
       + '<table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border-radius:14px;margin-bottom:28px;"><tr><td style="padding:22px 26px;">'
-      + '<p style="margin:0 0 14px;color:#06142f;font-weight:800;font-size:16px;">✅ Bộ file gồm 9 sheets</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">📖 Hướng Dẫn Sử Dụng</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">📊 Dashboard 90 Bài Đăng</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🗓 Lịch 30 Ngày Hoàn Chỉnh</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">📝 10 Caption Facebook Ready</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🎨 10 Visual Concepts Cinematic</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🔄 Hệ Thống Đa Kênh (5 nền tảng)</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🏆 Top 10 Siêu Phẩm Viral</p>'
-      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🪝 Hook Bank 20 Mẫu</p>'
+      + '<p style="margin:0 0 14px;color:#06142f;font-weight:800;font-size:16px;">✅ What is included in your templates</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">📖 Quick Start Guide</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">📊 90-Post Content Dashboard</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🗓 30-Day Master Content Calendar</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">📝 10 Copy-and-Paste Captions</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🎨 10 Visual Concept Ideas</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🔄 Multichannel Framework (5 Platforms)</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🏆 Top 10 Viral Post Formulas</p>'
+      + '<p style="margin:7px 0;color:#4a5568;font-size:15px;line-height:1.5;">🪝 20 Viral Headline Hooks</p>'
       + '</td></tr></table>'
-      + '<p style="color:#4a5568;font-size:15px;line-height:1.7;margin:0;">💬 Cần hỗ trợ? Liên hệ <a href="mailto:' + CONFIG.SUPPORT_EMAIL + '" style="color:#1d6fe3;font-weight:700;">' + CONFIG.SUPPORT_EMAIL + '</a></p>'
+      + '<p style="color:#4a5568;font-size:15px;line-height:1.7;margin:0;">💬 Need help? Contact us at <a href="mailto:' + CONFIG.SUPPORT_EMAIL + '" style="color:#1d6fe3;font-weight:700;">' + CONFIG.SUPPORT_EMAIL + '</a></p>'
       + '</td></tr>'
       + '<tr><td style="background:#f0f4f8;padding:24px 32px;text-align:center;border-top:1px solid #dbe5f2;">'
       + '<p style="color:#718096;font-size:14px;margin:0;">© 2026 ContentPro · <a href="mailto:' + CONFIG.SUPPORT_EMAIL + '" style="color:#718096;">' + CONFIG.SUPPORT_EMAIL + '</a></p>'
-      + '<p style="color:#718096;font-size:13px;margin:8px 0 0;">🔒 Bảo đảm hoàn tiền 7 ngày nếu không hài lòng</p>'
+      + '<p style="color:#718096;font-size:13px;margin:8px 0 0;">🔒 7-Day money-back guarantee</p>'
       + '</td></tr>'
       + '</table></td></tr></table></body></html>';
 
@@ -467,20 +467,20 @@ function sendDailyReport() {
   const paidTotal  = paidBank + paidPaypal;
   const revenue    = paidTotal * CONFIG.PRODUCT_PRICE_RAW;
   const convRate   = formCount > 0 ? ((paidTotal / formCount) * 100).toFixed(1) : '0.0';
-  const revenueStr = revenue.toLocaleString('vi-VN') + 'đ';
-  const dateStr    = Utilities.formatDate(today, 'Asia/Ho_Chi_Minh', 'dd/MM/yyyy');
+  const revenueStr = '$' + revenue.toFixed(2);
+  const dateStr    = Utilities.formatDate(today, 'America/New_York', 'MM/dd/yyyy');
 
   const msg =
-    '📊 BÁO CÁO NGÀY ' + dateStr + '\n' +
-    'Content Calendar 30 Ngày\n' +
+    '📊 DAILY REPORT: ' + dateStr + '\n' +
+    '30-Day Content Calendar\n' +
     '▬▬▬▬▬▬▬▬▬▬▬▬\n\n' +
-    '📝 Form đăng ký:   ' + formCount + ' người\n' +
-    '✅ Đơn thành công: ' + paidTotal + ' đơn\n' +
-    '💰 Doanh thu:      ' + revenueStr + '\n' +
-    '📈 Chuyển đổi:     ' + convRate + '%\n' +
+    '📝 Registrations: ' + formCount + '\n' +
+    '✅ Paid Orders:   ' + paidTotal + '\n' +
+    '💰 Revenue:       ' + revenueStr + '\n' +
+    '📈 Conv. Rate:    ' + convRate + '%\n' +
     '▬▬▬▬▬▬▬▬▬▬▬▬\n' +
-    '🏦 Chuyển khoản: ' + paidBank + ' đơn\n' +
-    '💳 PayPal:       ' + paidPaypal + ' đơn';
+    '🏦 Bank Transfer: ' + paidBank + '\n' +
+    '💳 PayPal:        ' + paidPaypal;
 
   sendTelegramMessage(msg);
   Logger.log('Daily report sent: ' + dateStr);
@@ -595,6 +595,6 @@ function setupDailyReportTrigger() {
 
 // Test gửi Telegram thủ công — chạy trong GAS Editor để verify bot token + chat ID
 function testTelegram() {
-  sendTelegramMessage('✅ Test kết nối Telegram thành công!\nBot đã sẵn sàng nhận thông báo đơn hàng.');
+  sendTelegramMessage('✅ Telegram integration test successful!\nBot is ready to receive order notifications.');
   Logger.log('testTelegram sent');
 }

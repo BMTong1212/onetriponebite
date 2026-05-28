@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -194,8 +194,8 @@ if (params.get('key') !== ADMIN_KEY) {
   document.getElementById('root').innerHTML = `
     <div class="screen-403">
       <div class="code">403</div>
-      <div class="msg">Truy cập bị từ chối</div>
-      <div class="sub">Thêm ?key=... vào URL để tiếp tục</div>
+      <div class="msg">Access Denied</div>
+      <div class="sub">Add ?key=... to the URL to continue</div>
     </div>`;
 } else {
   document.getElementById('root').innerHTML = `
@@ -204,19 +204,19 @@ if (params.get('key') !== ADMIN_KEY) {
         <div class="icon">🔧</div>
         <div>
           <h1>Admin — Resend Email</h1>
-          <p>Gửi lại email delivery cho khách hàng</p>
+          <p>Resend delivery email to customer</p>
         </div>
       </div>
 
-      <label for="ref-input">Mã ref đơn hàng</label>
+      <label for="ref-input">Order Reference Code</label>
       <div class="input-row">
         <input type="text" id="ref-input" placeholder="CC30-XXXXXX" autocomplete="off" spellcheck="false">
         <button id="send-btn" onclick="resend()">
           <span class="spinner" id="spinner"></span>
-          <span id="btn-label">Gửi</span>
+          <span id="btn-label">Send</span>
         </button>
       </div>
-      <div class="hint">Ref code tìm trong Google Sheet, cột B (ví dụ: CC30-A1B2C3)</div>
+      <div class="hint">Find the ref code in Google Sheet, Column B (e.g., CC30-A1B2C3)</div>
 
       <div class="result" id="result">
         <span class="result-icon" id="result-icon"></span>
@@ -245,7 +245,7 @@ async function resend() {
 
   btn.disabled = true;
   spinner.style.display = 'block';
-  btnLabel.textContent = 'Đang gửi...';
+  btnLabel.textContent = 'Sending...';
   result.className = 'result';
   result.style.display = 'none';
 
@@ -259,11 +259,11 @@ async function resend() {
 
     if (data.success) {
       icon.textContent = '✓';
-      text.innerHTML = `Đã gửi email đến <span class="result-email">${data.email}</span><br>Ref: ${data.ref} · Trạng thái: ${data.status}`;
+      text.innerHTML = `Email sent to <span class="result-email">${data.email}</span><br>Ref: ${data.ref} · Status: ${data.status}`;
       result.className = 'result success';
     } else {
       icon.textContent = '✕';
-      text.textContent = data.error || 'Có lỗi xảy ra';
+      text.textContent = data.error || 'An error occurred';
       result.className = 'result error';
     }
     result.style.display = 'flex';
@@ -271,13 +271,13 @@ async function resend() {
     const icon = document.getElementById('result-icon');
     const text = document.getElementById('result-text');
     icon.textContent = '✕';
-    text.textContent = 'Không kết nối được GAS. Kiểm tra mạng hoặc deployment URL.';
+    text.textContent = 'Could not connect to Google Apps Script. Check network or deployment URL.';
     result.className = 'result error';
     result.style.display = 'flex';
   } finally {
     btn.disabled = false;
     spinner.style.display = 'none';
-    btnLabel.textContent = 'Gửi';
+    btnLabel.textContent = 'Send';
   }
 }
 </script>

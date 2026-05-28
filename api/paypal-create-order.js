@@ -42,7 +42,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { amount = '7.00', description = 'Content Calendar 30 Ngày — ContentPro' } = req.body || {};
+    const { amount = '7.00', description = '30-Day Content Calendar — ContentPro' } = req.body || {};
 
     const accessToken = await getAccessToken();
 
