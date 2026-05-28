@@ -1,6 +1,6 @@
 #!/bin/bash
-CLASP=clasp
-DEPLOYMENT_ID="AKfycbzLpOS-rfBF0luOIRBs4z8KyffbG5CWwGljEbv7wrSjH0MalcLzLdSmoD7Cbxd_UG-9"
+CLASP="npx @google/clasp"
+DEPLOYMENT_ID="AKfycbw-aHSJi-t1mxF-nSGO3tQqoTcIQLh060hVA6pUCof9sQmby0abzjFjy89DE9J0tOU"
 VERSION="${1:-latest}"
 
 echo "→ Pushing code..."

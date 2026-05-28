@@ -14,7 +14,7 @@
 // ⚙️ CẤU HÌNH — Chỉnh sửa các giá trị này
 // ============================================================
 const CONFIG = {
-  SHEET_ID: '1sNVtWsh6bA8rklzp8fqMYlcH8m2OU3fUgTwyP1jfnU0',
+  SHEET_ID: '1IFiNuC2bzt-VPPDS52tM2nPLpNVDksCfYGCbjMCo3_U',
   SHEET_ORDERS: 'Orders',
 
   PRODUCT_NAME: '30-Day Marketing Content Calendar',
@@ -32,8 +32,8 @@ const CONFIG = {
 
   // Set these in GAS PropertiesService instead of hardcoding here
   TELEGRAM_BOT_TOKEN: PropertiesService.getScriptProperties().getProperty('TELEGRAM_BOT_TOKEN') || 'YOUR_TELEGRAM_BOT_TOKEN_HERE',
-  TELEGRAM_CHAT_ID:   PropertiesService.getScriptProperties().getProperty('TELEGRAM_CHAT_ID') || 'YOUR_TELEGRAM_CHAT_ID_HERE',
-  PRODUCT_PRICE_RAW:  7.00,
+  TELEGRAM_CHAT_ID: PropertiesService.getScriptProperties().getProperty('TELEGRAM_CHAT_ID') || 'YOUR_TELEGRAM_CHAT_ID_HERE',
+  PRODUCT_PRICE_RAW: 7.00,
 };
 
 // ============================================================
@@ -41,15 +41,15 @@ const CONFIG = {
 // Thay đổi ở đây → tự động áp dụng khắp nơi
 // ============================================================
 const COLS = {
-  TIMESTAMP:   1,  // A
-  REF:         2,  // B
-  NAME:        3,  // C
-  EMAIL:       4,  // D
-  PHONE:       5,  // E
-  METHOD:      6,  // F
-  STATUS:      7,  // G
-  PAID_AT:     8,  // H
-  TX_ID:       9,  // I
+  TIMESTAMP: 1,  // A
+  REF: 2,  // B
+  NAME: 3,  // C
+  EMAIL: 4,  // D
+  PHONE: 5,  // E
+  METHOD: 6,  // F
+  STATUS: 7,  // G
+  PAID_AT: 8,  // H
+  TX_ID: 9,  // I
   CK_CONTENT: 10,  // J
 };
 
@@ -100,9 +100,9 @@ function doPost(e) {
     const body = JSON.parse(e.postData.contents);
     const action = body.action || '';
 
-    if (action === 'register')        return handleRegister(body);
+    if (action === 'register') return handleRegister(body);
     if (action === 'paypal_complete') return handlePaypalComplete(body);
-    if (action === 'sepay_webhook')   return handleSepayWebhook(body);
+    if (action === 'sepay_webhook') return handleSepayWebhook(body);
     // Set SETUP_TRIGGER_SECRET in GAS PropertiesService before calling this action
     if (action === 'setup_trigger' && body.secret === (PropertiesService.getScriptProperties().getProperty('SETUP_TRIGGER_SECRET') || 'CHANGE_ME')) {
       setupDailyReportTrigger();
@@ -125,7 +125,7 @@ function handleRegister(body) {
   if (!name || !email) return jsonResponse({ success: false, error: 'Missing name or email' });
 
   const sheet = getSheet();
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
 
   // Idempotent: return existing ref if email already registered
   for (let i = 1; i < data.length; i++) {
@@ -165,13 +165,13 @@ function handlePaypalComplete(body) {
   if (!email) return jsonResponse({ success: false, error: 'Missing email' });
 
   const sheet = getSheet();
-  const now   = new Date();
-  const data  = sheet.getDataRange().getValues();
+  const now = new Date();
+  const data = sheet.getDataRange().getValues();
   let updated = false;
 
   let paidRowIndex = -1;
   for (let i = 1; i < data.length; i++) {
-    const rowEmail  = (data[i][COLS.EMAIL  - 1] || '').toString();
+    const rowEmail = (data[i][COLS.EMAIL - 1] || '').toString();
     const rowStatus = (data[i][COLS.STATUS - 1] || '').toString();
     if (rowEmail === email && rowStatus === 'PENDING') {
       sheet.getRange(i + 1, COLS.STATUS).setValue('PAID_PAYPAL');
@@ -187,8 +187,8 @@ function handlePaypalComplete(body) {
   if (paidRowIndex !== -1) {
     const toDelete = [];
     for (let j = paidRowIndex + 1; j < data.length; j++) {
-      if ((data[j][COLS.EMAIL  - 1] || '').toString() === email &&
-          (data[j][COLS.STATUS - 1] || '').toString() === 'PENDING') {
+      if ((data[j][COLS.EMAIL - 1] || '').toString() === email &&
+        (data[j][COLS.STATUS - 1] || '').toString() === 'PENDING') {
         toDelete.push(j + 1);
       }
     }
@@ -234,18 +234,18 @@ function handleSepayWebhook(payload) {
   Logger.log('SePay content: ' + content);
 
   const sheet = getSheet();
-  const data  = sheet.getDataRange().getValues();
-  const now   = new Date();
+  const data = sheet.getDataRange().getValues();
+  const now = new Date();
 
   for (let i = 1; i < data.length; i++) {
-    const ref       = (data[i][COLS.REF    - 1] || '').toString().toUpperCase();
+    const ref = (data[i][COLS.REF - 1] || '').toString().toUpperCase();
     const rowStatus = (data[i][COLS.STATUS - 1] || '').toString();
 
     if (!ref || rowStatus !== 'PENDING') continue;
 
     // MBBank có thể gửi: "CC30-546237474", "CC30546237474", hoặc "CC30 546237474"
     // Strip cả dash lẫn space để match mọi format
-    const refNorm    = ref.replace(/[-\s]/g, '');
+    const refNorm = ref.replace(/[-\s]/g, '');
     const contentNorm = content.replace(/[-\s]/g, '');
     const matched = content.includes(ref) || contentNorm.includes(refNorm);
 
@@ -258,7 +258,7 @@ function handleSepayWebhook(payload) {
       sheet.getRange(i + 1, COLS.CK_CONTENT).setValue(content);
 
       const toEmail = (data[i][COLS.EMAIL - 1] || '').toString();
-      const toName  = (data[i][COLS.NAME  - 1] || '').toString();
+      const toName = (data[i][COLS.NAME - 1] || '').toString();
       sendDeliveryEmail(toEmail, toName, 'bank', ref);
       Logger.log('Confirmed PAID_BANK: ref=' + ref + ' email=' + toEmail);
 
@@ -278,7 +278,7 @@ function handleSepayWebhook(payload) {
       // Delete remaining duplicate PENDING rows with same ref
       const toDelete = [];
       for (let j = i + 1; j < data.length; j++) {
-        const jRef    = (data[j][COLS.REF    - 1] || '').toString().toUpperCase();
+        const jRef = (data[j][COLS.REF - 1] || '').toString().toUpperCase();
         const jStatus = (data[j][COLS.STATUS - 1] || '').toString();
         if ((jRef === ref || jRef.replace(/-/g, '') === ref.replace(/-/g, '')) && jStatus === 'PENDING') {
           toDelete.push(j + 1);
@@ -303,8 +303,8 @@ function handleSepayWebhook(payload) {
 function handleResendDelivery(ref) {
   if (!ref) return jsonResponse({ success: false, error: 'Missing ref' });
 
-  const sheet   = getSheet();
-  const data    = sheet.getDataRange().getValues();
+  const sheet = getSheet();
+  const data = sheet.getDataRange().getValues();
   const refUpper = ref.toUpperCase();
 
   for (let i = 1; i < data.length; i++) {
@@ -312,8 +312,8 @@ function handleResendDelivery(ref) {
     if (rowRef !== refUpper) continue;
 
     const rowStatus = (data[i][COLS.STATUS - 1] || '').toString();
-    const toEmail   = (data[i][COLS.EMAIL  - 1] || '').toString();
-    const toName    = (data[i][COLS.NAME   - 1] || '').toString();
+    const toEmail = (data[i][COLS.EMAIL - 1] || '').toString();
+    const toName = (data[i][COLS.NAME - 1] || '').toString();
 
     // Update PAID_BANK nếu vẫn PENDING
     if (rowStatus === 'PENDING') {
@@ -336,12 +336,12 @@ function handleResendDelivery(ref) {
 function handleCheckPayment(ref) {
   if (!ref) return jsonResponse({ paid: false });
 
-  const sheet    = getSheet();
-  const data     = sheet.getDataRange().getValues();
+  const sheet = getSheet();
+  const data = sheet.getDataRange().getValues();
   const refUpper = ref.toUpperCase();
 
   for (let i = 1; i < data.length; i++) {
-    const rowRef    = (data[i][COLS.REF    - 1] || '').toString().toUpperCase();
+    const rowRef = (data[i][COLS.REF - 1] || '').toString().toUpperCase();
     const rowStatus = (data[i][COLS.STATUS - 1] || '').toString();
     if (rowRef === refUpper && rowStatus.startsWith('PAID')) {
       return jsonResponse({ paid: true, status: rowStatus });
@@ -425,7 +425,7 @@ function sendDeliveryEmail(toEmail, toName, method, ref) {
 // ============================================================
 
 function sendTelegramMessage(text) {
-  const token  = CONFIG.TELEGRAM_BOT_TOKEN;
+  const token = CONFIG.TELEGRAM_BOT_TOKEN;
   const chatId = CONFIG.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
   try {
@@ -444,9 +444,9 @@ function sendTelegramMessage(text) {
 }
 
 function sendDailyReport() {
-  const sheet  = getSheet();
-  const data   = sheet.getDataRange().getValues();
-  const today  = new Date();
+  const sheet = getSheet();
+  const data = sheet.getDataRange().getValues();
+  const today = new Date();
   const todayStr = Utilities.formatDate(today, 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd');
 
   let formCount = 0, paidBank = 0, paidPaypal = 0;
@@ -464,11 +464,11 @@ function sendDailyReport() {
     if (status === 'PAID_PAYPAL' || (status.startsWith('PAID') && method === 'paypal')) paidPaypal++;
   }
 
-  const paidTotal  = paidBank + paidPaypal;
-  const revenue    = paidTotal * CONFIG.PRODUCT_PRICE_RAW;
-  const convRate   = formCount > 0 ? ((paidTotal / formCount) * 100).toFixed(1) : '0.0';
+  const paidTotal = paidBank + paidPaypal;
+  const revenue = paidTotal * CONFIG.PRODUCT_PRICE_RAW;
+  const convRate = formCount > 0 ? ((paidTotal / formCount) * 100).toFixed(1) : '0.0';
   const revenueStr = '$' + revenue.toFixed(2);
-  const dateStr    = Utilities.formatDate(today, 'America/New_York', 'MM/dd/yyyy');
+  const dateStr = Utilities.formatDate(today, 'America/New_York', 'MM/dd/yyyy');
 
   const msg =
     '📊 DAILY REPORT: ' + dateStr + '\n' +
@@ -497,8 +497,8 @@ function generateRefCode(email) {
 
 // getSheet luôn ghi đè header row 1 — không bao giờ để header cũ sai tồn tại
 function getSheet() {
-  const ss    = SpreadsheetApp.openById(CONFIG.SHEET_ID);
-  let   sheet = ss.getSheetByName(CONFIG.SHEET_ORDERS);
+  const ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
+  let sheet = ss.getSheetByName(CONFIG.SHEET_ORDERS);
   if (!sheet) {
     sheet = ss.insertSheet(CONFIG.SHEET_ORDERS);
   }
@@ -541,19 +541,19 @@ function testHeader() {
 function testSepayWebhook() {
   const TEST_REF = 'CC30-546237';
   const cases = [
-    { desc: 'exact match with dash',  content: 'CC30-546237 CHUYEN KHOAN' },
-    { desc: 'no dash',                content: 'CC30546237 CHUYEN KHOAN' },
-    { desc: 'space separator',        content: 'CC30 546237 CHUYEN KHOAN' },
+    { desc: 'exact match with dash', content: 'CC30-546237 CHUYEN KHOAN' },
+    { desc: 'no dash', content: 'CC30546237 CHUYEN KHOAN' },
+    { desc: 'space separator', content: 'CC30 546237 CHUYEN KHOAN' },
   ];
 
   let allPassed = true;
-  cases.forEach(function(c) {
-    const ref         = TEST_REF.toUpperCase();
-    const content     = c.content.toUpperCase();
-    const refNorm     = ref.replace(/[-\s]/g, '');
+  cases.forEach(function (c) {
+    const ref = TEST_REF.toUpperCase();
+    const content = c.content.toUpperCase();
+    const refNorm = ref.replace(/[-\s]/g, '');
     const contentNorm = content.replace(/[-\s]/g, '');
-    const matched     = content.includes(ref) || contentNorm.includes(refNorm);
-    const ok          = matched === true;
+    const matched = content.includes(ref) || contentNorm.includes(refNorm);
+    const ok = matched === true;
     if (!ok) allPassed = false;
     Logger.log('[testSepayWebhook] ' + c.desc + ': matched=' + matched + ' ' + (ok ? 'PASS' : 'FAIL'));
   });
@@ -563,14 +563,14 @@ function testSepayWebhook() {
 // Resend delivery email cho khách đã PAID nhưng chưa nhận file — truyền vào email đầy đủ
 function manualResendByEmail(email) {
   const sheet = getSheet();
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
   for (let i = 1; i < data.length; i++) {
-    const rowEmail  = (data[i][COLS.EMAIL  - 1] || '').toString();
+    const rowEmail = (data[i][COLS.EMAIL - 1] || '').toString();
     const rowStatus = (data[i][COLS.STATUS - 1] || '').toString();
     if (rowEmail === email && rowStatus.startsWith('PAID')) {
-      const name   = (data[i][COLS.NAME - 1] || '').toString();
+      const name = (data[i][COLS.NAME - 1] || '').toString();
       const method = rowStatus === 'PAID_PAYPAL' ? 'paypal' : 'bank';
-      const ref    = (data[i][COLS.REF  - 1] || '').toString();
+      const ref = (data[i][COLS.REF - 1] || '').toString();
       sendDeliveryEmail(rowEmail, name, method, ref);
       Logger.log('manualResendByEmail: sent to ' + email + ' ref=' + ref);
       return;
@@ -581,7 +581,7 @@ function manualResendByEmail(email) {
 
 // Chạy 1 lần từ GAS Editor để tạo time-driven trigger báo cáo cuối ngày 23:00
 function setupDailyReportTrigger() {
-  ScriptApp.getProjectTriggers().forEach(function(t) {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'sendDailyReport') ScriptApp.deleteTrigger(t);
   });
   ScriptApp.newTrigger('sendDailyReport')
