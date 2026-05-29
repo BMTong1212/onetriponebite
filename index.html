@@ -1725,19 +1725,6 @@
     startCountdown();
 
     // ============================================================
-    // PAYMENT METHOD TOGGLE
-    // ============================================================
-    const pmBank = document.getElementById('pm-bank');
-    const pmPaypal = document.getElementById('pm-paypal');
-    const radios = document.querySelectorAll('input[name="payment"]');
-    radios.forEach(r => {
-      r.addEventListener('change', () => {
-        pmBank.classList.toggle('active', r.value === 'bank');
-        pmPaypal.classList.toggle('active', r.value === 'paypal');
-      });
-    });
-
-    // ============================================================
     // ORDER FORM SUBMIT
     // ============================================================
     const form = document.getElementById('order-form');
