@@ -24,7 +24,7 @@ const CONFIG = {
   DOWNLOAD_LINK: 'https://drive.google.com/drive/folders/1xf5-8Of5eGaXv-nsnMpl9vZk4u_h5o9M?usp=sharing',
 
   SUPPORT_EMAIL: 'support@onetriponebite.com',
-  SENDER_NAME: 'ContentPro',
+  SENDER_NAME: 'One Trip One Bite',
 
   BANK_NAME: 'MB Bank',
   BANK_ACCOUNT: '468166168',
@@ -357,7 +357,7 @@ function handleCheckPayment(ref) {
 
 function sendDeliveryEmail(toEmail, toName, method, ref) {
   try {
-    const subject = '🎉 [ContentPro] Your file is ready for download!';
+    const subject = '🎉 [One Trip One Bite] Your file is ready for download!';
     const methodLabel = method === 'paypal'
       ? 'PayPal (TXN ID: ' + ref + ')'
       : 'Bank Transfer (Ref: ' + ref + ')';
@@ -368,7 +368,7 @@ function sendDeliveryEmail(toEmail, toName, method, ref) {
       + '<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(6,20,47,.12);">'
       + '<tr><td style="background:linear-gradient(135deg,#06142f,#0b3778);padding:40px 32px;text-align:center;">'
       + '<div style="font-size:48px;margin-bottom:14px;">🗓️</div>'
-      + '<h1 style="color:#fff;margin:0;font-size:30px;font-weight:900;letter-spacing:-0.5px;">ContentPro</h1>'
+      + '<h1 style="color:#fff;margin:0;font-size:30px;font-weight:900;letter-spacing:-0.5px;">One Trip One Bite</h1>'
       + '<p style="color:rgba(255,255,255,.75);margin:10px 0 0;font-size:16px;">Thank you for your purchase!</p>'
       + '</td></tr>'
       + '<tr><td style="padding:36px 32px;">'
@@ -399,7 +399,7 @@ function sendDeliveryEmail(toEmail, toName, method, ref) {
       + '<p style="color:#4a5568;font-size:15px;line-height:1.7;margin:0;">💬 Need help? Contact us at <a href="mailto:' + CONFIG.SUPPORT_EMAIL + '" style="color:#1d6fe3;font-weight:700;">' + CONFIG.SUPPORT_EMAIL + '</a></p>'
       + '</td></tr>'
       + '<tr><td style="background:#f0f4f8;padding:24px 32px;text-align:center;border-top:1px solid #dbe5f2;">'
-      + '<p style="color:#718096;font-size:14px;margin:0;">© 2026 ContentPro · <a href="mailto:' + CONFIG.SUPPORT_EMAIL + '" style="color:#718096;">' + CONFIG.SUPPORT_EMAIL + '</a></p>'
+      + '<p style="color:#718096;font-size:14px;margin:0;">© 2026 One Trip One Bite · <a href="mailto:' + CONFIG.SUPPORT_EMAIL + '" style="color:#718096;">' + CONFIG.SUPPORT_EMAIL + '</a></p>'
       + '<p style="color:#718096;font-size:13px;margin:8px 0 0;">🔒 7-Day money-back guarantee</p>'
       + '</td></tr>'
       + '</table></td></tr></table></body></html>';
