@@ -2570,11 +2570,25 @@
     // SCROLL INTERACTIONS
     // ============================================================
     const nav = document.getElementById('main-nav');
+    const heroEl = document.querySelector('.hero');
+    const stickyBar = document.getElementById('mobile-sticky-bar');
+
     window.addEventListener('scroll', () => {
+      // Nav scroll state
       if (window.scrollY > 50) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
+      }
+
+      // Mobile sticky bar — appears after hero scrolls out of view
+      if (stickyBar && heroEl) {
+        const heroBound = heroEl.getBoundingClientRect();
+        if (heroBound.bottom < 0) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
       }
     });
 
@@ -2942,6 +2956,13 @@
       }, 7000);
     })();
   </script>
+
+  <!-- MOBILE STICKY BOTTOM BAR -->
+  <!-- Visible only on screens ≤768px, appears after hero scrolls out of view -->
+  <div id="mobile-sticky-bar" class="mobile-sticky-bar">
+    <span class="mobile-sticky-text">Matrix Shad Lures from $4.99</span>
+    <a href="#gear" class="mobile-sticky-btn" onclick="document.getElementById('mobile-sticky-bar').style.opacity='0'">Shop Now &uarr;</a>
+  </div>
 
 </body>
 
