@@ -2086,20 +2086,23 @@
 
 
 
-  <!-- SECTION 5 - JOIN THE CREW (unchanged) -->
+  <!-- SECTION 5 - JOIN THE CREW -->
   <section class="subscribe-section" id="subscribe">
     <div class="section-inner">
       <div class="subscribe-box fade-up-trigger">
         <span class="section-tag">Newsletter</span>
-        <h2 class="subscribe-title">Join The Crew</h2>
-        <p class="subscribe-subtitle">Monthly fishing reports, destination guides, local food finds, gear breakdowns, and stories from the water. No spam — just good content from people who actually go.</p>
+        <h2 class="subscribe-title">Join the Crew — Get Free Shipping on Your First Order</h2>
+        <p class="subscribe-subtitle">Subscribe and instantly receive a free shipping code for your first order. Plus monthly fishing reports, destination guides, local food finds, and gear recommendations from people who actually go.</p>
 
+        <!-- TODO: Configure email automation to send free shipping code FREESHIP1 on signup -->
         <form id="subscribe-form" class="subscribe-form">
+          <div style="font-size: 12px; color: #0d9488; margin-bottom: 14px; text-align: center; font-weight: 500;">🎁 Your free shipping code will be sent instantly to your inbox</div>
           <div class="input-row">
             <input type="text" id="s-name" class="form-input" placeholder="Your Name" required>
             <input type="email" id="s-email" class="form-input" placeholder="Your Email Address" required>
           </div>
-          <button type="submit" id="s-submit-btn" class="btn-submit">Join The Crew</button>
+          <button type="submit" id="s-submit-btn" class="btn-submit">Send My Free Shipping Code →</button>
+          <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px;">No spam — just good content and one great perk. Unsubscribe anytime.</p>
           <div id="subscribe-msg" class="subscribe-msg"></div>
         </form>
       </div>
