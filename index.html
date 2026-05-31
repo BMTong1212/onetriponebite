@@ -239,7 +239,40 @@
 
     @media (max-width: 768px) {
       .nav-menu {
-        display: none; /* Mobile burger or simple list can be wired later, keeping it clean */
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: var(--bg);
+        border-left: 1px solid var(--border);
+        padding: 80px 24px 40px;
+        gap: 24px;
+        z-index: 1001;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -5px 0 25px rgba(0,0,0,0.06);
+      }
+
+      .nav-menu.open {
+        right: 0;
+      }
+
+      .nav-menu .nav-link {
+        color: var(--text) !important;
+        font-size: 1.1rem;
+        display: block;
+        padding: 8px 0;
+        width: 100%;
+      }
+
+      .nav-menu .nav-cta {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 1rem;
       }
     }
 
@@ -812,9 +845,23 @@
       line-height: 1;
     }
 
+    /* Mobile Actions Wrapper */
+    .nav-mobile-actions {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 1002;
+    }
+
+    @media (max-width: 768px) {
+      .nav-mobile-actions {
+        display: flex !important;
+      }
+    }
+
     /* Mobile Cart Button */
     .mobile-cart-btn {
-      display: none;
+      display: flex;
       position: relative;
       align-items: center;
       justify-content: center;
@@ -842,10 +889,46 @@
       right: -3px;
     }
 
-    @media (max-width: 768px) {
-      .mobile-cart-btn {
-        display: flex !important;
-      }
+    /* Hamburger Menu Button */
+    .menu-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav.scrolled .menu-toggle-btn {
+      color: var(--text);
+      background: rgba(46, 91, 118, 0.05);
+    }
+
+    .nav:not(.scrolled) .menu-toggle-btn {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-toggle-btn svg line {
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+
+    .menu-toggle-btn.open .line-mid {
+      opacity: 0;
+    }
+
+    .menu-toggle-btn.open .line-top {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle-btn.open .line-bot {
+      transform: translateY(-6px) rotate(-45deg);
     }
 
     /* Cart Modal Item List */
@@ -1810,8 +1893,8 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 58px;
-        padding: 0 20px;
+        height: calc(58px + env(safe-area-inset-bottom));
+        padding: 0 20px env(safe-area-inset-bottom);
         background: var(--blue);
         color: #fff;
         z-index: 9999;
