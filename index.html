@@ -3062,6 +3062,9 @@
       });
       const data = await res.json();
       if (data.success || data.error === 'payment_captured_but_fulfillment_failed') {
+        const address = data.shippingAddress || '';
+        const phoneInputVal = document.getElementById('co-phone').value.trim();
+        saveFingerprint(_ppEmail, phoneInputVal, address);
         showCheckoutSuccess();
       } else {
         throw new Error(data.error || 'Capture failed');
