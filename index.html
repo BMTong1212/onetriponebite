@@ -278,9 +278,10 @@
 
     .hero-ctas {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       animation: fadeInUp 1.4s ease;
     }
 
@@ -322,13 +323,57 @@
       color: var(--white);
     }
 
+    /* ── Hero-specific CTA hierarchy ── */
+    .btn-hero-primary {
+      background: var(--blue);
+      color: var(--white);
+      border: 2px solid var(--blue);
+      padding: 18px 44px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 6px 24px rgba(46, 91, 118, 0.45);
+      transition: all 0.2s ease;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-hero-primary:hover {
+      background: #244c63;
+      border-color: #244c63;
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(46, 91, 118, 0.55);
+    }
+
+    .btn-hero-secondary {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(247, 244, 238, 0.72);
+      letter-spacing: 0.3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+      background: none;
+      border: none;
+      padding: 2px 0;
+    }
+
+    .btn-hero-secondary:hover {
+      color: var(--white);
+    }
+
     @media (max-width: 768px) {
       .hero-title {
         font-size: 2.8rem;
       }
       .hero-ctas {
-        flex-direction: column;
         gap: 12px;
+      }
+      .btn-hero-primary {
+        width: 100%;
+        padding: 16px 28px;
       }
       .btn {
         width: 100%;
@@ -1714,12 +1759,21 @@
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-tagline">Fishing • Travel • Local Food</p>
-      <h1 class="hero-title">ONE TRIP. ONE BITE.</h1>
-      <p class="hero-desc">Explore fishing destinations, local flavors, and affordable gear worth bringing on your next adventure.</p>
+      <!-- CHANGED: eyebrow — purchase-oriented, species-specific -->
+      <p class="hero-tagline">Gulf Coast Inshore &middot; Speckled Trout &middot; Redfish &middot; Flounder</p>
+
+      <!-- CHANGED: outcome-focused headline for Gulf Coast anglers -->
+      <h1 class="hero-title">Proven on Speckled Trout,<br>Redfish &amp; Flounder</h1>
+
+      <!-- CHANGED: product-and-benefit subheading -->
+      <p class="hero-desc">3&Prime; soft plastic swim baits built for Gulf Coast inshore fishing &mdash; trusted by anglers from Pensacola to Pontchartrain.</p>
+
       <div class="hero-ctas">
-        <a href="#spots" class="btn btn-primary">Explore Adventures</a>
-        <a href="#gear" class="btn btn-secondary">Shop Favorites</a>
+        <!-- PRIMARY CTA: dominant, filled, large — drives to shop -->
+        <a href="#gear" class="btn-hero-primary">Shop the Lures</a>
+
+        <!-- SECONDARY CTA: plain text link — visually subordinate -->
+        <a href="#spots" class="btn-hero-secondary">Explore Fishing Spots</a>
       </div>
     </div>
   </header>
