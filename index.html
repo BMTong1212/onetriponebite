@@ -1506,6 +1506,60 @@
       line-height: 1.7;
     }
 
+    /* Footer Featured Partners logos strip */
+    .footer-partners {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1.5px solid rgba(46, 91, 118, 0.08);
+      max-width: 100%;
+    }
+    
+    .footer-partners-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+    
+    .footer-partners-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .footer-partner-badge {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--muted);
+      border: 1.5px dashed var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(46, 91, 118, 0.02);
+      user-select: none;
+      transition: all 0.25s ease;
+      display: inline-block;
+    }
+    
+    .footer-partner-badge.join-us {
+      border: 1.5px solid var(--orange);
+      color: var(--orange);
+      background: rgba(199, 125, 74, 0.02);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    
+    .footer-partner-badge.join-us:hover {
+      background: var(--orange);
+      color: var(--white);
+      border-color: var(--orange);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(199, 125, 74, 0.15);
+    }
+
     .footer-nav {
       display: flex;
       gap: 60px;
@@ -2242,7 +2296,17 @@
         <div class="footer-logo">
           <img src="assets/logo.jpg" alt="One Trip One Bite Logo" style="height: 40px; mix-blend-mode: multiply; border-radius: 4px;">
         </div>
-        <p class="footer-tagline">Fishing. Food. Travel. Adventure. Stories worth telling from the Gulf Coast and beyond.</p>
+        <p class="footer-tagline">Cast &middot; Taste &middot; Explore &mdash; Stories worth telling from the Gulf Coast and beyond.</p>
+        
+        <div class="footer-partners">
+          <div class="footer-partners-title">Featured Partners</div>
+          <div class="footer-partners-list">
+            <span class="footer-partner-badge">Bayou Tackle</span>
+            <span class="footer-partner-badge">Gulf Charters</span>
+            <span class="footer-partner-badge">Coastal Eats</span>
+            <a href="mailto:partners@onetriponebite.com?subject=Partner%20Logos%20%26%20Advertising%20Inquiry" class="footer-partner-badge join-us" title="Click to advertise or collaborate">+ Your Logo</a>
+          </div>
+        </div>
       </div>
 
       <div class="footer-nav">
