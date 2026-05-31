@@ -83,6 +83,10 @@ function doGet(e) {
       testTelegram();
       return jsonResponse({ status: 'ok', action: 'test_telegram' });
     }
+    if (action === 'test_email') {
+      const ok = sendDeliveryEmail('support@onetriponebite.com', 'Support Test', 'paypal', 'PAYID-TEST-12345');
+      return jsonResponse({ success: ok });
+    }
     if (action === 'setup_trigger') {
       setupDailyReportTrigger();
       return jsonResponse({ status: 'ok', action: 'setup_trigger' });
