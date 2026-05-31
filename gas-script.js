@@ -329,7 +329,10 @@ function handlePaypalComplete(body) {
     ]);
   }
 
-  sendDeliveryEmail(email, name || 'Customer', 'paypal', txId || '');
+  const emailSent = sendDeliveryEmail(email, name || 'Customer', 'paypal', txId || '');
+  if (!emailSent) {
+    throw new Error('MailApp delivery failed. The Gmail daily quota might be exceeded, or the Apps Script requires authorization.');
+  }
 
   const paidAtPP = Utilities.formatDate(now, 'America/New_York', 'HH:mm - MM/dd/yyyy');
   const displayProduct = product || CONFIG.PRODUCT_NAME;
