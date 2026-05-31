@@ -1792,6 +1792,67 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ============================================================
+       MOBILE STICKY BOTTOM BAR
+       Visible only on mobile (≤768px), after hero scrolls out.
+       ============================================================ */
+    .mobile-sticky-bar {
+      display: none; /* hidden on desktop — overridden in media query */
+    }
+
+    @media (max-width: 768px) {
+      .mobile-sticky-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 58px;
+        padding: 0 20px;
+        background: var(--teal, #0a7c6e);
+        color: #fff;
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(100%);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.18);
+      }
+
+      .mobile-sticky-bar.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .mobile-sticky-text {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: rgba(255,255,255,0.92);
+        white-space: nowrap;
+      }
+
+      .mobile-sticky-btn {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #fff;
+        background: rgba(255,255,255,0.18);
+        border: 1.5px solid rgba(255,255,255,0.45);
+        border-radius: 6px;
+        padding: 7px 14px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.2s ease;
+      }
+
+      .mobile-sticky-btn:hover,
+      .mobile-sticky-btn:active {
+        background: rgba(255,255,255,0.28);
+      }
+    }
   </style>
 </head>
 
