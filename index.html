@@ -1499,7 +1499,7 @@
         <!-- Spot 4 -->
         <div class="spot-card">
           <div class="spot-img-box">
-            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=500&q=80" alt="Wide lake view of Pontchartrain">
+            <img src="https://images.unsplash.com/photo-1508849789987-4e5333c12b78?auto=format&fit=crop&w=500&q=80" alt="Causeway bridge crossing Lake Pontchartrain">
           </div>
           <div class="spot-content">
             <h4 class="spot-title">Pontchartrain, LA</h4>
@@ -1618,7 +1618,7 @@
         <label class="payment-method-option selected" id="opt-bank" onclick="selectPaymentMethod('bank')">
           <input type="radio" name="co-payment" value="bank" checked>
           <span class="payment-method-icon">🏦</span>
-          <span class="payment-method-label">Chuyển Khoản</span>
+          <span class="payment-method-label">Bank Transfer</span>
         </label>
         <label class="payment-method-option" id="opt-paypal" onclick="selectPaymentMethod('paypal')">
           <input type="radio" name="co-payment" value="paypal">
@@ -1637,42 +1637,42 @@
     <!-- Payment info sections (shown after Details submit) -->
     <!-- Bank Transfer Panel -->
     <div class="payment-details-panel" id="co-bank-panel">
-      <h3 style="font-size: 1.1rem; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">🏦 Chuyển khoản qua Ngân Hàng</h3>
-      <p style="font-size: 0.82rem; color: var(--muted); margin-bottom: 16px;">Vui lòng chuyển khoản đúng số tiền và nội dung chuyển khoản dưới đây. Đơn hàng sẽ được xác nhận tự động.</p>
+      <h3 style="font-size: 1.1rem; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">🏦 Direct Bank Transfer</h3>
+      <p style="font-size: 0.82rem; color: var(--muted); margin-bottom: 16px;">Please transfer the exact amount with the reference code below. The order will be confirmed automatically.</p>
 
       <div class="qr-container">
         <div class="qr-image-wrapper">
           <img id="co-qr-img" src="" alt="VietQR Code">
         </div>
         <div id="co-poll-status" style="font-size: 0.85rem; color: var(--orange); font-weight: 600; margin-bottom: 16px;">
-          ⏳ Đang chờ hệ thống xác nhận thanh toán...
+          ⏳ Waiting for payment confirmation...
         </div>
       </div>
 
       <div class="bank-details-row">
-        <span class="bank-details-label">Ngân hàng</span>
+        <span class="bank-details-label">Bank Name</span>
         <span class="bank-details-val">MB Bank</span>
       </div>
       <div class="bank-details-row">
-        <span class="bank-details-label">Số tài khoản</span>
+        <span class="bank-details-label">Account Number</span>
         <span class="bank-details-val">
           468166168
           <button class="copy-btn" onclick="copyText('468166168', this)">📋 Copy</button>
         </span>
       </div>
       <div class="bank-details-row">
-        <span class="bank-details-label">Chủ tài khoản</span>
+        <span class="bank-details-label">Account Owner</span>
         <span class="bank-details-val">NGUYEN QUANG KHAI</span>
       </div>
       <div class="bank-details-row">
-        <span class="bank-details-label">Số tiền</span>
+        <span class="bank-details-label">Amount</span>
         <span class="bank-details-val">
-          <span id="co-bank-amount">0đ</span>
+          <span id="co-bank-amount">0 VND</span>
           <button class="copy-btn" id="btn-copy-amount" onclick="copyText('0', this)">📋 Copy</button>
         </span>
       </div>
       <div class="bank-details-row" style="background: var(--blue-light); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(46, 91, 118, 0.15); margin-top: 8px;">
-        <span class="bank-details-label" style="color: var(--blue); font-weight: bold;">Nội dung CK</span>
+        <span class="bank-details-label" style="color: var(--blue); font-weight: bold;">Reference Code</span>
         <span class="bank-details-val" style="color: var(--blue); font-weight: bold;">
           <span id="co-bank-ref">CC30-XXXXXX</span>
           <button class="copy-btn" id="btn-copy-ref" onclick="copyText('', this)">📋 Copy</button>
@@ -1895,7 +1895,7 @@
         const usdEl = cardEl.querySelector('.price-usd');
         const vndEl = cardEl.querySelector('.price-vnd');
         if (usdEl) usdEl.textContent = `$${sizeInfo.priceUSD}`;
-        if (vndEl) vndEl.textContent = `${sizeInfo.priceVND.toLocaleString('vi-VN')}đ`;
+        if (vndEl) vndEl.textContent = `${sizeInfo.priceVND.toLocaleString('en-US')} VND`;
       }
     }
 
@@ -1925,7 +1925,7 @@
         });
         
         const initialPriceUSD = PACK_SIZES['8'].priceUSD;
-        const initialPriceVND = PACK_SIZES['8'].priceVND.toLocaleString('vi-VN');
+        const initialPriceVND = PACK_SIZES['8'].priceVND.toLocaleString('en-US');
         
         html += `
         <div class="product-card fade-up-trigger" data-color="${color.id}">
@@ -1936,14 +1936,14 @@
           
           <div class="product-card-rating">
             <span class="stars">★★★★★</span>
-            <span class="rating-text">(${color.rating}/5 từ ${color.reviews} lượt)</span>
+            <span class="rating-text">(${color.rating}/5 from ${color.reviews} reviews)</span>
           </div>
           
           <h3 class="product-card-title">Matrix Shad "${color.name}"</h3>
           <p class="product-card-desc">${color.desc}</p>
           
           <div class="product-card-options">
-            <label class="product-card-options-label">Số lượng gói:</label>
+            <label class="product-card-options-label">Select Pack Size:</label>
             <div class="select-wrapper">
               <select class="product-size-select" onchange="updateCardPrice(this, '${color.id}')">
                 ${selectOptions}
@@ -1954,10 +1954,10 @@
           <div class="product-card-purchase">
             <div class="product-card-price">
               <span class="price-usd">$${initialPriceUSD}</span>
-              <span class="price-vnd">${initialPriceVND}đ</span>
+              <span class="price-vnd">${initialPriceVND} VND</span>
             </div>
             <button class="btn-card-checkout" onclick="buyCardVariant('${color.id}')">
-              Mua Ngay
+              Buy Now
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 6px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
           </div>
@@ -2094,7 +2094,7 @@
           if (method === 'bank') {
             // Setup bank UI details
             document.getElementById('co-bank-ref').textContent = refCode;
-            document.getElementById('co-bank-amount').textContent = `${selectedProduct.priceVND.toLocaleString('vi-VN')}đ`;
+            document.getElementById('co-bank-amount').textContent = `${selectedProduct.priceVND.toLocaleString('en-US')} VND`;
             document.getElementById('btn-copy-amount').onclick = () => copyText(selectedProduct.priceVND, document.getElementById('btn-copy-amount'));
             document.getElementById('btn-copy-ref').onclick = () => copyText(refCode, document.getElementById('btn-copy-ref'));
 
@@ -2250,7 +2250,7 @@
       pollCount++;
       if (pollCount > 150) { // ~20 minutes timeout
         clearInterval(pollTimer);
-        document.getElementById('co-poll-status').textContent = '⚠️ Hết thời gian kiểm tra. Vui lòng liên hệ support@onetriponebite.com';
+        document.getElementById('co-poll-status').textContent = '⚠️ Verification timeout. Please contact support@onetriponebite.com';
         return;
       }
       try {
@@ -2262,7 +2262,7 @@
         } else {
           const mins = Math.floor((150 - pollCount) * 8 / 60);
           const secs = ((150 - pollCount) * 8) % 60;
-          document.getElementById('co-poll-status').textContent = `⏳ Đang chờ xác nhận... Hết hạn sau ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+          document.getElementById('co-poll-status').textContent = `⏳ Waiting for confirmation... Expires in ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
         }
       } catch (e) {
         // fail silently and wait for next tick
