@@ -76,6 +76,7 @@ export default async function handler(req, res) {
         success: false,
         error: 'payment_captured_but_fulfillment_failed',
         txId,
+        shippingAddress: capture.purchase_units?.[0]?.shipping?.address?.address_line_1 || '',
       });
     }
 
@@ -116,13 +117,16 @@ export default async function handler(req, res) {
         success: false,
         error: 'payment_captured_but_fulfillment_failed',
         txId,
+        shippingAddress: capture.purchase_units?.[0]?.shipping?.address?.address_line_1 || '',
       });
     }
 
+    const shippingAddress = capture.purchase_units?.[0]?.shipping?.address?.address_line_1 || '';
     return res.status(200).json({
       success: true,
       txId,
       status: capture.status,
+      shippingAddress,
     });
 
   } catch (err) {
