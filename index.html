@@ -2225,7 +2225,7 @@
       <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Items</span><span id="co-prod-name" style="font-weight:600; color:var(--text);">Product</span></span>
       <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Subtotal</span><span id="co-prod-price">$0.00</span></span>
       <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Shipping</span><span id="co-shipping-display">$7.00</span></span>
-      <span style="display:flex; justify-content:space-between; padding-top:8px; margin-top:4px; border-top:1px solid var(--border); font-weight:700; color:var(--text);"><span>Total</span><span id="co-total-display">$0.00</span></span>
+      <span style="display:flex; justify-content:space-between; padding-top:8px; margin-top:4px; border-top:1px solid var(--border); font-weight:700; color:var(--text);"><span>Total</span><span id="co-total-display">$7.00</span></span>
     </p>
 
     <!-- Details Form -->
@@ -2311,13 +2311,13 @@
       <!-- Dynamically rendered cart items -->
     </div>
 
-    <div id="cart-empty-state" class="cart-empty-message" style="display:none;">
+    <div id="cart-empty-state" class="cart-empty-message">
       <div class="cart-empty-icon">🎣</div>
       <p style="font-weight: 600; margin-bottom: 4px;">Your cart is empty</p>
       <p style="font-size: 0.85rem;">Add some lures to get started!</p>
     </div>
 
-    <div id="cart-summary-block" class="cart-summary-block">
+    <div id="cart-summary-block" class="cart-summary-block" style="display: none;">
       <div class="cart-subtotal-row">
         <span>Subtotal</span>
         <span id="cart-subtotal-display">$0.00</span>
@@ -2344,7 +2344,7 @@
       </div>
     </div>
 
-    <button id="cart-checkout-btn" class="btn-submit" style="width: 100%; padding: 14px; font-size: 1rem;" onclick="checkoutFromCart()">
+    <button id="cart-checkout-btn" class="btn-submit" style="width: 100%; padding: 14px; font-size: 1rem; display: none;" onclick="checkoutFromCart()">
       Proceed to Checkout →
     </button>
   </div>
