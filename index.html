@@ -79,6 +79,45 @@
       color: var(--muted);
     }
 
+    /* ── Unified type scale ─────────────────────────────────────────
+       Use these classes instead of ad-hoc inline font-size values.
+       text-body    → standard paragraph copy    (0.95rem / lh 1.75)
+       text-support → secondary / caption text   (0.875rem / lh 1.65)
+       text-lead    → intro / hero subheading    (1.05rem  / lh 1.8)
+    ───────────────────────────────────────────────────────────────── */
+    .text-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .text-support {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .text-lead {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* Section subtitles — all sections use the same size */
+    .section-subtitle,
+    .hero-desc,
+    .adventure-desc,
+    .subscribe-subtitle {
+      font-size: 0.95rem !important;
+      line-height: 1.75 !important;
+      color: var(--muted);
+    }
+
+    /* Spot guide text */
+    .spot-guide {
+      font-size: 0.875rem !important;
+      line-height: 1.65 !important;
+      color: var(--muted);
+    }
+
     a {
       color: var(--blue);
       text-decoration: none;
@@ -1885,7 +1924,7 @@
           <h3 class="adventure-card-title">ONE TRIP ONE BITE</h3>
 
           <!-- Always-visible 2-sentence summary -->
-          <p style="font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px;">
+          <p class="text-body" style="margin-bottom: 16px;">
             One Trip One Bite was built by Gulf Coast anglers who believe every trip should leave you with something worth remembering — a trophy fish, a hidden gem, or a meal you didn't expect. We fish, we travel, and we share what works.
           </p>
 
@@ -1896,15 +1935,15 @@
             transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
             opacity: 0;
           ">
-            <div style="font-size: 0.95rem; color: var(--muted); line-height: 1.7; display: flex; flex-direction: column; gap: 14px; padding-bottom: 8px;">
-              <p>Every journey has a destination, but the destination is never the whole story.</p>
-              <p>One Trip One Bite was created from a simple belief: every trip should leave you with something worth remembering. Sometimes it's the fish you've been chasing all day. Sometimes it's a hidden restaurant you never expected to find. Sometimes it's a historic landmark, a breathtaking view, a local tradition, or a special moment shared with family and friends.</p>
-              <p>We travel to discover. We fish to explore. We wander to understand the places, people, food, history, and nature that make every destination unique.</p>
-              <p>From coastal roads and fishing piers to beaches, small towns, local restaurants, museums, parks, and historic sites, every adventure becomes an opportunity to learn something new and create a story worth telling.</p>
-              <p>Whether the reward is a trophy fish, a memorable meal, a hidden gem, or a meaningful experience with the people we love, every journey brings back a discovery.</p>
-              <p>Because at the end of the day, it's not about how far you travel. It's about what you find along the way.</p>
-              <p style="font-weight: 700; color: var(--text);">One Trip. One Discovery. One Story.</p>
-              <p style="font-style: italic; color: var(--orange); font-weight: 600;">Travel. Fish. Explore. Discover.</p>
+            <div class="adventure-desc" style="display: flex; flex-direction: column; gap: 12px; padding-bottom: 8px;">
+              <p class="text-body">Every journey has a destination, but the destination is never the whole story.</p>
+              <p class="text-body">One Trip One Bite was created from a simple belief: every trip should leave you with something worth remembering. Sometimes it's the fish you've been chasing all day. Sometimes it's a hidden restaurant you never expected to find. Sometimes it's a historic landmark, a breathtaking view, a local tradition, or a special moment shared with family and friends.</p>
+              <p class="text-body">We travel to discover. We fish to explore. We wander to understand the places, people, food, history, and nature that make every destination unique.</p>
+              <p class="text-body">From coastal roads and fishing piers to beaches, small towns, local restaurants, museums, parks, and historic sites, every adventure becomes an opportunity to learn something new and create a story worth telling.</p>
+              <p class="text-body">Whether the reward is a trophy fish, a memorable meal, a hidden gem, or a meaningful experience with the people we love, every journey brings back a discovery.</p>
+              <p class="text-body">Because at the end of the day, it's not about how far you travel. It's about what you find along the way.</p>
+              <p class="text-body" style="font-weight: 700; color: var(--text);">One Trip. One Discovery. One Story.</p>
+              <p class="text-body" style="font-style: italic; color: var(--orange); font-weight: 600;">Travel. Fish. Explore. Discover.</p>
             </div>
           </div>
 
