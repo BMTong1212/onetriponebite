@@ -2311,6 +2311,17 @@
         <span>Subtotal</span>
         <span id="cart-subtotal-display">$0.00</span>
       </div>
+
+      <!-- Promo Code Section -->
+      <div style="margin: 8px 0; text-align: right;">
+        <a href="javascript:void(0)" id="cart-promo-toggle" style="font-size: 0.78rem; color: var(--blue); text-decoration: none; font-weight: 500;">Have a promo code? Enter it here</a>
+        <div id="cart-promo-container" style="display: none; margin-top: 8px; align-items: center; justify-content: flex-end; gap: 8px;">
+          <input type="text" id="cart-promo-input" placeholder="Promo Code" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.8rem; max-width: 150px; text-transform: uppercase;">
+          <button id="cart-promo-apply-btn" style="padding: 6px 12px; background: var(--blue); color: #fff; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">Apply</button>
+        </div>
+        <div id="cart-promo-msg" style="font-size: 0.75rem; margin-top: 4px; display: none; text-align: right;"></div>
+      </div>
+
       <div class="cart-subtotal-row" id="cart-shipping-row">
         <span>Shipping</span>
         <span id="cart-shipping-display">$7.00</span>
