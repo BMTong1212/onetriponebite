@@ -509,6 +509,7 @@
       object-fit: contain;
       mix-blend-mode: multiply;
       transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      cursor: zoom-in;
     }
     
     .product-card:hover .product-card-gallery img {
@@ -631,13 +632,6 @@
       line-height: 1.1;
     }
     
-    .product-card-price .price-vnd {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--muted);
-      margin-top: 1px;
-    }
-    
     .btn-card-checkout {
       background: var(--blue);
       color: var(--white);
@@ -657,6 +651,59 @@
       background: var(--orange);
       border-color: var(--orange);
       transform: translateY(-1px);
+    }
+    
+    /* Lightbox Modal for Product Image Zoom */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(31, 41, 51, 0.95);
+      z-index: 1200;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.2s ease-out;
+    }
+    
+    .lightbox-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      animation: scaleIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+      cursor: default;
+    }
+    
+    .lightbox-close-btn {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .lightbox-close-btn:hover {
+      transform: scale(1.15);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: scale(0.9); }
+      to { transform: scale(1); }
     }
 
     /* SECTION 4 - FISHING SPOTS */
@@ -1475,7 +1522,7 @@
         <!-- Spot 2 -->
         <div class="spot-card">
           <div class="spot-img-box">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=80" alt="Biloxi Lighthouse at Sunset">
+            <img src="assets/biloxi.jpg" alt="Biloxi Lighthouse at Sunset">
           </div>
           <div class="spot-content">
             <h4 class="spot-title">Biloxi, MS</h4>
@@ -1499,7 +1546,7 @@
         <!-- Spot 4 -->
         <div class="spot-card">
           <div class="spot-img-box">
-            <img src="https://images.unsplash.com/photo-1508849789987-4e5333c12b78?auto=format&fit=crop&w=500&q=80" alt="Causeway bridge crossing Lake Pontchartrain">
+            <img src="assets/pontchartrain.jpg" alt="Lake Pontchartrain Waterfront">
           </div>
           <div class="spot-content">
             <h4 class="spot-title">Pontchartrain, LA</h4>
@@ -1572,6 +1619,12 @@
 
   <!-- MODAL: PRIVACY POLICY -->
   <div id="modal-overlay" onclick="closeModal()"></div>
+
+  <!-- Lightbox for Product Image Zoom -->
+  <div id="lightbox-overlay" class="lightbox-overlay" onclick="closeLightbox()">
+    <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="Zoomed Product Image" onclick="event.stopPropagation()">
+  </div>
   
   <div id="modal-privacy" class="modal-box">
     <button onclick="closeModal()" class="modal-close-btn">✕</button>
@@ -1599,7 +1652,7 @@
 
     <!-- Details Form -->
     <form id="checkout-details-form">
-      <div class="checkout-step-title">1. Your Details</div>
+      <div class="checkout-step-title">Your Details</div>
       <div class="form-group">
         <label>Full Name *</label>
         <input type="text" id="co-name" class="form-input" placeholder="e.g. John Doe" required>
@@ -1613,72 +1666,12 @@
         <input type="tel" id="co-phone" class="form-input" placeholder="e.g. +1 (555) 000-0000">
       </div>
 
-      <div class="checkout-step-title" style="margin-top: 24px;">2. Choose Payment Method</div>
-      <div class="payment-methods-grid">
-        <label class="payment-method-option selected" id="opt-bank" onclick="selectPaymentMethod('bank')">
-          <input type="radio" name="co-payment" value="bank" checked>
-          <span class="payment-method-icon">🏦</span>
-          <span class="payment-method-label">Bank Transfer</span>
-        </label>
-        <label class="payment-method-option" id="opt-paypal" onclick="selectPaymentMethod('paypal')">
-          <input type="radio" name="co-payment" value="paypal">
-          <span class="payment-method-icon">💳</span>
-          <span class="payment-method-label">PayPal / Card</span>
-        </label>
-      </div>
-
       <button type="submit" id="co-submit-btn" class="btn-submit" style="width: 100%; padding: 14px;">
         Proceed to Payment →
       </button>
 
       <div id="co-form-msg" style="display:none; margin-top: 12px; padding: 12px; border-radius: 6px; font-size: 0.85rem; text-align: center;"></div>
     </form>
-
-    <!-- Payment info sections (shown after Details submit) -->
-    <!-- Bank Transfer Panel -->
-    <div class="payment-details-panel" id="co-bank-panel">
-      <h3 style="font-size: 1.1rem; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">🏦 Direct Bank Transfer</h3>
-      <p style="font-size: 0.82rem; color: var(--muted); margin-bottom: 16px;">Please transfer the exact amount with the reference code below. The order will be confirmed automatically.</p>
-
-      <div class="qr-container">
-        <div class="qr-image-wrapper">
-          <img id="co-qr-img" src="" alt="VietQR Code">
-        </div>
-        <div id="co-poll-status" style="font-size: 0.85rem; color: var(--orange); font-weight: 600; margin-bottom: 16px;">
-          ⏳ Waiting for payment confirmation...
-        </div>
-      </div>
-
-      <div class="bank-details-row">
-        <span class="bank-details-label">Bank Name</span>
-        <span class="bank-details-val">MB Bank</span>
-      </div>
-      <div class="bank-details-row">
-        <span class="bank-details-label">Account Number</span>
-        <span class="bank-details-val">
-          468166168
-          <button class="copy-btn" onclick="copyText('468166168', this)">📋 Copy</button>
-        </span>
-      </div>
-      <div class="bank-details-row">
-        <span class="bank-details-label">Account Owner</span>
-        <span class="bank-details-val">NGUYEN QUANG KHAI</span>
-      </div>
-      <div class="bank-details-row">
-        <span class="bank-details-label">Amount</span>
-        <span class="bank-details-val">
-          <span id="co-bank-amount">0 VND</span>
-          <button class="copy-btn" id="btn-copy-amount" onclick="copyText('0', this)">📋 Copy</button>
-        </span>
-      </div>
-      <div class="bank-details-row" style="background: var(--blue-light); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(46, 91, 118, 0.15); margin-top: 8px;">
-        <span class="bank-details-label" style="color: var(--blue); font-weight: bold;">Reference Code</span>
-        <span class="bank-details-val" style="color: var(--blue); font-weight: bold;">
-          <span id="co-bank-ref">CC30-XXXXXX</span>
-          <button class="copy-btn" id="btn-copy-ref" onclick="copyText('', this)">📋 Copy</button>
-        </span>
-      </div>
-    </div>
 
     <!-- PayPal Panel -->
     <div class="payment-details-panel" id="co-paypal-panel">
@@ -1762,8 +1755,8 @@
       { 
         id: 'shrimp_creole', 
         name: 'Shrimp Creole', 
-        img: 'assets/glow.jpg', 
-        filter: 'hue-rotate(15deg) saturate(1.8) brightness(1.0)',
+        img: 'assets/shrimp_creole.png', 
+        filter: '',
         badge: '🍤 Go-To Bait',
         rating: '4.9',
         reviews: '105',
@@ -1782,8 +1775,8 @@
       { 
         id: 'green_hornet', 
         name: 'Green Hornet', 
-        img: 'assets/glow.jpg', 
-        filter: 'hue-rotate(120deg) saturate(1.5) brightness(0.8)',
+        img: 'assets/green_hornet.png', 
+        filter: '',
         badge: '🏆 Trophy Hunter',
         rating: '4.9',
         reviews: '116',
@@ -1792,8 +1785,8 @@
       { 
         id: 'tiger_bait', 
         name: 'Tiger Bait', 
-        img: 'assets/glow.jpg', 
-        filter: 'hue-rotate(-20deg) saturate(2.0) brightness(1.0)',
+        img: 'assets/tiger_bait.png', 
+        filter: '',
         badge: '🐯 Redfish Killer',
         rating: '4.8',
         reviews: '85',
@@ -1802,8 +1795,8 @@
       { 
         id: 'ultra_violet', 
         name: 'Ultra-Violet', 
-        img: 'assets/glow.jpg', 
-        filter: 'hue-rotate(250deg) saturate(1.8) brightness(0.9)',
+        img: 'assets/ultra_violet.png', 
+        filter: '',
         badge: '⚡ Fluorescent',
         rating: '4.8',
         reviews: '90',
@@ -1812,7 +1805,7 @@
       { 
         id: 'magneto', 
         name: 'Magneto', 
-        img: 'assets/magneto.jpg', 
+        img: 'assets/magneto_custom.jpg', 
         filter: '',
         badge: '🌊 Versatile',
         rating: '4.9',
@@ -1861,11 +1854,11 @@
       }
     ];
 
-    const PACK_SIZES = {
-      '8': { label: '8 Baits', sub: 'Single Pack', priceUSD: '4.99', priceVND: 125000 },
-      '25': { label: '25 Baits', sub: 'Value Pack', priceUSD: '13.99', priceVND: 350000 },
-      '50': { label: '50 Baits', sub: 'Club Pack', priceUSD: '24.99', priceVND: 625000 },
-      '100': { label: '100 Baits', sub: 'Bulk Pack', priceUSD: '39.99', priceVND: 1000000 }
+        const PACK_SIZES = {
+      '8': { label: '8 Baits', sub: 'Single Pack', priceUSD: '4.99' },
+      '25': { label: '25 Baits', sub: 'Value Pack', priceUSD: '13.99' },
+      '50': { label: '50 Baits', sub: 'Club Pack', priceUSD: '24.99' },
+      '100': { label: '100 Baits', sub: 'Bulk Pack', priceUSD: '39.99' }
     };
 
     const PRODUCTS = {};
@@ -1876,8 +1869,7 @@
         const key = `${color.id}_${size}`;
         PRODUCTS[key] = {
           name: `Matrix Shad "${color.name}" — ${sizeInfo.label} (${sizeInfo.sub})`,
-          priceUSD: sizeInfo.priceUSD,
-          priceVND: sizeInfo.priceVND
+          priceUSD: sizeInfo.priceUSD
         };
       });
     });
@@ -1893,9 +1885,7 @@
       const cardEl = selectEl.closest('.product-card');
       if (cardEl) {
         const usdEl = cardEl.querySelector('.price-usd');
-        const vndEl = cardEl.querySelector('.price-vnd');
         if (usdEl) usdEl.textContent = `$${sizeInfo.priceUSD}`;
-        if (vndEl) vndEl.textContent = `${sizeInfo.priceVND.toLocaleString('en-US')} VND`;
       }
     }
 
@@ -1925,13 +1915,12 @@
         });
         
         const initialPriceUSD = PACK_SIZES['8'].priceUSD;
-        const initialPriceVND = PACK_SIZES['8'].priceVND.toLocaleString('en-US');
         
         html += `
         <div class="product-card fade-up-trigger" data-color="${color.id}">
           <div class="product-card-gallery">
             <span class="product-card-badge badge-tag">${color.badge}</span>
-            <img src="${imgSrc}" alt="Matrix Shad ${color.name}" ${imgFilter}>
+            <img src="${imgSrc}" alt="Matrix Shad ${color.name}" ${imgFilter} onclick="zoomProductImage(this)">
           </div>
           
           <div class="product-card-rating">
@@ -1954,7 +1943,6 @@
           <div class="product-card-purchase">
             <div class="product-card-price">
               <span class="price-usd">$${initialPriceUSD}</span>
-              <span class="price-vnd">${initialPriceVND} VND</span>
             </div>
             <button class="btn-card-checkout" onclick="buyCardVariant('${color.id}')">
               Buy Now
@@ -1974,8 +1962,6 @@
     let selectedProduct = null;
     let registeredEmail = '';
     let currentRef = '';
-    let pollTimer = null;
-    let pollCount = 0;
 
     // ============================================================
     // SCROLL INTERACTIONS
@@ -1999,6 +1985,37 @@
     document.querySelectorAll('.fade-up-trigger').forEach(el => observer.observe(el));
 
     // ============================================================
+    // PRODUCT IMAGE LIGHTBOX (ZOOM)
+    // ============================================================
+    function zoomProductImage(imgEl) {
+      const overlay = document.getElementById('lightbox-overlay');
+      const lightboxImg = document.getElementById('lightbox-img');
+      if (overlay && lightboxImg) {
+        lightboxImg.src = imgEl.src;
+        lightboxImg.style.filter = imgEl.style.filter;
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox() {
+      const overlay = document.getElementById('lightbox-overlay');
+      if (overlay) {
+        overlay.style.display = 'none';
+      }
+      
+      const checkoutModal = document.getElementById('modal-checkout');
+      const privacyModal = document.getElementById('modal-privacy');
+      const termsModal = document.getElementById('modal-terms');
+      const isAnyModalOpen = (checkoutModal && checkoutModal.style.display === 'block') ||
+                             (privacyModal && privacyModal.style.display === 'block') ||
+                             (termsModal && termsModal.style.display === 'block');
+      if (!isAnyModalOpen) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    // ============================================================
     // MODALS GENERAL ACTIONS
     // ============================================================
     function openModal(id) {
@@ -2011,11 +2028,13 @@
       document.getElementById('modal-overlay').style.display = 'none';
       document.querySelectorAll('.modal-box').forEach(box => box.style.display = 'none');
       document.body.style.overflow = '';
-      clearInterval(pollTimer);
     }
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeModal();
+      }
     });
 
     // ============================================================
@@ -2027,7 +2046,6 @@
 
       // Reset checkout panel forms
       document.getElementById('checkout-details-form').style.display = 'block';
-      document.getElementById('co-bank-panel').style.display = 'none';
       document.getElementById('co-paypal-panel').style.display = 'none';
       document.getElementById('co-success-panel').style.display = 'none';
       document.getElementById('co-form-msg').style.display = 'none';
@@ -2041,17 +2059,6 @@
       openModal('modal-checkout');
     }
 
-    function selectPaymentMethod(method) {
-      document.querySelectorAll('.payment-method-option').forEach(el => el.classList.remove('selected'));
-      if (method === 'bank') {
-        document.getElementById('opt-bank').classList.add('selected');
-        document.querySelector('input[value="bank"]').checked = true;
-      } else {
-        document.getElementById('opt-paypal').classList.add('selected');
-        document.querySelector('input[value="paypal"]').checked = true;
-      }
-    }
-
     // Handle checkout details form submit
     const checkoutDetailsForm = document.getElementById('checkout-details-form');
     checkoutDetailsForm.addEventListener('submit', async (e) => {
@@ -2060,7 +2067,7 @@
       const name = document.getElementById('co-name').value.trim();
       const email = document.getElementById('co-email').value.trim();
       const phone = document.getElementById('co-phone').value.trim();
-      const method = document.querySelector('input[name="co-payment"]:checked').value;
+      const method = 'paypal';
 
       if (!name || !email) return;
 
@@ -2091,24 +2098,9 @@
           // Hide form
           checkoutDetailsForm.style.display = 'none';
 
-          if (method === 'bank') {
-            // Setup bank UI details
-            document.getElementById('co-bank-ref').textContent = refCode;
-            document.getElementById('co-bank-amount').textContent = `${selectedProduct.priceVND.toLocaleString('en-US')} VND`;
-            document.getElementById('btn-copy-amount').onclick = () => copyText(selectedProduct.priceVND, document.getElementById('btn-copy-amount'));
-            document.getElementById('btn-copy-ref').onclick = () => copyText(refCode, document.getElementById('btn-copy-ref'));
-
-            // Load VietQR code
-            document.getElementById('co-qr-img').src = `https://img.vietqr.io/image/MB-468166168-compact2.png?amount=${selectedProduct.priceVND}&addInfo=${encodeURIComponent(refCode)}&accountName=NGUYEN%20QUANG%20KHAI`;
-
-            // Display bank panel and start polling
-            document.getElementById('co-bank-panel').style.display = 'block';
-            startPolling(refCode);
-          } else {
-            // Display PayPal panel & load buttons
-            document.getElementById('co-paypal-panel').style.display = 'block';
-            initPayPal(name, email);
-          }
+          // Display PayPal panel & load buttons
+          document.getElementById('co-paypal-panel').style.display = 'block';
+          initPayPal(name, email);
         } else {
           showCheckoutError(data.error || 'Failed to submit details. Please try again.');
           btn.disabled = false;
@@ -2230,54 +2222,9 @@
     }
 
     function showCheckoutSuccess() {
-      document.getElementById('co-bank-panel').style.display = 'none';
       document.getElementById('co-paypal-panel').style.display = 'none';
       document.getElementById('co-success-panel').style.display = 'block';
       document.getElementById('co-success-email').textContent = registeredEmail;
-    }
-
-    // ============================================================
-    // SEPAY BANK POLLING
-    // ============================================================
-    function startPolling(refCode) {
-      clearInterval(pollTimer);
-      pollCount = 0;
-      checkPaymentStatus();
-      pollTimer = setInterval(checkPaymentStatus, 8000);
-    }
-
-    async function checkPaymentStatus() {
-      pollCount++;
-      if (pollCount > 150) { // ~20 minutes timeout
-        clearInterval(pollTimer);
-        document.getElementById('co-poll-status').textContent = '⚠️ Verification timeout. Please contact support@onetriponebite.com';
-        return;
-      }
-      try {
-        const res = await fetch(`/api/check-payment?ref=${encodeURIComponent(currentRef)}`);
-        const data = await res.json();
-        if (data.paid) {
-          clearInterval(pollTimer);
-          showCheckoutSuccess();
-        } else {
-          const mins = Math.floor((150 - pollCount) * 8 / 60);
-          const secs = ((150 - pollCount) * 8) % 60;
-          document.getElementById('co-poll-status').textContent = `⏳ Waiting for confirmation... Expires in ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        }
-      } catch (e) {
-        // fail silently and wait for next tick
-      }
-    }
-
-    // ============================================================
-    // COPY UTILITY
-    // ============================================================
-    function copyText(text, btn) {
-      navigator.clipboard.writeText(text).then(() => {
-        const orig = btn.textContent;
-        btn.textContent = '✓ Copied!';
-        setTimeout(() => { btn.textContent = orig; }, 1800);
-      });
     }
 
     // ============================================================
