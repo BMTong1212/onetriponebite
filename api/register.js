@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   const GAS_URL = process.env.GAS_URL || 'https://script.google.com/macros/s/AKfycbw-aHSJi-t1mxF-nSGO3tQqoTcIQLh060hVA6pUCof9sQmby0abzjFjy89DE9J0tOU/exec';
 
   try {
-    const { name, email, phone, method, action, product } = req.body || {};
+    const { name, email, phone, method, action, product, txId, amount } = req.body || {};
 
     if (!name || !email) {
       return res.status(400).json({ success: false, error: 'Missing name or email' });
@@ -33,7 +33,9 @@ export default async function handler(req, res) {
         email,
         phone: phone || '',
         method: method || 'paypal',
-        product: product || ''
+        product: product || '',
+        txId: txId || '',
+        amount: amount || ''
       })
     });
 
