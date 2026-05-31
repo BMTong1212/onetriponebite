@@ -2120,8 +2120,11 @@
   <div id="modal-checkout" class="modal-box" style="max-width: 550px;">
     <button onclick="closeModal()" class="modal-close-btn">✕</button>
     <h2 class="modal-title" style="margin-bottom: 4px;">🛒 Secure Checkout</h2>
-    <p id="checkout-product-summary" style="font-size: 0.9rem; margin-bottom: 24px; color: var(--blue); font-weight: 500;">
-      Order: <span id="co-prod-name">Product</span> — <span id="co-prod-price">$0.00</span>
+    <p id="checkout-product-summary" style="font-size: 0.85rem; margin-bottom: 20px; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; background: var(--bg);">
+      <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Items</span><span id="co-prod-name" style="font-weight:600; color:var(--text);">Product</span></span>
+      <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Subtotal</span><span id="co-prod-price">$0.00</span></span>
+      <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Shipping</span><span id="co-shipping-display">$7.00</span></span>
+      <span style="display:flex; justify-content:space-between; padding-top:8px; margin-top:4px; border-top:1px solid var(--border); font-weight:700; color:var(--text);"><span>Total</span><span id="co-total-display">$0.00</span></span>
     </p>
 
     <!-- Details Form -->
@@ -2193,6 +2196,15 @@
       <div class="cart-subtotal-row">
         <span>Subtotal</span>
         <span id="cart-subtotal-display">$0.00</span>
+      </div>
+      <div class="cart-subtotal-row" id="cart-shipping-row">
+        <span>Shipping</span>
+        <span id="cart-shipping-display">$7.00</span>
+      </div>
+      <div id="cart-free-shipping-nudge" style="font-size: 0.78rem; color: var(--orange); font-weight: 600; text-align: center; margin: 4px 0 2px; display: none;">⁠</div>
+      <div class="cart-subtotal-row" style="border-top: 1.5px solid var(--border); margin-top: 8px; padding-top: 10px; font-weight: 700; color: var(--text); font-size: 1rem;">
+        <span>Total</span>
+        <span id="cart-total-display">$7.00</span>
       </div>
     </div>
 
@@ -2567,7 +2579,34 @@
         </div>`;
       });
       listEl.innerHTML = html;
+
+      // ── Shipping calculation ────────────────────────────────────
+      const FREE_SHIPPING_THRESHOLD = 99.00;
+      const FLAT_SHIPPING           = 7.00;
+      const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : FLAT_SHIPPING;
+      const total    = subtotal + shipping;
+
       if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+      const shippingEl = document.getElementById('cart-shipping-display');
+      const nudgeEl    = document.getElementById('cart-free-shipping-nudge');
+      const totalEl    = document.getElementById('cart-total-display');
+
+      if (shippingEl) {
+        shippingEl.textContent = shipping === 0 ? 'FREE 🎉' : `$${FLAT_SHIPPING.toFixed(2)}`;
+        shippingEl.style.color = shipping === 0 ? 'var(--green)' : '';
+        shippingEl.style.fontWeight = shipping === 0 ? '700' : '';
+      }
+      if (nudgeEl) {
+        if (shipping > 0) {
+          const remaining = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2);
+          nudgeEl.textContent = `📦 Add $${remaining} more for free shipping!`;
+          nudgeEl.style.display = 'block';
+        } else {
+          nudgeEl.style.display = 'none';
+        }
+      }
+      if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
     }
 
     function openCart() {
@@ -2583,18 +2622,20 @@
 
     function checkoutFromCart() {
       if (cartItems.length === 0) return;
-      // Build a combined product entry for the checkout form
       const subtotal = cartItems.reduce((s, i) => s + parseFloat(PACK_SIZES[i.sizeKey].priceUSD) * i.qty, 0);
+      const shipping = subtotal >= 99.00 ? 0 : 7.00;
+      const total    = subtotal + shipping;
       const names = cartItems.map(i => {
         const c = COLORS.find(x => x.id === i.colorId);
         const sz = PACK_SIZES[i.sizeKey];
         return `${c ? c.name : i.colorId} x${i.qty} (${sz ? sz.label : i.sizeKey})`;
       });
-      // Build a temporary PRODUCTS entry for cart checkout
       const cartKey = '__cart__';
       PRODUCTS[cartKey] = {
         name: names.join(', '),
-        priceUSD: subtotal.toFixed(2)
+        priceUSD: subtotal.toFixed(2),
+        shippingUSD: shipping.toFixed(2),
+        totalUSD: total.toFixed(2)
       };
       closeModal();
       setTimeout(() => openCheckout(cartKey), 150);
@@ -2691,6 +2732,14 @@
       // Populate product data
       document.getElementById('co-prod-name').textContent = selectedProduct.name;
       document.getElementById('co-prod-price').textContent = `$${selectedProduct.priceUSD}`;
+
+      // Shipping breakdown in checkout summary
+      const coShippingEl = document.getElementById('co-shipping-display');
+      const coTotalEl    = document.getElementById('co-total-display');
+      const shipping = selectedProduct.shippingUSD ?? (parseFloat(selectedProduct.priceUSD) >= 99 ? '0.00' : '7.00');
+      const total    = selectedProduct.totalUSD    ?? (parseFloat(selectedProduct.priceUSD) + parseFloat(shipping)).toFixed(2);
+      if (coShippingEl) coShippingEl.textContent = parseFloat(shipping) === 0 ? 'FREE 🎉' : `$${parseFloat(shipping).toFixed(2)}`;
+      if (coTotalEl)    coTotalEl.textContent    = `$${parseFloat(total).toFixed(2)}`;
 
       // Open modal
       openModal('modal-checkout');
@@ -2807,10 +2856,12 @@
     }
 
     async function createOrderServerSide() {
+      // Use totalUSD (subtotal + shipping) when available; fall back to priceUSD for single-item Buy Now
+      const chargeAmount = selectedProduct.totalUSD ?? selectedProduct.priceUSD;
       const res = await fetch('/api/paypal-create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: selectedProduct.priceUSD, description: selectedProduct.name })
+        body: JSON.stringify({ amount: chargeAmount, description: selectedProduct.name })
       });
       const data = await res.json();
       if (!data.id) throw new Error(data.error || 'Cannot create order');
