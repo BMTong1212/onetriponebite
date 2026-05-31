@@ -721,6 +721,43 @@
       color: var(--muted);
     }
 
+    /* COLOR SELECTOR SWATCHES */
+    .color-options-container {
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .color-swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    
+    .swatch-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2.5px solid var(--white);
+      box-shadow: 0 0 0 1.5px var(--border);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+    
+    .swatch-btn:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 1.5px var(--muted);
+      z-index: 2;
+    }
+    
+    .swatch-btn.active {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 2px var(--blue);
+      z-index: 2;
+    }
+
     /* SECTION 4 - FISHING SPOTS */
     .spots-section {
       background-color: var(--bg);
@@ -1522,6 +1559,25 @@
             A must-have color for any lure. The "GLOW" lights up in low-light situations, overcast days, and stained coastal marshes. Accepts plastic dye/dips exceptionally well, allowing you to custom-tip your tails. Made of durable, high-vibration soft plastic that holds up to multiple trout and redfish bites.
           </p>
 
+          <!-- Color Selector -->
+          <div class="color-options-container">
+            <label class="options-label">Select Color: <span id="active-color-name" style="color: var(--blue); text-transform: none; font-weight: 700; margin-left: 5px;">Glow</span></label>
+            <div class="color-swatches">
+              <button type="button" class="swatch-btn active" data-color="glow" style="background-color: #f7f5ee;" title="Glow" onclick="selectColor('glow')"></button>
+              <button type="button" class="swatch-btn" data-color="holy_joely" style="background-color: #5bb3a2;" title="Holy Joely" onclick="selectColor('holy_joely')"></button>
+              <button type="button" class="swatch-btn" data-color="shrimp_creole" style="background-color: #d6714b;" title="Shrimp Creole" onclick="selectColor('shrimp_creole')"></button>
+              <button type="button" class="swatch-btn" data-color="limbo_slice" style="background-color: #8cba00;" title="Limbo Slice" onclick="selectColor('limbo_slice')"></button>
+              <button type="button" class="swatch-btn" data-color="green_hornet" style="background-color: #1e5a23;" title="Green Hornet" onclick="selectColor('green_hornet')"></button>
+              <button type="button" class="swatch-btn" data-color="tiger_bait" style="background-color: #e67e00;" title="Tiger Bait" onclick="selectColor('tiger_bait')"></button>
+              <button type="button" class="swatch-btn" data-color="ultra_violet" style="background-color: #643bb5;" title="Ultra-Violet" onclick="selectColor('ultra_violet')"></button>
+              <button type="button" class="swatch-btn" data-color="magneto" style="background-color: #3b7bb5;" title="Magneto" onclick="selectColor('magneto')"></button>
+              <button type="button" class="swatch-btn" data-color="pink_champagne" style="background-color: #d13066;" title="Pink Champagne" onclick="selectColor('pink_champagne')"></button>
+              <button type="button" class="swatch-btn" data-color="avocado" style="background-color: #553b32;" title="Avocado" onclick="selectColor('avocado')"></button>
+              <button type="button" class="swatch-btn" data-color="midnight_mullet" style="background-color: #263238;" title="Midnight Mullet" onclick="selectColor('midnight_mullet')"></button>
+              <button type="button" class="swatch-btn" data-color="lemon_head" style="background-color: #eedc30;" title="Lemon Head" onclick="selectColor('lemon_head')"></button>
+            </div>
+          </div>
+
           <!-- Bait Option Selector -->
           <div class="options-container">
             <label class="options-label">Select Pack Size (Bait Count):</label>
@@ -1915,41 +1971,94 @@
     // ============================================================
     // PRODUCT CATALOG & RATES
     // ============================================================
-    const PRODUCTS = {
-      matrix_8: { name: 'Matrix Shad "Glow" — 8 Baits (Single Pack)', priceUSD: '4.99', priceVND: 125000 },
-      matrix_25: { name: 'Matrix Shad "Glow" — 25 Baits (3-Pack Bundle)', priceUSD: '13.99', priceVND: 350000 },
-      matrix_50: { name: 'Matrix Shad "Glow" — 50 Baits (Half-Club Pack)', priceUSD: '24.99', priceVND: 625000 },
-      matrix_100: { name: 'Matrix Shad "Glow" — 100 Baits (Bulk Club Pack)', priceUSD: '39.99', priceVND: 1000000 }
+    const COLORS = [
+      { id: 'glow', name: 'Glow', filter: '' },
+      { id: 'holy_joely', name: 'Holy Joely', filter: 'hue-rotate(60deg) saturate(1.5) brightness(1.1)' },
+      { id: 'shrimp_creole', name: 'Shrimp Creole', filter: 'hue-rotate(15deg) saturate(1.8) brightness(1.0)' },
+      { id: 'limbo_slice', name: 'Limbo Slice', filter: 'hue-rotate(85deg) saturate(2.5) brightness(1.2)' },
+      { id: 'green_hornet', name: 'Green Hornet', filter: 'hue-rotate(120deg) saturate(1.5) brightness(0.8)' },
+      { id: 'tiger_bait', name: 'Tiger Bait', filter: 'hue-rotate(-20deg) saturate(2.0) brightness(1.0)' },
+      { id: 'ultra_violet', name: 'Ultra-Violet', filter: 'hue-rotate(250deg) saturate(1.8) brightness(0.9)' },
+      { id: 'magneto', name: 'Magneto', filter: 'hue-rotate(180deg) saturate(1.2) brightness(0.9)' },
+      { id: 'pink_champagne', name: 'Pink Champagne', filter: 'hue-rotate(-60deg) saturate(1.5) brightness(1.2)' },
+      { id: 'avocado', name: 'Avocado', filter: 'hue-rotate(100deg) saturate(1.0) brightness(0.8)' },
+      { id: 'midnight_mullet', name: 'Midnight Mullet', filter: 'grayscale(1) brightness(0.4)' },
+      { id: 'lemon_head', name: 'Lemon Head', filter: 'hue-rotate(45deg) saturate(3.0) brightness(1.3)' }
+    ];
+
+    const PACK_SIZES = {
+      '8': { label: '8 Baits', sub: 'Single Pack', priceUSD: '4.99', priceVND: 125000 },
+      '25': { label: '25 Baits', sub: 'Value Pack', priceUSD: '13.99', priceVND: 350000 },
+      '50': { label: '50 Baits', sub: 'Club Pack', priceUSD: '24.99', priceVND: 625000 },
+      '100': { label: '100 Baits', sub: 'Bulk Pack', priceUSD: '39.99', priceVND: 1000000 }
     };
+
+    const PRODUCTS = {};
+    
+    COLORS.forEach(color => {
+      Object.keys(PACK_SIZES).forEach(size => {
+        const sizeInfo = PACK_SIZES[size];
+        const key = `${color.id}_${size}`;
+        PRODUCTS[key] = {
+          name: `Matrix Shad "${color.name}" — ${sizeInfo.label} (${sizeInfo.sub})`,
+          priceUSD: sizeInfo.priceUSD,
+          priceVND: sizeInfo.priceVND
+        };
+      });
+    });
 
     // ============================================================
     // SHOWCASE PRODUCT VARIANT SELECTION
     // ============================================================
-    let activeVariantKey = 'matrix_8';
+    let activeColorId = 'glow';
+    let activeSizeKey = '8';
 
-    function selectVariant(variantKey) {
-      activeVariantKey = variantKey;
+    function selectColor(colorId) {
+      activeColorId = colorId;
       
-      // Update active state in UI buttons
-      document.querySelectorAll('.option-btn').forEach(btn => {
-        if (btn.getAttribute('data-variant') === variantKey) {
+      // Update active state in swatches
+      document.querySelectorAll('.swatch-btn').forEach(btn => {
+        if (btn.getAttribute('data-color') === colorId) {
           btn.classList.add('active');
         } else {
           btn.classList.remove('active');
         }
       });
       
-      // Get selected product details
-      const product = PRODUCTS[variantKey];
-      if (!product) return;
+      // Get color info
+      const color = COLORS.find(c => c.id === colorId);
+      if (!color) return;
       
-      // Update price display
-      document.getElementById('display-price-usd').textContent = `$${product.priceUSD}`;
-      document.getElementById('display-price-vnd').textContent = `${product.priceVND.toLocaleString('vi-VN')}đ`;
+      // Update color name display
+      document.getElementById('active-color-name').textContent = color.name;
+      
+      // Update showcase image color filter
+      document.getElementById('showcase-main-img').style.filter = color.filter;
+    }
+
+    function selectVariant(sizeKey) {
+      activeSizeKey = sizeKey;
+      
+      // Update active state in size buttons
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        if (btn.getAttribute('data-variant') === sizeKey) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Update price display based on selected size
+      const sizeInfo = PACK_SIZES[sizeKey];
+      if (!sizeInfo) return;
+      
+      document.getElementById('display-price-usd').textContent = `$${sizeInfo.priceUSD}`;
+      document.getElementById('display-price-vnd').textContent = `${sizeInfo.priceVND.toLocaleString('vi-VN')}đ`;
     }
 
     function triggerShowcaseCheckout() {
-      openCheckout(activeVariantKey);
+      const variantKey = `${activeColorId}_${activeSizeKey}`;
+      openCheckout(variantKey);
     }
 
     let selectedProduct = null;
