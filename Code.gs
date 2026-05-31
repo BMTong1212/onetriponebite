@@ -217,6 +217,7 @@ function sendWelcomeEmail(toEmail, toName) {
 
     MailApp.sendEmail({
       to: toEmail,
+      bcc: CONFIG.SUPPORT_EMAIL,
       subject: subject,
       htmlBody: html,
       name: CONFIG.SENDER_NAME,
@@ -531,6 +532,7 @@ function sendDeliveryEmail(toEmail, toName, method, ref) {
 
     MailApp.sendEmail({
       to: toEmail,
+      bcc: CONFIG.SUPPORT_EMAIL,
       subject: subject,
       htmlBody: html,
       name: CONFIG.SENDER_NAME,
