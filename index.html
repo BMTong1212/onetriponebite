@@ -3162,8 +3162,8 @@
     }
 
     async function createOrderServerSide() {
-      // Use totalUSD (subtotal + shipping) when available; fall back to priceUSD for single-item Buy Now
-      const chargeAmount = isPromoApplied ? selectedProduct.priceUSD : (selectedProduct.totalUSD ?? selectedProduct.priceUSD);
+      // Use currentTotalUSD (shipping-adjusted total calculated dynamically on checkout form changes)
+      const chargeAmount = selectedProduct.currentTotalUSD || (isPromoApplied ? selectedProduct.priceUSD : (selectedProduct.totalUSD ?? selectedProduct.priceUSD));
       const res = await fetch('/api/paypal-create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
