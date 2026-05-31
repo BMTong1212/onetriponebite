@@ -1947,16 +1947,23 @@
       <div id="co-form-msg" style="display:none; margin-top: 12px; padding: 12px; border-radius: 6px; font-size: 0.85rem; text-align: center;"></div>
     </form>
 
-    <!-- PayPal Panel -->
+    <!-- ============================================================
+         PAYMENT STEP — PayPal Smart Buttons (hosted by PayPal)
+         No raw card fields. Card entry happens on PayPal's own page.
+         ============================================================ -->
     <div class="payment-details-panel" id="co-paypal-panel">
-      <h3 style="font-size: 1.1rem; margin-bottom: 12px;">💳 Pay with PayPal or Card</h3>
-      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;">Secured by PayPal. Enter your card details or log in below to complete your order.</p>
+      <h3 style="font-size: 1.1rem; margin-bottom: 12px;">🔒 Complete Payment via PayPal</h3>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;">
+        Secured by PayPal. Click the button below — you can pay with your PayPal account
+        <strong>or a debit/credit card</strong> on PayPal's secure, hosted checkout page.
+        Your card details are never entered on this site.
+      </p>
 
-      <!-- PayPal Buttons SDK Container -->
-      <div id="co-paypal-button-container" style="margin-bottom: 16px;"></div>
+      <!-- PayPal Smart Button renders here — DO NOT add card input fields here -->
+      <div id="paypal-button-container" style="margin-bottom: 16px;"></div>
+
+      <!-- Error message shown if PayPal reports an error -->
       <div id="co-paypal-error" style="display:none; padding:10px 14px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:6px; color:#ef4444; font-size:.8rem; margin-bottom: 16px;"></div>
-
-
     </div>
 
     <!-- Success Message Panel -->
@@ -1996,7 +2003,13 @@
     </button>
   </div>
 
-  <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&disable-funding=venmo,paylater"></script>
+  <!--
+    PayPal SDK — ONLY components=buttons (no card-fields).
+    TO GO LIVE: replace client-id below with your live PayPal Client ID
+    (from https://developer.paypal.com/dashboard/applications/live).
+    Current: LIVE client-id from .env  |  Sandbox: change to client-id=sb
+  -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&components=buttons&disable-funding=venmo,paylater"></script>
 
   <script>
     // ============================================================
@@ -2549,7 +2562,15 @@
     }
 
     // ============================================================
-    // PAYPAL INTEGRATION
+    // PAYPAL SMART BUTTON INTEGRATION
+    //
+    // The PayPal SDK (loaded above) renders official hosted buttons.
+    // No raw card fields are collected on this page.
+    //
+    // SANDBOX vs LIVE:
+    //   - The SDK script src uses the live client-id from the env.
+    //   - To test in sandbox: swap to client-id=sb in the <script> tag above.
+    //   - When ready to go live: paste your live Client ID in the script src.
     // ============================================================
     let paypalInited = false;
     let _ppName = '', _ppEmail = '';
@@ -2560,20 +2581,30 @@
       _ppName = name;
       _ppEmail = email;
 
-      // PayPal Wallet Buttons
       paypal.Buttons({
+
+        // ── Step 1: Create the order server-side ──────────────────
+        // Pulls the amount and product name from the currently
+        // selected product so pricing is always server-authoritative.
         createOrder: () => createOrderServerSide(),
+
+        // ── Step 2: Buyer approved payment on PayPal ─────────────
+        // Capture server-side, then show the order confirmation screen.
         onApprove: async (data) => {
           await captureOrderServerSide(data.orderID);
         },
+
+        // ── Step 3: Handle errors gracefully ─────────────────────
+        // Shows a friendly message without crashing the rest of the page.
         onError: (err) => {
-          console.error(err);
+          console.error('PayPal error:', err);
           const errEl = document.getElementById('co-paypal-error');
           errEl.style.display = 'block';
-          errEl.textContent = '❌ Error starting PayPal payment.';
+          errEl.textContent = '❌ Something went wrong with PayPal. Please try again or contact support.';
         }
-      }).render('#co-paypal-button-container');
 
+      // ── Render into the container div in the checkout modal ────
+      }).render('#paypal-button-container');
     }
 
     async function createOrderServerSide() {
