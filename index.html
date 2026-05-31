@@ -2907,29 +2907,149 @@
       document.getElementById('co-form-msg').style.display = 'none';
       document.getElementById('co-submit-btn').disabled = false;
 
+      // Reset first-order checkbox
+      const firstOrderChk = document.getElementById('co-first-order-chk');
+      if (firstOrderChk) firstOrderChk.checked = false;
+
       // Populate product data
       document.getElementById('co-prod-name').textContent = selectedProduct.name;
       document.getElementById('co-prod-price').textContent = `$${selectedProduct.priceUSD}`;
 
-      // Shipping breakdown in checkout summary
-      const coShippingEl = document.getElementById('co-shipping-display');
-      const coTotalEl    = document.getElementById('co-total-display');
-      const shipping = isPromoApplied ? '0.00' : (selectedProduct.shippingUSD ?? (parseFloat(selectedProduct.priceUSD) >= 99 ? '0.00' : '7.00'));
-      const total    = isPromoApplied ? (parseFloat(selectedProduct.priceUSD)).toFixed(2) : (selectedProduct.totalUSD    ?? (parseFloat(selectedProduct.priceUSD) + parseFloat(shipping)).toFixed(2));
-      if (coShippingEl) {
-        if (isPromoApplied) {
-          coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (promo applied) 🎁</span>';
-        } else {
-          coShippingEl.textContent = parseFloat(shipping) === 0 ? 'FREE 🎉' : `$${parseFloat(shipping).toFixed(2)}`;
-          coShippingEl.style.color = parseFloat(shipping) === 0 ? 'var(--green)' : '';
-          coShippingEl.style.fontWeight = parseFloat(shipping) === 0 ? '700' : '';
-        }
-      }
-      if (coTotalEl)    coTotalEl.textContent    = `$${parseFloat(total).toFixed(2)}`;
+      // Run eligibility and pricing checks
+      checkFirstOrderEligibility();
+      updateCheckoutPricing();
 
       // Open modal
       openModal('modal-checkout');
     }
+
+    function saveFingerprint(email, phone, address) {
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanPhone = phone.trim().replace(/\D/g, '');
+      const cleanAddress = address.trim().toLowerCase().substring(0, 10);
+      
+      const fingerprint = `${cleanEmail}|${cleanPhone}|${cleanAddress}`;
+      
+      let used = [];
+      try {
+        const stored = localStorage.getItem('otob_used_fingerprints');
+        if (stored) used = JSON.parse(stored);
+      } catch (e) {
+        console.error(e);
+      }
+      
+      if (!used.includes(fingerprint)) {
+        used.push(fingerprint);
+        localStorage.setItem('otob_used_fingerprints', JSON.stringify(used));
+      }
+    }
+
+    function checkFirstOrderEligibility() {
+      const email = document.getElementById('co-email').value.trim().toLowerCase();
+      const phone = document.getElementById('co-phone').value.trim().replace(/\D/g, '');
+      
+      let isEligible = true;
+      
+      try {
+        const stored = localStorage.getItem('otob_used_fingerprints');
+        if (stored) {
+          const used = JSON.parse(stored);
+          for (const f of used) {
+            const parts = f.split('|');
+            const storedEmail = parts[0];
+            const storedPhone = parts[1];
+            
+            if (email && storedEmail && email === storedEmail) {
+              isEligible = false;
+              break;
+            }
+            if (phone && storedPhone && phone === storedPhone) {
+              isEligible = false;
+              break;
+            }
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      
+      const checkboxContainer = document.getElementById('co-first-order-container');
+      const returningMsg = document.getElementById('co-returning-msg');
+      
+      if (!isEligible) {
+        if (checkboxContainer) checkboxContainer.style.display = 'none';
+        if (returningMsg) returningMsg.style.display = 'block';
+        const chk = document.getElementById('co-first-order-chk');
+        if (chk && chk.checked) {
+          chk.checked = false;
+          updateCheckoutPricing();
+        }
+      } else {
+        const subtotal = parseFloat(selectedProduct.priceUSD);
+        if (subtotal < 99.00) {
+          if (checkboxContainer) checkboxContainer.style.display = 'block';
+        } else {
+          if (checkboxContainer) checkboxContainer.style.display = 'none';
+        }
+        if (returningMsg) returningMsg.style.display = 'none';
+      }
+    }
+
+    function updateCheckoutPricing() {
+      const coShippingEl = document.getElementById('co-shipping-display');
+      const coTotalEl    = document.getElementById('co-total-display');
+      const chk = document.getElementById('co-first-order-chk');
+      
+      const subtotal = parseFloat(selectedProduct.priceUSD);
+      let shipping = 7.00;
+      
+      if (selectedProduct.shippingUSD !== undefined) {
+        shipping = parseFloat(selectedProduct.shippingUSD);
+      } else if (subtotal >= 99.00) {
+        shipping = 0.00;
+      }
+      
+      let isFirstOrderDiscount = false;
+      if (chk && chk.checked && subtotal < 99.00) {
+        shipping = 0.00;
+        isFirstOrderDiscount = true;
+      }
+      
+      const total = subtotal + shipping;
+      
+      if (coShippingEl) {
+        if (isFirstOrderDiscount) {
+          coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (first order) 🎁</span>';
+        } else if (shipping === 0) {
+          if (isPromoApplied) {
+            coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (promo applied) 🎁</span>';
+          } else {
+            coShippingEl.textContent = 'FREE 🎉';
+            coShippingEl.style.color = 'var(--green)';
+            coShippingEl.style.fontWeight = '700';
+          }
+        } else {
+          coShippingEl.textContent = `$${shipping.toFixed(2)}`;
+          coShippingEl.style.color = '';
+          coShippingEl.style.fontWeight = '';
+        }
+      }
+      
+      if (coTotalEl) {
+        coTotalEl.textContent = `$${total.toFixed(2)}`;
+      }
+      
+      selectedProduct.currentTotalUSD = total.toFixed(2);
+    }
+
+    // Attach checkout event listeners
+    const coEmailInput = document.getElementById('co-email');
+    const coPhoneInput = document.getElementById('co-phone');
+    const firstOrderChk = document.getElementById('co-first-order-chk');
+    
+    if (coEmailInput) coEmailInput.addEventListener('input', checkFirstOrderEligibility);
+    if (coPhoneInput) coPhoneInput.addEventListener('input', checkFirstOrderEligibility);
+    if (firstOrderChk) firstOrderChk.addEventListener('change', updateCheckoutPricing);
 
     // Handle checkout details form submit
     const checkoutDetailsForm = document.getElementById('checkout-details-form');
