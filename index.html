@@ -2590,6 +2590,7 @@
     // CART STATE
     // ============================================================
     let cartItems = []; // [{ colorId, sizeKey, qty }]
+    let isPromoApplied = false;
 
     function addToCart(colorId) {
       const cardEl = document.querySelector(`.product-card[data-color="${colorId}"]`);
@@ -2706,7 +2707,7 @@
       // ── Shipping calculation ────────────────────────────────────
       const FREE_SHIPPING_THRESHOLD = 99.00;
       const FLAT_SHIPPING           = 7.00;
-      const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : FLAT_SHIPPING;
+      const shipping = isPromoApplied ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : FLAT_SHIPPING);
       const total    = subtotal + shipping;
 
       if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
@@ -2716,12 +2717,16 @@
       const totalEl    = document.getElementById('cart-total-display');
 
       if (shippingEl) {
-        shippingEl.textContent = shipping === 0 ? 'FREE 🎉' : `$${FLAT_SHIPPING.toFixed(2)}`;
-        shippingEl.style.color = shipping === 0 ? 'var(--green)' : '';
-        shippingEl.style.fontWeight = shipping === 0 ? '700' : '';
+        if (isPromoApplied) {
+          shippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (promo applied) 🎁</span>';
+        } else {
+          shippingEl.textContent = shipping === 0 ? 'FREE 🎉' : `$${FLAT_SHIPPING.toFixed(2)}`;
+          shippingEl.style.color = shipping === 0 ? 'var(--green)' : '';
+          shippingEl.style.fontWeight = shipping === 0 ? '700' : '';
+        }
       }
       if (nudgeEl) {
-        if (shipping > 0) {
+        if (shipping > 0 && !isPromoApplied) {
           const remaining = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2);
           nudgeEl.textContent = `📦 Add $${remaining} more for free shipping!`;
           nudgeEl.style.display = 'block';
@@ -2730,6 +2735,31 @@
         }
       }
       if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+
+      // Render promo status if already applied
+      const promoToggle = document.getElementById('cart-promo-toggle');
+      const promoContainer = document.getElementById('cart-promo-container');
+      const promoInput = document.getElementById('cart-promo-input');
+      const promoApplyBtn = document.getElementById('cart-promo-apply-btn');
+      const promoMsg = document.getElementById('cart-promo-msg');
+
+      if (isPromoApplied) {
+        if (promoContainer) promoContainer.style.display = 'flex';
+        if (promoToggle) promoToggle.style.display = 'none';
+        if (promoInput) {
+          promoInput.value = 'FREESHIP1';
+          promoInput.disabled = true;
+        }
+        if (promoApplyBtn) {
+          promoApplyBtn.disabled = true;
+          promoApplyBtn.textContent = 'Applied';
+        }
+        if (promoMsg) {
+          promoMsg.style.display = 'block';
+          promoMsg.style.color = '#10b981';
+          promoMsg.textContent = '✅ Code FREESHIP1 applied!';
+        }
+      }
     }
 
     function openCart() {
@@ -2746,7 +2776,7 @@
     function checkoutFromCart() {
       if (cartItems.length === 0) return;
       const subtotal = cartItems.reduce((s, i) => s + parseFloat(PACK_SIZES[i.sizeKey].priceUSD) * i.qty, 0);
-      const shipping = subtotal >= 99.00 ? 0 : 7.00;
+      const shipping = isPromoApplied ? 0 : (subtotal >= 99.00 ? 0 : 7.00);
       const total    = subtotal + shipping;
       const names = cartItems.map(i => {
         const c = COLORS.find(x => x.id === i.colorId);
