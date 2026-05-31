@@ -63,6 +63,7 @@ export default async function handler(req, res) {
 
     const txId   = capture.purchase_units?.[0]?.payments?.captures?.[0]?.id || orderID;
     const amount = capture.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value || '7.00';
+    const description = capture.purchase_units?.[0]?.description || '';
 
     // Notify GAS — fulfillment failure is surfaced distinctly, not swallowed
     const GAS_URL = process.env.GAS_URL;
@@ -87,6 +88,7 @@ export default async function handler(req, res) {
           name: name || '',
           txId,
           amount,
+          product: description,
         }),
       });
 

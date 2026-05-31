@@ -21,7 +21,7 @@ const CONFIG = {
   PRODUCT_PRICE_VND: '125,000đ',
   PRODUCT_PRICE_USD: '$4.99',
 
-  DOWNLOAD_LINK: 'https://drive.google.com/drive/folders/1xf5-8Of5eGaXv-nsnMpl9vZk4u_h5o9M?usp=sharing',
+  DOWNLOAD_LINK: 'https://docs.google.com/spreadsheets/d/1IFiNuC2bzt-VPPDS52tM2nPLpNVDksCfYGCbjMCo3_U/edit?gid=0#gid=0',
 
   SUPPORT_EMAIL: 'support@onetriponebite.com',
   SENDER_NAME: 'One Trip One Bite',
@@ -52,11 +52,12 @@ const COLS = {
   TX_ID: 9,  // I
   CK_CONTENT: 10,  // J
   PRODUCT: 11, // K
+  AMOUNT: 12,  // L
 };
 
 const HEADER = [
   'Timestamp', 'Ref Code', 'Name', 'Email', 'Phone',
-  'Payment Method', 'Status', 'Payment Time', 'Transaction ID', 'Transfer Content', 'Product'
+  'Payment Method', 'Status', 'Payment Time', 'Transaction ID', 'Transfer Content', 'Product', 'Amount Paid'
 ];
 
 // ============================================================
@@ -264,6 +265,7 @@ function handleRegister(body) {
     '',               // TX_ID
     '',               // CK_CONTENT
     product || CONFIG.PRODUCT_NAME, // PRODUCT
+    '',               // AMOUNT
   ]);
 
   return jsonResponse({ success: true, refCode });
@@ -274,7 +276,7 @@ function handleRegister(body) {
 // ============================================================
 
 function handlePaypalComplete(body) {
-  const { email, name, txId, amount } = body;
+  const { email, name, txId, amount, product } = body;
   Logger.log('PayPal complete: ' + JSON.stringify(body));
 
   if (!email) return jsonResponse({ success: false, error: 'Missing email' });
@@ -292,6 +294,8 @@ function handlePaypalComplete(body) {
       sheet.getRange(i + 1, COLS.STATUS).setValue('PAID_PAYPAL');
       sheet.getRange(i + 1, COLS.PAID_AT).setValue(now);
       sheet.getRange(i + 1, COLS.TX_ID).setValue(txId || '');
+      if (COLS.PRODUCT) sheet.getRange(i + 1, COLS.PRODUCT).setValue(product || CONFIG.PRODUCT_NAME);
+      if (COLS.AMOUNT) sheet.getRange(i + 1, COLS.AMOUNT).setValue(amount || '');
       updated = true;
       paidRowIndex = i;
       break;
@@ -318,19 +322,24 @@ function handlePaypalComplete(body) {
       now,
       'PP-' + (txId || '').toString().slice(-6),
       name || '', email, '', 'paypal', 'PAID_PAYPAL', now, txId || '', '',
+      product || CONFIG.PRODUCT_NAME,
+      amount || '',
     ]);
   }
 
   sendDeliveryEmail(email, name || 'Customer', 'paypal', txId || '');
 
   const paidAtPP = Utilities.formatDate(now, 'America/New_York', 'HH:mm - MM/dd/yyyy');
+  const displayProduct = product || CONFIG.PRODUCT_NAME;
+  const displayAmount = amount ? '$' + amount : CONFIG.PRODUCT_PRICE_USD;
+
   sendTelegramMessage(
     '🎉 NEW ORDER - PAYMENT SUCCESSFUL\n\n' +
-    '📦 Product: ' + CONFIG.PRODUCT_NAME + '\n' +
+    '📦 Product: ' + displayProduct + '\n' +
     '👤 Customer: ' + (name || 'N/A') + '\n' +
     '📧 Email: ' + email + '\n' +
     '💳 Method: PayPal\n' +
-    '💰 Amount: ' + CONFIG.PRODUCT_PRICE_USD + '\n' +
+    '💰 Amount: ' + displayAmount + '\n' +
     '🔖 Transaction ID: ' + (txId || 'N/A') + '\n' +
     '⏰ Time: ' + paidAtPP
   );
