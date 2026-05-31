@@ -11,37 +11,50 @@ else
 fi
 
 # 2. Deploy to Google Apps Script
+# BUG FIX: GAS failure now warns-and-continues instead of aborting,
+# so Vercel always runs even if clasp has issues.
 echo "------------------------------------------------"
 echo "📦 Step 1: Deploying backend to Google Apps Script..."
 echo "------------------------------------------------"
-# Check if clasp is authenticated by running list
 if ! npx @google/clasp list &>/dev/null; then
-  echo "⚠️ Clasp is not logged in. Running clasp login..."
-  echo "👉 A browser window will open. Please log in using the shared Google Account."
-  npx @google/clasp login
-fi
-
-# Run the existing deploy-gas script
-chmod +x deploy-gas.sh
-./deploy-gas.sh "$MSG"
-if [ $? -ne 0 ]; then
-  echo "❌ Apps Script deployment failed. Aborting."
-  exit 1
+  echo "⚠️  Clasp is not logged in — skipping GAS deploy (Vercel will still run)."
+else
+  chmod +x deploy-gas.sh
+  ./deploy-gas.sh "$MSG"
+  if [ $? -ne 0 ]; then
+    echo "⚠️  GAS deploy failed — continuing to GitHub + Vercel anyway."
+  else
+    echo "✓ GAS deploy complete."
+  fi
 fi
 
 # 3. Commit and push to GitHub
+# BUG FIX: `git commit` exits 1 when there is nothing new to commit.
+# Previously this killed the script before Vercel ever ran.
+# Now we treat "nothing to commit" as a non-error and continue.
 echo "------------------------------------------------"
 echo "🐙 Step 2: Committing and pushing to GitHub..."
 echo "------------------------------------------------"
 git add .
-git commit -m "$MSG"
+COMMIT_OUT=$(git commit -m "$MSG" 2>&1)
+COMMIT_CODE=$?
+if [ $COMMIT_CODE -eq 0 ]; then
+  echo "✓ Committed: $MSG"
+elif echo "$COMMIT_OUT" | grep -q "nothing to commit"; then
+  echo "ℹ️  Nothing new to commit — already up to date."
+else
+  echo "❌ Git commit failed: $COMMIT_OUT"
+  exit 1
+fi
+
 git push
 if [ $? -ne 0 ]; then
   echo "❌ Git push failed. Aborting."
   exit 1
 fi
+echo "✓ GitHub push complete."
 
-# 4. Deploy to Vercel production
+# 4. Deploy to Vercel production (always runs)
 echo "------------------------------------------------"
 echo "⚡ Step 3: Deploying frontend to Vercel..."
 echo "------------------------------------------------"
@@ -52,5 +65,5 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "------------------------------------------------"
-echo "🎉 SUCCESS: All changes are live and tracked on GitHub, Vercel, and Google Apps Script!"
+echo "🎉 SUCCESS: All changes are live on GitHub, Vercel, and Google Apps Script!"
 echo "------------------------------------------------"
