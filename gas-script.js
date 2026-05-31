@@ -744,7 +744,7 @@ function sendMonthlyNewsletter() {
   const data = sheet.getDataRange().getValues();
   
   // ⚙️ TIÊU ĐỀ & NỘI DUNG EMAIL
-  const subject = "⛵ Tin tức & Ưu đãi hàng tháng - One Trip One Bite";
+  const subject = "⛵ Monthly Adventures & Updates - One Trip One Bite";
   const htmlBody = `
     <!DOCTYPE html>
     <html>
@@ -763,33 +763,33 @@ function sendMonthlyNewsletter() {
                 <td style="background:#2E5B76;padding:40px 32px;text-align:center;">
                   <div style="font-size:48px;margin-bottom:14px;">⛵</div>
                   <h1 style="color:#F7F4EE;margin:0;font-size:28px;font-family:Georgia,serif;font-weight:700;letter-spacing:1px;">ONE TRIP ONE BITE</h1>
-                  <p style="color:rgba(247,244,238,0.8);margin:10px 0 0;font-size:15px;letter-spacing:0.5px;">Bản tin hàng tháng</p>
+                  <p style="color:rgba(247,244,238,0.8);margin:10px 0 0;font-size:15px;letter-spacing:0.5px;">Monthly Newsletter</p>
                 </td>
               </tr>
               
               <!-- Body -->
               <tr>
                 <td style="padding:36px 32px;">
-                  <h2 style="color:#2E5B76;font-size:22px;font-weight:700;margin:0 0 16px;">Chào {{NAME}},</h2>
-                  <p style="line-height:1.7;margin:0 0 20px;">Dưới đây là tổng hợp tin tức hành trình, địa điểm câu cá và đánh giá đồ dùng dã ngoại nổi bật của tháng này từ One Trip One Bite:</p>
+                  <h2 style="color:#2E5B76;font-size:22px;font-weight:700;margin:0 0 16px;">Hi {{NAME}},</h2>
+                  <p style="line-height:1.7;margin:0 0 20px;">Here is a digest of our latest trip reports, hidden fishing spots, local food finds, and gear reviews from the Gulf Coast:</p>
                   
                   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea;border-radius:12px;margin:24px 0;">
                     <tr>
                       <td style="padding:20px 24px;">
-                        <p style="margin:0 0 10px;color:#2E5B76;font-weight:700;font-size:16px;">🌊 Nổi bật trong tháng này:</p>
-                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">📍 <strong>Địa điểm mới:</strong> Các điểm hạ thuyền kayak bí mật tại Vịnh Gulf.</p>
-                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🎣 <strong>Kỹ thuật câu:</strong> Cách chọn mồi mềm Matrix Shad hiệu quả nhất.</p>
-                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🍣 <strong>Ẩm thực địa phương:</strong> Đánh giá quán ăn ven biển nổi tiếng.</p>
+                        <p style="margin:0 0 10px;color:#2E5B76;font-weight:700;font-size:16px;">🌊 Highlights this month:</p>
+                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">📍 <strong>New Spots:</strong> Secret kayak launches and hot spots around the Gulf Coast.</p>
+                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🎣 <strong>Tips &amp; Tactics:</strong> Selecting the best soft plastic color patterns for stained water.</p>
+                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🍣 <strong>Local Flavors:</strong> Honest reviews of coastal seafood shacks and local dives.</p>
                       </td>
                     </tr>
                   </table>
                   
-                  <p style="line-height:1.7;margin:0 0 28px;">Hãy click vào đường dẫn bên dưới để ghé thăm website của chúng tôi và cập nhật thêm nhiều hành trình mới nhất.</p>
+                  <p style="line-height:1.7;margin:0 0 28px;">Click below to visit our website and catch up on the latest stories from the water.</p>
                   
                   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
                     <tr>
                       <td align="center">
-                        <a href="https://onetriponebite.com" style="display:inline-block;background:#C77D4A;color:#ffffff;text-decoration:none;padding:16px 36px;border-radius:8px;font-weight:700;font-size:16px;box-shadow:0 6px 18px rgba(199,125,74,0.3);letter-spacing:0.5px;">Ghé thăm Website</a>
+                        <a href="https://onetriponebite.com" style="display:inline-block;background:#C77D4A;color:#ffffff;text-decoration:none;padding:16px 36px;border-radius:8px;font-weight:700;font-size:16px;box-shadow:0 6px 18px rgba(199,125,74,0.3);letter-spacing:0.5px;">Visit Our Website</a>
                       </td>
                     </tr>
                   </table>
@@ -817,7 +817,7 @@ function sendMonthlyNewsletter() {
   for (let i = 1; i < data.length; i++) {
     const email = (data[i][COLS.EMAIL - 1] || '').toString().trim();
     const status = (data[i][COLS.STATUS - 1] || '').toString().trim();
-    const name = (data[i][COLS.NAME - 1] || 'Bạn hữu').toString().trim();
+    const name = (data[i][COLS.NAME - 1] || 'Friend').toString().trim();
 
     if (email && status === 'SUBSCRIBED') {
       try {
