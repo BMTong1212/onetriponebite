@@ -6,6 +6,8 @@ const readline = require('readline');
 const WATCH_DIR = __dirname;
 let debounceTimer = null;
 let isPrompting = false;
+let isShipping = false;
+const isAuto = process.argv.includes('--auto') || process.argv.includes('-a');
 
 // Folders and files to ignore
 const IGNORE_LIST = [
@@ -25,20 +27,44 @@ function shouldIgnore(filePath) {
 }
 
 console.log('================================================');
-console.log('👀 File Watcher Active');
-console.log('Monitoring for edits in the project...');
+console.log(`👀 File Watcher Active [Mode: ${isAuto ? 'AUTO' : 'INTERACTIVE'}]`);
+if (isAuto) {
+  console.log('Monitoring for edits. Changes will be deployed automatically.');
+} else {
+  console.log('Monitoring for edits. You will be prompted before deployment.');
+}
 console.log('================================================\n');
 
 fs.watch(WATCH_DIR, { recursive: true }, (eventType, filename) => {
   if (!filename || shouldIgnore(filename)) return;
 
-  // Debounce changes (wait 1.5 seconds after the last save before prompting)
+  // Debounce changes (wait 1.5 seconds after the last save)
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
-    if (isPrompting) return;
-    triggerPrompt(filename);
+    if (isPrompting || isShipping) return;
+    if (isAuto) {
+      shipAutomatically(filename);
+    } else {
+      triggerPrompt(filename);
+    }
   }, 1500);
 });
+
+function shipAutomatically(changedFile) {
+  isShipping = true;
+  console.log(`\n🔔 Change detected in: ${changedFile}`);
+  console.log('🚢 Auto-shipping changes (Vercel, GitHub, Google Apps Script)...\n');
+
+  const commitMsg = `Auto-update: ${changedFile} saved`;
+  const child = spawn('./ship.sh', [commitMsg], { stdio: 'inherit' });
+
+  child.on('close', (code) => {
+    isShipping = false;
+    console.log('\n================================================');
+    console.log('👀 Watching for file changes (Auto-mode)...');
+    console.log('================================================\n');
+  });
+}
 
 function triggerPrompt(changedFile) {
   isPrompting = true;

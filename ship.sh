@@ -1,17 +1,21 @@
 #!/bin/bash
 
-# 1. Prompt for commit message
-read -p "Enter commit message (press Enter for auto-generated message): " MSG
-if [ -z "$MSG" ]; then
-  MSG="Update at $(date '+%Y-%m-%d %H:%M:%S')"
+# 1. Check for command line argument or prompt for commit message
+if [ -n "$1" ]; then
+  MSG="$1"
+else
+  read -p "Enter commit message (press Enter for auto-generated message): " MSG
+  if [ -z "$MSG" ]; then
+    MSG="Update at $(date '+%Y-%m-%d %H:%M:%S')"
+  fi
 fi
 
 # 2. Deploy to Google Apps Script
 echo "------------------------------------------------"
 echo "📦 Step 1: Deploying backend to Google Apps Script..."
 echo "------------------------------------------------"
-# Check if clasp is authenticated by running status
-if ! npx @google/clasp status &>/dev/null; then
+# Check if clasp is authenticated by running list
+if ! npx @google/clasp list &>/dev/null; then
   echo "⚠️ Clasp is not logged in. Running clasp login..."
   echo "👉 A browser window will open. Please log in using the shared Google Account."
   npx @google/clasp login

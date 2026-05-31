@@ -62,7 +62,9 @@ export default async function handler(req, res) {
     }
 
     const txId   = capture.purchase_units?.[0]?.payments?.captures?.[0]?.id || orderID;
-    const amount = capture.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value || '7.00';
+    const amount = capture.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value 
+                || capture.purchase_units?.[0]?.amount?.value 
+                || '4.99';
     const description = capture.purchase_units?.[0]?.description || '';
 
     // Notify GAS — fulfillment failure is surfaced distinctly, not swallowed
