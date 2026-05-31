@@ -2402,8 +2402,8 @@
     ];
 
     const PACK_SIZES = {
-      '5':  { label: '5 Baits',  sub: 'Starter Pack', priceUSD: '7.99'  },
-      '25': { label: '25 Baits', sub: 'Value Pack',   priceUSD: '24.99' }
+      '8':  { label: '8 Baits',  sub: 'Starter Pack', priceUSD: '4.99'  },
+      '50': { label: '50 Baits', sub: 'Value Pack',   priceUSD: '24.99' }
     };
 
     const PRODUCTS = {};
@@ -2453,13 +2453,13 @@
         const imgSrc = color.img ? color.img : 'assets/glow.jpg';
         const imgFilter = color.img ? '' : `style="filter: ${color.filter}"`;
         
-        let selectOptions = '';
-        Object.keys(PACK_SIZES).forEach(sizeKey => {
-          const sizeInfo = PACK_SIZES[sizeKey];
-          selectOptions += `<option value="${sizeKey}">${sizeInfo.label} — $${sizeInfo.priceUSD}</option>`;
-        });
+        const selectOptions = `
+              <option value="8">8 Baits — $4.99</option>
+              <!-- OUT OF STOCK: Remove 'disabled' attribute below to reactivate 50 Baits option -->
+              <option value="50" disabled>50 Baits — $24.99 (Out of Stock)</option>
+        `;
         
-        const initialPriceUSD = PACK_SIZES['5'].priceUSD;
+        const initialPriceUSD = PACK_SIZES['8'].priceUSD;
         
         html += `
         <div class="product-card fade-up-trigger" data-color="${color.id}">
