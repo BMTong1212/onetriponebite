@@ -449,55 +449,61 @@
       }
     }
 
-    /* SECTION 3 - UNDER $25 FAVORITES */
-    /* SINGLE FEATURED PRODUCT SHOWCASE */
-    .favorites-section {
-      background-color: var(--white);
-      padding: 80px 0;
-    }
-    
-    .product-showcase {
+    /* SECTION 3 - 12-PRODUCT GRID */
+    .favorites-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 50px;
-      background: var(--bg);
-      border-radius: 20px;
-      padding: 40px;
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.03);
-      max-width: 1000px;
-      margin: 0 auto;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 40px;
     }
     
-    @media (max-width: 880px) {
-      .product-showcase {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 24px;
+    @media (max-width: 990px) {
+      .favorites-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
       }
     }
     
-    .showcase-gallery {
-      position: relative;
+    @media (max-width: 600px) {
+      .favorites-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+    
+    .product-card {
       background: var(--white);
       border-radius: 16px;
       border: 1px solid var(--border);
-      padding: 30px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .product-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    
+    .product-card-gallery {
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       aspect-ratio: 1.15;
+      margin-bottom: 20px;
+      overflow: hidden;
+      position: relative;
     }
     
-    .showcase-img-box {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .showcase-img-box img {
+    .product-card-gallery img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
@@ -505,257 +511,152 @@
       transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
     
-    .product-showcase:hover .showcase-img-box img {
-      transform: scale(1.05) rotate(1deg);
+    .product-card:hover .product-card-gallery img {
+      transform: scale(1.06) rotate(1deg);
     }
     
-    .showcase-gallery-badge {
+    .product-card-badge {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 15px;
+      left: 15px;
+      z-index: 2;
     }
     
-    .badge-tag {
-      background: rgba(199, 125, 74, 0.15);
-      color: var(--orange);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border: 1px solid rgba(199, 125, 74, 0.2);
-    }
-    
-    .showcase-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    .showcase-rating {
+    .product-card-rating {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 6px;
+      margin-bottom: 8px;
     }
     
-    .showcase-rating .stars {
+    .product-card-rating .stars {
       color: #ffb100;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
     }
     
-    .showcase-rating .rating-text {
+    .product-card-rating .rating-text {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 500;
     }
     
-    .showcase-title {
-      font-size: 2.2rem;
+    .product-card-title {
+      font-size: 1.35rem;
       font-family: var(--font-serif);
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 15px;
-      line-height: 1.2;
+      margin-bottom: 10px;
+      line-height: 1.25;
     }
     
-    .showcase-desc {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-    
-    /* Options Selector Layout */
-    .options-container {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .options-label {
-      display: block;
+    .product-card-desc {
       font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--muted);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    
+    .product-card-options {
+      margin-bottom: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .product-card-options-label {
+      display: block;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--text);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     
-    .options-selector {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+    .select-wrapper {
+      position: relative;
+      width: 100%;
     }
     
-    @media (max-width: 480px) {
-      .options-selector {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    .option-btn {
+    .product-size-select {
+      width: 100%;
       background: var(--white);
       border: 1.5px solid var(--border);
       border-radius: 8px;
-      padding: 12px 8px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      appearance: none;
+      -webkit-appearance: none;
       transition: all 0.2s ease;
     }
     
-    .option-btn:hover {
-      border-color: var(--beige);
+    .product-size-select:focus, .product-size-select:hover {
+      outline: none;
+      border-color: var(--blue);
       background: var(--bg);
     }
     
-    .option-btn.active {
-      border-color: var(--blue);
-      background: rgba(46, 91, 118, 0.05);
-      box-shadow: 0 0 0 1px var(--blue);
-    }
-    
-    .option-btn .option-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    
-    .option-btn .option-subtitle {
-      font-size: 0.7rem;
+    .select-wrapper::after {
+      content: '▼';
+      font-size: 0.65rem;
       color: var(--muted);
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
     }
     
-    .option-btn.active .option-title {
-      color: var(--blue);
-    }
-    
-    .showcase-purchase {
+    .product-card-purchase {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 24px;
+      gap: 15px;
+      margin-top: auto;
     }
     
-    .price-display {
+    .product-card-price {
       display: flex;
       flex-direction: column;
     }
     
-    .price-display .price-usd {
-      font-size: 1.8rem;
+    .product-card-price .price-usd {
+      font-size: 1.35rem;
       font-weight: 800;
       color: var(--text);
       line-height: 1.1;
     }
     
-    .price-display .price-vnd {
-      font-size: 0.95rem;
+    .product-card-price .price-vnd {
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--muted);
-      margin-top: 2px;
+      margin-top: 1px;
     }
     
-    .btn-checkout-now {
-      flex-grow: 1;
+    .btn-card-checkout {
       background: var(--blue);
       color: var(--white);
       border: 1px solid var(--blue);
-      padding: 15px 24px;
+      padding: 10px 16px;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(46, 91, 118, 0.15);
     }
     
-    .btn-checkout-now:hover {
+    .btn-card-checkout:hover {
       background: var(--orange);
       border-color: var(--orange);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(199, 125, 74, 0.25);
-    }
-    
-    .showcase-features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    
-    @media (max-width: 480px) {
-      .showcase-features {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-    }
-    
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--white);
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-    
-    .feature-item .feature-icon {
-      font-size: 1.05rem;
-    }
-    
-    .feature-item .feature-text {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    /* COLOR SELECTOR SWATCHES */
-    .color-options-container {
-      margin-bottom: 24px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .color-swatches {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
-    }
-    
-    .swatch-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2.5px solid var(--white);
-      box-shadow: 0 0 0 1.5px var(--border);
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-    }
-    
-    .swatch-btn:hover {
-      transform: scale(1.2);
-      box-shadow: 0 0 0 1.5px var(--muted);
-      z-index: 2;
-    }
-    
-    .swatch-btn.active {
-      transform: scale(1.2);
-      box-shadow: 0 0 0 2px var(--blue);
-      z-index: 2;
+      transform: translateY(-1px);
     }
 
     /* SECTION 4 - FISHING SPOTS */
@@ -1529,104 +1430,18 @@
     </div>
   </section>
 
-  <!-- SECTION 3 - FEATURED LURE -->
+  <!-- SECTION 3 - FEATURED LURES -->
   <section class="favorites-section" id="gear">
     <div class="section-inner">
       <div class="section-header fade-up-trigger">
-        <span class="section-tag">On-The-Water Essential</span>
-        <h2 class="section-title">Matrix Shad "Glow" — The Ultimate Lure</h2>
-        <p class="section-subtitle">A must-have color for any tackle box. The "GLOW" lights up in low-light situations and stained waters. Accepts dye exceptionally well.</p>
+        <span class="section-tag">On-The-Water Essentials</span>
+        <h2 class="section-title">Matrix Shad Lure Collection</h2>
+        <p class="section-subtitle">The ultimate 3" soft plastic swim baits for speckled trout, redfish, and flounder. Select your variant, choose your pack size, and hit the water.</p>
       </div>
 
-      <!-- Single Product Showcase Card -->
-      <div class="product-showcase fade-up-trigger">
-        <div class="showcase-gallery">
-          <div class="showcase-img-box">
-            <img id="showcase-main-img" src="assets/glow.jpg" alt="Matrix Shad Glow">
-          </div>
-          <div class="showcase-gallery-badge">
-            <span class="badge-tag">🔥 Best Seller</span>
-          </div>
-        </div>
-
-        <div class="showcase-details">
-          <div class="showcase-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">(4.9/5 from 124 reviews)</span>
-          </div>
-          <h3 class="showcase-title">Matrix Shad "Glow"</h3>
-          <p class="showcase-desc">
-            A must-have color for any lure. The "GLOW" lights up in low-light situations, overcast days, and stained coastal marshes. Accepts plastic dye/dips exceptionally well, allowing you to custom-tip your tails. Made of durable, high-vibration soft plastic that holds up to multiple trout and redfish bites.
-          </p>
-
-          <!-- Color Selector -->
-          <div class="color-options-container">
-            <label class="options-label">Select Color: <span id="active-color-name" style="color: var(--blue); text-transform: none; font-weight: 700; margin-left: 5px;">Glow</span></label>
-            <div class="color-swatches">
-              <button type="button" class="swatch-btn active" data-color="glow" style="background-color: #f7f5ee;" title="Glow" onclick="selectColor('glow')"></button>
-              <button type="button" class="swatch-btn" data-color="holy_joely" style="background-color: #5bb3a2;" title="Holy Joely" onclick="selectColor('holy_joely')"></button>
-              <button type="button" class="swatch-btn" data-color="shrimp_creole" style="background-color: #d6714b;" title="Shrimp Creole" onclick="selectColor('shrimp_creole')"></button>
-              <button type="button" class="swatch-btn" data-color="limbo_slice" style="background-color: #8cba00;" title="Limbo Slice" onclick="selectColor('limbo_slice')"></button>
-              <button type="button" class="swatch-btn" data-color="green_hornet" style="background-color: #1e5a23;" title="Green Hornet" onclick="selectColor('green_hornet')"></button>
-              <button type="button" class="swatch-btn" data-color="tiger_bait" style="background-color: #e67e00;" title="Tiger Bait" onclick="selectColor('tiger_bait')"></button>
-              <button type="button" class="swatch-btn" data-color="ultra_violet" style="background-color: #643bb5;" title="Ultra-Violet" onclick="selectColor('ultra_violet')"></button>
-              <button type="button" class="swatch-btn" data-color="magneto" style="background-color: #3b7bb5;" title="Magneto" onclick="selectColor('magneto')"></button>
-              <button type="button" class="swatch-btn" data-color="pink_champagne" style="background-color: #d13066;" title="Pink Champagne" onclick="selectColor('pink_champagne')"></button>
-              <button type="button" class="swatch-btn" data-color="avocado" style="background-color: #553b32;" title="Avocado" onclick="selectColor('avocado')"></button>
-              <button type="button" class="swatch-btn" data-color="midnight_mullet" style="background-color: #263238;" title="Midnight Mullet" onclick="selectColor('midnight_mullet')"></button>
-              <button type="button" class="swatch-btn" data-color="lemon_head" style="background-color: #eedc30;" title="Lemon Head" onclick="selectColor('lemon_head')"></button>
-            </div>
-          </div>
-
-          <!-- Bait Option Selector -->
-          <div class="options-container">
-            <label class="options-label">Select Pack Size (Bait Count):</label>
-            <div class="options-selector">
-              <button type="button" class="option-btn active" data-variant="matrix_8" onclick="selectVariant('matrix_8')">
-                <span class="option-title">8 Baits</span>
-                <span class="option-subtitle">Single Pack</span>
-              </button>
-              <button type="button" class="option-btn" data-variant="matrix_25" onclick="selectVariant('matrix_25')">
-                <span class="option-title">25 Baits</span>
-                <span class="option-subtitle">Value Pack</span>
-              </button>
-              <button type="button" class="option-btn" data-variant="matrix_50" onclick="selectVariant('matrix_50')">
-                <span class="option-title">50 Baits</span>
-                <span class="option-subtitle">Club Pack</span>
-              </button>
-              <button type="button" class="option-btn" data-variant="matrix_100" onclick="selectVariant('matrix_100')">
-                <span class="option-title">100 Baits</span>
-                <span class="option-subtitle">Bulk Pack</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="showcase-purchase">
-            <div class="price-display">
-              <span class="price-usd" id="display-price-usd">$4.99</span>
-              <span class="price-vnd" id="display-price-vnd">125.000đ</span>
-            </div>
-            <button class="btn-checkout-now" onclick="triggerShowcaseCheckout()">
-              Quick Buy Now
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 8px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </button>
-          </div>
-          
-          <div class="showcase-features">
-            <div class="feature-item">
-              <span class="feature-icon">🛡️</span>
-              <span class="feature-text">High-durability soft plastic</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">⚡</span>
-              <span class="feature-text">High-vibration tail action</span>
-            </div>
-            <div class="feature-item">
-              <span class="feature-icon">⚓</span>
-              <span class="feature-text">Overcast & low-light must-have</span>
-            </div>
-          </div>
-        </div>
+      <!-- 12-Product Dynamic Grid -->
+      <div class="favorites-grid fade-up-trigger" id="favorites-grid">
+        <!-- Rendered dynamically by JavaScript -->
       </div>
     </div>
   </section>
@@ -1972,18 +1787,126 @@
     // PRODUCT CATALOG & RATES
     // ============================================================
     const COLORS = [
-      { id: 'glow', name: 'Glow', img: 'assets/glow.jpg', filter: '' },
-      { id: 'holy_joely', name: 'Holy Joely', img: 'assets/holy_joely.jpg', filter: '' },
-      { id: 'shrimp_creole', name: 'Shrimp Creole', img: '', filter: 'hue-rotate(15deg) saturate(1.8) brightness(1.0)' },
-      { id: 'limbo_slice', name: 'Limbo Slice', img: 'assets/limbo_slice.jpg', filter: '' },
-      { id: 'green_hornet', name: 'Green Hornet', img: '', filter: 'hue-rotate(120deg) saturate(1.5) brightness(0.8)' },
-      { id: 'tiger_bait', name: 'Tiger Bait', img: '', filter: 'hue-rotate(-20deg) saturate(2.0) brightness(1.0)' },
-      { id: 'ultra_violet', name: 'Ultra-Violet', img: '', filter: 'hue-rotate(250deg) saturate(1.8) brightness(0.9)' },
-      { id: 'magneto', name: 'Magneto', img: 'assets/magneto.jpg', filter: '' },
-      { id: 'pink_champagne', name: 'Pink Champagne', img: '', filter: 'hue-rotate(-60deg) saturate(1.5) brightness(1.2)' },
-      { id: 'avocado', name: 'Avocado', img: 'assets/avocado.jpg', filter: '' },
-      { id: 'midnight_mullet', name: 'Midnight Mullet', img: '', filter: 'grayscale(1) brightness(0.4)' },
-      { id: 'lemon_head', name: 'Lemon Head', img: '', filter: 'hue-rotate(45deg) saturate(3.0) brightness(1.3)' }
+      { 
+        id: 'glow', 
+        name: 'Glow', 
+        img: 'assets/glow.jpg', 
+        filter: '',
+        badge: '🔥 Best Seller',
+        rating: '4.9',
+        reviews: '124',
+        desc: 'A must-have color for any lure. The "GLOW" lights up in low-light situations, overcast days, and stained coastal marshes. Accepts plastic dye/dips exceptionally well.' 
+      },
+      { 
+        id: 'holy_joely', 
+        name: 'Holy Joely', 
+        img: 'assets/magneto.jpg', 
+        filter: '',
+        badge: '✨ Popular',
+        rating: '4.8',
+        reviews: '92',
+        desc: 'A perfect match for clear water. Clear body sprinkled with silver glitter and a nice reflective coat. Combined with an extremely tough bait to make the perfect mixture of durability and action.' 
+      },
+      { 
+        id: 'shrimp_creole', 
+        name: 'Shrimp Creole', 
+        img: 'assets/glow.jpg', 
+        filter: 'hue-rotate(15deg) saturate(1.8) brightness(1.0)',
+        badge: '🍤 Go-To Bait',
+        rating: '4.9',
+        reviews: '105',
+        desc: 'A perfect match for clear water with a beautiful amber/shrimp hue. Sprinkled with fine glitter and a reflective coat. This is the go-to bait when real shrimp are running in the bays.' 
+      },
+      { 
+        id: 'limbo_slice', 
+        name: 'Limbo Slice', 
+        img: 'assets/holy_joely.jpg', 
+        filter: '',
+        badge: '🎨 Eye Catcher',
+        rating: '4.7',
+        reviews: '78',
+        desc: 'One of the brightest and most contrasting colors. Features a bright blue top with a neon green belly. Highly effective in both clear and moderately stained waters.' 
+      },
+      { 
+        id: 'green_hornet', 
+        name: 'Green Hornet', 
+        img: 'assets/glow.jpg', 
+        filter: 'hue-rotate(120deg) saturate(1.5) brightness(0.8)',
+        badge: '🏆 Trophy Hunter',
+        rating: '4.9',
+        reviews: '116',
+        desc: 'Combining Avocado with a glow belly, red and silver flakes. Offers the perfect flash for mimicking cocahoes, shrimp, and oyster worms. The ultimate winter bait for trophy trout.' 
+      },
+      { 
+        id: 'tiger_bait', 
+        name: 'Tiger Bait', 
+        img: 'assets/glow.jpg', 
+        filter: 'hue-rotate(-20deg) saturate(2.0) brightness(1.0)',
+        badge: '🐯 Redfish Killer',
+        rating: '4.8',
+        reviews: '85',
+        desc: 'Perfect stained water bait giving a strong contrast between purple and chartreuse. Catches the fish\'s eye in murky conditions. Duplicates crabs to perfection.' 
+      },
+      { 
+        id: 'ultra_violet', 
+        name: 'Ultra-Violet', 
+        img: 'assets/glow.jpg', 
+        filter: 'hue-rotate(250deg) saturate(1.8) brightness(0.9)',
+        badge: '⚡ Fluorescent',
+        rating: '4.8',
+        reviews: '90',
+        desc: 'Gets a beautiful purple hue that actually changes color in sunlight. Has violet powder inside the plastic for unique light-shifting properties. Awesome color that accepts Spike-It dye perfectly.' 
+      },
+      { 
+        id: 'magneto', 
+        name: 'Magneto', 
+        img: 'assets/magneto.jpg', 
+        filter: '',
+        badge: '🌊 Versatile',
+        rating: '4.9',
+        reviews: '112',
+        desc: 'An opening night style color that is great for every condition. Natural styling mimics glass minnows and shad perfectly. A must-have in the tackle arsenal for trout, flounder, and bass.' 
+      },
+      { 
+        id: 'pink_champagne', 
+        name: 'Pink Champagne', 
+        img: 'assets/glow.jpg', 
+        filter: 'hue-rotate(-60deg) saturate(1.5) brightness(1.2)',
+        badge: '🎯 Sight Fishing',
+        rating: '4.7',
+        reviews: '64',
+        desc: 'Classic bubble gum pink. Bright and highly visible, making it the ultimate tool for sight fishing in crystal clear water so you can see the bait disappear when a strike occurs.' 
+      },
+      { 
+        id: 'avocado', 
+        name: 'Avocado', 
+        img: 'assets/avocado.jpg', 
+        filter: '',
+        badge: '🦎 Oyster Worm',
+        rating: '4.8',
+        reviews: '73',
+        desc: 'Dark olive green loaded with red flake. A perfect replica of oyster worms, making it the perfect color for catching trophy-sized flounder and speckled trout in oyster reefs.' 
+      },
+      { 
+        id: 'midnight_mullet', 
+        name: 'Midnight Mullet', 
+        img: 'assets/glow.jpg', 
+        filter: 'grayscale(1) brightness(0.4)',
+        badge: '🌙 Dirty Water',
+        rating: '4.6',
+        reviews: '59',
+        desc: 'A very versatile bait, particularly deadly on murky or dirty water days. A dark purple top contrasted with a clear belly, combined with a high-durability paddle tail.' 
+      },
+      { 
+        id: 'lemon_head', 
+        name: 'Lemon Head', 
+        img: 'assets/limbo_slice.jpg', 
+        filter: '',
+        badge: '🍋 Visual Hook',
+        rating: '4.9',
+        reviews: '131',
+        desc: 'Bright, solid chartreuse color that is a definite eye catcher. Features the classic paddle tail combined with tough, durable soft plastic that stands up to aggressive strikes.' 
+      }
     ];
 
     const PACK_SIZES = {
@@ -2008,65 +1931,93 @@
     });
 
     // ============================================================
-    // SHOWCASE PRODUCT VARIANT SELECTION
+    // PRODUCT GRID ACTIONS & DYNAMIC RENDER
     // ============================================================
-    let activeColorId = 'glow';
-    let activeSizeKey = '8';
-
-    function selectColor(colorId) {
-      activeColorId = colorId;
-      
-      // Update active state in swatches
-      document.querySelectorAll('.swatch-btn').forEach(btn => {
-        if (btn.getAttribute('data-color') === colorId) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-      
-      // Get color info
-      const color = COLORS.find(c => c.id === colorId);
-      if (!color) return;
-      
-      // Update color name display
-      document.getElementById('active-color-name').textContent = color.name;
-      
-      // Update showcase image source and filter
-      const imgEl = document.getElementById('showcase-main-img');
-      if (color.img) {
-        imgEl.src = color.img;
-        imgEl.style.filter = '';
-      } else {
-        imgEl.src = 'assets/glow.jpg';
-        imgEl.style.filter = color.filter;
-      }
-    }
-
-    function selectVariant(sizeKey) {
-      activeSizeKey = sizeKey;
-      
-      // Update active state in size buttons
-      document.querySelectorAll('.option-btn').forEach(btn => {
-        if (btn.getAttribute('data-variant') === sizeKey) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-      
-      // Update price display based on selected size
+    function updateCardPrice(selectEl, colorId) {
+      const sizeKey = selectEl.value;
       const sizeInfo = PACK_SIZES[sizeKey];
       if (!sizeInfo) return;
       
-      document.getElementById('display-price-usd').textContent = `$${sizeInfo.priceUSD}`;
-      document.getElementById('display-price-vnd').textContent = `${sizeInfo.priceVND.toLocaleString('vi-VN')}đ`;
+      const cardEl = selectEl.closest('.product-card');
+      if (cardEl) {
+        const usdEl = cardEl.querySelector('.price-usd');
+        const vndEl = cardEl.querySelector('.price-vnd');
+        if (usdEl) usdEl.textContent = `$${sizeInfo.priceUSD}`;
+        if (vndEl) vndEl.textContent = `${sizeInfo.priceVND.toLocaleString('vi-VN')}đ`;
+      }
     }
 
-    function triggerShowcaseCheckout() {
-      const variantKey = `${activeColorId}_${activeSizeKey}`;
+    function buyCardVariant(colorId) {
+      const cardEl = document.querySelector(`.product-card[data-color="${colorId}"]`);
+      if (!cardEl) return;
+      const selectEl = cardEl.querySelector('.product-size-select');
+      if (!selectEl) return;
+      const sizeKey = selectEl.value;
+      const variantKey = `${colorId}_${sizeKey}`;
       openCheckout(variantKey);
     }
+
+    function renderProductGrid() {
+      const gridEl = document.getElementById('favorites-grid');
+      if (!gridEl) return;
+      
+      let html = '';
+      COLORS.forEach(color => {
+        const imgSrc = color.img ? color.img : 'assets/glow.jpg';
+        const imgFilter = color.img ? '' : `style="filter: ${color.filter}"`;
+        
+        let selectOptions = '';
+        Object.keys(PACK_SIZES).forEach(sizeKey => {
+          const sizeInfo = PACK_SIZES[sizeKey];
+          selectOptions += `<option value="${sizeKey}">${sizeInfo.label} — $${sizeInfo.priceUSD}</option>`;
+        });
+        
+        const initialPriceUSD = PACK_SIZES['8'].priceUSD;
+        const initialPriceVND = PACK_SIZES['8'].priceVND.toLocaleString('vi-VN');
+        
+        html += `
+        <div class="product-card fade-up-trigger" data-color="${color.id}">
+          <div class="product-card-gallery">
+            <span class="product-card-badge badge-tag">${color.badge}</span>
+            <img src="${imgSrc}" alt="Matrix Shad ${color.name}" ${imgFilter}>
+          </div>
+          
+          <div class="product-card-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">(${color.rating}/5 từ ${color.reviews} lượt)</span>
+          </div>
+          
+          <h3 class="product-card-title">Matrix Shad "${color.name}"</h3>
+          <p class="product-card-desc">${color.desc}</p>
+          
+          <div class="product-card-options">
+            <label class="product-card-options-label">Số lượng gói:</label>
+            <div class="select-wrapper">
+              <select class="product-size-select" onchange="updateCardPrice(this, '${color.id}')">
+                ${selectOptions}
+              </select>
+            </div>
+          </div>
+          
+          <div class="product-card-purchase">
+            <div class="product-card-price">
+              <span class="price-usd">$${initialPriceUSD}</span>
+              <span class="price-vnd">${initialPriceVND}đ</span>
+            </div>
+            <button class="btn-card-checkout" onclick="buyCardVariant('${color.id}')">
+              Mua Ngay
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 6px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+        `;
+      });
+      
+      gridEl.innerHTML = html;
+    }
+
+    // Initialize grid rendering
+    renderProductGrid();
 
     let selectedProduct = null;
     let registeredEmail = '';
@@ -2441,12 +2392,14 @@
     // ============================================================
     (function () {
       const activities = [
-        { name: 'Hoang N.', loc: 'Da Nang', msg: 'Joined the crew newsletter', emoji: '⛵' },
-        { name: 'Khai M.', loc: 'Vung Tau', msg: 'Ordered Matrix Shad "Glow" (25 Baits)', emoji: '🐟' },
-        { name: 'Toby S.', loc: 'Pensacola', msg: 'Ordered Matrix Shad "Glow" (8 Baits)', emoji: '🎣' },
-        { name: 'Linh T.', loc: 'Nha Trang', msg: 'Joined the crew newsletter', emoji: '⛵' },
-        { name: 'Viet A.', loc: 'Phu Quoc', msg: 'Ordered Matrix Shad "Glow" (100 Baits)', emoji: '📦' },
-        { name: 'John D.', loc: 'Biloxi', msg: 'Ordered Matrix Shad "Glow" (50 Baits)', emoji: '🎣' }
+        { name: 'Hoang N.', loc: 'Da Nang', type: 'newsletter', emoji: '⛵' },
+        { name: 'Linh T.', loc: 'Nha Trang', type: 'newsletter', emoji: '⛵' },
+        { name: 'Khai M.', loc: 'Vung Tau', type: 'order', emoji: '🐟' },
+        { name: 'Toby S.', loc: 'Pensacola', type: 'order', emoji: '🎣' },
+        { name: 'Viet A.', loc: 'Phu Quoc', type: 'order', emoji: '📦' },
+        { name: 'John D.', loc: 'Biloxi', type: 'order', emoji: '🎣' },
+        { name: 'Sarah K.', loc: 'Slidell', type: 'order', emoji: '🐟' },
+        { name: 'David L.', loc: 'Mobile', type: 'order', emoji: '🎣' }
       ];
       
       const times = ['just now', '1 min ago', '3 mins ago', '5 mins ago'];
@@ -2459,13 +2412,24 @@
         const act = activities[Math.floor(Math.random() * activities.length)];
         const time = times[Math.floor(Math.random() * times.length)];
         
+        let msg = '';
+        if (act.type === 'newsletter') {
+          msg = 'Joined the crew newsletter';
+        } else {
+          const randomColor = COLORS[Math.floor(Math.random() * COLORS.length)];
+          const sizeKeys = Object.keys(PACK_SIZES);
+          const randomSizeKey = sizeKeys[Math.floor(Math.random() * sizeKeys.length)];
+          const sizeLabel = PACK_SIZES[randomSizeKey].label;
+          msg = `Ordered Matrix Shad "${randomColor.name}" (${sizeLabel})`;
+        }
+        
         const toast = document.createElement('div');
         toast.className = 'sp-toast';
         toast.innerHTML = `
           <div class="sp-avatar">${act.emoji}</div>
           <div class="sp-body">
             <div class="sp-name">${act.name} · ${act.loc}</div>
-            <div class="sp-msg">${act.msg}</div>
+            <div class="sp-msg">${msg}</div>
             <div class="sp-time">${time}</div>
           </div>
         `;
