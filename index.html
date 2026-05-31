@@ -1865,22 +1865,79 @@
     </div>
   </section>
 
-  <!-- SECTION 4 (new) - CONDENSED MISSION STATEMENT
-       Replaces the full Cover Story essay entirely.
-       Full essay lives on a future /about page. -->
+  <!-- SECTION 4 (new) - MISSION STATEMENT with inline expand/collapse -->
   <section class="adventure-section" id="about" style="background: var(--bg);">
     <div class="section-inner" style="padding-top: 60px; padding-bottom: 60px;">
-      <div class="section-header fade-up-trigger" style="max-width: 680px; margin-left: auto; margin-right: auto; text-align: center;">
+      <div class="fade-up-trigger" style="max-width: 680px; margin-left: auto; margin-right: auto; text-align: center;">
         <span class="section-tag">Our Story</span>
-        <p style="font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 10px;">
+
+        <!-- Always-visible 2-sentence summary -->
+        <p style="font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
           One Trip One Bite was built by Gulf Coast anglers who believe every trip should leave you with something worth remembering — a trophy fish, a hidden gem, or a meal you didn't expect. We fish, we travel, and we share what works.
         </p>
-        <a href="#about" style="font-size: 0.9rem; color: var(--blue); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s ease;">
-          Read our full story →
-        </a>
+
+        <!-- Full essay — hidden by default, expands on click -->
+        <div id="full-story-panel" style="
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+          opacity: 0;
+          text-align: left;
+          margin-bottom: 0;
+        ">
+          <div style="font-size: 0.97rem; color: var(--muted); line-height: 1.8; display: flex; flex-direction: column; gap: 14px; padding: 24px 0 8px;">
+            <p>Every journey has a destination, but the destination is never the whole story.</p>
+            <p>One Trip One Bite was created from a simple belief: every trip should leave you with something worth remembering. Sometimes it's the fish you've been chasing all day. Sometimes it's a hidden restaurant you never expected to find. Sometimes it's a historic landmark, a breathtaking view, a local tradition, or a special moment shared with family and friends.</p>
+            <p>We travel to discover. We fish to explore. We wander to understand the places, people, food, history, and nature that make every destination unique.</p>
+            <p>From coastal roads and fishing piers to beaches, small towns, local restaurants, museums, parks, and historic sites, every adventure becomes an opportunity to learn something new and create a story worth telling.</p>
+            <p>Whether the reward is a trophy fish, a memorable meal, a hidden gem, or a meaningful experience with the people we love, every journey brings back a discovery.</p>
+            <p>Because at the end of the day, it's not about how far you travel. It's about what you find along the way.</p>
+            <p style="font-weight: 700; color: var(--text);">One Trip. One Discovery. One Story.</p>
+            <p style="font-style: italic; color: var(--orange); font-weight: 600;">Travel. Fish. Explore. Discover.</p>
+          </div>
+        </div>
+
+        <!-- Toggle button -->
+        <button
+          id="full-story-toggle"
+          onclick="toggleFullStory()"
+          style="
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--blue);
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s ease;
+            padding: 0;
+            margin-top: 4px;
+          "
+        >Read our full story →</button>
       </div>
     </div>
   </section>
+
+  <script>
+    function toggleFullStory() {
+      const panel  = document.getElementById('full-story-panel');
+      const toggle = document.getElementById('full-story-toggle');
+      const isOpen = panel.style.maxHeight !== '0px' && panel.style.maxHeight !== '';
+
+      if (isOpen) {
+        panel.style.maxHeight = '0';
+        panel.style.opacity   = '0';
+        panel.style.marginBottom = '0';
+        toggle.textContent = 'Read our full story →';
+      } else {
+        panel.style.maxHeight    = panel.scrollHeight + 'px';
+        panel.style.opacity      = '1';
+        panel.style.marginBottom = '8px';
+        toggle.textContent = '← Collapse story';
+      }
+    }
+  </script>
 
   <!-- SECTION 5 - JOIN THE CREW (unchanged) -->
   <section class="subscribe-section" id="subscribe">
