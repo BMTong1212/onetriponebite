@@ -2903,9 +2903,17 @@
       // Shipping breakdown in checkout summary
       const coShippingEl = document.getElementById('co-shipping-display');
       const coTotalEl    = document.getElementById('co-total-display');
-      const shipping = selectedProduct.shippingUSD ?? (parseFloat(selectedProduct.priceUSD) >= 99 ? '0.00' : '7.00');
-      const total    = selectedProduct.totalUSD    ?? (parseFloat(selectedProduct.priceUSD) + parseFloat(shipping)).toFixed(2);
-      if (coShippingEl) coShippingEl.textContent = parseFloat(shipping) === 0 ? 'FREE 🎉' : `$${parseFloat(shipping).toFixed(2)}`;
+      const shipping = isPromoApplied ? '0.00' : (selectedProduct.shippingUSD ?? (parseFloat(selectedProduct.priceUSD) >= 99 ? '0.00' : '7.00'));
+      const total    = isPromoApplied ? (parseFloat(selectedProduct.priceUSD)).toFixed(2) : (selectedProduct.totalUSD    ?? (parseFloat(selectedProduct.priceUSD) + parseFloat(shipping)).toFixed(2));
+      if (coShippingEl) {
+        if (isPromoApplied) {
+          coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (promo applied) 🎁</span>';
+        } else {
+          coShippingEl.textContent = parseFloat(shipping) === 0 ? 'FREE 🎉' : `$${parseFloat(shipping).toFixed(2)}`;
+          coShippingEl.style.color = parseFloat(shipping) === 0 ? 'var(--green)' : '';
+          coShippingEl.style.fontWeight = parseFloat(shipping) === 0 ? '700' : '';
+        }
+      }
       if (coTotalEl)    coTotalEl.textContent    = `$${parseFloat(total).toFixed(2)}`;
 
       // Open modal
