@@ -1542,7 +1542,7 @@
       <div class="product-showcase fade-up-trigger">
         <div class="showcase-gallery">
           <div class="showcase-img-box">
-            <img id="showcase-main-img" src="assets/matrix_glow.png" alt="Matrix Shad Glow">
+            <img id="showcase-main-img" src="assets/glow.jpg" alt="Matrix Shad Glow">
           </div>
           <div class="showcase-gallery-badge">
             <span class="badge-tag">🔥 Best Seller</span>
@@ -1972,18 +1972,18 @@
     // PRODUCT CATALOG & RATES
     // ============================================================
     const COLORS = [
-      { id: 'glow', name: 'Glow', filter: '' },
-      { id: 'holy_joely', name: 'Holy Joely', filter: 'hue-rotate(60deg) saturate(1.5) brightness(1.1)' },
-      { id: 'shrimp_creole', name: 'Shrimp Creole', filter: 'hue-rotate(15deg) saturate(1.8) brightness(1.0)' },
-      { id: 'limbo_slice', name: 'Limbo Slice', filter: 'hue-rotate(85deg) saturate(2.5) brightness(1.2)' },
-      { id: 'green_hornet', name: 'Green Hornet', filter: 'hue-rotate(120deg) saturate(1.5) brightness(0.8)' },
-      { id: 'tiger_bait', name: 'Tiger Bait', filter: 'hue-rotate(-20deg) saturate(2.0) brightness(1.0)' },
-      { id: 'ultra_violet', name: 'Ultra-Violet', filter: 'hue-rotate(250deg) saturate(1.8) brightness(0.9)' },
-      { id: 'magneto', name: 'Magneto', filter: 'hue-rotate(180deg) saturate(1.2) brightness(0.9)' },
-      { id: 'pink_champagne', name: 'Pink Champagne', filter: 'hue-rotate(-60deg) saturate(1.5) brightness(1.2)' },
-      { id: 'avocado', name: 'Avocado', filter: 'hue-rotate(100deg) saturate(1.0) brightness(0.8)' },
-      { id: 'midnight_mullet', name: 'Midnight Mullet', filter: 'grayscale(1) brightness(0.4)' },
-      { id: 'lemon_head', name: 'Lemon Head', filter: 'hue-rotate(45deg) saturate(3.0) brightness(1.3)' }
+      { id: 'glow', name: 'Glow', img: 'assets/glow.jpg', filter: '' },
+      { id: 'holy_joely', name: 'Holy Joely', img: 'assets/holy_joely.jpg', filter: '' },
+      { id: 'shrimp_creole', name: 'Shrimp Creole', img: '', filter: 'hue-rotate(15deg) saturate(1.8) brightness(1.0)' },
+      { id: 'limbo_slice', name: 'Limbo Slice', img: 'assets/limbo_slice.jpg', filter: '' },
+      { id: 'green_hornet', name: 'Green Hornet', img: '', filter: 'hue-rotate(120deg) saturate(1.5) brightness(0.8)' },
+      { id: 'tiger_bait', name: 'Tiger Bait', img: '', filter: 'hue-rotate(-20deg) saturate(2.0) brightness(1.0)' },
+      { id: 'ultra_violet', name: 'Ultra-Violet', img: '', filter: 'hue-rotate(250deg) saturate(1.8) brightness(0.9)' },
+      { id: 'magneto', name: 'Magneto', img: 'assets/magneto.jpg', filter: '' },
+      { id: 'pink_champagne', name: 'Pink Champagne', img: '', filter: 'hue-rotate(-60deg) saturate(1.5) brightness(1.2)' },
+      { id: 'avocado', name: 'Avocado', img: 'assets/avocado.jpg', filter: '' },
+      { id: 'midnight_mullet', name: 'Midnight Mullet', img: '', filter: 'grayscale(1) brightness(0.4)' },
+      { id: 'lemon_head', name: 'Lemon Head', img: '', filter: 'hue-rotate(45deg) saturate(3.0) brightness(1.3)' }
     ];
 
     const PACK_SIZES = {
@@ -2032,8 +2032,15 @@
       // Update color name display
       document.getElementById('active-color-name').textContent = color.name;
       
-      // Update showcase image color filter
-      document.getElementById('showcase-main-img').style.filter = color.filter;
+      // Update showcase image source and filter
+      const imgEl = document.getElementById('showcase-main-img');
+      if (color.img) {
+        imgEl.src = color.img;
+        imgEl.style.filter = '';
+      } else {
+        imgEl.src = 'assets/glow.jpg';
+        imgEl.style.filter = color.filter;
+      }
     }
 
     function selectVariant(sizeKey) {
