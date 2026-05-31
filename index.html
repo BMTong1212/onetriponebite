@@ -2053,7 +2053,7 @@
       </div>
 
       <!-- 12-Product Dynamic Grid -->
-      <div class="favorites-grid fade-up-trigger" id="favorites-grid">
+      <div class="favorites-grid" id="favorites-grid">
         <!-- Rendered dynamically by JavaScript -->
       </div>
     </div>
@@ -2665,7 +2665,7 @@
         const initialPriceUSD = PACK_SIZES['8'].priceUSD;
         
         html += `
-        <div class="product-card" data-color="${color.id}">
+        <div class="product-card fade-up-trigger" data-color="${color.id}">
           <div class="product-card-gallery">
             <span class="product-card-badge badge-tag">${color.badge}</span>
             <img src="${imgSrc}" alt="Matrix Shad ${color.name}" ${imgFilter} onclick="zoomProductImage(this)">
@@ -2957,7 +2957,7 @@
           e.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
     document.querySelectorAll('.fade-up-trigger').forEach(el => observer.observe(el));
 
     // ============================================================
