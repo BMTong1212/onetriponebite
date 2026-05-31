@@ -3032,7 +3032,7 @@
 
     async function createOrderServerSide() {
       // Use totalUSD (subtotal + shipping) when available; fall back to priceUSD for single-item Buy Now
-      const chargeAmount = selectedProduct.totalUSD ?? selectedProduct.priceUSD;
+      const chargeAmount = isPromoApplied ? selectedProduct.priceUSD : (selectedProduct.totalUSD ?? selectedProduct.priceUSD);
       const res = await fetch('/api/paypal-create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -3072,6 +3072,7 @@
     const subscribeBtn = document.getElementById('s-submit-btn');
     const subscribeMsg = document.getElementById('subscribe-msg');
 
+    // <!-- TODO: Configure email automation to send free shipping code FREESHIP1 on signup -->
     subscribeForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('s-name').value.trim();
