@@ -3114,8 +3114,47 @@
       }
 
       subscribeBtn.disabled = false;
-      subscribeBtn.textContent = 'Join The Crew';
+      subscribeBtn.textContent = 'Send My Free Shipping Code →';
     });
+
+    // ============================================================
+    // PROMO CODE LOGIC
+    // ============================================================
+    const promoToggle = document.getElementById('cart-promo-toggle');
+    const promoContainer = document.getElementById('cart-promo-container');
+    const promoInput = document.getElementById('cart-promo-input');
+    const promoApplyBtn = document.getElementById('cart-promo-apply-btn');
+    const promoMsg = document.getElementById('cart-promo-msg');
+
+    if (promoToggle && promoContainer) {
+      promoToggle.addEventListener('click', () => {
+        if (promoContainer.style.display === 'none' || promoContainer.style.display === '') {
+          promoContainer.style.display = 'flex';
+          promoToggle.style.display = 'none';
+        } else {
+          promoContainer.style.display = 'none';
+        }
+      });
+    }
+
+    if (promoApplyBtn && promoInput && promoMsg) {
+      promoApplyBtn.addEventListener('click', () => {
+        const code = promoInput.value.trim().toUpperCase();
+        if (code === 'FREESHIP1') {
+          isPromoApplied = true;
+          promoMsg.style.display = 'block';
+          promoMsg.style.color = '#10b981';
+          promoMsg.textContent = '✅ Code FREESHIP1 applied successfully! Free shipping active.';
+          promoInput.disabled = true;
+          promoApplyBtn.disabled = true;
+          renderCartModal();
+        } else {
+          promoMsg.style.display = 'block';
+          promoMsg.style.color = '#ef4444';
+          promoMsg.textContent = '❌ Invalid promo code.';
+        }
+      });
+    }
 
     function showSubscribeError(msg) {
       subscribeMsg.style.display = 'block';
