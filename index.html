@@ -2334,11 +2334,9 @@
       }
     ];
 
-        const PACK_SIZES = {
-      '8': { label: '8 Baits', sub: 'Single Pack', priceUSD: '4.99' },
-      '25': { label: '25 Baits', sub: 'Value Pack', priceUSD: '13.99' },
-      '50': { label: '50 Baits', sub: 'Club Pack', priceUSD: '24.99' },
-      '100': { label: '100 Baits', sub: 'Bulk Pack', priceUSD: '39.99' }
+    const PACK_SIZES = {
+      '5':  { label: '5 Baits',  sub: 'Starter Pack', priceUSD: '7.99'  },
+      '25': { label: '25 Baits', sub: 'Value Pack',   priceUSD: '24.99' }
     };
 
     const PRODUCTS = {};
@@ -2394,7 +2392,7 @@
           selectOptions += `<option value="${sizeKey}">${sizeInfo.label} — $${sizeInfo.priceUSD}</option>`;
         });
         
-        const initialPriceUSD = PACK_SIZES['8'].priceUSD;
+        const initialPriceUSD = PACK_SIZES['5'].priceUSD;
         
         html += `
         <div class="product-card fade-up-trigger" data-color="${color.id}">
