@@ -42,7 +42,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { amount = '7.00', description = '30-Day Content Calendar — One Trip One Bite' } = req.body || {};
+    const { amount = '4.99', description = 'Matrix Shad "Glow" — Single Pack' } = req.body || {};
 
     const accessToken = await getAccessToken();
 

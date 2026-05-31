@@ -17,9 +17,9 @@ const CONFIG = {
   SHEET_ID: '1IFiNuC2bzt-VPPDS52tM2nPLpNVDksCfYGCbjMCo3_U',
   SHEET_ORDERS: 'Orders',
 
-  PRODUCT_NAME: '30-Day Marketing Content Calendar',
-  PRODUCT_PRICE_VND: '168,000đ',
-  PRODUCT_PRICE_USD: '$7',
+  PRODUCT_NAME: 'Matrix Shad "Glow" — Single Pack',
+  PRODUCT_PRICE_VND: '125,000đ',
+  PRODUCT_PRICE_USD: '$4.99',
 
   DOWNLOAD_LINK: 'https://drive.google.com/drive/folders/1xf5-8Of5eGaXv-nsnMpl9vZk4u_h5o9M?usp=sharing',
 
@@ -33,7 +33,7 @@ const CONFIG = {
   // Set these in GAS PropertiesService instead of hardcoding here
   TELEGRAM_BOT_TOKEN: PropertiesService.getScriptProperties().getProperty('TELEGRAM_BOT_TOKEN') || 'YOUR_TELEGRAM_BOT_TOKEN_HERE',
   TELEGRAM_CHAT_ID: PropertiesService.getScriptProperties().getProperty('TELEGRAM_CHAT_ID') || 'YOUR_TELEGRAM_CHAT_ID_HERE',
-  PRODUCT_PRICE_RAW: 7.00,
+  PRODUCT_PRICE_RAW: 4.99,
 };
 
 // ============================================================
@@ -588,7 +588,7 @@ function sendDailyReport() {
 
   const msg =
     '📊 DAILY REPORT: ' + dateStr + '\n' +
-    '30-Day Content Calendar\n' +
+    'Matrix Shad "Glow" Lures\n' +
     '▬▬▬▬▬▬▬▬▬▬▬▬\n\n' +
     '📝 Registrations: ' + formCount + '\n' +
     '✅ Paid Orders:   ' + paidTotal + '\n' +
