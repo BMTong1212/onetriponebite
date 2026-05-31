@@ -1956,37 +1956,7 @@
       <div id="co-paypal-button-container" style="margin-bottom: 16px;"></div>
       <div id="co-paypal-error" style="display:none; padding:10px 14px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:6px; color:#ef4444; font-size:.8rem; margin-bottom: 16px;"></div>
 
-      <div style="display:flex; align-items:center; gap:10px; margin: 16px 0;">
-        <div style="flex:1; height:1px; background:var(--border)"></div>
-        <span style="color:var(--muted); font-size:0.75rem; white-space:nowrap">or pay with card</span>
-        <div style="flex:1; height:1px; background:var(--border)"></div>
-      </div>
 
-      <!-- PayPal Inline Cards Fields -->
-      <div id="co-card-fields-form">
-        <div class="form-group">
-          <label>Card Number</label>
-          <div id="co-card-number-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="form-group">
-            <label>Expiry Date</label>
-            <div id="co-card-expiry-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-          </div>
-          <div class="form-group">
-            <label>CVV</label>
-            <div id="co-card-cvv-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Cardholder Name</label>
-          <div id="co-card-name-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-        </div>
-        <button id="co-card-submit-btn" class="btn-submit" style="width:100%; padding:12px; margin-top: 10px;" onclick="submitCardPayment()">
-          💳 Pay with Card
-        </button>
-        <div id="co-card-error" style="display:none; padding:10px 14px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:6px; color:#ef4444; font-size:.8rem; margin-top: 10px;"></div>
-      </div>
     </div>
 
     <!-- Success Message Panel -->
@@ -2026,8 +1996,7 @@
     </button>
   </div>
 
-  <!-- JavaScript and PayPal SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&components=card-fields,buttons&disable-funding=venmo,paylater"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&disable-funding=venmo,paylater"></script>
 
   <script>
     // ============================================================
@@ -2583,7 +2552,6 @@
     // PAYPAL INTEGRATION
     // ============================================================
     let paypalInited = false;
-    let cardFields = null;
     let _ppName = '', _ppEmail = '';
 
     function initPayPal(name, email) {
@@ -2606,32 +2574,6 @@
         }
       }).render('#co-paypal-button-container');
 
-      // PayPal Advanced Card Fields
-      if (paypal.CardFields) {
-        cardFields = paypal.CardFields({
-          createOrder: () => createOrderServerSide(),
-          onApprove: async (data) => {
-            await captureOrderServerSide(data.orderID);
-          },
-          onError: (err) => {
-            console.error(err);
-            const errEl = document.getElementById('co-card-error');
-            errEl.style.display = 'block';
-            errEl.textContent = '❌ Card error: ' + (err.message || 'Payment failed.');
-          }
-        });
-
-        if (cardFields.isEligible()) {
-          cardFields.NumberField({ placeholder: 'Card Number' }).render('#co-card-number-field-container');
-          cardFields.ExpiryField({ placeholder: 'MM/YY' }).render('#co-card-expiry-field-container');
-          cardFields.CVVField({ placeholder: 'CVV' }).render('#co-card-cvv-field-container');
-          cardFields.NameField({ placeholder: 'Cardholder Name' }).render('#co-card-name-field-container');
-        } else {
-          document.getElementById('co-card-fields-form').style.display = 'none';
-        }
-      } else {
-        document.getElementById('co-card-fields-form').style.display = 'none';
-      }
     }
 
     async function createOrderServerSide() {
@@ -2659,23 +2601,7 @@
       }
     }
 
-    async function submitCardPayment() {
-      const btn = document.getElementById('co-card-submit-btn');
-      const errEl = document.getElementById('co-card-error');
-      errEl.style.display = 'none';
-      btn.disabled = true;
-      btn.textContent = 'Processing...';
 
-      try {
-        if (!cardFields) throw new Error('Card form not ready');
-        await cardFields.submit();
-      } catch (err) {
-        errEl.style.display = 'block';
-        errEl.textContent = '❌ ' + (err.message || 'Payment failed.');
-        btn.disabled = false;
-        btn.textContent = '💳 Pay with Card';
-      }
-    }
 
     function showCheckoutSuccess() {
       document.getElementById('co-paypal-panel').style.display = 'none';
