@@ -42,7 +42,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { amount = '4.99', description = 'Matrix Shad "Glow" — Single Pack' } = req.body || {};
+    const { amount = '4.99', description = 'Matrix Shad "Glow" — 8 Baits' } = req.body || {};
 
     const accessToken = await getAccessToken();
 

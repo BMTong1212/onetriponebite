@@ -17,7 +17,7 @@ const CONFIG = {
   SHEET_ID: '1IFiNuC2bzt-VPPDS52tM2nPLpNVDksCfYGCbjMCo3_U',
   SHEET_ORDERS: 'Orders',
 
-  PRODUCT_NAME: 'Matrix Shad "Glow" — Single Pack',
+  PRODUCT_NAME: 'Matrix Shad "Glow" — 8 Baits',
   PRODUCT_PRICE_VND: '125,000đ',
   PRODUCT_PRICE_USD: '$4.99',
 
