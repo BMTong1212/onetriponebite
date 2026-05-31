@@ -1623,6 +1623,19 @@
       color: var(--orange);
     }
 
+    @media (max-width: 600px) {
+      .modal-close-btn {
+        top: 12px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+    }
+
     .modal-title {
       font-size: 1.6rem;
       margin-bottom: 12px;
@@ -2977,6 +2990,30 @@
         document.body.style.overflow = '';
       }
     }
+
+    // ============================================================
+    // MOBILE DRAWER NAV MENU
+    // ============================================================
+    function toggleMobileMenu() {
+      const menu = document.querySelector('.nav-menu');
+      const btn = document.getElementById('menu-toggle-btn');
+      if (menu) menu.classList.toggle('open');
+      if (btn) btn.classList.toggle('open');
+    }
+
+    // Close mobile menu drawer on navigation link clicks
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        const menu = document.querySelector('.nav-menu');
+        const btn = document.getElementById('menu-toggle-btn');
+        if (menu && menu.classList.contains('open')) {
+          menu.classList.remove('open');
+        }
+        if (btn && btn.classList.contains('open')) {
+          btn.classList.remove('open');
+        }
+      });
+    });
 
     // ============================================================
     // MODALS GENERAL ACTIONS
