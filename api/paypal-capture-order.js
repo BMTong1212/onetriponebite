@@ -37,7 +37,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { orderID, name, email } = req.body || {};
+    const { orderID, name, email, product } = req.body || {};
 
     if (!orderID) {
       return res.status(400).json({ error: 'Missing orderID' });
@@ -65,7 +65,7 @@ export default async function handler(req, res) {
     const amount = capture.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value 
                 || capture.purchase_units?.[0]?.amount?.value 
                 || '4.99';
-    const description = capture.purchase_units?.[0]?.description || '';
+    const description = product || capture.purchase_units?.[0]?.description || '';
 
     // Extract full shipping address
     const shipping = capture.purchase_units?.[0]?.shipping;
