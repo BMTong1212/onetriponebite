@@ -275,6 +275,7 @@ function handleRegister(body) {
     '',               // CK_CONTENT
     product || CONFIG.PRODUCT_NAME, // PRODUCT
     '',               // AMOUNT
+    '',               // SHIPPING_ADDRESS
   ]);
 
   return jsonResponse({ success: true, refCode });
@@ -285,7 +286,7 @@ function handleRegister(body) {
 // ============================================================
 
 function handlePaypalComplete(body) {
-  const { email, name, txId, amount, product } = body;
+  const { email, name, txId, amount, product, shippingAddress } = body;
   Logger.log('PayPal complete: ' + JSON.stringify(body));
 
   if (!email) return jsonResponse({ success: false, error: 'Missing email' });
@@ -306,6 +307,7 @@ function handlePaypalComplete(body) {
       sheet.getRange(i + 1, COLS.NAME).setValue(name || data[i][COLS.NAME - 1]);
       if (COLS.PRODUCT) sheet.getRange(i + 1, COLS.PRODUCT).setValue(product || CONFIG.PRODUCT_NAME);
       if (COLS.AMOUNT) sheet.getRange(i + 1, COLS.AMOUNT).setValue(amount || '');
+      if (COLS.SHIPPING_ADDRESS) sheet.getRange(i + 1, COLS.SHIPPING_ADDRESS).setValue(shippingAddress || '');
       updated = true;
       paidRowIndex = i;
       break;
@@ -334,6 +336,7 @@ function handlePaypalComplete(body) {
       name || '', email, '', 'paypal', 'PAID_PAYPAL', now, txId || '', '',
       product || CONFIG.PRODUCT_NAME,
       amount || '',
+      shippingAddress || '',
     ]);
   }
 
@@ -351,6 +354,7 @@ function handlePaypalComplete(body) {
     '📦 Product: ' + displayProduct + '\n' +
     '👤 Customer: ' + (name || 'N/A') + '\n' +
     '📧 Email: ' + email + '\n' +
+    '📍 Shipping Address: ' + (shippingAddress || 'N/A') + '\n' +
     '💳 Method: PayPal\n' +
     '💰 Amount: ' + displayAmount + '\n' +
     '🔖 Transaction ID: ' + (txId || 'N/A') + '\n' +
