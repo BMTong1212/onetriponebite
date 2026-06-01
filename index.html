@@ -862,6 +862,69 @@
       to { opacity: 1; }
     }
     
+    /* ============================================================
+       INTRO SPLASH SCREEN
+    ============================================================ */
+    #intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #intro-overlay.intro-fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    #intro-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      animation: introScaleIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    #intro-logo {
+      width: min(340px, 72vw);
+      height: auto;
+      animation: introPulse 1.8s ease-in-out 0.7s infinite alternate;
+      filter: drop-shadow(0 12px 40px rgba(46, 91, 118, 0.18));
+    }
+
+    #intro-tagline {
+      font-family: var(--font-serif);
+      font-size: clamp(0.9rem, 3vw, 1.15rem);
+      font-style: italic;
+      color: var(--orange);
+      font-weight: 600;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: introTagFadeUp 0.6s ease 0.9s forwards;
+      text-align: center;
+    }
+
+    @keyframes introScaleIn {
+      from { opacity: 0; transform: scale(0.72); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes introPulse {
+      from { transform: scale(1);    filter: drop-shadow(0 12px 40px rgba(46,91,118,0.18)); }
+      to   { transform: scale(1.04); filter: drop-shadow(0 18px 50px rgba(46,91,118,0.28)); }
+    }
+
+    @keyframes introTagFadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     /* Shopping Cart Styles */
     .cart-badge {
       display: inline-flex !important;
@@ -2152,6 +2215,14 @@
 </head>
 
 <body>
+
+  <!-- INTRO SPLASH SCREEN -->
+  <div id="intro-overlay">
+    <div id="intro-content">
+      <img id="intro-logo" src="assets/logo_transparent.png" alt="One Trip One Bite">
+      <p id="intro-tagline">Travel. Fish. Explore. Discover.</p>
+    </div>
+  </div>
 
   <!-- STICKY NAV -->
   <nav class="nav" id="main-nav">
@@ -3959,6 +4030,31 @@
         triggerToast();
         setTimeout(loop, Math.random() * 20000 + 25000);
       }, 7000);
+    })();
+
+    // ============================================================
+    // INTRO SPLASH SCREEN
+    // ============================================================
+    (function() {
+      const overlay = document.getElementById('intro-overlay');
+      if (!overlay) return;
+
+      // Lock scroll during intro
+      document.body.style.overflow = 'hidden';
+
+      function dismissIntro() {
+        overlay.classList.add('intro-fade-out');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 800);
+      }
+
+      // Auto-dismiss after 2.6s
+      setTimeout(dismissIntro, 2600);
+
+      // Also dismiss on click/tap
+      overlay.addEventListener('click', dismissIntro);
     })();
   </script>
 
