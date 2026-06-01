@@ -2958,6 +2958,12 @@
     </div>
 
     <div id="cart-summary-block" class="cart-summary-block" style="display: none;">
+      <div style="background: rgba(13, 148, 136, 0.08); border: 1px dashed rgba(13, 148, 136, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.2rem; line-height: 1;">🎁</span>
+        <span style="font-size: 0.78rem; color: #0f766e; font-weight: 500; line-height: 1.4; text-align: left; margin: 0;">
+          First order? Enter code <strong style="color: #0d9488; font-family: monospace; font-size: 0.85rem;">FREESHIP1</strong> for free shipping!
+        </span>
+      </div>
       <div class="cart-subtotal-row">
         <span>Subtotal</span>
         <span id="cart-subtotal-display">$0.00</span>
@@ -4133,7 +4139,7 @@
 
         if (data.success) {
           subscribeMsg.style.display = 'block';
-          subscribeMsg.textContent = '🎉 Welcome to the crew! Check your inbox for your code and 2026 regulations guide.';
+          subscribeMsg.textContent = '🎉 Welcome to the crew! Check your inbox for your 2026 Regulations Quick-Reference download link.';
           subscribeMsg.style.background = 'rgba(122, 143, 123, 0.15)';
           subscribeMsg.style.color = 'var(--green)';
           subscribeMsg.style.border = '1px solid rgba(122, 143, 123, 0.3)';
@@ -4147,7 +4153,7 @@
       }
 
       subscribeBtn.disabled = false;
-      subscribeBtn.textContent = 'Get My Free Code & Regulations Guide →';
+      subscribeBtn.textContent = 'Get My Free Quick-Reference →';
     });
 
     // ============================================================
