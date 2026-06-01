@@ -3207,18 +3207,80 @@
         const imgSrc = color.img ? color.img : 'assets/glow.jpg';
         const imgFilter = color.img ? '' : `style="filter: ${color.filter}"`;
         
-        const selectOptions = `
-              <option value="8">8 Baits — $4.99</option>
-              <!-- OUT OF STOCK: Remove 'disabled' attribute below to reactivate 50 Baits option -->
-              <option value="50" disabled>50 Baits — $24.99 (Out of Stock)</option>
-        `;
+        let selectOptions = '';
+        let allOutOfStock = true;
+        let firstAvailableSizeValue = null;
         
-        const initialPriceUSD = PACK_SIZES['8'].priceUSD;
+        // Find first available size
+        Object.keys(PACK_SIZES).forEach(sizeKey => {
+          const sku = `${color.id}_${sizeKey}`;
+          const isOutOfStock = stockInventory[sku] !== undefined && stockInventory[sku] <= 0;
+          if (!isOutOfStock) {
+            if (firstAvailableSizeValue === null) firstAvailableSizeValue = sizeKey;
+            allOutOfStock = false;
+          }
+        });
+
+        // Generate options HTML
+        Object.keys(PACK_SIZES).forEach(sizeKey => {
+          const sku = `${color.id}_${sizeKey}`;
+          const isOutOfStock = stockInventory[sku] !== undefined && stockInventory[sku] <= 0;
+          const label = PACK_SIZES[sizeKey].label;
+          const price = PACK_SIZES[sizeKey].priceUSD;
+          const isSelected = (sizeKey === firstAvailableSizeValue);
+          
+          selectOptions += `
+            <option value="${sizeKey}" ${isOutOfStock ? 'disabled' : ''} ${isSelected ? 'selected' : ''}>
+              ${label} — $${price}${isOutOfStock ? ' (Out of Stock)' : ''}
+            </option>
+          `;
+        });
+        
+        const selectedSize = firstAvailableSizeValue || '8';
+        const initialPriceUSD = PACK_SIZES[selectedSize].priceUSD;
+        
+        let badgeHTML = `<span class="product-card-badge badge-tag">${color.badge}</span>`;
+        if (allOutOfStock) {
+          badgeHTML = `<span class="product-card-badge badge-tag" style="background:var(--muted);color:#fff;">Sold Out</span>`;
+        }
+
+        let purchaseSectionHTML = '';
+        if (allOutOfStock) {
+          purchaseSectionHTML = `
+            <div class="product-card-purchase">
+              <div class="product-card-price">
+                <span class="price-usd" style="color:var(--muted);">$${initialPriceUSD}</span>
+              </div>
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <button class="btn-card-add-to-cart" style="flex:1; background:var(--muted); border-color:var(--muted); cursor:not-allowed;" disabled>
+                  Out of Stock
+                </button>
+              </div>
+            </div>
+          `;
+        } else {
+          purchaseSectionHTML = `
+            <div class="product-card-purchase">
+              <div class="product-card-price">
+                <span class="price-usd">$${initialPriceUSD}</span>
+              </div>
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <button class="btn-card-add-to-cart" style="flex:1;" onclick="addToCart('${color.id}')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 5px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  Add to Cart
+                </button>
+                <button class="btn-card-buy-now" onclick="buyCardVariant('${color.id}')" title="Buy Now">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </div>
+            </div>
+          `;
+        }
         
         html += `
         <div class="product-card fade-up-trigger" data-color="${color.id}">
           <div class="product-card-gallery">
-            <span class="product-card-badge badge-tag">${color.badge}</span>
+            ${badgeHTML}
             <img src="${imgSrc}" alt="Matrix Shad ${color.name}" ${imgFilter} onclick="zoomProductImage(this)">
           </div>
           
@@ -3233,26 +3295,13 @@
           <div class="product-card-options">
             <label class="product-card-options-label">Select Pack Size:</label>
             <div class="select-wrapper">
-              <select class="product-size-select" onchange="updateCardPrice(this, '${color.id}')">
+              <select class="product-size-select" ${allOutOfStock ? 'disabled' : ''} onchange="updateCardPrice(this, '${color.id}')">
                 ${selectOptions}
               </select>
             </div>
           </div>
           
-          <div class="product-card-purchase">
-            <div class="product-card-price">
-              <span class="price-usd">$${initialPriceUSD}</span>
-            </div>
-            <div style="display: flex; gap: 8px; width: 100%;">
-              <button class="btn-card-add-to-cart" style="flex:1;" onclick="addToCart('${color.id}')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 5px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                Add to Cart
-              </button>
-              <button class="btn-card-buy-now" onclick="buyCardVariant('${color.id}')" title="Buy Now">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </button>
-            </div>
-          </div>
+          ${purchaseSectionHTML}
           <div class="card-trust-bar">🔒 Secure checkout &nbsp;&middot;&nbsp; ↩ 7-day guarantee &nbsp;&middot;&nbsp; 📦 Free shipping over $99</div>
         </div>
         `;
@@ -3338,6 +3387,48 @@
       const packInfo = JIG_PACK_SIZES[packSel.value];
       const priceEl  = cardEl.querySelector('.jig-price-display');
       if (priceEl && packInfo) priceEl.textContent = `$${packInfo.priceUSD}`;
+
+      const seriesId = cardEl.dataset.series;
+      const weightKey = weightSel.value;
+      const packKey = packSel.value;
+      const sku = `jig_${seriesId}_${weightKey}_${packKey}`;
+      const isOutOfStock = stockInventory[sku] !== undefined && stockInventory[sku] <= 0;
+
+      const addToCartBtn = cardEl.querySelector('.btn-card-add-to-cart');
+      const buyNowBtn = cardEl.querySelector('.btn-card-buy-now');
+
+      if (isOutOfStock) {
+        if (addToCartBtn) {
+          addToCartBtn.disabled = true;
+          addToCartBtn.innerHTML = 'Out of Stock';
+          addToCartBtn.style.background = 'var(--muted)';
+          addToCartBtn.style.borderColor = 'var(--muted)';
+          addToCartBtn.style.cursor = 'not-allowed';
+        }
+        if (buyNowBtn) {
+          buyNowBtn.disabled = true;
+          buyNowBtn.style.background = 'var(--muted)';
+          buyNowBtn.style.borderColor = 'var(--muted)';
+          buyNowBtn.style.cursor = 'not-allowed';
+        }
+      } else {
+        if (addToCartBtn) {
+          addToCartBtn.disabled = false;
+          addToCartBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:5px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            Add to Cart
+          `;
+          addToCartBtn.style.background = '';
+          addToCartBtn.style.borderColor = '';
+          addToCartBtn.style.cursor = '';
+        }
+        if (buyNowBtn) {
+          buyNowBtn.disabled = false;
+          buyNowBtn.style.background = '';
+          buyNowBtn.style.borderColor = '';
+          buyNowBtn.style.cursor = '';
+        }
+      }
     }
 
     function buyJigVariant(seriesId) {
@@ -3345,7 +3436,11 @@
       if (!cardEl) return;
       const weightKey = cardEl.querySelector('.jig-weight-select').value;
       const packKey   = cardEl.querySelector('.jig-pack-select').value;
-      openCheckout(`jig_${seriesId}_${weightKey}_${packKey}`);
+      
+      const sku = `jig_${seriesId}_${weightKey}_${packKey}`;
+      if (stockInventory[sku] !== undefined && stockInventory[sku] <= 0) return; // ignore click if out of stock
+      
+      openCheckout(sku);
     }
 
     function addJigToCart(seriesId) {
@@ -3354,6 +3449,9 @@
       const weightKey = cardEl.querySelector('.jig-weight-select').value;
       const packKey   = cardEl.querySelector('.jig-pack-select').value;
       const itemKey   = `jig_${seriesId}_${weightKey}_${packKey}`;
+      
+      if (stockInventory[itemKey] !== undefined && stockInventory[itemKey] <= 0) return; // ignore click if out of stock
+      
       const product   = PRODUCTS[itemKey];
       if (!product) return;
 
@@ -3455,9 +3553,28 @@
         </div>`;
       });
       gridEl.innerHTML = html;
+      gridEl.querySelectorAll('.jig-card').forEach(card => {
+        updateJigPrice(card);
+      });
     }
 
     renderJigGrid();
+
+    // Fetch stock on page load
+    let stockInventory = {};
+    async function fetchStock() {
+      try {
+        const res = await fetch('/api/get-stock');
+        if (res.ok) {
+          stockInventory = await res.json();
+          renderProductGrid();
+          renderJigGrid();
+        }
+      } catch (e) {
+        console.error("Failed to load inventory stock:", e);
+      }
+    }
+    fetchStock();
 
     let selectedProduct = null;
     let registeredEmail = '';
