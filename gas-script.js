@@ -305,7 +305,10 @@ function handlePaypalComplete(body) {
       sheet.getRange(i + 1, COLS.PAID_AT).setValue(now);
       sheet.getRange(i + 1, COLS.TX_ID).setValue(txId || '');
       sheet.getRange(i + 1, COLS.NAME).setValue(name || data[i][COLS.NAME - 1]);
-      if (COLS.PRODUCT) sheet.getRange(i + 1, COLS.PRODUCT).setValue(product || CONFIG.PRODUCT_NAME);
+      if (COLS.PRODUCT) {
+        const existingProduct = (data[i][COLS.PRODUCT - 1] || '').toString();
+        sheet.getRange(i + 1, COLS.PRODUCT).setValue(product || existingProduct || CONFIG.PRODUCT_NAME);
+      }
       if (COLS.AMOUNT) sheet.getRange(i + 1, COLS.AMOUNT).setValue(amount || '');
       if (COLS.SHIPPING_ADDRESS) sheet.getRange(i + 1, COLS.SHIPPING_ADDRESS).setValue(shippingAddress || '');
       updated = true;
