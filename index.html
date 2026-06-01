@@ -892,19 +892,20 @@
     }
 
     #intro-logo {
-      width: min(340px, 72vw);
+      width: min(500px, 88vw);
       height: auto;
       animation: introPulse 1.8s ease-in-out 0.7s infinite alternate;
-      filter: drop-shadow(0 12px 40px rgba(46, 91, 118, 0.18));
+      filter: drop-shadow(0 16px 48px rgba(46, 91, 118, 0.22));
     }
 
     #intro-tagline {
-      font-family: var(--font-serif);
-      font-size: clamp(0.9rem, 3vw, 1.15rem);
-      font-style: italic;
-      color: var(--orange);
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-family: var(--font-sans);
+      font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+      font-style: normal;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 5px;
+      text-transform: uppercase;
       opacity: 0;
       animation: introTagFadeUp 0.6s ease 0.9s forwards;
       text-align: center;
@@ -2220,7 +2221,7 @@
   <div id="intro-overlay">
     <div id="intro-content">
       <img id="intro-logo" src="assets/logo_transparent.png" alt="One Trip One Bite">
-      <p id="intro-tagline">Travel. Fish. Explore. Discover.</p>
+      <p id="intro-tagline">Cast &bull; Taste &bull; Explore</p>
     </div>
   </div>
 
