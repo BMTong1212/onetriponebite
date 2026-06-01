@@ -53,11 +53,12 @@ const COLS = {
   CK_CONTENT: 10,  // J
   PRODUCT: 11, // K
   AMOUNT: 12,  // L
+  SHIPPING_ADDRESS: 13, // M
 };
 
 const HEADER = [
   'Timestamp', 'Ref Code', 'Name', 'Email', 'Phone',
-  'Payment Method', 'Status', 'Payment Time', 'Transaction ID', 'Transfer Content', 'Product', 'Amount Paid'
+  'Payment Method', 'Status', 'Payment Time', 'Transaction ID', 'Transfer Content', 'Product', 'Amount Paid', 'Shipping Address'
 ];
 
 // ============================================================
