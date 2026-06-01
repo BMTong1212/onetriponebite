@@ -10,11 +10,12 @@ BRAIN_DIR = "/Users/bmtong/.gemini/antigravity-ide/brain/b8b76f8f-9066-4ed2-a4cb
 MD_PATH = os.path.join(BRAIN_DIR, "kids_fishing_activity_guide.md")
 LOGO_PATH = os.path.join(PROJECT_DIR, "assets/logo_transparent.png")
 COVER_ILLUST_PATH = os.path.join(PROJECT_DIR, "assets/kids_fishing_cover_illustration.png")
-OUTPUT_HTML_PATH = os.path.join(PROJECT_DIR, "scratch/kids_fishing_activity_guide.html")
-OUTPUT_PDF_PATH = os.path.join(PROJECT_DIR, "assets/OTOB_Kids_Fishing_Activity_Guide.pdf")
+OUTPUT_HTML_PATH = os.path.join(WORKSPACE_DIR, "kids_fishing_activity_guide_DRAFT.html")
+OUTPUT_PDF_PATH = os.path.join(WORKSPACE_DIR, "OTOB_Kids_Fishing_Activity_Guide_DRAFT.pdf")
 
-# Ensure scratch directory exists
+# Ensure directories exist
 os.makedirs(os.path.dirname(OUTPUT_HTML_PATH), exist_ok=True)
+os.makedirs(os.path.dirname(OUTPUT_PDF_PATH), exist_ok=True)
 
 def get_base64_image(path):
     if os.path.exists(path):
