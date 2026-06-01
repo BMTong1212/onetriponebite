@@ -671,7 +671,8 @@ function jsonResponse(data) {
 // ============================================================
 
 function testEmail() {
-  sendDeliveryEmail('quangkhaipk@gmail.com', 'Khai Test', 'bank', 'CC30-TEST');
+  sendWelcomeEmail('tongmshome@gmail.com', 'Tong');
+  sendDeliveryEmail('tongmshome@gmail.com', 'Tong', 'bank', 'CC30-TEST');
 }
 
 // Gửi lại email cho đơn đã thanh toán nhưng chưa nhận file
