@@ -1,6 +1,66 @@
 /**
+ * Helper function to map user's human-readable Notion database titles to website SKU keys.
+ * Handles parsing for both Jig Heads and Matrix Shad lures.
+ */
+function mapNotionTitleToSKU(title) {
+  const t = title.toLowerCase().trim();
+  
+  // 1. Parse Jig Heads (e.g. "Goldeneye Jig Heads — Bullseye Series | 1/2 oz")
+  if (t.includes("jig head") || t.includes("jighead") || t.includes("jig")) {
+    let series = "";
+    if (t.includes("bullseye")) series = "bullseye";
+    else if (t.includes("black platinum") || t.includes("platinum")) series = "black_platinum";
+    else if (t.includes("goldeneye") || t.includes("golden eye")) series = "goldeneye";
+    
+    let weight = "";
+    if (t.includes("1/16") || t.includes("1_16")) weight = "1_16";
+    else if (t.includes("1/8") || t.includes("1_8")) weight = "1_8";
+    else if (t.includes("1/4") || t.includes("1_4")) weight = "1_4";
+    else if (t.includes("5/16") || t.includes("5_16")) weight = "5_16";
+    else if (t.includes("3/8") || t.includes("3_8")) weight = "3_8";
+    else if (t.includes("1/2") || t.includes("1_2")) weight = "1_2";
+    
+    // Check pack size (default to 5 for jigs, if title contains "50" it's 50)
+    let pack = "5";
+    if (t.includes("50")) pack = "50";
+    
+    if (series && weight) {
+      return `jig_${series}_${weight}_${pack}`;
+    }
+  }
+  
+  // 2. Parse Matrix Shad Lures (e.g. "Matrix Shad - Glow" or "Glow")
+  const colors = [
+    { name: "holy joely", id: "holy_joely" },
+    { name: "shrimp creole", id: "shrimp_creole" },
+    { name: "limbo slice", id: "limbo_slice" },
+    { name: "green hornet", id: "green_hornet" },
+    { name: "tiger bait", id: "tiger_bait" },
+    { name: "ultra violet", id: "ultra_violet" },
+    { name: "ultra-violet", id: "ultra_violet" },
+    { name: "pink champagne", id: "pink_champagne" },
+    { name: "midnight mullet", id: "midnight_mullet" },
+    { name: "lemon head", id: "lemon_head" },
+    { name: "glow", id: "glow" },
+    { name: "magneto", id: "magneto" },
+    { name: "avocado", id: "avocado" }
+  ];
+  
+  for (const c of colors) {
+    if (t.includes(c.name)) {
+      let pack = "8";
+      if (t.includes("50")) pack = "50";
+      return `${c.id}_${pack}`;
+    }
+  }
+  
+  // 3. Fallback: return raw title if no mapping is found
+  return title;
+}
+
+/**
  * Serverless function to fetch inventory stock levels from a Notion database.
- * This runs on Netlify (Node.js 18+ supported natively).
+ * This runs on Netlify/Vercel.
  */
 exports.handler = async (event, context) => {
   const token = process.env.NOTION_INTEGRATION_TOKEN;
@@ -63,7 +123,8 @@ exports.handler = async (event, context) => {
       const stockProp = props["Stock"] || props["Quantity"];
 
       if (skuProp && skuProp.title && skuProp.title.length > 0) {
-        const sku = skuProp.title[0].plain_text.trim();
+        const rawTitle = skuProp.title[0].plain_text.trim();
+        const sku = mapNotionTitleToSKU(rawTitle);
         
         let stockVal = 999; // Default to in-stock if column is missing
         if (stockProp) {
