@@ -43,6 +43,14 @@ def format_md(text):
     text = re.sub(r'_(.*?)_', r'<em>\1</em>', text)
     return text
 
+def strip_emojis(text):
+    if not text:
+        return ""
+    for emoji in ["🧭", "🏆", "👶", "🧒", "🧑"]:
+        text = text.replace(emoji, "")
+    return text.strip()
+
+
 print("Parsing markdown file...")
 with open(MD_PATH, 'r', encoding='utf-8') as f:
     lines = f.readlines()
@@ -266,7 +274,7 @@ html_content = f"""<!DOCTYPE html>
 
     .cover-title {{
       font-family: var(--font-serif);
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       font-weight: 700;
       line-height: 1.15;
       color: var(--blue);
@@ -337,12 +345,12 @@ html_content = f"""<!DOCTYPE html>
 
     .section-title {{
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 1.65rem;
       font-weight: 700;
       color: var(--blue);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       border-bottom: 2px solid var(--orange);
-      padding-bottom: 8px;
+      padding-bottom: 6px;
     }}
 
     .intro-paragraph {{
@@ -383,7 +391,7 @@ html_content = f"""<!DOCTYPE html>
 
     .phase-title {{
       font-family: var(--font-serif);
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--blue);
       margin-bottom: 8px;
@@ -437,7 +445,7 @@ html_content = f"""<!DOCTYPE html>
     .card-number {{
       font-family: var(--font-serif);
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.05rem;
     }}
     .phase-1 .card-number {{ color: var(--green); }}
     .phase-2 .card-number {{ color: var(--blue); }}
@@ -445,7 +453,7 @@ html_content = f"""<!DOCTYPE html>
 
     .card-title {{
       font-family: var(--font-serif);
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text);
     }}
@@ -597,7 +605,7 @@ html_content = f"""<!DOCTYPE html>
 
     <!-- ─── INTRODUCTION ─── -->
     <section class="intro-section">
-      <h2 class="section-title">🧭 Introduction for Homeschool Parents</h2>
+      <h2 class="section-title">Introduction for Homeschool Parents</h2>
       <p class="intro-paragraph">{format_md(intro_paragraphs[0]) if len(intro_paragraphs) > 0 else ""}</p>
       
       <div class="intro-callout">
@@ -618,7 +626,7 @@ for idx, phase in enumerate(phases):
     html_content += f"""
     <section class="phase-section {phase_class}">
       <div class="phase-header">
-        <h2 class="phase-title">{phase['title']}</h2>
+        <h2 class="phase-title">{strip_emojis(phase['title'])}</h2>
         <div class="phase-focus"><strong>Focus:</strong> {phase['focus']}</div>
       </div>
       
@@ -669,7 +677,7 @@ for idx, phase in enumerate(phases):
 html_content += f"""
     <!-- ─── BONUS SECTION ─── -->
     <section class="bonus-section">
-      <h2 class="section-title">{bonus_title}</h2>
+      <h2 class="section-title">{strip_emojis(bonus_title)}</h2>
       <div class="bonus-intro">{format_md(bonus_desc)}</div>
       
       <div class="bonus-list">
