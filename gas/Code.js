@@ -21,7 +21,7 @@ const CONFIG = {
   PRODUCT_PRICE_VND: '125,000đ',
   PRODUCT_PRICE_USD: '$4.99',
 
-  DOWNLOAD_LINK: 'https://drive.google.com/drive/folders/1xf5-8Of5eGaXv-nsnMpl9vZk4u_h5o9M?usp=sharing',
+  DOWNLOAD_LINK: 'https://docs.google.com/spreadsheets/d/1IFiNuC2bzt-VPPDS52tM2nPLpNVDksCfYGCbjMCo3_U/edit?gid=0#gid=0',
 
   SUPPORT_EMAIL: 'support@onetriponebite.com',
   SENDER_NAME: 'One Trip One Bite',
@@ -52,11 +52,13 @@ const COLS = {
   TX_ID: 9,  // I
   CK_CONTENT: 10,  // J
   PRODUCT: 11, // K
+  AMOUNT: 12,  // L
+  SHIPPING_ADDRESS: 13, // M
 };
 
 const HEADER = [
   'Timestamp', 'Ref Code', 'Name', 'Email', 'Phone',
-  'Payment Method', 'Status', 'Payment Time', 'Transaction ID', 'Transfer Content', 'Product'
+  'Payment Method', 'Status', 'Payment Time', 'Transaction ID', 'Transfer Content', 'Product', 'Amount Paid', 'Shipping Address'
 ];
 
 // ============================================================
@@ -81,6 +83,10 @@ function doGet(e) {
     if (action === 'test_telegram') {
       testTelegram();
       return jsonResponse({ status: 'ok', action: 'test_telegram' });
+    }
+    if (action === 'test_email') {
+      const ok = sendDeliveryEmail('support@onetriponebite.com', 'Support Test', 'paypal', 'PAYID-TEST-12345');
+      return jsonResponse({ success: ok });
     }
     if (action === 'setup_trigger') {
       setupDailyReportTrigger();
@@ -164,6 +170,9 @@ function handleSubscribe(body) {
     now,              // PAID_AT (Subscribed time)
     '',               // TX_ID
     '',               // CK_CONTENT
+    '',               // PRODUCT
+    '',               // AMOUNT
+    '',               // SHIPPING_ADDRESS
   ]);
 
   sendWelcomeEmail(email, name);
@@ -216,6 +225,7 @@ function sendWelcomeEmail(toEmail, toName) {
 
     MailApp.sendEmail({
       to: toEmail,
+      bcc: CONFIG.SUPPORT_EMAIL,
       subject: subject,
       htmlBody: html,
       name: CONFIG.SENDER_NAME,
@@ -264,6 +274,8 @@ function handleRegister(body) {
     '',               // TX_ID
     '',               // CK_CONTENT
     product || CONFIG.PRODUCT_NAME, // PRODUCT
+    '',               // AMOUNT
+    '',               // SHIPPING_ADDRESS
   ]);
 
   return jsonResponse({ success: true, refCode });
@@ -274,7 +286,7 @@ function handleRegister(body) {
 // ============================================================
 
 function handlePaypalComplete(body) {
-  const { email, name, txId, amount } = body;
+  const { email, name, txId, amount, product, shippingAddress } = body;
   Logger.log('PayPal complete: ' + JSON.stringify(body));
 
   if (!email) return jsonResponse({ success: false, error: 'Missing email' });
@@ -292,6 +304,13 @@ function handlePaypalComplete(body) {
       sheet.getRange(i + 1, COLS.STATUS).setValue('PAID_PAYPAL');
       sheet.getRange(i + 1, COLS.PAID_AT).setValue(now);
       sheet.getRange(i + 1, COLS.TX_ID).setValue(txId || '');
+      sheet.getRange(i + 1, COLS.NAME).setValue(name || data[i][COLS.NAME - 1]);
+      if (COLS.PRODUCT) {
+        const existingProduct = (data[i][COLS.PRODUCT - 1] || '').toString();
+        sheet.getRange(i + 1, COLS.PRODUCT).setValue(product || existingProduct || CONFIG.PRODUCT_NAME);
+      }
+      if (COLS.AMOUNT) sheet.getRange(i + 1, COLS.AMOUNT).setValue(amount || '');
+      if (COLS.SHIPPING_ADDRESS) sheet.getRange(i + 1, COLS.SHIPPING_ADDRESS).setValue(shippingAddress || '');
       updated = true;
       paidRowIndex = i;
       break;
@@ -318,19 +337,29 @@ function handlePaypalComplete(body) {
       now,
       'PP-' + (txId || '').toString().slice(-6),
       name || '', email, '', 'paypal', 'PAID_PAYPAL', now, txId || '', '',
+      product || CONFIG.PRODUCT_NAME,
+      amount || '',
+      shippingAddress || '',
     ]);
   }
 
-  sendDeliveryEmail(email, name || 'Customer', 'paypal', txId || '');
+  const emailSent = sendDeliveryEmail(email, name || 'Customer', 'paypal', txId || '');
+  if (!emailSent) {
+    throw new Error('MailApp delivery failed. The Gmail daily quota might be exceeded, or the Apps Script requires authorization.');
+  }
 
   const paidAtPP = Utilities.formatDate(now, 'America/New_York', 'HH:mm - MM/dd/yyyy');
+  const displayProduct = product || CONFIG.PRODUCT_NAME;
+  const displayAmount = amount ? '$' + amount : CONFIG.PRODUCT_PRICE_USD;
+
   sendTelegramMessage(
     '🎉 NEW ORDER - PAYMENT SUCCESSFUL\n\n' +
-    '📦 Product: ' + CONFIG.PRODUCT_NAME + '\n' +
+    '📦 Product: ' + displayProduct + '\n' +
     '👤 Customer: ' + (name || 'N/A') + '\n' +
     '📧 Email: ' + email + '\n' +
+    '📍 Shipping Address: ' + (shippingAddress || 'N/A') + '\n' +
     '💳 Method: PayPal\n' +
-    '💰 Amount: ' + CONFIG.PRODUCT_PRICE_USD + '\n' +
+    '💰 Amount: ' + displayAmount + '\n' +
     '🔖 Transaction ID: ' + (txId || 'N/A') + '\n' +
     '⏰ Time: ' + paidAtPP
   );
@@ -521,6 +550,7 @@ function sendDeliveryEmail(toEmail, toName, method, ref) {
 
     MailApp.sendEmail({
       to: toEmail,
+      bcc: CONFIG.SUPPORT_EMAIL,
       subject: subject,
       htmlBody: html,
       name: CONFIG.SENDER_NAME,
@@ -713,4 +743,112 @@ function setupDailyReportTrigger() {
 function testTelegram() {
   sendTelegramMessage('✅ Telegram integration test successful!\nBot is ready to receive order notifications.');
   Logger.log('testTelegram sent');
+}
+
+// ============================================================
+// NEWSLETTER SENDER
+// ============================================================
+
+// Gửi Email bản tin hàng tháng cho tất cả các khách hàng có trạng thái SUBSCRIBED
+function sendMonthlyNewsletter() {
+  const sheet = getSheet();
+  const data = sheet.getDataRange().getValues();
+  
+  // ⚙️ TIÊU ĐỀ & NỘI DUNG EMAIL
+  const subject = "⛵ Monthly Adventures & Updates - One Trip One Bite";
+  const htmlBody = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body style="margin:0;padding:0;background:#F7F4EE;font-family:Arial,sans-serif;font-size:16px;color:#1F2933;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background:#F7F4EE;padding:32px 16px;">
+        <tr>
+          <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(31,41,51,0.05);border:1px solid #D8C3A5;">
+              
+              <!-- Header -->
+              <tr>
+                <td style="background:#2E5B76;padding:40px 32px;text-align:center;">
+                  <div style="font-size:48px;margin-bottom:14px;">⛵</div>
+                  <h1 style="color:#F7F4EE;margin:0;font-size:28px;font-family:Georgia,serif;font-weight:700;letter-spacing:1px;">ONE TRIP ONE BITE</h1>
+                  <p style="color:rgba(247,244,238,0.8);margin:10px 0 0;font-size:15px;letter-spacing:0.5px;">Monthly Newsletter</p>
+                </td>
+              </tr>
+              
+              <!-- Body -->
+              <tr>
+                <td style="padding:36px 32px;">
+                  <h2 style="color:#2E5B76;font-size:22px;font-weight:700;margin:0 0 16px;">Hi {{NAME}},</h2>
+                  <p style="line-height:1.7;margin:0 0 20px;">Here is a digest of our latest trip reports, hidden fishing spots, local food finds, and gear reviews from the Gulf Coast:</p>
+                  
+                  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea;border-radius:12px;margin:24px 0;">
+                    <tr>
+                      <td style="padding:20px 24px;">
+                        <p style="margin:0 0 10px;color:#2E5B76;font-weight:700;font-size:16px;">🌊 Highlights this month:</p>
+                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">📍 <strong>New Spots:</strong> Secret kayak launches and hot spots around the Gulf Coast.</p>
+                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🎣 <strong>Tips &amp; Tactics:</strong> Selecting the best soft plastic color patterns for stained water.</p>
+                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🍣 <strong>Local Flavors:</strong> Honest reviews of coastal seafood shacks and local dives.</p>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <p style="line-height:1.7;margin:0 0 28px;">Click below to visit our website and catch up on the latest stories from the water.</p>
+                  
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                    <tr>
+                      <td align="center">
+                        <a href="https://onetriponebite.com" style="display:inline-block;background:#C77D4A;color:#ffffff;text-decoration:none;padding:16px 36px;border-radius:8px;font-weight:700;font-size:16px;box-shadow:0 6px 18px rgba(199,125,74,0.3);letter-spacing:0.5px;">Visit Our Website</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="background:#F7F4EE;padding:24px 32px;text-align:center;border-top:1px solid #D8C3A5;">
+                  <p style="color:#7A8F7B;font-size:14px;margin:0;">Explore More. Fish More. Travel More.</p>
+                  <p style="color:#1F2933;font-size:13px;margin:8px 0 0;">© 2026 One Trip One Bite. All rights reserved.</p>
+                </td>
+              </tr>
+              
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+
+  let sendCount = 0;
+
+  for (let i = 1; i < data.length; i++) {
+    const email = (data[i][COLS.EMAIL - 1] || '').toString().trim();
+    const status = (data[i][COLS.STATUS - 1] || '').toString().trim();
+    const name = (data[i][COLS.NAME - 1] || 'Friend').toString().trim();
+
+    if (email && status === 'SUBSCRIBED') {
+      try {
+        const personalizedBody = htmlBody.replace('{{NAME}}', name);
+        MailApp.sendEmail({
+          to: email,
+          subject: subject,
+          htmlBody: personalizedBody,
+          name: CONFIG.SENDER_NAME,
+          replyTo: CONFIG.SUPPORT_EMAIL
+        });
+        sendCount++;
+        Logger.log('Newsletter sent successfully to: ' + email);
+      } catch (err) {
+        Logger.log('Newsletter send failed for ' + email + ': ' + err.toString());
+      }
+    }
+  }
+
+  Logger.log('============================================');
+  Logger.log('SUMMARY: Newsletter sent to ' + sendCount + ' subscribers.');
+  Logger.log('============================================');
 }

@@ -4,22 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="assets/favicon.png?v=2">
   <meta name="theme-color" content="#F7F4EE">
-  <title>One Trip. One Bite. — Fishing, Travel & Outdoor Adventure</title>
+  <title>One Trip One Bite — Cast. Taste. Explore.</title>
   <meta name="description"
-    content="Explore kayak fishing destinations, local coastal flavors, and the affordable outdoor gear worth bringing on your next adventure.">
+    content="Gulf Coast fishing destinations, food discoveries, and the gear worth bringing along. Soft plastic swim baits proven on speckled trout, redfish, and flounder.">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://onetriponebite.com/">
-  <meta property="og:title" content="One Trip. One Bite. — Fishing, Travel & Outdoor Adventure">
+  <meta property="og:title" content="One Trip One Bite — Cast. Taste. Explore.">
   <meta property="og:description"
-    content="Explore kayak fishing destinations, local coastal flavors, and the affordable outdoor gear worth bringing on your next adventure.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&h=630&q=80">
+    content="Gulf Coast fishing destinations, food discoveries, and the gear worth bringing along. Soft plastic swim baits proven on speckled trout, redfish, and flounder.">
+  <meta property="og:image" content="https://www.onetriponebite.com/assets/og-image.png">
   <meta property="og:locale" content="en_US">
-  <meta property="og:site_name" content="One Trip. One Bite.">
+  <meta property="og:site_name" content="One Trip One Bite">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,6 +76,45 @@
 
     p {
       font-size: 1rem;
+      color: var(--muted);
+    }
+
+    /* ── Unified type scale ─────────────────────────────────────────
+       Use these classes instead of ad-hoc inline font-size values.
+       text-body    → standard paragraph copy    (0.95rem / lh 1.75)
+       text-support → secondary / caption text   (0.875rem / lh 1.65)
+       text-lead    → intro / hero subheading    (1.05rem  / lh 1.8)
+    ───────────────────────────────────────────────────────────────── */
+    .text-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .text-support {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .text-lead {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* Section subtitles — all sections use the same size */
+    .section-subtitle,
+    .hero-desc,
+    .adventure-desc,
+    .subscribe-subtitle {
+      font-size: 0.95rem !important;
+      line-height: 1.75 !important;
+      color: var(--muted);
+    }
+
+    /* Spot guide text */
+    .spot-guide {
+      font-size: 0.875rem !important;
+      line-height: 1.65 !important;
       color: var(--muted);
     }
 
@@ -200,7 +239,40 @@
 
     @media (max-width: 768px) {
       .nav-menu {
-        display: none; /* Mobile burger or simple list can be wired later, keeping it clean */
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: var(--bg);
+        border-left: 1px solid var(--border);
+        padding: 80px 24px 40px;
+        gap: 24px;
+        z-index: 1001;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -5px 0 25px rgba(0,0,0,0.06);
+      }
+
+      .nav-menu.open {
+        right: 0;
+      }
+
+      .nav-menu .nav-link {
+        color: var(--text) !important;
+        font-size: 1.1rem;
+        display: block;
+        padding: 8px 0;
+        width: 100%;
+      }
+
+      .nav-menu .nav-cta {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 1rem;
       }
     }
 
@@ -278,9 +350,10 @@
 
     .hero-ctas {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       animation: fadeInUp 1.4s ease;
     }
 
@@ -322,16 +395,66 @@
       color: var(--white);
     }
 
+    /* ── Hero-specific CTA hierarchy ── */
+    .btn-hero-primary {
+      background: var(--blue);
+      color: var(--white);
+      border: 2px solid var(--blue);
+      padding: 18px 44px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 6px 24px rgba(46, 91, 118, 0.45);
+      transition: all 0.2s ease;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-hero-primary:hover {
+      background: #244c63;
+      border-color: #244c63;
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(46, 91, 118, 0.55);
+    }
+
+    .btn-hero-secondary {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(247, 244, 238, 0.72);
+      letter-spacing: 0.3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+      background: none;
+      border: none;
+      padding: 2px 0;
+    }
+
+    .btn-hero-secondary:hover {
+      color: var(--white);
+    }
+
     @media (max-width: 768px) {
       .hero-title {
         font-size: 2.8rem;
       }
       .hero-ctas {
-        flex-direction: column;
         gap: 12px;
+      }
+      .btn-hero-primary {
+        width: 100%;
+        padding: 16px 28px;
       }
       .btn {
         width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.2rem;
       }
     }
 
@@ -504,8 +627,8 @@
     }
     
     .product-card-gallery img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       mix-blend-mode: multiply;
       transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -652,6 +775,17 @@
       border-color: var(--orange);
       transform: translateY(-1px);
     }
+
+    /* Trust signals below Add to Cart button */
+    .card-trust-bar {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 7px;
+      letter-spacing: 0.1px;
+      opacity: 0.75;
+      line-height: 1.4;
+    }
     
     /* Lightbox Modal for Product Image Zoom */
     .lightbox-overlay {
@@ -717,9 +851,23 @@
       line-height: 1;
     }
 
+    /* Mobile Actions Wrapper */
+    .nav-mobile-actions {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 1002;
+    }
+
+    @media (max-width: 768px) {
+      .nav-mobile-actions {
+        display: flex !important;
+      }
+    }
+
     /* Mobile Cart Button */
     .mobile-cart-btn {
-      display: none;
+      display: flex;
       position: relative;
       align-items: center;
       justify-content: center;
@@ -747,10 +895,46 @@
       right: -3px;
     }
 
-    @media (max-width: 768px) {
-      .mobile-cart-btn {
-        display: flex !important;
-      }
+    /* Hamburger Menu Button */
+    .menu-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav.scrolled .menu-toggle-btn {
+      color: var(--text);
+      background: rgba(46, 91, 118, 0.05);
+    }
+
+    .nav:not(.scrolled) .menu-toggle-btn {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-toggle-btn svg line {
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+
+    .menu-toggle-btn.open .line-mid {
+      opacity: 0;
+    }
+
+    .menu-toggle-btn.open .line-top {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle-btn.open .line-bot {
+      transform: translateY(-6px) rotate(-45deg);
     }
 
     /* Cart Modal Item List */
@@ -853,6 +1037,18 @@
       font-weight: 600;
       width: 24px;
       text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .qty-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+      }
+      .qty-val {
+        width: 32px;
+        font-size: 0.95rem;
+      }
     }
 
     .cart-item-remove-btn {
@@ -1147,6 +1343,31 @@
       margin-top: auto;
     }
 
+    /* Insider lure tip — subtle, below Best Season */
+    .spot-lure-tip {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--light-gray);
+      font-style: italic;
+    }
+
+    .spot-lure-tip a {
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .spot-lure-tip a:hover {
+      color: var(--orange);
+    }
+
     .btn-spot {
       margin-top: 12px;
       text-align: left;
@@ -1385,6 +1606,60 @@
       line-height: 1.7;
     }
 
+    /* Footer Featured Partners logos strip */
+    .footer-partners {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1.5px solid rgba(46, 91, 118, 0.08);
+      max-width: 100%;
+    }
+    
+    .footer-partners-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+    
+    .footer-partners-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .footer-partner-badge {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--muted);
+      border: 1.5px dashed var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(46, 91, 118, 0.02);
+      user-select: none;
+      transition: all 0.25s ease;
+      display: inline-block;
+    }
+    
+    .footer-partner-badge.join-us {
+      border: 1.5px solid var(--orange);
+      color: var(--orange);
+      background: rgba(199, 125, 74, 0.02);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    
+    .footer-partner-badge.join-us:hover {
+      background: var(--orange);
+      color: var(--white);
+      border-color: var(--orange);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(199, 125, 74, 0.15);
+    }
+
     .footer-nav {
       display: flex;
       gap: 60px;
@@ -1506,6 +1781,19 @@
 
     .modal-close-btn:hover {
       color: var(--orange);
+    }
+
+    @media (max-width: 600px) {
+      .modal-close-btn {
+        top: 12px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
     }
 
     .modal-title {
@@ -1772,6 +2060,67 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ============================================================
+       MOBILE STICKY BOTTOM BAR
+       Visible only on mobile (≤768px), after hero scrolls out.
+       ============================================================ */
+    .mobile-sticky-bar {
+      display: none; /* hidden on desktop — overridden in media query */
+    }
+
+    @media (max-width: 768px) {
+      .mobile-sticky-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: calc(58px + env(safe-area-inset-bottom));
+        padding: 0 20px env(safe-area-inset-bottom);
+        background: var(--blue);
+        color: #fff;
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(100%);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.18);
+      }
+
+      .mobile-sticky-bar.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .mobile-sticky-text {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: rgba(255,255,255,0.92);
+        white-space: nowrap;
+      }
+
+      .mobile-sticky-btn {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #fff;
+        background: rgba(255,255,255,0.18);
+        border: 1.5px solid rgba(255,255,255,0.45);
+        border-radius: 6px;
+        padding: 7px 14px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.2s ease;
+      }
+
+      .mobile-sticky-btn:hover,
+      .mobile-sticky-btn:active {
+        background: rgba(255,255,255,0.28);
+      }
+    }
   </style>
 </head>
 
@@ -1784,12 +2133,24 @@
         <img src="assets/logo.jpg" alt="One Trip One Bite Logo" style="height: 40px; mix-blend-mode: multiply; border-radius: 4px;">
       </a>
       
-      <!-- Mobile Cart Button -->
-      <a href="javascript:void(0)" onclick="openCart()" class="mobile-cart-btn" title="View Cart">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-        <span id="mobile-cart-badge" class="cart-badge" style="display: none;">0</span>
-      </a>
-      
+      <!-- Mobile Actions (Cart & Hamburger Menu) -->
+      <div class="nav-mobile-actions">
+        <!-- Mobile Cart Button -->
+        <a href="javascript:void(0)" onclick="openCart()" class="mobile-cart-btn" title="View Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span id="mobile-cart-badge" class="cart-badge" style="display: none;">0</span>
+        </a>
+        
+        <!-- Hamburger Menu Button -->
+        <button id="menu-toggle-btn" class="menu-toggle-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+          <svg class="hamburger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align: middle;">
+            <line x1="3" y1="12" x2="21" y2="12" class="line-mid"></line>
+            <line x1="3" y1="6" x2="21" y2="6" class="line-top"></line>
+            <line x1="3" y1="18" x2="21" y2="18" class="line-bot"></line>
+          </svg>
+        </button>
+      </div>
+
       <ul class="nav-menu">
         <li><a href="#adventures" class="nav-link">Adventures</a></li>
         <li><a href="#spots" class="nav-link">Fishing Spots</a></li>
@@ -1815,58 +2176,46 @@
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-tagline">Fishing • Travel • Local Food</p>
-      <h1 class="hero-title">ONE TRIP. ONE BITE.</h1>
-      <p class="hero-desc">Explore fishing destinations, local flavors, and affordable gear worth bringing on your next adventure.</p>
+      <!-- Eyebrow: lifestyle brand pillars -->
+      <p class="hero-tagline">Cast &middot; Taste &middot; Explore</p>
+
+      <!-- H1: brand name -->
+      <h1 class="hero-title"><span style="white-space: nowrap;">ONE TRIP.</span> <span style="white-space: nowrap;">ONE BITE.</span></h1>
+
+      <!-- Subheading: lifestyle brand positioning -->
+      <p class="hero-desc">Every trip tells a story. Every bite is the reward. We explore coastal destinations, chase fish, discover local flavors, and share the gear worth bringing along.</p>
+
       <div class="hero-ctas">
-        <a href="#spots" class="btn btn-primary">Explore Adventures</a>
-        <a href="#gear" class="btn btn-secondary">Shop Favorites</a>
+        <!-- PRIMARY CTA: experience-first — leads to adventures/spots -->
+        <a href="#spots" class="btn-hero-primary">Explore Adventures</a>
+
+        <!-- SECONDARY CTA: ghost outline — gear is part of the experience -->
+        <a href="#gear" class="btn btn-secondary">Shop the Lures</a>
       </div>
     </div>
   </header>
 
-  <!-- SECTION 2 - LATEST ADVENTURE -->
-  <section class="adventure-section" id="adventures">
-    <div class="section-inner">
-      <div class="section-header fade-up-trigger">
-        <span class="section-tag">Brand Philosophy</span>
-        <h2 class="section-title">The Cover Story</h2>
-        <p class="section-subtitle">The belief, the vision, and the passion that drive every journey and every single bite.</p>
-      </div>
 
-      <div class="adventure-card fade-up-trigger">
-        <div class="adventure-img-container">
-          <img src="assets/cover_story.jpg" alt="One Trip One Bite Cover Story">
-        </div>
-        <div class="adventure-content">
-          <span class="adventure-date">Our Mission</span>
-          <h3 class="adventure-card-title">ONE TRIP ONE BITE</h3>
-          <div class="adventure-desc" style="font-size: 0.95rem; color: var(--muted); line-height: 1.7; display: flex; flex-direction: column; gap: 14px;">
-            <p>Every journey has a destination, but the destination is never the whole story.</p>
-            <p>One Trip One Bite was created from a simple belief: every trip should leave you with something worth remembering. Sometimes it's the fish you've been chasing all day. Sometimes it's a hidden restaurant you never expected to find. Sometimes it's a historic landmark, a breathtaking view, a local tradition, or a special moment shared with family and friends.</p>
-            <p>We travel to discover. We fish to explore. We wander to understand the places, people, food, history, and nature that make every destination unique.</p>
-            <p>From coastal roads and fishing piers to beaches, small towns, local restaurants, museums, parks, and historic sites, every adventure becomes an opportunity to learn something new and create a story worth telling.</p>
-            <p>Whether the reward is a trophy fish, a memorable meal, a hidden gem, or a meaningful experience with the people we love, every journey brings back a discovery.</p>
-            <p>Because at the end of the day, it's not about how far you travel. It's about what you find along the way.</p>
-            <p style="font-weight: 700; color: var(--text); margin-top: 5px;">One Trip. One Discovery. One Story.</p>
-            <p style="font-style: italic; color: var(--orange); font-weight: 600; margin-top: -5px;">Travel. Fish. Explore. Discover.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ============================================================
+       NEW SECTION ORDER:
+       1. Hero (above, unchanged)
+       2. Product Grid  ← moved up from position 3
+       3. Fishing Spots ← moved up from position 4
+       4. Condensed Mission (replaces full Cover Story essay)
+       5. Newsletter    ← unchanged, stays at bottom
+       ============================================================ -->
 
-  <!-- SECTION 3 - FEATURED LURES -->
+  <!-- SECTION 2 (new) - PRODUCT GRID — Matrix Shad Lure Collection -->
   <section class="favorites-section" id="gear">
     <div class="section-inner">
       <div class="section-header fade-up-trigger">
         <span class="section-tag">On-The-Water Essentials</span>
         <h2 class="section-title">Matrix Shad Lure Collection</h2>
-        <p class="section-subtitle">The ultimate 3" soft plastic swim baits for speckled trout, redfish, and flounder. Select your variant, choose your pack size, and hit the water.</p>
+        <p class="section-subtitle">The ultimate 3&Prime; soft plastic swim baits for Gulf Coast inshore fishing. Proven on speckled trout, redfish, and flounder from Pensacola to Pontchartrain.</p>
       </div>
 
       <!-- 12-Product Dynamic Grid -->
-      <div class="favorites-grid fade-up-trigger" id="favorites-grid">
+      <div class="favorites-grid" id="favorites-grid">
         <!-- Rendered dynamically by JavaScript -->
       </div>
     </div>
@@ -1891,8 +2240,8 @@
     <div class="section-inner">
       <div class="section-header fade-up-trigger">
         <span class="section-tag">Explore New Waters</span>
-        <h2 class="section-title">Coastal Fishing Spot Guides</h2>
-        <p class="section-subtitle">A collection of kayak launches, fishing bridge locations, and seasonal insights for anglers seeking adventure.</p>
+        <h2 class="section-title">Explore New Waters</h2>
+        <p class="section-subtitle">From Gulf Coast kayak launches to bridge structures and barrier islands — every spot tells its own story.</p>
       </div>
 
       <div class="spots-grid fade-up-trigger">
@@ -1905,6 +2254,7 @@
             <h4 class="spot-title">Pensacola, FL</h4>
             <p class="spot-guide">Excellent pier access, deep channels, and offshore trolling reefs. Famous for Spanish mackerel and red snapper in the bay.</p>
             <div class="spot-meta">Best Season: Summer / Fall</div>
+            <div class="spot-lure-tip">Top pick: Matrix Shad ‘Lemon Head’ for Spanish mackerel in clear Gulf water &mdash; <a href="#gear">Shop Now</a></div>
           </div>
         </div>
 
@@ -1917,6 +2267,7 @@
             <h4 class="spot-title">Biloxi, MS</h4>
             <p class="spot-guide">Shallow bayous, tidal reefs, and bridge structures. Prime spot for Speckled Trout, Black Drum, and Flounder in deep structure.</p>
             <div class="spot-meta">Best Season: Spring / Fall</div>
+            <div class="spot-lure-tip">Top pick: Matrix Shad ‘Avocado’ for speckled trout in murky bayous &mdash; <a href="#gear">Shop Now</a></div>
           </div>
         </div>
 
@@ -1929,6 +2280,7 @@
             <h4 class="spot-title">Ship Island, MS</h4>
             <p class="spot-guide">Barrier island with deep gulches and crystal clear surf. Ideal for shorecasting and offshore kayak angling for bull redfish.</p>
             <div class="spot-meta">Best Season: Early Fall</div>
+            <div class="spot-lure-tip">Top pick: Matrix Shad ‘Tiger Bait’ for bull redfish in stained surf &mdash; <a href="#gear">Shop Now</a></div>
           </div>
         </div>
 
@@ -1941,27 +2293,112 @@
             <h4 class="spot-title">Pontchartrain, LA</h4>
             <p class="spot-guide">Giant brackish lake crossed by concrete bridges. The massive bridge pylons attract trophy-sized trout and sheepshead.</p>
             <div class="spot-meta">Best Season: Winter / Spring</div>
+            <div class="spot-lure-tip">Top pick: Matrix Shad ‘Green Hornet’ for trophy trout around bridge pylons &mdash; <a href="#gear">Shop Now</a></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SECTION 4a - COVER STORY (collapsible) -->
+  <section class="adventure-section" id="cover-story" style="border-top: 1px solid var(--light-gray);">
+    <div class="section-inner" style="padding-top: 64px; padding-bottom: 64px;">
+      <div class="section-header fade-up-trigger" style="text-align: center; max-width: 680px; margin: 0 auto;">
+        <span class="section-tag">Behind the Brand</span>
+        <h2 class="section-title" style="margin-bottom: 12px;">The Story Behind Every Cast &amp; Every Bite</h2>
+        <p class="section-subtitle" style="margin-bottom: 24px;">Built by Gulf Coast anglers who believe every trip should leave you with something worth remembering — a trophy fish, a hidden local restaurant, or a moment you didn't expect. We fish, we travel, and we share what works.</p>
 
-  <!-- SECTION 7 - JOIN THE CREW -->
+        <!-- Toggle button — teal text, clean, no heavy border -->
+        <button
+          id="cover-story-toggle"
+          onclick="toggleCoverStory()"
+          style="
+            background: none;
+            border: 1.5px solid var(--blue);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--blue);
+            font-weight: 600;
+            padding: 8px 20px;
+            transition: background 0.2s ease, color 0.2s ease;
+            font-family: var(--font-sans);
+          "
+          onmouseover="this.style.background='var(--blue)';this.style.color='#fff';"
+          onmouseout="this.style.background='none';this.style.color='var(--blue)';"
+        >Read More ↓</button>
+      </div>
+
+      <!-- Collapsible content: image + full essay -->
+      <div
+        id="cover-story-panel"
+        style="
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.35s ease, opacity 0.3s ease;
+          opacity: 0;
+        "
+      >
+        <!-- Cover story image -->
+        <div style="max-width: 820px; margin: 40px auto 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.10);">
+          <img src="assets/cover_story.jpg" alt="One Trip One Bite Cover Story" style="width: 100%; display: block; object-fit: cover;">
+        </div>
+
+        <!-- Full mission essay -->
+        <div style="max-width: 680px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 16px;">
+          <h3 class="section-title" style="font-size: 1.6rem; margin: 4px 0 8px;">ONE TRIP ONE BITE</h3>
+
+          <p class="text-body">Every journey has a destination, but the destination is never the whole story.</p>
+          <p class="text-body">One Trip One Bite was created from a simple belief: every trip should leave you with something worth remembering. Sometimes it's the fish you've been chasing all day. Sometimes it's a hidden restaurant you never expected to find. Sometimes it's a historic landmark, a breathtaking view, a local tradition, or a special moment shared with family and friends.</p>
+          <p class="text-body">We travel to discover. We fish to explore. We wander to understand the places, people, food, history, and nature that make every destination unique.</p>
+          <p class="text-body">From coastal roads and fishing piers to beaches, small towns, local restaurants, museums, parks, and historic sites, every adventure becomes an opportunity to learn something new and create a story worth telling.</p>
+          <p class="text-body">Whether the reward is a trophy fish, a memorable meal, a hidden gem, or a meaningful experience with the people we love, every journey brings back a discovery.</p>
+          <p class="text-body">Because at the end of the day, it's not about how far you travel. It's about what you find along the way.</p>
+          <p class="text-body" style="font-weight: 700; color: var(--text);">One Trip. One Bite. One Story.</p>
+          <p class="text-body" style="font-style: italic; color: var(--orange); font-weight: 600;">Cast. Taste. Explore. Repeat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleCoverStory() {
+      const panel  = document.getElementById('cover-story-panel');
+      const toggle = document.getElementById('cover-story-toggle');
+      const isOpen = panel.dataset.open === 'true';
+      if (isOpen) {
+        panel.style.maxHeight = '0';
+        panel.style.opacity   = '0';
+        panel.dataset.open    = 'false';
+        toggle.textContent    = 'Read More ↓';
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.style.opacity   = '1';
+        panel.dataset.open    = 'true';
+        toggle.textContent    = 'Read Less ↑';
+      }
+    }
+  </script>
+
+
+
+  <!-- SECTION 5 - JOIN THE CREW -->
   <section class="subscribe-section" id="subscribe">
     <div class="section-inner">
       <div class="subscribe-box fade-up-trigger">
         <span class="section-tag">Newsletter</span>
-        <h2 class="subscribe-title">Join The Crew</h2>
-        <p class="subscribe-subtitle">Get monthly kayak fishing reports, secret destination guides, gear review breakdowns, and fresh campfire cooking recipes.</p>
+        <h2 class="subscribe-title">Join the Crew — Get Free Shipping on Your First Order</h2>
+        <p class="subscribe-subtitle">Subscribe and instantly receive a free shipping code for your first order. Plus monthly fishing reports, destination guides, local food finds, and gear recommendations from people who actually go.</p>
 
+        <!-- TODO: Configure email automation to send free shipping code FREESHIP1 on signup -->
         <form id="subscribe-form" class="subscribe-form">
+          <div style="font-size: 12px; color: #0d9488; margin-bottom: 14px; text-align: center; font-weight: 500;">🎁 Your free shipping code will be sent instantly to your inbox</div>
           <div class="input-row">
             <input type="text" id="s-name" class="form-input" placeholder="Your Name" required>
             <input type="email" id="s-email" class="form-input" placeholder="Your Email Address" required>
           </div>
-          <button type="submit" id="s-submit-btn" class="btn-submit">Join The Crew</button>
+          <button type="submit" id="s-submit-btn" class="btn-submit">Send My Free Shipping Code →</button>
+          <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px;">No spam — just good content and one great perk. Unsubscribe anytime.</p>
           <div id="subscribe-msg" class="subscribe-msg"></div>
         </form>
       </div>
@@ -1975,15 +2412,24 @@
         <div class="footer-logo">
           <img src="assets/logo.jpg" alt="One Trip One Bite Logo" style="height: 40px; mix-blend-mode: multiply; border-radius: 4px;">
         </div>
-        <p class="footer-tagline">Explore More. Fish More. Travel More. Create More Memories. Outdoor lifestyle and storytelling off the beaten path.</p>
+        <p class="footer-tagline">Cast &middot; Taste &middot; Explore &mdash; Stories worth telling from the Gulf Coast and beyond.</p>
+        
+        <div class="footer-partners">
+          <div class="footer-partners-title">Featured Partners</div>
+          <div class="footer-partners-list">
+            <span class="footer-partner-badge">Swim School of Slidell</span>
+            <span class="footer-partner-badge">Slap Yo Hook</span>
+            <span class="footer-partner-badge">Matrix Shad</span>
+            <a href="mailto:partners@onetriponebite.com?subject=Partner%20Logos%20%26%20Advertising%20Inquiry" class="footer-partner-badge join-us" title="Click to advertise or collaborate">+ Your Logo</a>
+          </div>
+        </div>
       </div>
 
       <div class="footer-nav">
         <div class="footer-links-col">
           <span class="footer-col-title">Navigation</span>
           <a href="#" class="footer-link">Home</a>
-          <a href="#adventures" class="footer-link">Adventures</a>
-          <a href="#spots" class="footer-link">Fishing Spots</a>
+          <a href="#spots" class="footer-link">Adventures</a>
           <a href="#gear" class="footer-link">Gear Shop</a>
         </div>
         <div class="footer-links-col">
@@ -2017,26 +2463,75 @@
   
   <div id="modal-privacy" class="modal-box">
     <button onclick="closeModal()" class="modal-close-btn">✕</button>
-    <h2 class="modal-title">🔒 Privacy Policy</h2>
-    <p style="font-size: 0.9rem; margin-bottom: 16px;">We value your privacy. We collect your name, email, and phone number when you subscribe to our newsletter or purchase products.</p>
-    <p style="font-size: 0.9rem; margin-bottom: 16px;">Your information is securely forwarded to our Google Sheet database and is only used to fulfill orders and send newsletter updates. We do not sell or share your data.</p>
-    <p style="font-size: 0.9rem; margin-bottom: 16px;">Payments are processed securely via third-party providers (PayPal, SePay). We do not collect or store card information directly.</p>
+    <h2 class="modal-title" style="margin-bottom: 20px;">🔒 Privacy Policy</h2>
+    
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Your Privacy Matters</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">One Trip One Bite is committed to protecting your personal information. This policy explains what we collect, how we use it, and how we keep it safe.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">What We Collect</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">When you purchase a product or subscribe to our newsletter, we collect your name, email address, and optionally your phone number. This information is used solely to process your order, deliver your products, and send you newsletter updates you've opted into.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">How We Use Your Information</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">We use your information to fulfill orders, send order confirmations, provide shipping updates, and deliver our monthly newsletter featuring fishing reports, destination guides, local food finds, and gear recommendations. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Payment Security</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">All payments are processed securely through PayPal. We accept all major credit and debit cards (Visa, Mastercard, Discover, and American Express) as well as PayPal balance and PayPal Credit. We do not collect, store, or have access to your credit card or banking information at any point. PayPal's industry-leading encryption and security protocols protect every transaction.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Data Storage</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">Order and subscriber information is securely stored and accessible only to the One Trip One Bite team for the purpose of order fulfillment and newsletter delivery.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Your Rights</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">You may request to view, update, or delete your personal information at any time by contacting us at <a href="mailto:support@onetriponebite.com" style="color: var(--blue); text-decoration: underline;">support@onetriponebite.com</a>. Newsletter subscribers may unsubscribe at any time via the unsubscribe link in any email.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Contact</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 24px; line-height: 1.6;">For any privacy-related questions, reach us at <a href="mailto:support@onetriponebite.com" style="color: var(--blue); text-decoration: underline;">support@onetriponebite.com</a>.</p>
+
+    <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+    <p style="font-size: 0.8rem; color: var(--muted); text-align: center;">© 2026 One Trip One Bite. All rights reserved.</p>
   </div>
 
   <!-- MODAL: TERMS OF SERVICE -->
   <div id="modal-terms" class="modal-box">
     <button onclick="closeModal()" class="modal-close-btn">✕</button>
-    <h2 class="modal-title">📋 Terms of Service</h2>
-    <p style="font-size: 0.9rem; margin-bottom: 16px;">By visiting our site or purchasing our gear, you agree to our terms. Products under $25 are sold as-is with a 7-day money-back guarantee.</p>
-    <p style="font-size: 0.9rem; margin-bottom: 16px;">3D printed accessories are custom built and designed for recreational use. Always verify rigging safety on your vessel before launching.</p>
+    <h2 class="modal-title" style="margin-bottom: 20px;">📋 Terms of Service</h2>
+    
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Agreement to Terms</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">By visiting onetriponebite.com or purchasing our products, you agree to the following terms and conditions.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Products &amp; Pricing</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">All Matrix Shad soft plastic lure packs are priced as listed at the time of purchase. Prices are in USD and do not include shipping unless the free shipping threshold of $99 or more is met. We reserve the right to update pricing at any time without prior notice.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Shipping</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">We charge a flat rate shipping fee of $7.00 per order. Orders with a subtotal of $99.00 or more qualify for free shipping. Estimated delivery time is 2–5 business days after dispatch. One Trip One Bite is not responsible for delays caused by carriers or circumstances outside our control.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Returns &amp; Guarantee</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">We stand behind every product we sell. If you are not satisfied with your purchase, we offer a 7-day money-back guarantee from the date of delivery. To request a return or refund, contact us at <a href="mailto:support@onetriponebite.com" style="color: var(--blue); text-decoration: underline;">support@onetriponebite.com</a> with your order details.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Payment</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">All payments are processed securely through PayPal. We accept all major credit and debit cards including Visa, Mastercard, Discover, and American Express, as well as PayPal balance and PayPal Credit. We do not store or have access to your payment information.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Product Use &amp; Safety</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">Our soft plastic lures are designed for recreational fishing use only. Always follow local fishing regulations and obtain the appropriate licenses before fishing. Verify the safety of all rigging and equipment on your vessel before launching.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Intellectual Property</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6;">All content on onetriponebite.com including text, images, product descriptions, and brand assets are the property of One Trip One Bite and may not be reproduced without written permission.</p>
+
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; color: var(--text);">Contact</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 24px; line-height: 1.6;">For any questions regarding these terms, reach us at <a href="mailto:support@onetriponebite.com" style="color: var(--blue); text-decoration: underline;">support@onetriponebite.com</a>.</p>
+
+    <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+    <p style="font-size: 0.8rem; color: var(--muted); text-align: center;">© 2026 One Trip One Bite. All rights reserved.</p>
   </div>
 
   <!-- MODAL: QUICK CHECKOUT -->
   <div id="modal-checkout" class="modal-box" style="max-width: 550px;">
     <button onclick="closeModal()" class="modal-close-btn">✕</button>
     <h2 class="modal-title" style="margin-bottom: 4px;">🛒 Secure Checkout</h2>
-    <p id="checkout-product-summary" style="font-size: 0.9rem; margin-bottom: 24px; color: var(--blue); font-weight: 500;">
-      Order: <span id="co-prod-name">Product</span> — <span id="co-prod-price">$0.00</span>
+    <p id="checkout-product-summary" style="font-size: 0.85rem; margin-bottom: 20px; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; background: var(--bg);">
+      <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Items</span><span id="co-prod-name" style="font-weight:600; color:var(--text);">Product</span></span>
+      <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Subtotal</span><span id="co-prod-price">$0.00</span></span>
+      <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Shipping</span><span id="co-shipping-display">$7.00</span></span>
+      <span style="display:flex; justify-content:space-between; padding-top:8px; margin-top:4px; border-top:1px solid var(--border); font-weight:700; color:var(--text);"><span>Total</span><span id="co-total-display">$7.00</span></span>
     </p>
 
     <!-- Details Form -->
@@ -2055,6 +2550,17 @@
         <input type="tel" id="co-phone" class="form-input" placeholder="e.g. +1 (555) 000-0000">
       </div>
 
+      <div class="form-group" id="co-first-order-container" style="display: none; margin-top: 15px; margin-bottom: 15px;">
+        <label style="display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; font-size: 0.9rem; color: var(--text);">
+          <input type="checkbox" id="co-first-order-chk" style="width: 16px; height: 16px; cursor: pointer;">
+          This is my first order — apply free shipping
+        </label>
+        <div style="font-size: 11px; color: var(--muted); margin-top: 4px; padding-left: 24px;">One-time offer for new customers. Valid on first order only.</div>
+      </div>
+      <div id="co-returning-msg" style="display: none; font-size: 0.82rem; color: var(--muted); margin: 15px 0; font-style: italic;">
+        Free shipping applied to your first order — thank you for coming back!
+      </div>
+
       <button type="submit" id="co-submit-btn" class="btn-submit" style="width: 100%; padding: 14px;">
         Proceed to Payment →
       </button>
@@ -2062,46 +2568,34 @@
       <div id="co-form-msg" style="display:none; margin-top: 12px; padding: 12px; border-radius: 6px; font-size: 0.85rem; text-align: center;"></div>
     </form>
 
-    <!-- PayPal Panel -->
+    <!-- ============================================================
+         PAYMENT STEP — PayPal Smart Buttons (hosted by PayPal)
+         No raw card fields. Card entry happens on PayPal's own page.
+         ============================================================ -->
     <div class="payment-details-panel" id="co-paypal-panel">
-      <h3 style="font-size: 1.1rem; margin-bottom: 12px;">💳 Pay with PayPal or Card</h3>
-      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;">Secured by PayPal. Enter your card details or log in below to complete your order.</p>
+      <h3 style="font-size: 1.1rem; margin-bottom: 12px;">🔒 Complete Payment via PayPal</h3>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;">
+        Pay securely with PayPal or any debit/credit card — card details never touch this site.
+      </p>
 
-      <!-- PayPal Buttons SDK Container -->
-      <div id="co-paypal-button-container" style="margin-bottom: 16px;"></div>
+      <!-- PayPal Smart Button renders here — DO NOT add card input fields here -->
+      <div style="border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; text-align: center; margin-bottom: 16px;">
+        <div style="font-size: 11px; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap;">
+          <span>We accept:</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-weight: 500; font-family: monospace;">Visa</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-weight: 500; font-family: monospace;">Mastercard</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-weight: 500; font-family: monospace;">Discover</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-weight: 500; font-family: monospace;">Amex</span>
+          <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-weight: 500; font-family: monospace;">PayPal</span>
+        </div>
+      </div>
+      <div id="paypal-button-container" style="margin-bottom: 16px;"></div>
+      <p style="color: var(--muted); font-size: 0.8rem; margin-top: 14px; text-align: center; margin-bottom: 16px;">
+        🔒 Secured by PayPal &middot; All major cards accepted &middot; No PayPal account required
+      </p>
+
+      <!-- Error message shown if PayPal reports an error -->
       <div id="co-paypal-error" style="display:none; padding:10px 14px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:6px; color:#ef4444; font-size:.8rem; margin-bottom: 16px;"></div>
-
-      <div style="display:flex; align-items:center; gap:10px; margin: 16px 0;">
-        <div style="flex:1; height:1px; background:var(--border)"></div>
-        <span style="color:var(--muted); font-size:0.75rem; white-space:nowrap">or pay with card</span>
-        <div style="flex:1; height:1px; background:var(--border)"></div>
-      </div>
-
-      <!-- PayPal Inline Cards Fields -->
-      <div id="co-card-fields-form">
-        <div class="form-group">
-          <label>Card Number</label>
-          <div id="co-card-number-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="form-group">
-            <label>Expiry Date</label>
-            <div id="co-card-expiry-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-          </div>
-          <div class="form-group">
-            <label>CVV</label>
-            <div id="co-card-cvv-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Cardholder Name</label>
-          <div id="co-card-name-field-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--white);"></div>
-        </div>
-        <button id="co-card-submit-btn" class="btn-submit" style="width:100%; padding:12px; margin-top: 10px;" onclick="submitCardPayment()">
-          💳 Pay with Card
-        </button>
-        <div id="co-card-error" style="display:none; padding:10px 14px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:6px; color:#ef4444; font-size:.8rem; margin-top: 10px;"></div>
-      </div>
     </div>
 
     <!-- Success Message Panel -->
@@ -2123,26 +2617,51 @@
       <!-- Dynamically rendered cart items -->
     </div>
 
-    <div id="cart-empty-state" class="cart-empty-message" style="display:none;">
+    <div id="cart-empty-state" class="cart-empty-message">
       <div class="cart-empty-icon">🎣</div>
       <p style="font-weight: 600; margin-bottom: 4px;">Your cart is empty</p>
       <p style="font-size: 0.85rem;">Add some lures to get started!</p>
     </div>
 
-    <div id="cart-summary-block" class="cart-summary-block">
+    <div id="cart-summary-block" class="cart-summary-block" style="display: none;">
       <div class="cart-subtotal-row">
         <span>Subtotal</span>
         <span id="cart-subtotal-display">$0.00</span>
       </div>
+
+      <!-- Promo Code Section -->
+      <div style="margin: 8px 0; text-align: right;">
+        <a href="javascript:void(0)" id="cart-promo-toggle" style="font-size: 0.78rem; color: var(--blue); text-decoration: none; font-weight: 500;">Have a promo code? Enter it here</a>
+        <div id="cart-promo-container" style="display: none; margin-top: 8px; align-items: center; justify-content: flex-end; gap: 8px;">
+          <input type="text" id="cart-promo-input" placeholder="Promo Code" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.8rem; max-width: 150px; text-transform: uppercase;">
+          <button id="cart-promo-apply-btn" style="padding: 6px 12px; background: var(--blue); color: #fff; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">Apply</button>
+        </div>
+        <div id="cart-promo-msg" style="font-size: 0.75rem; margin-top: 4px; display: none; text-align: right;"></div>
+      </div>
+
+      <div class="cart-subtotal-row" id="cart-shipping-row">
+        <span>Shipping</span>
+        <span id="cart-shipping-display">$7.00</span>
+      </div>
+      <div id="cart-free-shipping-nudge" style="font-size: 0.78rem; color: var(--orange); font-weight: 600; text-align: center; margin: 4px 0 2px; display: none;">⁠</div>
+      <div class="cart-subtotal-row" style="border-top: 1.5px solid var(--border); margin-top: 8px; padding-top: 10px; font-weight: 700; color: var(--text); font-size: 1rem;">
+        <span>Total</span>
+        <span id="cart-total-display">$7.00</span>
+      </div>
     </div>
 
-    <button id="cart-checkout-btn" class="btn-submit" style="width: 100%; padding: 14px; font-size: 1rem;" onclick="checkoutFromCart()">
+    <button id="cart-checkout-btn" class="btn-submit" style="width: 100%; padding: 14px; font-size: 1rem; display: none;" onclick="checkoutFromCart()">
       Proceed to Checkout →
     </button>
   </div>
 
-  <!-- JavaScript and PayPal SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&components=card-fields,buttons&disable-funding=venmo,paylater"></script>
+  <!--
+    PayPal SDK — ONLY components=buttons (no card-fields).
+    TO GO LIVE: replace client-id below with your live PayPal Client ID
+    (from https://developer.paypal.com/dashboard/applications/live).
+    Current: LIVE client-id from .env  |  Sandbox: change to client-id=sb
+  -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&components=buttons&disable-funding=venmo,paylater"></script>
 
   <script>
     // ============================================================
@@ -2154,7 +2673,7 @@
         name: 'Glow', 
         img: 'assets/glow.jpg', 
         filter: '',
-        badge: '🔥 Best Seller',
+        badge: 'Best Seller',
         rating: '4.9',
         reviews: '124',
         desc: 'A must-have color for any lure. The "GLOW" lights up in low-light situations, overcast days, and stained coastal marshes. Accepts plastic dye/dips exceptionally well.' 
@@ -2164,7 +2683,7 @@
         name: 'Holy Joely', 
         img: 'assets/magneto.jpg', 
         filter: '',
-        badge: '✨ Popular',
+        badge: 'Popular',
         rating: '4.8',
         reviews: '92',
         desc: 'A perfect match for clear water. Clear body sprinkled with silver glitter and a nice reflective coat. Combined with an extremely tough bait to make the perfect mixture of durability and action.' 
@@ -2174,7 +2693,7 @@
         name: 'Shrimp Creole', 
         img: 'assets/shrimp_creole.png', 
         filter: '',
-        badge: '🍤 Go-To Bait',
+        badge: 'Go-To Bait',
         rating: '4.9',
         reviews: '105',
         desc: 'A perfect match for clear water with a beautiful amber/shrimp hue. Sprinkled with fine glitter and a reflective coat. This is the go-to bait when real shrimp are running in the bays.' 
@@ -2184,7 +2703,7 @@
         name: 'Limbo Slice', 
         img: 'assets/holy_joely.jpg', 
         filter: '',
-        badge: '🎨 Eye Catcher',
+        badge: 'Eye Catcher',
         rating: '4.7',
         reviews: '78',
         desc: 'One of the brightest and most contrasting colors. Features a bright blue top with a neon green belly. Highly effective in both clear and moderately stained waters.' 
@@ -2194,7 +2713,7 @@
         name: 'Green Hornet', 
         img: 'assets/green_hornet.png', 
         filter: '',
-        badge: '🏆 Trophy Hunter',
+        badge: 'Trophy Hunter',
         rating: '4.9',
         reviews: '116',
         desc: 'Combining Avocado with a glow belly, red and silver flakes. Offers the perfect flash for mimicking cocahoes, shrimp, and oyster worms. The ultimate winter bait for trophy trout.' 
@@ -2204,7 +2723,7 @@
         name: 'Tiger Bait', 
         img: 'assets/tiger_bait.png', 
         filter: '',
-        badge: '🐯 Redfish Killer',
+        badge: 'Redfish Killer',
         rating: '4.8',
         reviews: '85',
         desc: 'Perfect stained water bait giving a strong contrast between purple and chartreuse. Catches the fish\'s eye in murky conditions. Duplicates crabs to perfection.' 
@@ -2214,7 +2733,7 @@
         name: 'Ultra-Violet', 
         img: 'assets/ultra_violet.png', 
         filter: '',
-        badge: '⚡ Fluorescent',
+        badge: 'Fluorescent',
         rating: '4.8',
         reviews: '90',
         desc: 'Gets a beautiful purple hue that actually changes color in sunlight. Has violet powder inside the plastic for unique light-shifting properties. Awesome color that accepts Spike-It dye perfectly.' 
@@ -2224,7 +2743,7 @@
         name: 'Magneto', 
         img: 'assets/magneto_custom.jpg', 
         filter: '',
-        badge: '🌊 Versatile',
+        badge: 'Versatile',
         rating: '4.9',
         reviews: '112',
         desc: 'An opening night style color that is great for every condition. Natural styling mimics glass minnows and shad perfectly. A must-have in the tackle arsenal for trout, flounder, and bass.' 
@@ -2234,7 +2753,7 @@
         name: 'Pink Champagne', 
         img: 'assets/pink_champagne.png', 
         filter: '',
-        badge: '🎯 Sight Fishing',
+        badge: 'Sight Fishing',
         rating: '4.7',
         reviews: '64',
         desc: 'Classic bubble gum pink. Bright and highly visible, making it the ultimate tool for sight fishing in crystal clear water so you can see the bait disappear when a strike occurs.' 
@@ -2244,7 +2763,7 @@
         name: 'Avocado', 
         img: 'assets/avocado.png', 
         filter: '',
-        badge: '🦎 Oyster Worm',
+        badge: 'Oyster Worm',
         rating: '4.8',
         reviews: '73',
         desc: 'Dark olive green loaded with red flake. A perfect replica of oyster worms, making it the perfect color for catching trophy-sized flounder and speckled trout in oyster reefs.' 
@@ -2254,7 +2773,7 @@
         name: 'Midnight Mullet', 
         img: 'assets/midnight_mullet.png', 
         filter: '',
-        badge: '🌙 Dirty Water',
+        badge: 'Dirty Water',
         rating: '4.6',
         reviews: '59',
         desc: 'A very versatile bait, particularly deadly on murky or dirty water days. A dark purple top contrasted with a clear belly, combined with a high-durability paddle tail.' 
@@ -2264,18 +2783,16 @@
         name: 'Lemon Head', 
         img: 'assets/limbo_slice.jpg', 
         filter: '',
-        badge: '🍋 Visual Hook',
+        badge: 'Visual Hook',
         rating: '4.9',
         reviews: '131',
         desc: 'Bright, solid chartreuse color that is a definite eye catcher. Features the classic paddle tail combined with tough, durable soft plastic that stands up to aggressive strikes.' 
       }
     ];
 
-        const PACK_SIZES = {
-      '8': { label: '8 Baits', sub: 'Single Pack', priceUSD: '4.99' },
-      '25': { label: '25 Baits', sub: 'Value Pack', priceUSD: '13.99' },
-      '50': { label: '50 Baits', sub: 'Club Pack', priceUSD: '24.99' },
-      '100': { label: '100 Baits', sub: 'Bulk Pack', priceUSD: '39.99' }
+    const PACK_SIZES = {
+      '8':  { label: '8 Baits',  sub: 'Starter Pack', priceUSD: '4.99'  },
+      '50': { label: '50 Baits', sub: 'Value Pack',   priceUSD: '24.99' }
     };
 
     const PRODUCTS = {};
@@ -2325,11 +2842,11 @@
         const imgSrc = color.img ? color.img : 'assets/glow.jpg';
         const imgFilter = color.img ? '' : `style="filter: ${color.filter}"`;
         
-        let selectOptions = '';
-        Object.keys(PACK_SIZES).forEach(sizeKey => {
-          const sizeInfo = PACK_SIZES[sizeKey];
-          selectOptions += `<option value="${sizeKey}">${sizeInfo.label} — $${sizeInfo.priceUSD}</option>`;
-        });
+        const selectOptions = `
+              <option value="8">8 Baits — $4.99</option>
+              <!-- OUT OF STOCK: Remove 'disabled' attribute below to reactivate 50 Baits option -->
+              <option value="50" disabled>50 Baits — $24.99 (Out of Stock)</option>
+        `;
         
         const initialPriceUSD = PACK_SIZES['8'].priceUSD;
         
@@ -2371,6 +2888,7 @@
               </button>
             </div>
           </div>
+          <div class="card-trust-bar">🔒 Secure checkout &nbsp;&middot;&nbsp; ↩ 7-day guarantee &nbsp;&middot;&nbsp; 📦 Free shipping over $99</div>
         </div>
         `;
       });
@@ -2584,6 +3102,7 @@
     // CART STATE
     // ============================================================
     let cartItems = []; // [{ colorId, sizeKey, qty }]
+    let isPromoApplied = false;
 
     function addToCart(colorId) {
       const cardEl = document.querySelector(`.product-card[data-color="${colorId}"]`);
@@ -2721,7 +3240,63 @@
         </div>`;
       });
       listEl.innerHTML = html;
+
+      // ── Shipping calculation ────────────────────────────────────
+      const FREE_SHIPPING_THRESHOLD = 99.00;
+      const FLAT_SHIPPING           = 7.00;
+      const shipping = isPromoApplied ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : FLAT_SHIPPING);
+      const total    = subtotal + shipping;
+
       if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+      const shippingEl = document.getElementById('cart-shipping-display');
+      const nudgeEl    = document.getElementById('cart-free-shipping-nudge');
+      const totalEl    = document.getElementById('cart-total-display');
+
+      if (shippingEl) {
+        if (isPromoApplied) {
+          shippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (promo applied) 🎁</span>';
+        } else {
+          shippingEl.textContent = shipping === 0 ? 'FREE 🎉' : `$${FLAT_SHIPPING.toFixed(2)}`;
+          shippingEl.style.color = shipping === 0 ? 'var(--green)' : '';
+          shippingEl.style.fontWeight = shipping === 0 ? '700' : '';
+        }
+      }
+      if (nudgeEl) {
+        if (shipping > 0 && !isPromoApplied) {
+          const remaining = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2);
+          nudgeEl.textContent = `📦 Add $${remaining} more for free shipping!`;
+          nudgeEl.style.display = 'block';
+        } else {
+          nudgeEl.style.display = 'none';
+        }
+      }
+      if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+
+      // Render promo status if already applied
+      const promoToggle = document.getElementById('cart-promo-toggle');
+      const promoContainer = document.getElementById('cart-promo-container');
+      const promoInput = document.getElementById('cart-promo-input');
+      const promoApplyBtn = document.getElementById('cart-promo-apply-btn');
+      const promoMsg = document.getElementById('cart-promo-msg');
+
+      if (isPromoApplied) {
+        if (promoContainer) promoContainer.style.display = 'flex';
+        if (promoToggle) promoToggle.style.display = 'none';
+        if (promoInput) {
+          promoInput.value = 'FREESHIP1';
+          promoInput.disabled = true;
+        }
+        if (promoApplyBtn) {
+          promoApplyBtn.disabled = true;
+          promoApplyBtn.textContent = 'Applied';
+        }
+        if (promoMsg) {
+          promoMsg.style.display = 'block';
+          promoMsg.style.color = '#10b981';
+          promoMsg.textContent = '✅ Code FREESHIP1 applied!';
+        }
+      }
     }
 
     // Jig-specific cart helpers
@@ -2752,18 +3327,20 @@
 
     function checkoutFromCart() {
       if (cartItems.length === 0) return;
-      // Build a combined product entry for the checkout form
       const subtotal = cartItems.reduce((s, i) => s + parseFloat(PACK_SIZES[i.sizeKey].priceUSD) * i.qty, 0);
+      const shipping = isPromoApplied ? 0 : (subtotal >= 99.00 ? 0 : 7.00);
+      const total    = subtotal + shipping;
       const names = cartItems.map(i => {
         const c = COLORS.find(x => x.id === i.colorId);
         const sz = PACK_SIZES[i.sizeKey];
         return `${c ? c.name : i.colorId} x${i.qty} (${sz ? sz.label : i.sizeKey})`;
       });
-      // Build a temporary PRODUCTS entry for cart checkout
       const cartKey = '__cart__';
       PRODUCTS[cartKey] = {
         name: names.join(', '),
-        priceUSD: subtotal.toFixed(2)
+        priceUSD: subtotal.toFixed(2),
+        shippingUSD: shipping.toFixed(2),
+        totalUSD: total.toFixed(2)
       };
       closeModal();
       setTimeout(() => openCheckout(cartKey), 150);
@@ -2773,11 +3350,25 @@
     // SCROLL INTERACTIONS
     // ============================================================
     const nav = document.getElementById('main-nav');
+    const heroEl = document.querySelector('.hero');
+    const stickyBar = document.getElementById('mobile-sticky-bar');
+
     window.addEventListener('scroll', () => {
+      // Nav scroll state
       if (window.scrollY > 50) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
+      }
+
+      // Mobile sticky bar — appears after hero scrolls out of view
+      if (stickyBar && heroEl) {
+        const heroBound = heroEl.getBoundingClientRect();
+        if (heroBound.bottom < 0) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
       }
     });
 
@@ -2787,7 +3378,7 @@
           e.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
     document.querySelectorAll('.fade-up-trigger').forEach(el => observer.observe(el));
 
     // ============================================================
@@ -2820,6 +3411,30 @@
         document.body.style.overflow = '';
       }
     }
+
+    // ============================================================
+    // MOBILE DRAWER NAV MENU
+    // ============================================================
+    function toggleMobileMenu() {
+      const menu = document.querySelector('.nav-menu');
+      const btn = document.getElementById('menu-toggle-btn');
+      if (menu) menu.classList.toggle('open');
+      if (btn) btn.classList.toggle('open');
+    }
+
+    // Close mobile menu drawer on navigation link clicks
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        const menu = document.querySelector('.nav-menu');
+        const btn = document.getElementById('menu-toggle-btn');
+        if (menu && menu.classList.contains('open')) {
+          menu.classList.remove('open');
+        }
+        if (btn && btn.classList.contains('open')) {
+          btn.classList.remove('open');
+        }
+      });
+    });
 
     // ============================================================
     // MODALS GENERAL ACTIONS
@@ -2857,13 +3472,149 @@
       document.getElementById('co-form-msg').style.display = 'none';
       document.getElementById('co-submit-btn').disabled = false;
 
+      // Reset first-order checkbox
+      const firstOrderChk = document.getElementById('co-first-order-chk');
+      if (firstOrderChk) firstOrderChk.checked = false;
+
       // Populate product data
       document.getElementById('co-prod-name').textContent = selectedProduct.name;
       document.getElementById('co-prod-price').textContent = `$${selectedProduct.priceUSD}`;
 
+      // Run eligibility and pricing checks
+      checkFirstOrderEligibility();
+      updateCheckoutPricing();
+
       // Open modal
       openModal('modal-checkout');
     }
+
+    function saveFingerprint(email, phone, address) {
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanPhone = phone.trim().replace(/\D/g, '');
+      const cleanAddress = address.trim().toLowerCase().substring(0, 10);
+      
+      const fingerprint = `${cleanEmail}|${cleanPhone}|${cleanAddress}`;
+      
+      let used = [];
+      try {
+        const stored = localStorage.getItem('otob_used_fingerprints');
+        if (stored) used = JSON.parse(stored);
+      } catch (e) {
+        console.error(e);
+      }
+      
+      if (!used.includes(fingerprint)) {
+        used.push(fingerprint);
+        localStorage.setItem('otob_used_fingerprints', JSON.stringify(used));
+      }
+    }
+
+    function checkFirstOrderEligibility() {
+      const email = document.getElementById('co-email').value.trim().toLowerCase();
+      const phone = document.getElementById('co-phone').value.trim().replace(/\D/g, '');
+      
+      let isEligible = true;
+      
+      try {
+        const stored = localStorage.getItem('otob_used_fingerprints');
+        if (stored) {
+          const used = JSON.parse(stored);
+          for (const f of used) {
+            const parts = f.split('|');
+            const storedEmail = parts[0];
+            const storedPhone = parts[1];
+            
+            if (email && storedEmail && email === storedEmail) {
+              isEligible = false;
+              break;
+            }
+            if (phone && storedPhone && phone === storedPhone) {
+              isEligible = false;
+              break;
+            }
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      
+      const checkboxContainer = document.getElementById('co-first-order-container');
+      const returningMsg = document.getElementById('co-returning-msg');
+      
+      if (!isEligible) {
+        if (checkboxContainer) checkboxContainer.style.display = 'none';
+        if (returningMsg) returningMsg.style.display = 'block';
+        const chk = document.getElementById('co-first-order-chk');
+        if (chk && chk.checked) {
+          chk.checked = false;
+          updateCheckoutPricing();
+        }
+      } else {
+        const subtotal = parseFloat(selectedProduct.priceUSD);
+        if (subtotal < 99.00) {
+          if (checkboxContainer) checkboxContainer.style.display = 'block';
+        } else {
+          if (checkboxContainer) checkboxContainer.style.display = 'none';
+        }
+        if (returningMsg) returningMsg.style.display = 'none';
+      }
+    }
+
+    function updateCheckoutPricing() {
+      const coShippingEl = document.getElementById('co-shipping-display');
+      const coTotalEl    = document.getElementById('co-total-display');
+      const chk = document.getElementById('co-first-order-chk');
+      
+      const subtotal = parseFloat(selectedProduct.priceUSD);
+      let shipping = 7.00;
+      
+      if (selectedProduct.shippingUSD !== undefined) {
+        shipping = parseFloat(selectedProduct.shippingUSD);
+      } else if (subtotal >= 99.00) {
+        shipping = 0.00;
+      }
+      
+      let isFirstOrderDiscount = false;
+      if (chk && chk.checked && subtotal < 99.00) {
+        shipping = 0.00;
+        isFirstOrderDiscount = true;
+      }
+      
+      const total = subtotal + shipping;
+      
+      if (coShippingEl) {
+        if (isFirstOrderDiscount) {
+          coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (first order) 🎁</span>';
+        } else if (shipping === 0) {
+          if (isPromoApplied) {
+            coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (promo applied) 🎁</span>';
+          } else {
+            coShippingEl.textContent = 'FREE 🎉';
+            coShippingEl.style.color = 'var(--green)';
+            coShippingEl.style.fontWeight = '700';
+          }
+        } else {
+          coShippingEl.textContent = `$${shipping.toFixed(2)}`;
+          coShippingEl.style.color = '';
+          coShippingEl.style.fontWeight = '';
+        }
+      }
+      
+      if (coTotalEl) {
+        coTotalEl.textContent = `$${total.toFixed(2)}`;
+      }
+      
+      selectedProduct.currentTotalUSD = total.toFixed(2);
+    }
+
+    // Attach checkout event listeners
+    const coEmailInput = document.getElementById('co-email');
+    const coPhoneInput = document.getElementById('co-phone');
+    const firstOrderChk = document.getElementById('co-first-order-chk');
+    
+    if (coEmailInput) coEmailInput.addEventListener('input', checkFirstOrderEligibility);
+    if (coPhoneInput) coPhoneInput.addEventListener('input', checkFirstOrderEligibility);
+    if (firstOrderChk) firstOrderChk.addEventListener('change', updateCheckoutPricing);
 
     // Handle checkout details form submit
     const checkoutDetailsForm = document.getElementById('checkout-details-form');
@@ -2930,10 +3681,17 @@
     }
 
     // ============================================================
-    // PAYPAL INTEGRATION
+    // PAYPAL SMART BUTTON INTEGRATION
+    //
+    // The PayPal SDK (loaded above) renders official hosted buttons.
+    // No raw card fields are collected on this page.
+    //
+    // SANDBOX vs LIVE:
+    //   - The SDK script src uses the live client-id from the env.
+    //   - To test in sandbox: swap to client-id=sb in the <script> tag above.
+    //   - When ready to go live: paste your live Client ID in the script src.
     // ============================================================
     let paypalInited = false;
-    let cardFields = null;
     let _ppName = '', _ppEmail = '';
 
     function initPayPal(name, email) {
@@ -2942,53 +3700,39 @@
       _ppName = name;
       _ppEmail = email;
 
-      // PayPal Wallet Buttons
       paypal.Buttons({
+
+        // ── Step 1: Create the order server-side ──────────────────
+        // Pulls the amount and product name from the currently
+        // selected product so pricing is always server-authoritative.
         createOrder: () => createOrderServerSide(),
+
+        // ── Step 2: Buyer approved payment on PayPal ─────────────
+        // Capture server-side, then show the order confirmation screen.
         onApprove: async (data) => {
           await captureOrderServerSide(data.orderID);
         },
+
+        // ── Step 3: Handle errors gracefully ─────────────────────
+        // Shows a friendly message without crashing the rest of the page.
         onError: (err) => {
-          console.error(err);
+          console.error('PayPal error:', err);
           const errEl = document.getElementById('co-paypal-error');
           errEl.style.display = 'block';
-          errEl.textContent = '❌ Error starting PayPal payment.';
+          errEl.textContent = '❌ Something went wrong with PayPal. Please try again or contact support.';
         }
-      }).render('#co-paypal-button-container');
 
-      // PayPal Advanced Card Fields
-      if (paypal.CardFields) {
-        cardFields = paypal.CardFields({
-          createOrder: () => createOrderServerSide(),
-          onApprove: async (data) => {
-            await captureOrderServerSide(data.orderID);
-          },
-          onError: (err) => {
-            console.error(err);
-            const errEl = document.getElementById('co-card-error');
-            errEl.style.display = 'block';
-            errEl.textContent = '❌ Card error: ' + (err.message || 'Payment failed.');
-          }
-        });
-
-        if (cardFields.isEligible()) {
-          cardFields.NumberField({ placeholder: 'Card Number' }).render('#co-card-number-field-container');
-          cardFields.ExpiryField({ placeholder: 'MM/YY' }).render('#co-card-expiry-field-container');
-          cardFields.CVVField({ placeholder: 'CVV' }).render('#co-card-cvv-field-container');
-          cardFields.NameField({ placeholder: 'Cardholder Name' }).render('#co-card-name-field-container');
-        } else {
-          document.getElementById('co-card-fields-form').style.display = 'none';
-        }
-      } else {
-        document.getElementById('co-card-fields-form').style.display = 'none';
-      }
+      // ── Render into the container div in the checkout modal ────
+      }).render('#paypal-button-container');
     }
 
     async function createOrderServerSide() {
+      // Use currentTotalUSD (shipping-adjusted total calculated dynamically on checkout form changes)
+      const chargeAmount = selectedProduct.currentTotalUSD || (isPromoApplied ? selectedProduct.priceUSD : (selectedProduct.totalUSD ?? selectedProduct.priceUSD));
       const res = await fetch('/api/paypal-create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: selectedProduct.priceUSD, description: selectedProduct.name })
+        body: JSON.stringify({ amount: chargeAmount, description: selectedProduct.name })
       });
       const data = await res.json();
       if (!data.id) throw new Error(data.error || 'Cannot create order');
@@ -2999,33 +3743,20 @@
       const res = await fetch('/api/paypal-capture-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderID, name: _ppName, email: _ppEmail })
+        body: JSON.stringify({ orderID, name: _ppName, email: _ppEmail, product: selectedProduct.name })
       });
       const data = await res.json();
       if (data.success || data.error === 'payment_captured_but_fulfillment_failed') {
+        const address = data.shippingAddress || '';
+        const phoneInputVal = document.getElementById('co-phone').value.trim();
+        saveFingerprint(_ppEmail, phoneInputVal, address);
         showCheckoutSuccess();
       } else {
         throw new Error(data.error || 'Capture failed');
       }
     }
 
-    async function submitCardPayment() {
-      const btn = document.getElementById('co-card-submit-btn');
-      const errEl = document.getElementById('co-card-error');
-      errEl.style.display = 'none';
-      btn.disabled = true;
-      btn.textContent = 'Processing...';
 
-      try {
-        if (!cardFields) throw new Error('Card form not ready');
-        await cardFields.submit();
-      } catch (err) {
-        errEl.style.display = 'block';
-        errEl.textContent = '❌ ' + (err.message || 'Payment failed.');
-        btn.disabled = false;
-        btn.textContent = '💳 Pay with Card';
-      }
-    }
 
     function showCheckoutSuccess() {
       document.getElementById('co-paypal-panel').style.display = 'none';
@@ -3040,6 +3771,7 @@
     const subscribeBtn = document.getElementById('s-submit-btn');
     const subscribeMsg = document.getElementById('subscribe-msg');
 
+    // <!-- TODO: Configure email automation to send free shipping code FREESHIP1 on signup -->
     subscribeForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('s-name').value.trim();
@@ -3081,8 +3813,47 @@
       }
 
       subscribeBtn.disabled = false;
-      subscribeBtn.textContent = 'Join The Crew';
+      subscribeBtn.textContent = 'Send My Free Shipping Code →';
     });
+
+    // ============================================================
+    // PROMO CODE LOGIC
+    // ============================================================
+    const promoToggle = document.getElementById('cart-promo-toggle');
+    const promoContainer = document.getElementById('cart-promo-container');
+    const promoInput = document.getElementById('cart-promo-input');
+    const promoApplyBtn = document.getElementById('cart-promo-apply-btn');
+    const promoMsg = document.getElementById('cart-promo-msg');
+
+    if (promoToggle && promoContainer) {
+      promoToggle.addEventListener('click', () => {
+        if (promoContainer.style.display === 'none' || promoContainer.style.display === '') {
+          promoContainer.style.display = 'flex';
+          promoToggle.style.display = 'none';
+        } else {
+          promoContainer.style.display = 'none';
+        }
+      });
+    }
+
+    if (promoApplyBtn && promoInput && promoMsg) {
+      promoApplyBtn.addEventListener('click', () => {
+        const code = promoInput.value.trim().toUpperCase();
+        if (code === 'FREESHIP1') {
+          isPromoApplied = true;
+          promoMsg.style.display = 'block';
+          promoMsg.style.color = '#10b981';
+          promoMsg.textContent = '✅ Code FREESHIP1 applied successfully! Free shipping active.';
+          promoInput.disabled = true;
+          promoApplyBtn.disabled = true;
+          renderCartModal();
+        } else {
+          promoMsg.style.display = 'block';
+          promoMsg.style.color = '#ef4444';
+          promoMsg.textContent = '❌ Invalid promo code.';
+        }
+      });
+    }
 
     function showSubscribeError(msg) {
       subscribeMsg.style.display = 'block';
@@ -3160,6 +3931,13 @@
       }, 7000);
     })();
   </script>
+
+  <!-- MOBILE STICKY BOTTOM BAR -->
+  <!-- Visible only on screens ≤768px, appears after hero scrolls out of view -->
+  <div id="mobile-sticky-bar" class="mobile-sticky-bar">
+    <span class="mobile-sticky-text">Matrix Shad Lures from $4.99</span>
+    <a href="#gear" class="mobile-sticky-btn" onclick="document.getElementById('mobile-sticky-bar').style.opacity='0'">Shop Now &uarr;</a>
+  </div>
 
 </body>
 

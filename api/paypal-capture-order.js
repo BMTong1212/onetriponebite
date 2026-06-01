@@ -37,7 +37,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { orderID, name, email } = req.body || {};
+    const { orderID, name, email, product } = req.body || {};
 
     if (!orderID) {
       return res.status(400).json({ error: 'Missing orderID' });
@@ -62,7 +62,30 @@ export default async function handler(req, res) {
     }
 
     const txId   = capture.purchase_units?.[0]?.payments?.captures?.[0]?.id || orderID;
-    const amount = capture.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value || '7.00';
+    const amount = capture.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value 
+                || capture.purchase_units?.[0]?.amount?.value 
+                || '4.99';
+    const description = product || capture.purchase_units?.[0]?.description || '';
+
+    // Extract full shipping address
+    const shipping = capture.purchase_units?.[0]?.shipping;
+    let shippingAddress = '';
+    if (shipping) {
+      const recipientName = shipping.name?.full_name || '';
+      const addr = shipping.address;
+      if (addr) {
+        const addressParts = [
+          addr.address_line_1,
+          addr.address_line_2,
+          addr.admin_area_2,
+          addr.admin_area_1,
+          addr.postal_code,
+          addr.country_code
+        ].filter(Boolean);
+        const addressText = addressParts.join(', ');
+        shippingAddress = recipientName ? `${recipientName} - ${addressText}` : addressText;
+      }
+    }
 
     // Notify GAS — fulfillment failure is surfaced distinctly, not swallowed
     const GAS_URL = process.env.GAS_URL;
@@ -73,6 +96,7 @@ export default async function handler(req, res) {
         success: false,
         error: 'payment_captured_but_fulfillment_failed',
         txId,
+        shippingAddress,
       });
     }
 
@@ -87,6 +111,8 @@ export default async function handler(req, res) {
           name: name || '',
           txId,
           amount,
+          product: description,
+          shippingAddress,
         }),
       });
 
@@ -112,6 +138,7 @@ export default async function handler(req, res) {
         success: false,
         error: 'payment_captured_but_fulfillment_failed',
         txId,
+        shippingAddress,
       });
     }
 
@@ -119,6 +146,7 @@ export default async function handler(req, res) {
       success: true,
       txId,
       status: capture.status,
+      shippingAddress,
     });
 
   } catch (err) {
