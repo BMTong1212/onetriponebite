@@ -37,3 +37,9 @@ Deploy:
 - API: `api/` (Vercel serverless functions)
 - Backend logic: Google Apps Script (`gas/Code.js`)
 - Payment: SePay (bank transfer) + PayPal
+
+## Marketing & Lead Magnet Guidelines
+
+- **Default to Private Offline Drafts**: Any new marketing materials, campaign assets, cheatsheets, or lead magnets (e.g. PDFs, HTML drafts, copy kits) must be created as local offline draft files (in the parent workspace directory `/Users/bmtong/Desktop/One Trip One Bite Landing Page/`) rather than within the public landing page directory.
+- **Explicit Permission Required**: Do not commit new lead magnets to the public project assets folder or integrate them into the landing page code (e.g. form handlers, checkout buttons, email automation) without explicit request and prompt instruction from the user.
+
