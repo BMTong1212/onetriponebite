@@ -3392,7 +3392,7 @@
       const res = await fetch('/api/paypal-capture-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderID, name: _ppName, email: _ppEmail })
+        body: JSON.stringify({ orderID, name: _ppName, email: _ppEmail, product: selectedProduct.name })
       });
       const data = await res.json();
       if (data.success || data.error === 'payment_captured_but_fulfillment_failed') {
