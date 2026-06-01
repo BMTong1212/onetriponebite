@@ -3029,6 +3029,9 @@
   <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&components=buttons&disable-funding=venmo,paylater"></script>
 
   <script>
+    // Fetch stock on page load
+    let stockInventory = {};
+
     // ============================================================
     // PRODUCT CATALOG & RATES
     // ============================================================
@@ -3561,7 +3564,6 @@
     renderJigGrid();
 
     // Fetch stock on page load
-    let stockInventory = {};
     async function fetchStock() {
       try {
         const res = await fetch('/api/get-stock');
