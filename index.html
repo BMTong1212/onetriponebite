@@ -966,6 +966,106 @@
       margin-bottom: 0;
     }
 
+    /* JIG HEADS SECTION */
+    .jig-section {
+      background: linear-gradient(180deg, #f0ede6 0%, var(--bg) 100%);
+    }
+
+    .jig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 990px) {
+      .jig-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    @media (max-width: 600px) {
+      .jig-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    .jig-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .jig-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .jig-card-gallery {
+      background: #f8f7f4;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1;
+      margin-bottom: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .jig-card-gallery img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      cursor: zoom-in;
+    }
+
+    .jig-card:hover .jig-card-gallery img {
+      transform: scale(1.08) rotate(-1deg);
+    }
+
+    .jig-depth-chart {
+      background: var(--blue-light);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 0.78rem;
+      color: var(--blue);
+      line-height: 1.7;
+    }
+
+    .jig-depth-chart strong {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .jig-options-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .jig-select-group label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
     /* SECTION 4 - FISHING SPOTS */
     .spots-section {
       background-color: var(--bg);
@@ -1693,7 +1793,8 @@
       <ul class="nav-menu">
         <li><a href="#adventures" class="nav-link">Adventures</a></li>
         <li><a href="#spots" class="nav-link">Fishing Spots</a></li>
-        <li><a href="#gear" class="nav-link">Gear</a></li>
+        <li><a href="#gear" class="nav-link">Lures</a></li>
+        <li><a href="#jig-heads" class="nav-link">Jig Heads</a></li>
         <li>
           <a href="javascript:void(0)" onclick="openCart()" class="nav-cart-btn nav-link" style="position: relative; display: flex; align-items: center; gap: 6px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
@@ -1766,6 +1867,20 @@
 
       <!-- 12-Product Dynamic Grid -->
       <div class="favorites-grid fade-up-trigger" id="favorites-grid">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3b - JIG HEADS -->
+  <section class="jig-section" id="jig-heads">
+    <div class="section-inner">
+      <div class="section-header fade-up-trigger">
+        <span class="section-tag">Complete Your Rig</span>
+        <h2 class="section-title">Jig Head Collection</h2>
+        <p class="section-subtitle">Eagle Claw 3/0 hooks with prismatic holographic eyes. 6 weight sizes for any depth. The perfect match for Matrix Shad soft plastics.</p>
+      </div>
+      <div class="jig-grid fade-up-trigger" id="jig-grid">
         <!-- Rendered dynamically by JavaScript -->
       </div>
     </div>
@@ -2266,6 +2381,201 @@
     // Initialize grid rendering
     renderProductGrid();
 
+    // ============================================================
+    // JIG HEADS CATALOG & RENDER
+    // ============================================================
+    const JIG_SERIES = [
+      {
+        id: 'goldeneye',
+        name: 'Goldeneye Series',
+        subtitle: 'Gold Hook · Gold Eye',
+        img: 'assets/jig_goldeneye.png',
+        badge: '⭐ Best Seller',
+        rating: '4.9',
+        reviews: '87',
+        accent: '#c8a227',
+        desc: 'Gold hook with a prismatic gold holographic eye. The perfect complement for any soft plastic — especially the Matrix Shad. Features Eagle Claw 3/0 .045 dia. hooks built for coastal saltwater use.'
+      },
+      {
+        id: 'black_platinum',
+        name: 'Black Platinum Series',
+        subtitle: 'Black Hook · Silver Eye',
+        img: 'assets/jig_black_platinum.jpg',
+        badge: '🖤 Stealth Mode',
+        rating: '4.8',
+        reviews: '64',
+        accent: '#555',
+        desc: 'Black hook with a prismatic silver holographic eye. Ideal for clear water and pressured fish. The dark profile provides a stealthy, natural presentation with Eagle Claw 3/0 .045 dia. hooks.'
+      },
+      {
+        id: 'bullseye',
+        name: 'Bullseye Series',
+        subtitle: 'Red Hook · Red Eye',
+        img: 'assets/jig_bullseye.jpg',
+        badge: '🎯 Redfish Favorite',
+        rating: '4.8',
+        reviews: '72',
+        accent: '#c0392b',
+        desc: 'Red hook with a bold red holographic eye. Triggers aggressive strikes from redfish and speckled trout. The red color mimics a bleeding baitfish and excels in stained water conditions.'
+      }
+    ];
+
+    const JIG_WEIGHTS = [
+      { key: '1_16', label: '1/16 oz', depth: 'Super light presentation (0–2\')', sort: 1 },
+      { key: '1_8',  label: '1/8 oz',  depth: '0–2\' of water', sort: 2 },
+      { key: '1_4',  label: '1/4 oz',  depth: '1–6\' of water', sort: 3 },
+      { key: '5_16', label: '5/16 oz', depth: '4–10\' of water', sort: 4 },
+      { key: '3_8',  label: '3/8 oz',  depth: '8–15\' of water', sort: 5 },
+      { key: '1_2',  label: '1/2 oz',  depth: '10–25\' of water', sort: 6 }
+    ];
+
+    const JIG_PACK_SIZES = {
+      '5':  { label: '5 Jig Heads',  sub: 'Single Pack', priceUSD: '5.49' },
+      '50': { label: '50 Jig Heads', sub: 'Value Pack',  priceUSD: '39.99' }
+    };
+
+    // Register jig products in PRODUCTS lookup for checkout
+    JIG_SERIES.forEach(series => {
+      JIG_WEIGHTS.forEach(w => {
+        Object.keys(JIG_PACK_SIZES).forEach(packKey => {
+          const packInfo = JIG_PACK_SIZES[packKey];
+          const key = `jig_${series.id}_${w.key}_${packKey}`;
+          PRODUCTS[key] = {
+            name: `${series.name} Jig Head — ${w.label} · ${packInfo.label} (${packInfo.sub})`,
+            priceUSD: packInfo.priceUSD
+          };
+        });
+      });
+    });
+
+    function updateJigPrice(cardEl) {
+      const weightSel = cardEl.querySelector('.jig-weight-select');
+      const packSel   = cardEl.querySelector('.jig-pack-select');
+      if (!weightSel || !packSel) return;
+      const packInfo = JIG_PACK_SIZES[packSel.value];
+      const priceEl  = cardEl.querySelector('.jig-price-display');
+      if (priceEl && packInfo) priceEl.textContent = `$${packInfo.priceUSD}`;
+    }
+
+    function buyJigVariant(seriesId) {
+      const cardEl = document.querySelector(`.jig-card[data-series="${seriesId}"]`);
+      if (!cardEl) return;
+      const weightKey = cardEl.querySelector('.jig-weight-select').value;
+      const packKey   = cardEl.querySelector('.jig-pack-select').value;
+      openCheckout(`jig_${seriesId}_${weightKey}_${packKey}`);
+    }
+
+    function addJigToCart(seriesId) {
+      const cardEl = document.querySelector(`.jig-card[data-series="${seriesId}"]`);
+      if (!cardEl) return;
+      const weightKey = cardEl.querySelector('.jig-weight-select').value;
+      const packKey   = cardEl.querySelector('.jig-pack-select').value;
+      const itemKey   = `jig_${seriesId}_${weightKey}_${packKey}`;
+      const product   = PRODUCTS[itemKey];
+      if (!product) return;
+
+      const existing = cartItems.find(i => i.jiKey === itemKey);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cartItems.push({
+          jiKey: itemKey,
+          seriesId,
+          weightKey,
+          packKey,
+          qty: 1,
+          isJig: true
+        });
+      }
+      updateCartBadges();
+      const btn = cardEl.querySelector('.btn-card-add-to-cart');
+      if (btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '✓ Added!';
+        btn.style.background = 'var(--green)';
+        btn.style.borderColor = 'var(--green)';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; }, 1200);
+      }
+    }
+
+    function renderJigGrid() {
+      const gridEl = document.getElementById('jig-grid');
+      if (!gridEl) return;
+
+      let html = '';
+      JIG_SERIES.forEach(series => {
+        let weightOptions = JIG_WEIGHTS.map(w =>
+          `<option value="${w.key}">${w.label}</option>`
+        ).join('');
+        let packOptions = Object.keys(JIG_PACK_SIZES).map(k =>
+          `<option value="${k}">${JIG_PACK_SIZES[k].label} — $${JIG_PACK_SIZES[k].priceUSD}</option>`
+        ).join('');
+
+        const depthRows = JIG_WEIGHTS.map(w =>
+          `<span style="display:flex;justify-content:space-between;"><strong style="font-weight:700;color:var(--blue);display:inline;">${w.label}</strong><span>${w.depth}</span></span>`
+        ).join('');
+
+        html += `
+        <div class="jig-card fade-up-trigger" data-series="${series.id}">
+          <div class="jig-card-gallery">
+            <span class="product-card-badge badge-tag" style="position:absolute;top:12px;left:12px;z-index:2;">${series.badge}</span>
+            <img src="${series.img}" alt="${series.name}" onclick="zoomProductImage(this)">
+          </div>
+
+          <div class="product-card-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">(${series.rating}/5 from ${series.reviews} reviews)</span>
+          </div>
+
+          <h3 class="product-card-title" style="font-size:1.2rem;">${series.name}</h3>
+          <p style="font-size:0.78rem;font-weight:700;color:${series.accent};margin-bottom:8px;letter-spacing:0.3px;">${series.subtitle}</p>
+          <p class="product-card-desc">${series.desc}</p>
+
+          <div class="jig-depth-chart">
+            <strong>⚓ Depth Guide</strong>
+            ${depthRows}
+          </div>
+
+          <div class="jig-options-row">
+            <div class="jig-select-group">
+              <label>Weight</label>
+              <div class="select-wrapper">
+                <select class="product-size-select jig-weight-select" onchange="updateJigPrice(this.closest('.jig-card'))">
+                  ${weightOptions}
+                </select>
+              </div>
+            </div>
+            <div class="jig-select-group">
+              <label>Pack Size</label>
+              <div class="select-wrapper">
+                <select class="product-size-select jig-pack-select" onchange="updateJigPrice(this.closest('.jig-card'))">
+                  ${packOptions}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card-purchase">
+            <div class="product-card-price">
+              <span class="price-usd jig-price-display">$${JIG_PACK_SIZES['5'].priceUSD}</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-card-add-to-cart" style="flex:1;" onclick="addJigToCart('${series.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:5px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                Add to Cart
+              </button>
+              <button class="btn-card-buy-now" onclick="buyJigVariant('${series.id}')" title="Buy Now">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+          </div>
+        </div>`;
+      });
+      gridEl.innerHTML = html;
+    }
+
+    renderJigGrid();
+
     let selectedProduct = null;
     let registeredEmail = '';
     let currentRef = '';
@@ -2357,29 +2667,54 @@
       let subtotal = 0;
       let html = '';
       cartItems.forEach(item => {
-        const color = COLORS.find(c => c.id === item.colorId);
-        const sizeInfo = PACK_SIZES[item.sizeKey];
-        if (!color || !sizeInfo) return;
-        const lineTotal = parseFloat(sizeInfo.priceUSD) * item.qty;
+        let imgSrc, itemName, itemMeta, priceEach, removeCall, qtyDecCall, qtyIncCall;
+
+        if (item.isJig) {
+          // Jig head item
+          const series  = JIG_SERIES.find(s => s.id === item.seriesId);
+          const weight  = JIG_WEIGHTS.find(w => w.key === item.weightKey);
+          const packInf = JIG_PACK_SIZES[item.packKey];
+          if (!series || !weight || !packInf) return;
+          imgSrc    = series.img;
+          itemName  = series.name;
+          itemMeta  = `${weight.label} · ${packInf.label} — $${packInf.priceUSD} each`;
+          priceEach = parseFloat(packInf.priceUSD);
+          removeCall = `removeJigFromCart('${item.jiKey}')`;
+          qtyDecCall = `updateJigCartQty('${item.jiKey}', -1)`;
+          qtyIncCall = `updateJigCartQty('${item.jiKey}', 1)`;
+        } else {
+          // Lure item
+          const color    = COLORS.find(c => c.id === item.colorId);
+          const sizeInfo = PACK_SIZES[item.sizeKey];
+          if (!color || !sizeInfo) return;
+          imgSrc    = color.img || 'assets/glow.jpg';
+          itemName  = `Matrix Shad "${color.name}"`;
+          itemMeta  = `${sizeInfo.label} (${sizeInfo.sub}) — $${sizeInfo.priceUSD} each`;
+          priceEach = parseFloat(sizeInfo.priceUSD);
+          removeCall = `removeFromCart('${item.colorId}', '${item.sizeKey}')`;
+          qtyDecCall = `updateCartQty('${item.colorId}', '${item.sizeKey}', -1)`;
+          qtyIncCall = `updateCartQty('${item.colorId}', '${item.sizeKey}', 1)`;
+        }
+
+        const lineTotal = priceEach * item.qty;
         subtotal += lineTotal;
-        const imgFilter = color.filter ? `style="filter: ${color.filter}"` : '';
         html += `
         <div class="cart-item">
           <div class="cart-item-gallery">
-            <img src="${color.img || 'assets/glow.jpg'}" alt="${color.name}" ${imgFilter}>
+            <img src="${imgSrc}" alt="${itemName}">
           </div>
           <div class="cart-item-info">
-            <div class="cart-item-name">Matrix Shad "${color.name}"</div>
-            <div class="cart-item-meta">${sizeInfo.label} (${sizeInfo.sub}) — $${sizeInfo.priceUSD} each</div>
+            <div class="cart-item-name">${itemName}</div>
+            <div class="cart-item-meta">${itemMeta}</div>
           </div>
           <div class="cart-item-actions">
             <div class="cart-item-qty-controls">
-              <button class="qty-btn" onclick="updateCartQty('${item.colorId}', '${item.sizeKey}', -1)">−</button>
+              <button class="qty-btn" onclick="${qtyDecCall}">−</button>
               <span class="qty-val">${item.qty}</span>
-              <button class="qty-btn" onclick="updateCartQty('${item.colorId}', '${item.sizeKey}', 1)">+</button>
+              <button class="qty-btn" onclick="${qtyIncCall}">+</button>
             </div>
             <div class="cart-item-price">$${lineTotal.toFixed(2)}</div>
-            <button class="cart-item-remove-btn" onclick="removeFromCart('${item.colorId}', '${item.sizeKey}')" title="Remove">
+            <button class="cart-item-remove-btn" onclick="${removeCall}" title="Remove">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg>
             </button>
           </div>
@@ -2387,6 +2722,21 @@
       });
       listEl.innerHTML = html;
       if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    // Jig-specific cart helpers
+    function removeJigFromCart(jiKey) {
+      cartItems = cartItems.filter(i => i.jiKey !== jiKey);
+      updateCartBadges();
+      renderCartModal();
+    }
+
+    function updateJigCartQty(jiKey, delta) {
+      const item = cartItems.find(i => i.jiKey === jiKey);
+      if (!item) return;
+      item.qty = Math.max(1, item.qty + delta);
+      updateCartBadges();
+      renderCartModal();
     }
 
     function openCart() {
