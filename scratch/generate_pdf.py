@@ -6,8 +6,6 @@ import subprocess
 # Define paths
 WORKSPACE_DIR = "/Users/bmtong/Desktop/One Trip One Bite Landing Page"
 PROJECT_DIR = os.path.join(WORKSPACE_DIR, "content-calendar-lp")
-MD_PATH = os.path.join(WORKSPACE_DIR, "OTOB_Consumer_Avatars_Marketing_Plan.md") # Wait, where is the guide?
-# Let's check the absolute path of kids_fishing_activity_guide.md:
 BRAIN_DIR = "/Users/bmtong/.gemini/antigravity-ide/brain/b8b76f8f-9066-4ed2-a4cb-6aff795b2a75"
 MD_PATH = os.path.join(BRAIN_DIR, "kids_fishing_activity_guide.md")
 LOGO_PATH = os.path.join(PROJECT_DIR, "assets/logo_transparent.png")
@@ -207,85 +205,30 @@ html_content = f"""<!DOCTYPE html>
 
     @page {{
       size: letter;
-      margin-top: 1.3in;
-      margin-bottom: 1.3in;
+      margin-top: 1.2in;
+      margin-bottom: 1.2in;
       margin-left: 0.8in;
       margin-right: 0.8in;
     }}
 
-    /* Repeating headers and footers for PDF prints */
-    .pdf-header {{
-      position: fixed;
-      top: -0.9in;
-      left: 0;
-      right: 0;
-      height: 0.5in;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.75rem;
-      padding-bottom: 6px;
-      z-index: 100;
-    }}
-
-    .pdf-header .header-brand {{
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-serif);
-      font-weight: 700;
-      color: var(--blue);
-    }}
-
-    .pdf-header .header-logo {{
-      height: 16px;
-      width: auto;
-    }}
-
-    .pdf-footer {{
-      position: fixed;
-      bottom: -0.9in;
-      left: 0;
-      right: 0;
-      height: 0.5in;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.75rem;
-      padding-top: 6px;
-      z-index: 100;
-    }}
-    
-    .pdf-footer .slogan {{
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--orange);
-      font-weight: 600;
-    }}
-
-    /* CSS page number stamping */
-    .page-number:after {{
-      content: counter(page);
+    /* Remove margins for the cover page, which also suppresses header/footer templates on the first page */
+    @page :first {{
+      margin-top: 0in;
+      margin-bottom: 0in;
+      margin-left: 0in;
+      margin-right: 0in;
     }}
 
     /* ─── COVER PAGE ─── */
     .page-cover {{
-      position: absolute;
-      top: -1.3in;
-      left: -0.8in;
-      right: -0.8in;
-      bottom: -1.3in;
+      width: 100%;
+      height: 100vh;
       background-color: var(--bg);
-      z-index: 10000;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2in 1.0in;
+      padding: 1.2in 0.8in;
       box-sizing: border-box;
       page-break-after: always;
       break-after: page;
@@ -629,22 +572,6 @@ html_content = f"""<!DOCTYPE html>
 </head>
 <body>
 
-  <!-- Static header printed on every page except cover -->
-  <header class="pdf-header">
-    <div class="header-brand">
-      <img src="{logo_base64}" class="header-logo" alt="OTOB Logo">
-      <span>One Trip One Bite</span>
-    </div>
-    <div>Kids Fishing Activity Guide</div>
-  </header>
-
-  <!-- Static footer printed on every page except cover -->
-  <footer class="pdf-footer">
-    <div>Homeschool Field Study Edition</div>
-    <div class="slogan">Cast. Taste. Explore.</div>
-    <div>Page <span class="page-number"></span></div>
-  </footer>
-
   <!-- ─── COVER PAGE ─── -->
   <div class="page-cover">
     <div class="cover-top">
@@ -698,7 +625,6 @@ for idx, phase in enumerate(phases):
     """
     
     for act in phase['activities']:
-        # Extract situation, activity, outcome, link
         situation = format_md(act['situation'])
         activity_body = format_md(act['activity'])
         learning_outcome = format_md(act['learning_outcome'])
@@ -776,16 +702,34 @@ with open(OUTPUT_HTML_PATH, 'w', encoding='utf-8') as f:
     f.write(html_content)
 print("HTML output complete.")
 
-# Trigger PDF Generation via headless Chrome
+# Trigger PDF Generation via headless Chrome with custom headers/footers templates
 print(f"Generating PDF using headless Chrome at {OUTPUT_PDF_PATH}...")
 chrome_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+header_template = """
+<div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 8px; color: #52606d; width: 100%; margin-left: 0.8in; margin-right: 0.8in; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(46, 91, 118, 0.12); padding-bottom: 5px; box-sizing: border-box;">
+  <span style="font-weight: 700; color: #2E5B76;">One Trip One Bite</span>
+  <span>Kids Fishing Activity Guide</span>
+</div>
+"""
+
+footer_template = """
+<div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 8px; color: #52606d; width: 100%; margin-left: 0.8in; margin-right: 0.8in; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(46, 91, 118, 0.12); padding-top: 5px; box-sizing: border-box;">
+  <span>Homeschool Field Study Edition</span>
+  <span style="font-family: Georgia, serif; font-style: italic; color: #C77D4A; font-weight: 600;">Cast. Taste. Explore.</span>
+  <div>Page <span class="pageNumber"></span> of <span class="totalPages"></span></div>
+</div>
+"""
+
 try:
     cmd = [
         chrome_path,
         "--headless",
         "--disable-gpu",
         f"--print-to-pdf={OUTPUT_PDF_PATH}",
-        "--no-margins", # let CSS control margins
+        "--display-header-footer",
+        f"--header-template={header_template}",
+        f"--footer-template={footer_template}",
         OUTPUT_HTML_PATH
     ]
     print(f"Running command: {' '.join(cmd)}")
