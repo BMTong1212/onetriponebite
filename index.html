@@ -1882,32 +1882,62 @@
       align-items: center;
     }
     
-    .footer-partner-badge {
-      font-size: 0.74rem;
-      font-weight: 600;
-      color: var(--muted);
-      border: 1.5px dashed var(--border);
-      padding: 6px 12px;
+    .footer-partner-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(46, 91, 118, 0.08);
       border-radius: 6px;
-      background: rgba(46, 91, 118, 0.02);
-      user-select: none;
-      transition: all 0.25s ease;
-      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-partner-item:hover {
+      background: var(--white);
+      border-color: rgba(46, 91, 118, 0.15);
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 10px rgba(46, 91, 118, 0.05);
+    }
+    
+    .footer-partner-logo {
+      height: 100%;
+      width: auto;
+      max-width: 110px;
+      object-fit: contain;
+      filter: grayscale(100%) opacity(0.7);
+      transition: all 0.3s ease;
+    }
+    
+    .footer-partner-item:hover .footer-partner-logo {
+      filter: grayscale(0%) opacity(1);
     }
     
     .footer-partner-badge.join-us {
-      border: 1.5px solid var(--orange);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      box-sizing: border-box;
+      font-size: 0.74rem;
+      font-weight: 700;
       color: var(--orange);
+      border: 1.5px dashed var(--orange);
+      padding: 0 14px;
+      border-radius: 6px;
       background: rgba(199, 125, 74, 0.02);
       cursor: pointer;
       text-decoration: none;
+      transition: all 0.25s ease;
     }
     
     .footer-partner-badge.join-us:hover {
       background: var(--orange);
       color: var(--white);
+      border-style: solid;
       border-color: var(--orange);
-      transform: translateY(-1px);
+      transform: translateY(-1.5px);
       box-shadow: 0 4px 10px rgba(199, 125, 74, 0.15);
     }
 
@@ -2754,9 +2784,15 @@
         <div class="footer-partners">
           <div class="footer-partners-title">Featured Partners</div>
           <div class="footer-partners-list">
-            <span class="footer-partner-badge">Swim School of Slidell</span>
-            <span class="footer-partner-badge">Slap Yo Hook</span>
-            <span class="footer-partner-badge">Matrix Shad</span>
+            <div class="footer-partner-item" title="Swim School of Slidell">
+              <img src="assets/partner_swim_school.png" alt="Swim School of Slidell" class="footer-partner-logo">
+            </div>
+            <div class="footer-partner-item" title="Oak Harbor Nail Spa & Beyond">
+              <img src="assets/partner_oak_harbor.png" alt="Oak Harbor Nail Spa & Beyond" class="footer-partner-logo" style="border-radius: 4px;">
+            </div>
+            <div class="footer-partner-item" title="Matrix Shad">
+              <img src="assets/partner_matrix_shad.png" alt="Matrix Shad" class="footer-partner-logo">
+            </div>
             <a href="mailto:partners@onetriponebite.com?subject=Partner%20Logos%20%26%20Advertising%20Inquiry" class="footer-partner-badge join-us" title="Click to advertise or collaborate">+ Your Logo</a>
           </div>
         </div>
