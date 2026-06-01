@@ -2647,21 +2647,94 @@
   <section class="subscribe-section" id="subscribe">
     <div class="section-inner">
       <div class="subscribe-box fade-up-trigger">
-        <span class="section-tag">Newsletter</span>
-        <h2 class="subscribe-title">Join the Crew — Get Free Shipping & 2026 Regulations Guide</h2>
-        <p class="subscribe-subtitle">Subscribe and instantly receive the **2026 Gulf Coast Fishing Regulations Guide** (Excel/Printable) covering Louisiana, Mississippi, and Florida Panhandle, plus a **free shipping code** for your first order.</p>
-
-        <!-- TODO: Configure email automation to send free shipping code FREESHIP1 on signup -->
-        <form id="subscribe-form" class="subscribe-form">
-          <div style="font-size: 12px; color: #0d9488; margin-bottom: 14px; text-align: center; font-weight: 500;">🎁 Your code and regulations guide will be sent instantly to your inbox</div>
-          <div class="input-row">
-            <input type="text" id="s-name" class="form-input" placeholder="Your Name" required>
-            <input type="email" id="s-email" class="form-input" placeholder="Your Email Address" required>
+        <div class="subscribe-grid">
+          
+          <!-- Left Column: Visual Guide Preview -->
+          <div class="subscribe-left">
+            <div class="guide-card-preview">
+              <div class="guide-card-badge">Free</div>
+              <div class="guide-card-header">
+                <span class="guide-card-tag">Excel & Printable Guide</span>
+                <h3 class="guide-card-title">2026 Gulf Coast Regulations</h3>
+              </div>
+              <div class="guide-card-mini-table">
+                <div class="guide-card-table-row" style="font-weight: 700; color: var(--blue); font-size: 0.7rem;">
+                  <span>Species</span>
+                  <span>LA Limit</span>
+                  <span>MS Limit</span>
+                  <span>FL Limit</span>
+                </div>
+                <div class="guide-card-table-row">
+                  <span>Speckled Trout</span>
+                  <span>13"-20" Slot</span>
+                  <span>15" Min</span>
+                  <span>15"-19" Slot</span>
+                </div>
+                <div class="guide-card-table-row">
+                  <span>Redfish</span>
+                  <span>18"-27" Slot</span>
+                  <span>18"-30" Slot</span>
+                  <span>18"-27" Slot</span>
+                </div>
+                <div class="guide-card-table-row">
+                  <span>Southern Flounder</span>
+                  <span>No Min</span>
+                  <span>12" Min</span>
+                  <span>14" Min</span>
+                </div>
+              </div>
+              <div class="guide-card-bullets">
+                <div class="guide-card-bullet">
+                  <span class="guide-card-bullet-icon">📅</span>
+                  <span>Closed Seasons Calendar Included</span>
+                </div>
+                <div class="guide-card-bullet">
+                  <span class="guide-card-bullet-icon">🪪</span>
+                  <span>State License Buying Guide</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <button type="submit" id="s-submit-btn" class="btn-submit">Get My Free Code & Regulations Guide →</button>
-          <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px;">No spam — just good content and two great perks. Unsubscribe anytime.</p>
-          <div id="subscribe-msg" class="subscribe-msg"></div>
-        </form>
+
+          <!-- Right Column: Wording & Subscription Form -->
+          <div class="subscribe-right">
+            <span class="section-tag" style="margin-bottom: 8px;">Free Reference Guide</span>
+            <h2 class="subscribe-title" style="font-size: 1.95rem; line-height: 1.25; margin-bottom: 12px; font-weight: 700; color: var(--text);">
+              Get the 2026 Gulf Coast Fishing Regulations Quick-Reference
+            </h2>
+            <p class="subscribe-subtitle" style="font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; line-height: 1.6;">
+              Stay legal on the water. Download our comprehensive state-by-state reference guide (Excel & printable) covering limits, slot sizes, seasons, and licenses for <strong>Louisiana</strong>, <strong>Mississippi</strong>, and the <strong>Florida Panhandle</strong>.
+            </p>
+
+            <div class="guide-features-list">
+              <div class="guide-feature-item">
+                <span class="guide-feature-icon">📊</span>
+                <span><strong>Side-by-Side Limits:</strong> Instantly compare Speckled Trout, Redfish, Flounder, Black Drum, Sheepshead, and Cobia.</span>
+              </div>
+              <div class="guide-feature-item">
+                <span class="guide-feature-icon">📅</span>
+                <span><strong>Closed Seasons:</strong> Quick reference for flounder closures and new regional speckled trout restrictions.</span>
+              </div>
+              <div class="guide-feature-item">
+                <span class="guide-feature-icon">🪪</span>
+                <span><strong>License Selectors:</strong> Know exactly who needs a license, resident/non-resident fees, and official links.</span>
+              </div>
+            </div>
+
+            <!-- TODO: Configure email automation to send regulations guide download link on signup -->
+            <form id="subscribe-form" class="subscribe-form">
+              <div style="font-size: 12px; color: #0d9488; margin-bottom: 14px; font-weight: 600;">📩 The Regulations Quick-Reference will be sent instantly to your inbox</div>
+              <div class="input-row">
+                <input type="text" id="s-name" class="form-input" placeholder="Your Name" required>
+                <input type="email" id="s-email" class="form-input" placeholder="Your Email Address" required>
+              </div>
+              <button type="submit" id="s-submit-btn" class="btn-submit" style="margin-top: 10px;">Get My Free Quick-Reference →</button>
+              <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; margin-bottom: 0;">No spam — just good content and free outdoor guides. Unsubscribe anytime.</p>
+              <div id="subscribe-msg" class="subscribe-msg"></div>
+            </form>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
