@@ -132,7 +132,7 @@ for line in lines:
 
     # Parse Bonus Section items
     if bonus_section:
-        match_bonus = re.match(r"^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*)", line)
+        match_bonus = re.match(r"^(\d+)\.\s*\*\*(.*?):\*\*\s*(.*)", line)
         if match_bonus:
             num = match_bonus.group(1)
             bold_text = match_bonus.group(2)
