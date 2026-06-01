@@ -67,6 +67,26 @@ export default async function handler(req, res) {
                 || '4.99';
     const description = capture.purchase_units?.[0]?.description || '';
 
+    // Extract full shipping address
+    const shipping = capture.purchase_units?.[0]?.shipping;
+    let shippingAddress = '';
+    if (shipping) {
+      const recipientName = shipping.name?.full_name || '';
+      const addr = shipping.address;
+      if (addr) {
+        const addressParts = [
+          addr.address_line_1,
+          addr.address_line_2,
+          addr.admin_area_2,
+          addr.admin_area_1,
+          addr.postal_code,
+          addr.country_code
+        ].filter(Boolean);
+        const addressText = addressParts.join(', ');
+        shippingAddress = recipientName ? `${recipientName} - ${addressText}` : addressText;
+      }
+    }
+
     // Notify GAS — fulfillment failure is surfaced distinctly, not swallowed
     const GAS_URL = process.env.GAS_URL;
     if (!GAS_URL) {
@@ -76,7 +96,7 @@ export default async function handler(req, res) {
         success: false,
         error: 'payment_captured_but_fulfillment_failed',
         txId,
-        shippingAddress: capture.purchase_units?.[0]?.shipping?.address?.address_line_1 || '',
+        shippingAddress,
       });
     }
 
@@ -92,6 +112,7 @@ export default async function handler(req, res) {
           txId,
           amount,
           product: description,
+          shippingAddress,
         }),
       });
 
@@ -117,11 +138,10 @@ export default async function handler(req, res) {
         success: false,
         error: 'payment_captured_but_fulfillment_failed',
         txId,
-        shippingAddress: capture.purchase_units?.[0]?.shipping?.address?.address_line_1 || '',
+        shippingAddress,
       });
     }
 
-    const shippingAddress = capture.purchase_units?.[0]?.shipping?.address?.address_line_1 || '';
     return res.status(200).json({
       success: true,
       txId,
