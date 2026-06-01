@@ -177,7 +177,7 @@
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-family: var(--font-serif);
       font-weight: 700;
       font-size: 1.3rem;
@@ -194,6 +194,36 @@
       width: 24px;
       height: 24px;
       fill: currentColor;
+    }
+
+    .brand-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-logo-text .brand-line1 {
+      font-family: var(--font-serif);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .brand-logo-text .brand-line2 {
+      font-family: var(--font-serif);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
+      .brand-logo-text {
+        display: none;
+      }
     }
 
     .nav-menu {
@@ -2130,7 +2160,11 @@
   <nav class="nav" id="main-nav">
     <div class="nav-inner">
       <a href="#" class="brand-logo" style="display: flex; align-items: center;">
-        <img src="assets/logo.jpg" alt="One Trip One Bite Logo" style="height: 40px; mix-blend-mode: multiply; border-radius: 4px;">
+        <img src="assets/logo.jpg" alt="One Trip One Bite Logo" style="height: 52px; mix-blend-mode: multiply; border-radius: 6px;">
+        <span class="brand-logo-text">
+          <span class="brand-line1">One Trip</span>
+          <span class="brand-line2">One Bite</span>
+        </span>
       </a>
       
       <!-- Mobile Actions (Cart & Hamburger Menu) -->
