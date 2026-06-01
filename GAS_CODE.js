@@ -777,10 +777,9 @@ function sendMonthlyNewsletter() {
               
               <!-- Header -->
               <tr>
-                <td style="background:#2E5B76;padding:40px 32px;text-align:center;">
-                  <div style="font-size:48px;margin-bottom:14px;">⛵</div>
-                  <h1 style="color:#F7F4EE;margin:0;font-size:28px;font-family:Georgia,serif;font-weight:700;letter-spacing:1px;">ONE TRIP ONE BITE</h1>
-                  <p style="color:rgba(247,244,238,0.8);margin:10px 0 0;font-size:15px;letter-spacing:0.5px;">Monthly Newsletter</p>
+                <td style="background:#F7F4EE;padding:40px 32px;text-align:center;border-bottom:1px solid rgba(46,91,118,0.12);">
+                  <img src="https://www.onetriponebite.com/assets/logo_transparent.png" alt="One Trip One Bite Logo" style="width:160px;height:auto;display:block;margin:0 auto 10px;" />
+                  <p style="color:#C77D4A;margin:5px 0 0;font-size:14px;font-family:Georgia,serif;font-style:italic;font-weight:600;letter-spacing:0.5px;">Monthly Digest & Updates</p>
                 </td>
               </tr>
               
@@ -790,13 +789,13 @@ function sendMonthlyNewsletter() {
                   <h2 style="color:#2E5B76;font-size:22px;font-weight:700;margin:0 0 16px;">Hi {{NAME}},</h2>
                   <p style="line-height:1.7;margin:0 0 20px;">Here is a digest of our latest trip reports, hidden fishing spots, local food finds, and gear reviews from the Gulf Coast:</p>
                   
-                  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea;border-radius:12px;margin:24px 0;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F7F4EE;border-radius:12px;margin:24px 0;border:1px solid rgba(46,91,118,0.08);">
                     <tr>
                       <td style="padding:20px 24px;">
-                        <p style="margin:0 0 10px;color:#2E5B76;font-weight:700;font-size:16px;">🌊 Highlights this month:</p>
-                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">📍 <strong>New Spots:</strong> Secret kayak launches and hot spots around the Gulf Coast.</p>
-                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🎣 <strong>Tips &amp; Tactics:</strong> Selecting the best soft plastic color patterns for stained water.</p>
-                        <p style="margin:6px 0;color:#1F2933;font-size:15px;">🍣 <strong>Local Flavors:</strong> Honest reviews of coastal seafood shacks and local dives.</p>
+                        <p style="margin:0 0 12px;color:#2E5B76;font-weight:700;font-size:16px;">🌊 Highlights this month:</p>
+                        <p style="margin:8px 0;color:#52606d;font-size:14px;line-height:1.6;"><strong style="color:#1F2933;">📍 New Spots:</strong> Secret kayak launches and hot spots around the Gulf Coast.</p>
+                        <p style="margin:8px 0;color:#52606d;font-size:14px;line-height:1.6;"><strong style="color:#1F2933;">🎣 Tips &amp; Tactics:</strong> Selecting the best soft plastic color patterns for stained water.</p>
+                        <p style="margin:8px 0;color:#52606d;font-size:14px;line-height:1.6;"><strong style="color:#1F2933;">🍣 Local Flavors:</strong> Honest reviews of coastal seafood shacks and local dives.</p>
                       </td>
                     </tr>
                   </table>
@@ -806,7 +805,7 @@ function sendMonthlyNewsletter() {
                   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
                     <tr>
                       <td align="center">
-                        <a href="https://onetriponebite.com" style="display:inline-block;background:#C77D4A;color:#ffffff;text-decoration:none;padding:16px 36px;border-radius:8px;font-weight:700;font-size:16px;box-shadow:0 6px 18px rgba(199,125,74,0.3);letter-spacing:0.5px;">Visit Our Website</a>
+                        <a href="https://www.onetriponebite.com" style="display:inline-block;background:#C77D4A;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-weight:700;font-size:15px;box-shadow:0 4px 12px rgba(199,125,74,0.25);">Visit Our Website</a>
                       </td>
                     </tr>
                   </table>
@@ -815,9 +814,9 @@ function sendMonthlyNewsletter() {
               
               <!-- Footer -->
               <tr>
-                <td style="background:#F7F4EE;padding:24px 32px;text-align:center;border-top:1px solid #D8C3A5;">
-                  <p style="color:#7A8F7B;font-size:14px;margin:0;">Explore More. Fish More. Travel More.</p>
-                  <p style="color:#1F2933;font-size:13px;margin:8px 0 0;">© 2026 One Trip One Bite. All rights reserved.</p>
+                <td style="background:#F7F4EE;padding:24px 32px;text-align:center;border-top:1px solid rgba(46,91,118,0.12);">
+                  <p style="font-family:Georgia,serif;font-style:italic;color:#C77D4A;font-weight:600;margin:0 0 6px;">Cast. Taste. Explore.</p>
+                  <p style="color:#1F2933;font-size:13px;margin:0;">© 2026 One Trip One Bite. All rights reserved.</p>
                 </td>
               </tr>
               
