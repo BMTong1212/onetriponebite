@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Tên Sản Phẩm] - [Tiêu Đề Thu Hút Khách Hàng]</title>
+    <meta name="description" content="[Mô tả sản phẩm chuẩn SEO dài khoảng 150-160 ký tự để tối ưu tìm kiếm Google]">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Cấu hình Theme & Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',      // Màu chủ đạo (Xanh dương chính)
+                        accent: '#0EA5E9',       // Màu nhấn (Xanh cyan)
+                        dark: '#0F172A',         // Màu chữ chính / nền tối (Slate 900)
+                        surface: '#F8FAFC',      // Nền phụ (Slate 50)
+                        muted: '#64748B',        // Màu chữ phụ (Slate 500)
+                        sale: '#DC2626'          // Màu đỏ khuyến mãi
+                    },
+                    fontFamily: {
+                        sans: ['Be Vietnam Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS Animations & Transitions -->
+    <style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .gradient-hero { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
+        .gradient-cta { background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%); }
+        .feature-glow { box-shadow: 0 0 40px rgba(37, 99, 235, 0.08); }
+        
+        .pulse-dot { animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.4); }
+        }
+        
+        .float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .modal-overlay { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        html { scroll-behavior: smooth; }
+        
+        .sale-badge { animation: pulse-sale 1.5s infinite; }
+        @keyframes pulse-sale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-white text-dark pt-16">
+
+    <!-- STICKY NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <!-- Logo / Icon -->
+                <div class="w-8 h-8 gradient-cta rounded-lg flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <span class="font-bold text-dark text-sm md:text-base">[Tên Cửa Hàng / Thương Hiệu]</span>
+            </div>
+
+            <!-- Menu desktop -->
+            <div class="hidden md:flex items-center gap-6 text-sm text-muted">
+                <a href="#features" class="hover:text-primary transition">Tính năng</a>
+                <a href="#specs" class="hover:text-primary transition">Thông số</a>
+                <a href="#faq" class="hover:text-primary transition">Hỏi đáp</a>
+                <a href="https://zalo.me/0973332823" target="_blank" class="hover:text-primary transition" id="nav-zalo-link">Zalo hỗ trợ</a>
+            </div>
+
+            <!-- Nút mua nhanh trên header -->
+            <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-2 px-5 rounded-lg text-sm hover:opacity-90 transition shadow-md">
+                Đặt Mua
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="gradient-hero text-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Cột thông tin khuyến mãi & tiêu đề -->
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-red-500/20 text-red-300 text-sm font-semibold px-4 py-2 rounded-full mb-6 sale-badge">
+                        <span class="w-2 h-2 bg-red-400 rounded-full pulse-dot"></span>
+                        [Ghi chú khuyến mãi ngắn - VD: Giảm giá 35% duy nhất hôm nay]
+                    </div>
+
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+                        [Tiêu đề chính giới thiệu sản phẩm của bạn]
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300"> [Từ khóa chính]</span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-lg">
+                        [Mô tả ngắn gọn về công dụng vượt trội của sản phẩm. Nêu bật giải pháp giúp giải quyết nỗi đau của khách hàng trong 2-3 câu ngắn].
+                    </p>
+
+                    <!-- Giá bán nổi bật -->
+                    <div class="flex items-baseline gap-4 mb-3">
+                        <span class="text-5xl font-extrabold text-white" id="hero-sale-price">[Giá KM]<span class="text-2xl">đ</span></span>
+                        <span class="text-2xl text-gray-500 line-through" id="hero-original-price">[Giá gốc]đ</span>
+                        <span class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full" id="hero-discount-tag">-[%]</span>
+                    </div>
+                    <p class="text-sm text-cyan-300 mb-8">[Tiết kiệm ...đ so với giá gốc]</p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-4 px-8 rounded-xl text-lg hover:opacity-90 transition shadow-lg shadow-blue-500/30">
+                            Đặt Hàng Ngay - [Giá KM]đ
+                        </button>
+                        <a href="#features" class="border-2 border-white/30 text-white font-semibold py-4 px-8 rounded-xl text-lg hover:bg-white/10 transition text-center">
+                            Xem chi tiết
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-6 mt-8 text-sm text-gray-400">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            [VD: Đổi mới nếu lỗi trong 7 ngày]
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Giao hàng toàn quốc
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Cột hình ảnh sản phẩm (Hiệu ứng trôi lơ lửng) -->
+                <div class="relative flex justify-center">
+                    <div class="absolute w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
+                    <img src="https://via.placeholder.com/500x500/1E293B/FFFFFF?text=Anh+san+pham+1688"
+                         alt="[Tên sản phẩm]"
+                         class="relative z-10 w-full max-w-md float rounded-2xl shadow-2xl"
+                         id="hero-image"
+                         onerror="this.src='https://via.placeholder.com/500x500/1E293B/FFFFFF?text=[Ảnh+Sản+Phẩm]'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST BADGES (Các chứng nhận / Cam kết bán hàng) -->
+    <section class="bg-surface border-y border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 py-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span class="font-semibold text-sm">[Cam kết 1 - VD: Ship COD nhanh]</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <span class="font-semibold text-sm">[Cam kết 2 - VD: Bảo hành chu đáo]</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <span class="font-semibold text-sm">[Cam kết 3 - VD: Đóng gói an toàn]</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <span class="font-semibold text-sm">[Cam kết 4 - VD: Hỗ trợ 24/7]</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: NỖI ĐAU KHÁCH HÀNG & GIẢI PHÁP -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">[Đặt câu hỏi trúng nỗi đau - VD: Bạn Vẫn Đang Mất Thời Gian Cho Việc Này?]</h2>
+            </div>
+
+            <!-- Ảnh so sánh / ảnh mô tả vấn đề -->
+            <div class="mb-10">
+                <img src="https://via.placeholder.com/800x400/E2E8F0/475569?text=Anh+Before+After+San+Pham" alt="So sánh trước và sau"
+                     class="w-full max-w-2xl mx-auto rounded-2xl shadow-md" id="before-after-image">
+            </div>
+
+            <!-- Bảng so sánh 2 cột -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="bg-red-50 border border-red-200 p-6 rounded-2xl">
+                    <div class="text-red-500 font-bold text-lg mb-3">[Khi KHÔNG sử dụng sản phẩm]:</div>
+                    <ul class="space-y-3 text-muted">
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> [Vấn đề 1 / Khó khăn khách hàng gặp phải]</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> [Vấn đề 2 / Tốn thời gian, tiền bạc]</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> [Vấn đề 3 / Sự bất tiện trong đời sống]</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 border border-green-200 p-6 rounded-2xl">
+                    <div class="text-green-600 font-bold text-lg mb-3">[Sau khi sở hữu sản phẩm]:</div>
+                    <ul class="space-y-3 text-muted">
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> [Giải pháp 1 / Sự cải thiện tức thì]</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> [Giải pháp 2 / Tiết kiệm công sức, chi phí]</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> [Giải pháp 3 / Trải nghiệm thông minh, tiện lợi]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: 3 TÍNH NĂNG CHÍNH / ĐIỂM BÁN HÀNG ĐỘC NHẤT (USP) -->
+    <section id="features" class="py-16 md:py-24 bg-surface">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">[Những Tính Năng Nổi Bật Nhất]</h2>
+                <p class="text-lg text-muted max-w-2xl mx-auto">[Dòng mô tả phụ giới thiệu ngắn gọn các ưu thế kỹ thuật giúp sản phẩm vượt trội trên thị trường].</p>
+            </div>
+
+            <!-- Grid 3 cột giới thiệu tính năng chính -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tính năng 1 -->
+                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
+                    <img src="https://via.placeholder.com/400x250/E2E8F0/475569?text=Anh+tinh+nang+1" alt="Tính năng 1"
+                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-1-image">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3">[Tiêu đề tính năng 1]</h3>
+                        <p class="text-muted leading-relaxed mb-4">[Mô tả chi tiết hơn về cơ chế hoạt động, lợi ích tính năng 1 đem lại cho người sử dụng].</p>
+                        <div class="bg-surface p-3 rounded-lg text-sm text-primary font-semibold">[VD: Hiệu suất gấp 2 lần bình thường]</div>
+                    </div>
+                </div>
+
+                <!-- Tính năng 2 -->
+                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
+                    <img src="https://via.placeholder.com/400x250/E2E8F0/475569?text=Anh+tinh+nang+2" alt="Tính năng 2"
+                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-2-image">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3">[Tiêu đề tính năng 2]</h3>
+                        <p class="text-muted leading-relaxed mb-4">[Mô tả chi tiết hơn về cơ chế hoạt động, lợi ích tính năng 2 đem lại cho người sử dụng].</p>
+                        <div class="bg-surface p-3 rounded-lg text-sm text-primary font-semibold">[VD: Tiết kiệm tối đa thời gian]</div>
+                    </div>
+                </div>
+
+                <!-- Tính năng 3 -->
+                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
+                    <img src="https://via.placeholder.com/400x250/E2E8F0/475569?text=Anh+tinh+nang+3" alt="Tính năng 3"
+                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-3-image">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3">[Tiêu đề tính năng 3]</h3>
+                        <p class="text-muted leading-relaxed mb-4">[Mô tả chi tiết hơn về cơ chế hoạt động, lợi ích tính năng 3 đem lại cho người sử dụng].</p>
+                        <div class="bg-surface p-3 rounded-lg text-sm text-primary font-semibold">[VD: Thiết kế thời thượng, bền bỉ]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: THÔNG SỐ & CAM KẾT BÁN HÀNG -->
+    <section id="specs" class="py-16 md:py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                
+                <!-- Bảng Thông Số Kỹ Thuật -->
+                <div>
+                    <h2 class="text-3xl font-extrabold text-dark mb-8">Thông Số Kỹ Thuật</h2>
+                    <div class="bg-surface rounded-2xl overflow-hidden shadow-sm">
+                        <table class="w-full">
+                            <tbody>
+                                <tr class="border-b border-gray-100">
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 w-2/5">[Thông số 1]</td>
+                                    <td class="px-6 py-4 text-muted">[Giá trị 1]</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">[Thông số 2]</td>
+                                    <td class="px-6 py-4 text-muted">[Giá trị 2]</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">[Thông số 3]</td>
+                                    <td class="px-6 py-4 text-muted">[Giá trị 3]</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">[Thông số 4]</td>
+                                    <td class="px-6 py-4 text-muted">[Giá trị 4]</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">[Thông số 5]</td>
+                                    <td class="px-6 py-4 text-muted">[Giá trị 5]</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">[Thông số 6]</td>
+                                    <td class="px-6 py-4 text-muted">[Giá trị 6]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cột lợi ích bán hàng (Tại sao khách hàng nên chọn mua) -->
+                <div>
+                    <img src="https://via.placeholder.com/600x300/E2E8F0/475569?text=Anh+phu+lifestyle" alt="Ảnh phong cách sản phẩm"
+                         class="w-full h-56 object-cover rounded-2xl shadow-md mb-8" id="specs-image">
+                    
+                    <h2 class="text-3xl font-extrabold text-dark mb-8">Tại Sao Nên Mua Sản Phẩm Này?</h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Lý do 1 -->
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 gradient-cta rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark text-lg mb-1">[Lý do mua hàng 1]</h3>
+                                <p class="text-muted">[Diễn giải chi tiết lý do mua hàng 1 mang tính thuyết phục, kích thích khách hàng mua].</p>
+                            </div>
+                        </div>
+
+                        <!-- Lý do 2 -->
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 gradient-cta rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark text-lg mb-1">[Lý do mua hàng 2]</h3>
+                                <p class="text-muted">[Diễn giải chi tiết lý do mua hàng 2 mang tính thuyết phục, kích thích khách hàng mua].</p>
+                            </div>
+                        </div>
+
+                        <!-- Lý do 3 -->
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 gradient-cta rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark text-lg mb-1">[Lý do mua hàng 3]</h3>
+                                <p class="text-muted">[Diễn giải chi tiết lý do mua hàng 3 mang tính thuyết phục, kích thích khách hàng mua].</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: ĐỐI TƯỢNG SỬ DỤNG PHÙ HỢP -->
+    <section class="py-16 md:py-24 bg-surface">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Sản Phẩm Này Dành Cho Ai?</h2>
+                <p class="text-lg text-muted">[Sản phẩm giải quyết nỗi đau hiệu quả cho các đối tượng khách hàng dưới đây]</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Đối tượng 1 -->
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                    <div class="text-4xl mb-4">👤</div>
+                    <h3 class="font-bold text-dark mb-2">[Đối tượng 1]</h3>
+                    <p class="text-muted text-sm">[Mô tả sự phù hợp và lý do đối tượng 1 rất cần sản phẩm này trong cuộc sống hàng ngày].</p>
+                </div>
+                
+                <!-- Đối tượng 2 -->
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                    <div class="text-4xl mb-4">👤</div>
+                    <h3 class="font-bold text-dark mb-2">[Đối tượng 2]</h3>
+                    <p class="text-muted text-sm">[Mô tả sự phù hợp và lý do đối tượng 2 rất cần sản phẩm này trong cuộc sống hàng ngày].</p>
+                </div>
+
+                <!-- Đối tượng 3 -->
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                    <div class="text-4xl mb-4">👤</div>
+                    <h3 class="font-bold text-dark mb-2">[Đối tượng 3]</h3>
+                    <p class="text-muted text-sm">[Mô tả sự phù hợp và lý do đối tượng 3 rất cần sản phẩm này trong cuộc sống hàng ngày].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CÂU HỎI THƯỜNG GẶP (FAQ Accordion) -->
+    <section id="faq" class="py-16 md:py-24 bg-white">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Câu Hỏi Thường Gặp</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Câu hỏi 1 -->
+                <div class="bg-surface rounded-xl shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-dark text-lg">[Câu hỏi 1 - VD: Sản phẩm sử dụng có bền không?]</span>
+                        <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-muted leading-relaxed">[Câu trả lời chi tiết và rõ ràng cho câu hỏi 1. Cung cấp đầy đủ thông tin để tạo niềm tin cho khách hàng].</p>
+                    </div>
+                </div>
+
+                <!-- Câu hỏi 2 -->
+                <div class="bg-surface rounded-xl shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-dark text-lg">[Câu hỏi 2 - VD: Chế độ bảo hành/đổi mới như thế nào?]</span>
+                        <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-muted leading-relaxed">[Câu trả lời chi tiết và rõ ràng cho câu hỏi 2. Cung cấp đầy đủ thông tin để tạo niềm tin cho khách hàng].</p>
+                    </div>
+                </div>
+
+                <!-- Câu hỏi 3 -->
+                <div class="bg-surface rounded-xl shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-dark text-lg">[Câu hỏi 3 - VD: Phí vận chuyển và giao hàng mất bao lâu?]</span>
+                        <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-muted leading-relaxed">[Câu trả lời chi tiết và rõ ràng cho câu hỏi 3. Cung cấp đầy đủ thông tin để tạo niềm tin cho khách hàng].</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CALL TO ACTION (CTA) -->
+    <section id="payment" class="py-16 md:py-24 gradient-hero text-white">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6">[Thông điệp kêu gọi mua hàng cuối trang]</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-xl mx-auto">[Dòng tóm tắt nhanh công dụng lớn nhất và hối thúc hành động đặt hàng ngay trước khi ưu đãi hết hạn].</p>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 max-w-md mx-auto border border-white/20">
+                <div class="text-sm text-red-300 font-semibold mb-2">Ưu đãi độc quyền đợt này</div>
+                <div class="flex items-baseline justify-center gap-3 mb-2">
+                    <span class="text-5xl font-extrabold text-white" id="cta-sale-price">[Giá KM]đ</span>
+                </div>
+                <div class="flex items-center justify-center gap-2 mb-6">
+                    <span class="text-lg text-gray-500 line-through" id="cta-original-price">[Giá gốc]đ</span>
+                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full" id="cta-discount-tag">-[%]</span>
+                </div>
+
+                <button onclick="showPaymentModal()" class="w-full gradient-cta text-white font-bold py-4 px-8 rounded-xl text-xl hover:opacity-90 transition shadow-lg shadow-blue-500/30">
+                    Đặt Hàng Ngay
+                </button>
+
+                <p class="text-xs text-gray-400 mt-4">[Cam kết phụ / Chính sách giao hàng / Đổi trả miễn phí]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-gray-400 py-8 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm">Hỗ trợ đặt hàng: <a href="https://zalo.me/0973332823" target="_blank" class="text-accent hover:underline" id="footer-zalo-link">Nhắn Zalo hỗ trợ</a></p>
+            <p class="text-xs mt-2 text-gray-600">&copy; 2026 [Tên thương hiệu / Bản quyền sở hữu]</p>
+        </div>
+    </footer>
+
+    <!-- STICKY MOBILE CTA (Thanh mua hàng nhanh bám dưới mobile, xuất hiện khi cuộn qua Hero) -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-50 p-3 md:hidden translate-y-full transition-transform duration-300">
+        <div class="flex items-center justify-between gap-3">
+            <div>
+                <div class="font-bold text-dark" id="sticky-price">[Giá KM]đ</div>
+                <div class="text-xs text-green-600 font-semibold">[Ưu đãi bổ sung / Free ship]</div>
+            </div>
+            <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-3 px-6 rounded-xl hover:opacity-90 transition flex-1 text-center">
+                Đặt Hàng Ngay
+            </button>
+        </div>
+    </div>
+
+    <!-- HỘP THOẠI ĐẶT HÀNG & THANH TOÁN (PAYMENT MODAL) -->
+    <div id="payment-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center">
+        <div class="modal-overlay absolute inset-0" onclick="hidePaymentModal()"></div>
+        <div class="relative bg-white rounded-2xl p-6 md:p-8 max-w-md w-[90%] mx-4 shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
+            <button onclick="hidePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold leading-none">&times;</button>
+
+            <!-- BƯỚC 1: ĐIỀN THÔNG TIN ĐƠN HÀNG -->
+            <div id="step-form">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-dark mb-1">Đặt Hàng</h3>
+                    <p class="text-muted">Vui lòng chọn gói và nhập địa chỉ giao hàng</p>
+                </div>
+
+                <!-- LỰA CHỌN GÓI SẢN PHẨM / COMBO -->
+                <div class="space-y-3 mb-6">
+                    <!-- Gói 1 -->
+                    <label class="block cursor-pointer" onclick="selectPackage(1)">
+                        <div id="pkg-1" class="border-2 border-primary bg-blue-50 rounded-xl p-4 transition">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div id="radio-1" class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+                                        <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-dark">[Gói 1: VD - Mua 1 chiếc]</div>
+                                        <div class="text-xs text-green-600 font-semibold">[VD: Miễn phí vận chuyển]</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-bold text-primary text-lg" id="pkg-price-1">[Giá KM 1]đ</div>
+                                    <div class="text-xs text-muted line-through" id="pkg-orig-1">[Giá gốc 1]đ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Gói 2 -->
+                    <label class="block cursor-pointer" onclick="selectPackage(2)">
+                        <div id="pkg-2" class="border-2 border-gray-200 hover:border-primary rounded-xl p-4 transition relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">HOT</div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div id="radio-2" class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center">
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-dark">[Gói 2: VD - Combo 2 chiếc]</div>
+                                        <div class="text-xs text-green-600 font-semibold">[VD: Mua nhiều rẻ hơn]</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-bold text-primary text-lg" id="pkg-price-2">[Giá KM 2]đ</div>
+                                    <div class="text-xs text-muted line-through" id="pkg-orig-2">[Giá gốc 2]đ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- FORM ĐIỀN THÔNG TIN KHÁCH HÀNG -->
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-dark mb-1">Họ tên người nhận *</label>
+                        <input type="text" id="customer-name" placeholder="Nguyễn Văn A"
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition text-base">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-dark mb-1">Số điện thoại *</label>
+                        <input type="tel" id="customer-phone" placeholder="0912 345 678"
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition text-base">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-dark mb-1">Địa chỉ nhận hàng *</label>
+                        <textarea id="customer-address" rows="2" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành"
+                                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition text-base resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-dark mb-1">Email (Không bắt buộc)</label>
+                        <input type="email" id="customer-email" placeholder="khachhang@gmail.com"
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary transition text-base">
+                    </div>
+                </div>
+
+                <button onclick="goToPayment()" class="w-full gradient-cta text-white font-bold py-4 px-8 rounded-xl text-lg hover:opacity-90 transition">
+                    Tiếp tục thanh toán
+                </button>
+
+                <p id="form-error" class="text-red-500 text-sm text-center mt-3 hidden">Vui lòng nhập đầy đủ các trường thông tin bắt buộc (*).</p>
+            </div>
+
+            <!-- BƯỚC 2: QUÉT MÃ VIETQR QUA SEPAY -->
+            <div id="step-payment" class="hidden">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-bold text-dark mb-1">Thanh Toán</h3>
+                    <p class="text-muted">Quét mã QR để hoàn thành chuyển khoản nhanh</p>
+                </div>
+
+                <!-- Tóm tắt đơn hàng ngắn -->
+                <div class="bg-blue-50 rounded-xl p-3 mb-4 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-dark font-semibold" id="pay-summary">[Tên Gói Sản Phẩm]</span>
+                        <span class="text-primary font-bold" id="pay-amount-display">[Giá tiền]đ</span>
+                    </div>
+                </div>
+
+                <!-- Mã QR tạo động -->
+                <div class="text-center mb-4">
+                    <img src="" alt="Mã QR thanh toán" class="mx-auto w-52 h-52 rounded-xl shadow-md border" id="payment-qr"/>
+                </div>
+
+                <!-- Chi tiết chuyển khoản trực quan -->
+                <div class="bg-surface rounded-xl p-3 mb-4 text-sm">
+                    <div class="flex justify-between py-1.5 border-b border-gray-200">
+                        <span class="font-semibold text-dark">Ngân hàng:</span>
+                        <span class="text-muted" id="bank-name-display">[Tên ngân hàng]</span>
+                    </div>
+                    <div class="flex justify-between py-1.5 border-b border-gray-200">
+                        <span class="font-semibold text-dark">Chủ tài khoản:</span>
+                        <span class="text-muted" id="bank-owner-display">[Tên chủ tài khoản]</span>
+                    </div>
+                    <div class="flex justify-between py-1.5 border-b border-gray-200">
+                        <span class="font-semibold text-dark">Số tài khoản:</span>
+                        <span class="text-muted" id="bank-number-display">[Số tài khoản]</span>
+                    </div>
+                    <div class="flex justify-between py-1.5 border-b border-gray-200">
+                        <span class="font-semibold text-dark">Số tiền:</span>
+                        <span class="text-primary font-bold" id="pay-amount-bank">[Số tiền] VNĐ</span>
+                    </div>
+                    <div class="flex justify-between py-1.5">
+                        <span class="font-semibold text-dark">Nội dung CK:</span>
+                        <span class="text-primary font-bold" id="transfer-content">[Nội dung]</span>
+                    </div>
+                </div>
+
+                <!-- ĐỒNG HỒ CẠN GIỜ & CHỜ XÁC THỰC WEBHOOK -->
+                <div id="payment-waiting" class="text-center py-4">
+                    <div class="flex items-center justify-center gap-3 mb-3">
+                        <svg class="animate-spin w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="text-dark font-semibold">Đang chờ hệ thống xác nhận...</span>
+                    </div>
+                    <p class="text-muted text-sm">Hệ thống sẽ tự động chuyển sang trang xác nhận sau khi nhận được tiền.</p>
+                    <p class="text-xs text-gray-400 mt-2">Thời gian chờ: <span id="wait-timer">5:00</span></p>
+                </div>
+
+                <!-- Hỗ trợ thủ công nếu hết giờ -->
+                <div id="payment-fallback" class="hidden text-center py-4">
+                    <p class="text-dark font-semibold mb-2">Gặp sự cố chuyển khoản?</p>
+                    <p class="text-muted text-sm mb-4">Nếu bạn đã chuyển tiền thành công nhưng hệ thống chưa xác nhận, vui lòng kết nối qua Zalo để kiểm tra thủ công:</p>
+                    <a href="https://zalo.me/0973332823" target="_blank" id="fallback-zalo-btn"
+                       class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition">
+                        Liên hệ Zalo hỗ trợ
+                    </a>
+                </div>
+
+                <button onclick="goBackToForm()" class="w-full text-muted text-sm mt-3 hover:text-dark transition">
+                    ← Quay lại sửa thông tin nhận hàng
+                </button>
+            </div>
+
+            <!-- BƯỚC 3: XÁC NHẬN HOÀN TẤT & THÔNG BÁO CẢM ƠN -->
+            <div id="step-confirm" class="hidden text-center py-6">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-dark mb-2">Thanh Toán Thành Công!</h3>
+                <p class="text-muted mb-4">Đơn hàng <strong id="confirm-order-code" class="text-primary"></strong> đã được xác nhận thành công.</p>
+
+                <div class="bg-surface rounded-xl p-4 text-sm text-left mb-6">
+                    <p class="font-semibold text-dark mb-3">Thông tin đơn hàng:</p>
+                    <div class="space-y-3">
+                        <div class="flex gap-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <span class="text-muted">Thanh toán chuyển khoản hoàn tất</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-white text-xs font-bold">2</div>
+                            <span class="text-dark font-semibold">Cửa hàng đang đóng gói và vận chuyển</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-sm text-dark font-semibold mb-3">Kết nối với chúng tôi qua Zalo:</p>
+                <a href="https://zalo.me/0973332823" target="_blank" id="confirm-zalo-btn"
+                   class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg w-full justify-center text-lg mb-3">
+                    Kết nối Zalo hỗ trợ
+                </a>
+
+                <button onclick="hidePaymentModal()" class="text-muted text-sm hover:text-dark transition">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Xử Lý Toàn Bộ Logic Giao Diện -->
+    <script>
+        // ============================================================
+        // 1. CẤU HÌNH BIẾN MẪU (Thay đổi các giá trị ở đây để cập nhật web)
+        // ============================================================
+        const CONFIG = {
+            // Thông tin hiển thị giá
+            originalPrice: 399000,
+            salePrice: 268000,
+            discountPercent: 33,
+            savingAmount: 131000,
+            
+            // Cấu hình gói sản phẩm trong hộp thoại đặt hàng
+            packages: {
+                1: { qty: 1, price: 268000, label: 'Mua 1 chiếc (Miễn phí ship)', display: '268.000', original: '399.000' },
+                2: { qty: 2, price: 468000, label: 'Combo 2 chiếc (Tiết kiệm nhất)', display: '468.000', original: '798.000' }
+            },
+
+            // Thông tin ngân hàng của bạn (VPBank/Techcombank/VCB...)
+            bank: {
+                name: 'VPBank',
+                owner: 'Lê Hồng Nam',
+                accountNumber: '948363666',
+                memoPrefix: 'SPAI' // Tiền tố nội dung chuyển khoản tự động
+            },
+
+            // Zalo ID hỗ trợ
+            zaloId: '0973332823',
+
+            // Link Google Sheets Web App URL nhận dữ liệu (Google Apps Script API)
+            googleSheetUrl: 'https://script.google.com/macros/s/AKfycbxPjkqtEBCzXjLtjSVihBWpBor_nHLt_uW5YsvxgMMBYSjIIoDhaUE6NpL4zTjGDQWPhQ/exec'
+        };
+
+        // ============================================================
+        // 2. KHỞI TẠO DỮ LIỆU LÊN GIAO DIỆN
+        // ============================================================
+        function initTemplateValues() {
+            // Cập nhật giá trên phần Hero
+            const formatter = new Intl.NumberFormat('vi-VN');
+            document.getElementById('hero-sale-price').innerHTML = `${formatter.format(CONFIG.salePrice)}<span class="text-2xl">đ</span>`;
+            document.getElementById('hero-original-price').textContent = `${formatter.format(CONFIG.originalPrice)}đ`;
+            document.getElementById('hero-discount-tag').textContent = `-${CONFIG.discountPercent}%`;
+
+            // Cập nhật giá trên phần CTA cuối trang
+            document.getElementById('cta-sale-price').textContent = `${formatter.format(CONFIG.salePrice)}đ`;
+            document.getElementById('cta-original-price').textContent = `${formatter.format(CONFIG.originalPrice)}đ`;
+            document.getElementById('cta-discount-tag').textContent = `-${CONFIG.discountPercent}%`;
+
+            // Cập nhật giá thanh dính dưới Mobile
+            document.getElementById('sticky-price').textContent = `${formatter.format(CONFIG.salePrice)}đ`;
+
+            // Cập nhật các gói chọn sản phẩm
+            document.getElementById('pkg-price-1').textContent = `${CONFIG.packages[1].display}đ`;
+            document.getElementById('pkg-orig-1').textContent = `${CONFIG.packages[1].original}đ`;
+            document.getElementById('pkg-price-2').textContent = `${CONFIG.packages[2].display}đ`;
+            document.getElementById('pkg-orig-2').textContent = `${CONFIG.packages[2].original}đ`;
+
+            // Cập nhật các liên kết Zalo hỗ trợ
+            const zaloUrl = `https://zalo.me/${CONFIG.zaloId}`;
+            document.getElementById('nav-zalo-link').href = zaloUrl;
+            document.getElementById('footer-zalo-link').href = zaloUrl;
+            document.getElementById('fallback-zalo-btn').href = zaloUrl;
+            document.getElementById('confirm-zalo-btn').href = zaloUrl;
+        }
+        initTemplateValues();
+
+        // ========== LỰA CHỌN GÓI SẢN PHẨM / COMBO ==========
+        let selectedPackage = 1;
+
+        function selectPackage(pkg) {
+            selectedPackage = pkg;
+            // Cập nhật hiệu ứng viền hộp thoại chọn
+            document.getElementById('pkg-1').className = pkg === 1
+                ? 'border-2 border-primary bg-blue-50 rounded-xl p-4 transition'
+                : 'border-2 border-gray-200 hover:border-primary rounded-xl p-4 transition';
+            document.getElementById('pkg-2').className = pkg === 2
+                ? 'border-2 border-primary bg-blue-50 rounded-xl p-4 transition relative overflow-hidden'
+                : 'border-2 border-gray-200 hover:border-primary rounded-xl p-4 transition relative overflow-hidden';
+            
+            // Cập nhật nút radio tròn
+            document.getElementById('radio-1').innerHTML = pkg === 1
+                ? '<div class="w-3 h-3 rounded-full bg-primary"></div>' : '';
+            document.getElementById('radio-2').innerHTML = pkg === 2
+                ? '<div class="w-3 h-3 rounded-full bg-primary"></div>' : '';
+            
+            document.getElementById('radio-1').className = pkg === 1
+                ? 'w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center'
+                : 'w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center';
+            document.getElementById('radio-2').className = pkg === 2
+                ? 'w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center'
+                : 'w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center';
+        }
+
+        // ========== CÂU HỎI THƯỜNG GẶP (Accordion) ==========
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('svg');
+            content.classList.toggle('hidden');
+            icon.style.transform = content.classList.contains('hidden') ? '' : 'rotate(180deg)';
+        }
+
+        // ========== QUẢN LÝ TRẠNG THÁI HỘP THOẠI ĐẶT HÀNG ==========
+        let waitInterval = null;
+
+        function showPaymentModal() {
+            document.getElementById('payment-modal').classList.remove('hidden');
+            document.getElementById('step-form').classList.remove('hidden');
+            document.getElementById('step-payment').classList.add('hidden');
+            document.getElementById('step-confirm').classList.add('hidden');
+            document.body.style.overflow = 'hidden';
+            if (waitInterval) { clearInterval(waitInterval); waitInterval = null; }
+        }
+
+        function hidePaymentModal() {
+            document.getElementById('payment-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+            if (waitInterval) { clearInterval(waitInterval); waitInterval = null; }
+            if (window._pollInterval) { clearInterval(window._pollInterval); window._pollInterval = null; }
+        }
+
+        function goToPayment() {
+            const name = document.getElementById('customer-name').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+            const address = document.getElementById('customer-address').value.trim();
+
+            if (!name || !phone || !address) {
+                document.getElementById('form-error').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('form-error').classList.add('hidden');
+
+            const pkg = CONFIG.packages[selectedPackage];
+            const code = CONFIG.bank.memoPrefix + phone.slice(-4);
+
+            // Cập nhật thông tin thanh toán VietQR ngân hàng
+            document.getElementById('bank-name-display').textContent = CONFIG.bank.name;
+            document.getElementById('bank-owner-display').textContent = CONFIG.bank.owner;
+            document.getElementById('bank-number-display').textContent = CONFIG.bank.accountNumber;
+            document.getElementById('transfer-content').textContent = code;
+            document.getElementById('pay-summary').textContent = pkg.label;
+            document.getElementById('pay-amount-display').textContent = pkg.display + 'đ';
+            document.getElementById('pay-amount-bank').textContent = pkg.display + ' VNĐ';
+
+            // Tạo mã QR bằng API Sepay thông qua thông số đã cấu hình
+            document.getElementById('payment-qr').src =
+                `https://qr.sepay.vn/img?acc=${CONFIG.bank.accountNumber}&bank=${CONFIG.bank.name}&amount=${pkg.price}&des=${encodeURIComponent(code)}&template=compact`;
+
+            // Khởi tạo lại trạng thái giao diện bước chờ
+            document.getElementById('payment-waiting').classList.remove('hidden');
+            document.getElementById('payment-fallback').classList.add('hidden');
+
+            // Gửi dữ liệu khách hàng lên Google Sheet ngay lập tức ở trạng thái "Đang chờ chuyển khoản"
+            const email = document.getElementById('customer-email').value.trim();
+            submitToGoogleSheet({
+                name, phone, address, email,
+                product: pkg.label,
+                amount: pkg.price,
+                transferCode: code,
+                date: new Date().toLocaleString('vi-VN')
+            });
+
+            document.getElementById('step-form').classList.add('hidden');
+            document.getElementById('step-payment').classList.remove('hidden');
+
+            // Bắt đầu bộ đếm ngược 5 phút chờ chuyển khoản
+            startWaitTimer(300);
+        }
+
+        function goBackToForm() {
+            if (waitInterval) { clearInterval(waitInterval); waitInterval = null; }
+            if (window._pollInterval) { clearInterval(window._pollInterval); window._pollInterval = null; }
+            document.getElementById('step-payment').classList.add('hidden');
+            document.getElementById('step-form').classList.remove('hidden');
+        }
+
+        // ========== BỘ ĐẾM NGƯỢC & AUTO-CHECK (QUÉT TRẠNG THÁI WEBHOOK) ==========
+        function startWaitTimer(seconds) {
+            let remaining = seconds;
+            const timerEl = document.getElementById('wait-timer');
+
+            if (waitInterval) clearInterval(waitInterval);
+            waitInterval = setInterval(() => {
+                remaining--;
+                const m = Math.floor(remaining / 60);
+                const s = remaining % 60;
+                timerEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+
+                if (remaining <= 0) {
+                    clearInterval(waitInterval);
+                    waitInterval = null;
+                    // Hết giờ mà chưa nhận được tiền tự động chuyển sang cấu hình thủ công
+                    document.getElementById('payment-waiting').classList.add('hidden');
+                    document.getElementById('payment-fallback').classList.remove('hidden');
+                }
+            }, 1000);
+
+            // AUTO-DETECTION: Thực hiện gọi API kiểm tra trạng thái thanh toán từ Google Sheet (nhận qua SePay) mỗi 10 giây
+            const code = document.getElementById('transfer-content').textContent;
+
+            if (window._pollInterval) clearInterval(window._pollInterval);
+            window._pollInterval = setInterval(async () => {
+                try {
+                    const res = await fetch(`${CONFIG.googleSheetUrl}?action=check&code=${encodeURIComponent(code)}`);
+                    const result = await res.json();
+                    if (result.paid) {
+                        clearInterval(window._pollInterval);
+                        window._pollInterval = null;
+                        showThankYou();
+                    }
+                } catch(e) { /* Lỗi mạng hoặc đang đợi, bỏ qua và quét ở chu kỳ tiếp theo */ }
+            }, 10000);
+        }
+
+        function showThankYou() {
+            const code = document.getElementById('transfer-content').textContent;
+            document.getElementById('confirm-order-code').textContent = code;
+            document.getElementById('step-payment').classList.add('hidden');
+            document.getElementById('step-confirm').classList.remove('hidden');
+            if (waitInterval) { clearInterval(waitInterval); waitInterval = null; }
+        }
+
+        // ========== GỬI DỮ LIỆU KHÁCH HÀNG LÊN GOOGLE SHEET VIA API ==========
+        function submitToGoogleSheet(data) {
+            if (!CONFIG.googleSheetUrl) return;
+            
+            // Sử dụng mode no-cors để gửi yêu cầu POST dạng văn bản thô tới Google Web App
+            fetch(CONFIG.googleSheetUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                console.log('Đã gửi thông tin đơn hàng lên Google Sheet thành công:', data.transferCode);
+            }).catch(err => console.error('Lỗi khi gửi lên Google Sheet:', err));
+        }
+
+        // ========== THANH MUA HÀNG DƯỚI MOBILE (STICKY CTA) ==========
+        const stickyCta = document.getElementById('sticky-cta');
+        window.addEventListener('scroll', () => {
+            stickyCta.style.transform = window.scrollY > 600 ? 'translateY(0)' : 'translateY(100%)';
+        });
+
+        // Đóng hộp thoại khi người dùng bấm phím Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hidePaymentModal();
+        });
+    </script>
+</body>
+</html>
