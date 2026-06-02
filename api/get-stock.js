@@ -54,7 +54,32 @@ function mapNotionTitleToSKU(title) {
     }
   }
   
-  // 3. Fallback: return raw title if no mapping is found
+  // 3. Parse Beach Tent and Beach Mats (e.g. "Lều che nắng 300*280cm" or "Thảm dã ngoại xanh dương 140*200cm")
+  if (t.includes("lều") || t.includes("leu") || t.includes("tent") || t.includes("che nắng") || t.includes("che nang")) {
+    if (t.includes("300") && (t.includes("280") || t.includes("280cm"))) {
+      return "tent_300_280";
+    }
+    if (t.includes("500") && (t.includes("300") || t.includes("300cm"))) {
+      return "tent_500_300";
+    }
+  }
+
+  if (t.includes("thảm") || t.includes("tham") || t.includes("mat") || t.includes("dã ngoại") || t.includes("da ngoai")) {
+    const isBlueGrey = t.includes("xanh dương") || t.includes("xanh duong") || t.includes("grey") || t.includes("gray") || t.includes("xám") || t.includes("xam") || t.includes("蓝色+灰色") || t.includes("blue");
+    const isLakeBlue = t.includes("xanh hồ") || t.includes("xanh ho") || t.includes("lake") || t.includes("deep blue") || t.includes("湖蓝+深蓝");
+    
+    let size = "";
+    if (t.includes("140")) size = "140";
+    else if (t.includes("210")) size = "210";
+
+    if (isBlueGrey && size) {
+      return `mat_blue_grey_${size}`;
+    } else if (isLakeBlue && size) {
+      return `mat_lake_blue_${size}`;
+    }
+  }
+  
+  // 4. Fallback: return raw title if no mapping is found
   return title;
 }
 
@@ -93,7 +118,13 @@ exports.handler = async (event, context) => {
         "jig_goldeneye_3_8_50": 0,
         "jig_goldeneye_1_2_5": 0,
         "jig_goldeneye_1_2_50": 0,
-        "jig_black_platinum_3_8_50": 0 // Mock: Out of Stock
+        "jig_black_platinum_3_8_50": 0, // Mock: Out of Stock
+        "tent_300_280": 25,
+        "tent_500_300": 18,
+        "mat_blue_grey_140": 50,
+        "mat_blue_grey_210": 40,
+        "mat_lake_blue_140": 35,
+        "mat_lake_blue_210": 30
       })
     };
   }
