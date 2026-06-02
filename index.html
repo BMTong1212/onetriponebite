@@ -1337,11 +1337,16 @@
 
     .jig-options-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.5fr;
       gap: 10px;
       margin-bottom: 16px;
       padding-top: 15px;
       border-top: 1px solid var(--border);
+    }
+
+    .jig-options-row .product-size-select {
+      font-size: 0.8rem;
+      padding: 10px 24px 10px 10px;
     }
 
     .jig-select-group label {
@@ -3491,9 +3496,11 @@
         let weightOptions = JIG_WEIGHTS.map(w =>
           `<option value="${w.key}">${w.label}</option>`
         ).join('');
-        let packOptions = Object.keys(JIG_PACK_SIZES).map(k =>
-          `<option value="${k}">${JIG_PACK_SIZES[k].label} — $${JIG_PACK_SIZES[k].priceUSD}</option>`
-        ).join('');
+        let packOptions = Object.keys(JIG_PACK_SIZES).map(k => {
+          const packInfo = JIG_PACK_SIZES[k];
+          const shortLabel = packInfo.label.replace(' Jig Heads', ' Pack');
+          return `<option value="${k}">${shortLabel} — $${packInfo.priceUSD}</option>`;
+        }).join('');
 
         const depthRows = JIG_WEIGHTS.map(w =>
           `<span style="display:flex;justify-content:space-between;"><strong style="font-weight:700;color:var(--blue);display:inline;">${w.label}</strong><span>${w.depth}</span></span>`
@@ -3811,21 +3818,42 @@
 
     function checkoutFromCart() {
       if (cartItems.length === 0) return;
-      const subtotal = cartItems.reduce((s, i) => s + parseFloat(PACK_SIZES[i.sizeKey].priceUSD) * i.qty, 0);
+      
+      let subtotal = 0;
+      const names = [];
+      
+      cartItems.forEach(item => {
+        if (item.isJig) {
+          const series = JIG_SERIES.find(s => s.id === item.seriesId);
+          const weight = JIG_WEIGHTS.find(w => w.key === item.weightKey);
+          const packInf = JIG_PACK_SIZES[item.packKey];
+          if (series && weight && packInf) {
+            const priceEach = parseFloat(packInf.priceUSD);
+            subtotal += priceEach * item.qty;
+            names.push(`${series.name} (${weight.label}, ${packInf.label}) x${item.qty}`);
+          }
+        } else {
+          const color = COLORS.find(c => c.id === item.colorId);
+          const sizeInfo = PACK_SIZES[item.sizeKey];
+          if (color && sizeInfo) {
+            const priceEach = parseFloat(sizeInfo.priceUSD);
+            subtotal += priceEach * item.qty;
+            names.push(`${color.name} (${sizeInfo.label}) x${item.qty}`);
+          }
+        }
+      });
+
       const shipping = isPromoApplied ? 0 : (subtotal >= 99.00 ? 0 : 7.00);
       const total    = subtotal + shipping;
-      const names = cartItems.map(i => {
-        const c = COLORS.find(x => x.id === i.colorId);
-        const sz = PACK_SIZES[i.sizeKey];
-        return `${c ? c.name : i.colorId} x${i.qty} (${sz ? sz.label : i.sizeKey})`;
-      });
       const cartKey = '__cart__';
+      
       PRODUCTS[cartKey] = {
         name: names.join(', '),
         priceUSD: subtotal.toFixed(2),
         shippingUSD: shipping.toFixed(2),
         totalUSD: total.toFixed(2)
       };
+      
       closeModal();
       setTimeout(() => openCheckout(cartKey), 150);
     }
