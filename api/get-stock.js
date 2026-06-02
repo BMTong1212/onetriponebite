@@ -81,8 +81,18 @@ exports.handler = async (event, context) => {
         "glow_50": 0, // Mock: Out of Stock
         "limbo_slice_8": 20,
         "limbo_slice_50": 0, // Mock: Out of Stock
-        "jig_goldeneye_1_4_5": 0, // Mock: Out of Stock
-        "jig_goldeneye_1_4_50": 10,
+        "jig_goldeneye_1_16_5": 0,
+        "jig_goldeneye_1_16_50": 0,
+        "jig_goldeneye_1_8_5": 0,
+        "jig_goldeneye_1_8_50": 0,
+        "jig_goldeneye_1_4_5": 0,
+        "jig_goldeneye_1_4_50": 0,
+        "jig_goldeneye_5_16_5": 0,
+        "jig_goldeneye_5_16_50": 0,
+        "jig_goldeneye_3_8_5": 0,
+        "jig_goldeneye_3_8_50": 0,
+        "jig_goldeneye_1_2_5": 0,
+        "jig_goldeneye_1_2_50": 0,
         "jig_black_platinum_3_8_50": 0 // Mock: Out of Stock
       })
     };
