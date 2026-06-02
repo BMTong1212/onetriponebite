@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tấm Che Nắng Bãi Biển Cao Cấp | One Trip One Bite</title>
+    <title>Tấm Che Nắng Bãi Biển Cao Cấp | One Trip One Bite Shop</title>
     <meta name="description" content="Tấm che nắng bãi biển dã ngoại ngoài trời chất liệu nylon 210T siêu nhẹ, chống UV 99%, chống nước 2000mm. Đi kèm khung thép mạ kẽm vững chãi, cọc neo cát chuyên dụng.">
     <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
     <link rel="apple-touch-icon" href="assets/favicon.png?v=2">
@@ -12,25 +12,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Cấu hình Theme & Colors của One Trip One Bite -->
+    <!-- Cấu hình Theme & Colors hiện đại dạng Landing Template -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2E5B76',      // Xanh dương sẫm của biển (Deep Sea Navy)
-                        accent: '#C77D4A',       // Màu cam cát cháy/nắng (Sunburnt Orange)
-                        dark: '#1F2933',         // Màu chữ đen sẫm (Slate Charcoal)
-                        surface: '#F7F4EE',      // Nền cát mịn (Sand Beige)
-                        muted: '#52606D',        // Màu chữ phụ xám
-                        sale: '#DC2626',          // Màu đỏ khuyến mãi
-                        borderLight: 'rgba(46, 91, 118, 0.12)'
+                        primary: '#2563EB',      // Xanh dương chính (Blue 600)
+                        accent: '#0EA5E9',       // Xanh nhấn (Sky 500)
+                        dark: '#0F172A',         // Màu chữ chính / nền tối (Slate 900)
+                        surface: '#F8FAFC',      // Nền phụ (Slate 50)
+                        muted: '#64748B',        // Màu chữ phụ (Slate 500)
+                        sale: '#DC2626'          // Màu đỏ khuyến mãi
                     },
                     fontFamily: {
-                        sans: ['Be Vietnam Pro', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
+                        sans: ['Be Vietnam Pro', 'sans-serif']
                     }
                 }
             }
@@ -39,13 +37,10 @@
 
     <!-- Custom CSS Animations & Transitions -->
     <style>
-        body { 
-            font-family: 'Be Vietnam Pro', sans-serif; 
-            background-color: #F7F4EE;
-        }
-        .serif-font { font-family: 'Playfair Display', serif; }
-        .gradient-hero { background: linear-gradient(180deg, rgba(31, 41, 51, 0.4) 0%, rgba(31, 41, 51, 0.8) 100%); }
-        .feature-glow { box-shadow: 0 10px 30px rgba(31, 41, 51, 0.04); }
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .gradient-hero { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
+        .gradient-cta { background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%); }
+        .feature-glow { box-shadow: 0 0 40px rgba(37, 99, 235, 0.08); }
         
         .pulse-dot { animation: pulse-dot 2s infinite; }
         @keyframes pulse-dot {
@@ -69,163 +64,148 @@
         }
     </style>
 </head>
-<body class="text-dark pt-16">
+<body class="bg-white text-dark pt-16">
 
     <!-- STICKY NAVBAR -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#F7F4EE]/95 backdrop-blur-md border-b border-[#2E5B76]/10 shadow-sm transition-all duration-300">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3">
-                <img src="assets/logo_transparent.png" alt="One Trip One Bite Logo" class="h-12 w-auto">
-                <span class="serif-font font-bold text-primary text-base md:text-lg tracking-wider uppercase hidden sm:block">One Trip One Bite</span>
-            </a>
+            <div class="flex items-center gap-2">
+                <!-- Logo / Icon -->
+                <div class="w-8 h-8 gradient-cta rounded-lg flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <span class="font-bold text-dark text-sm md:text-base">One Trip One Bite Shop</span>
+            </div>
 
             <!-- Menu desktop -->
-            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-muted">
+            <div class="hidden md:flex items-center gap-6 text-sm text-muted">
                 <a href="#features" class="hover:text-primary transition">Tính năng</a>
                 <a href="#specs" class="hover:text-primary transition">Thông số</a>
                 <a href="#faq" class="hover:text-primary transition">Hỏi đáp</a>
-                <a href="https://zalo.me/0973332823" target="_blank" class="hover:text-accent transition flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                    Zalo hỗ trợ
-                </a>
+                <a href="https://zalo.me/0973332823" target="_blank" class="hover:text-primary transition">Zalo hỗ trợ</a>
             </div>
 
             <!-- Nút mua nhanh trên header -->
-            <button onclick="showPaymentModal()" class="bg-accent hover:bg-[#b26839] text-white font-bold py-2 px-6 rounded-lg text-sm transition shadow-md">
+            <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-2 px-5 rounded-lg text-sm hover:opacity-90 transition shadow-md">
                 Đặt Mua
             </button>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="relative min-h-[90vh] flex items-center text-white overflow-hidden bg-black/40">
-        <!-- Ảnh nền Hero -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://cbu01.alicdn.com/img/ibank/O1CN01djxSBd1lOZlQq8CZD_!!2921024809-0-cib.jpg" 
-                 alt="Tấm Che Nắng Bãi Biển" 
-                 class="w-full h-full object-cover opacity-80">
-            <div class="absolute inset-0 gradient-hero"></div>
-        </div>
-
-        <div class="relative z-10 max-w-6xl mx-auto px-4 py-16 md:py-24 w-full">
+    <section class="gradient-hero text-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Cột thông tin khuyến mãi & tiêu đề -->
                 <div>
-                    <div class="inline-flex items-center gap-2 bg-red-600/30 border border-red-500/50 text-red-200 text-xs md:text-sm font-semibold px-4 py-2 rounded-full mb-6 sale-badge">
+                    <div class="inline-flex items-center gap-2 bg-red-500/20 text-red-300 text-sm font-semibold px-4 py-2 rounded-full mb-6 sale-badge">
                         <span class="w-2 h-2 bg-red-400 rounded-full pulse-dot"></span>
-                        Khởi động hè - Giảm giá 35% duy nhất hôm nay
+                        Giảm giá khởi động hè 35% duy nhất hôm nay
                     </div>
 
-                    <h1 class="serif-font text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-                        Tấm Che Nắng <br>
-                        <span class="text-accent">Dã Ngoại Bãi Biển</span>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+                        Tấm Che Nắng Dã Ngoại
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300"> Bãi Biển Cao Cấp</span>
                     </h1>
 
-                    <p class="text-base md:text-lg text-gray-200 leading-relaxed mb-8 max-w-lg">
-                        Thỏa sức tận hưởng gió biển mát lành mà không sợ nắng gắt. Thiết kế vải Nylon 210T cao cấp siêu nhẹ, cản 99% tia UV & kháng nước 2000mm vượt trội.
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-lg">
+                        Thỏa sức tận hưởng làn gió mát lành bên bờ đại dương mà không lo nắng gắt. Chất liệu vải Nylon 210T siêu nhẹ, chống UV 99% & chống nước 2000mm.
                     </p>
 
                     <!-- Giá bán nổi bật -->
                     <div class="flex items-baseline gap-4 mb-3">
-                        <span class="text-4xl md:text-5xl font-extrabold text-white">590.000đ</span>
-                        <span class="text-xl text-gray-400 line-through">890.000đ</span>
-                        <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">-34%</span>
+                        <span class="text-5xl font-extrabold text-white">590.000đ</span>
+                        <span class="text-2xl text-gray-500 line-through">890.000đ</span>
+                        <span class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">-34%</span>
                     </div>
-                    <p class="text-sm text-accent mb-8">Tiết kiệm 300.000đ so với giá bán lẻ gốc</p>
+                    <p class="text-sm text-cyan-300 mb-8">Tiết kiệm 300.000đ so với giá gốc</p>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="showPaymentModal()" class="bg-accent hover:bg-[#b26839] text-white font-bold py-4 px-8 rounded-xl text-lg transition shadow-lg shadow-accent/30 text-center">
+                        <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-4 px-8 rounded-xl text-lg hover:opacity-90 transition shadow-lg shadow-blue-500/30">
                             Đặt Hàng Ngay
                         </button>
-                        <a href="#features" class="border-2 border-white/40 text-white font-semibold py-4 px-8 rounded-xl text-lg hover:bg-white/10 transition text-center">
+                        <a href="#features" class="border-2 border-white/30 text-white font-semibold py-4 px-8 rounded-xl text-lg hover:bg-white/10 transition text-center">
                             Xem chi tiết
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-6 mt-8 text-sm text-gray-300">
+                    <div class="flex items-center gap-6 mt-8 text-sm text-gray-400">
                         <span class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Giao hàng toàn quốc
                         </span>
                         <span class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            Kiểm tra hàng trước khi thanh toán
+                            Đổi mới nếu lỗi trong 7 ngày
                         </span>
                     </div>
                 </div>
 
                 <!-- Cột hình ảnh sản phẩm (Hiệu ứng trôi lơ lửng) -->
-                <div class="relative flex justify-center lg:justify-end">
-                    <div class="absolute w-72 h-72 bg-accent/20 rounded-full blur-3xl"></div>
-                    <img src="https://cbu01.alicdn.com/img/ibank/O1CN01djxSBd1lOZlQq8CZD_!!2921024809-0-cib.jpg" 
-                         alt="Tấm che nắng bãi biển cao cấp" 
-                         class="relative z-10 w-full max-w-sm md:max-w-md float rounded-2xl shadow-2xl border-4 border-white/20">
+                <div class="relative flex justify-center">
+                    <div class="absolute w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
+                    <img src="https://cbu01.alicdn.com/img/ibank/O1CN01djxSBd1lOZlQq8CZD_!!2921024809-0-cib.jpg"
+                         alt="Tấm Che Nắng Bãi Biển"
+                         class="relative z-10 w-full max-w-md float rounded-2xl shadow-2xl border border-white/10"
+                         id="hero-image">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- TRUST BADGES (Các chứng nhận / Cam kết bán hàng) -->
-    <section class="bg-white border-y border-[#2E5B76]/10">
-        <div class="max-w-6xl mx-auto px-4 py-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="flex flex-col items-center gap-2 py-3 border-r border-[#2E5B76]/10 last:border-none md:border-r">
-                    <span class="text-3xl">🚚</span>
-                    <span class="font-bold text-sm text-primary">FREE SHIP TOÀN QUỐC</span>
-                    <span class="text-xs text-muted">Nhận hàng thanh toán tại nhà</span>
+    <section class="bg-surface border-y border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 py-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span class="font-semibold text-sm">Giao hàng siêu tốc</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 py-3 border-r border-[#2E5B76]/10 last:border-none md:border-r">
-                    <span class="text-3xl">🛡️</span>
-                    <span class="font-bold text-sm text-primary">ĐỔI TRẢ TRONG 7 NGÀY</span>
-                    <span class="text-xs text-muted">Đổi mới nếu phát hiện lỗi từ nhà SX</span>
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <span class="font-semibold text-sm">Bảo hành chính hãng</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 py-3 border-r border-[#2E5B76]/10 last:border-none md:border-r">
-                    <span class="text-3xl">⚙️</span>
-                    <span class="font-bold text-sm text-primary">BẢO TRÌ TRỌN ĐỜI</span>
-                    <span class="text-xs text-muted">Hỗ trợ kỹ thuật và phụ kiện trọn đời</span>
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <span class="font-semibold text-sm">Đóng gói chuẩn xuất khẩu</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 py-3 last:border-none">
-                    <span class="text-3xl">🌟</span>
-                    <span class="font-bold text-sm text-primary">CAM KẾT CHẤT LƯỢNG</span>
-                    <span class="text-xs text-muted">Vải Nylon 210T phủ bạc chống UV50+</span>
+                <div class="flex flex-col items-center gap-2 py-3">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <span class="font-semibold text-sm">Hỗ trợ kỹ thuật trọn đời</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECTION: NỖI ĐAU KHÁCH HÀNG & GIẢI PHÁP -->
-    <section class="py-16 md:py-24 bg-surface">
+    <section class="py-16 md:py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="serif-font text-3xl md:text-4xl font-bold text-dark mb-4">Bạn Vẫn Đang Chịu Đựng Những Cơn Nắng Gắt Khi Đi Biển?</h2>
-                <p class="text-muted max-w-xl mx-auto">Lều thông thường nóng bức, cồng kềnh khó mang vác và rất dễ bị gió thổi bay? Hãy nâng cấp kỳ nghỉ của bạn.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Bạn Đã Quá Mệt Mỏi Với Những Lều Kín Bí Bách Nóng Nực?</h2>
             </div>
 
-            <!-- Ảnh so sánh / ảnh mô tả vấn đề -->
-            <div class="mb-12">
-                <img src="https://cbu01.alicdn.com/img/ibank/O1CN01aQ3EYR1lOZlWDmxFN_!!2921024809-0-cib.jpg" 
-                     alt="Hướng dẫn và tính năng của tấm che nắng" 
-                     class="w-full max-w-2xl mx-auto rounded-2xl shadow-md border-4 border-white">
+            <!-- Ảnh mô tả vấn đề -->
+            <div class="mb-10">
+                <img src="https://cbu01.alicdn.com/img/ibank/O1CN01aQ3EYR1lOZlWDmxFN_!!2921024809-0-cib.jpg" alt="So sánh trước và sau"
+                     class="w-full max-w-2xl mx-auto rounded-2xl shadow-md" id="before-after-image">
             </div>
 
             <!-- Bảng so sánh 2 cột -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 <div class="bg-red-50 border border-red-200 p-6 rounded-2xl">
-                    <div class="text-red-600 font-bold text-lg mb-3">❌ Lều dã ngoại truyền thống:</div>
+                    <div class="text-red-500 font-bold text-lg mb-3">Khi không có Tấm che nắng:</div>
                     <ul class="space-y-3 text-muted text-sm">
-                        <li class="flex items-start gap-2"><span class="text-red-500 font-bold">✗</span> Bí bách, ngột ngạt khi trời nắng nóng vì lều kín không thoáng khí.</li>
-                        <li class="flex items-start gap-2"><span class="text-red-500 font-bold">✗</span> Cồng kềnh, nặng nề, khó khăn khi vận chuyển và cất giữ.</li>
-                        <li class="flex items-start gap-2"><span class="text-red-500 font-bold">✗</span> Khung lều yếu, dễ bị lật hoặc gãy khi gặp những cơn gió biển mạnh.</li>
-                        <li class="flex items-start gap-2"><span class="text-red-500 font-bold">✗</span> Lắp đặt phức tạp, tốn nhiều thời gian loay hoay dưới trời nắng.</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> Lều thường kín như bưng, hấp hơi nóng bức ngột ngạt khó chịu.</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> Ô dù nhỏ dễ bị gió thổi bay lật khi có gió biển thổi mạnh.</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> Nặng nề cồng kềnh khó di chuyển bằng xe máy hay vali du lịch.</li>
                     </ul>
                 </div>
                 <div class="bg-green-50 border border-green-200 p-6 rounded-2xl">
-                    <div class="text-green-700 font-bold text-lg mb-3">✓ Tấm che nắng One Trip One Bite:</div>
+                    <div class="text-green-600 font-bold text-lg mb-3">Khi sở hữu Tấm che nắng One Trip One Bite:</div>
                     <ul class="space-y-3 text-muted text-sm">
-                        <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Thoáng đãng 4 phía đón gió tự nhiên, diện tích bóng râm bao phủ cực rộng.</li>
-                        <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Siêu nhẹ chỉ khoảng 2.0kg, xếp gọn gàng trong túi xách đeo vai du lịch.</li>
-                        <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Khung thép mạ kẽm cao 2.0m & cọc neo cát chắc chắn chống gió biển.</li>
-                        <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Dựng lều nhanh chóng trong 5 phút bằng cách đổ cát đầy vào các góc.</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> Không gian mở thoáng mát đón gió biển tự nhiên từ 4 phía.</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> Neo giữ bằng túi cát siêu nặng kết hợp dây kéo căng cực kì vững chãi.</li>
+                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> Trọng lượng siêu nhẹ ~2.0kg xếp gọn gàng trong túi xách mini.</li>
                     </ul>
                 </div>
             </div>
@@ -233,133 +213,118 @@
     </section>
 
     <!-- SECTION: 3 TÍNH NĂNG CHÍNH / USP -->
-    <section id="features" class="py-16 md:py-24 bg-white">
+    <section id="features" class="py-16 md:py-24 bg-surface">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
-                <span class="text-accent font-bold uppercase tracking-wider text-sm">Thiết kế đột phá</span>
-                <h2 class="serif-font text-3xl md:text-4xl font-bold text-dark mt-2 mb-4">Các Tính Năng Vượt Trội</h2>
-                <p class="text-muted max-w-2xl mx-auto">Trải nghiệm du lịch dã ngoại chuyên nghiệp và đẳng cấp với công nghệ che nắng hiện đại.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Các Tính Năng Nổi Bật</h2>
+                <p class="text-lg text-muted max-w-2xl mx-auto">Thiết kế đột phá dựa trên công nghệ và trải nghiệm người dùng thực tế trên các bãi biển.</p>
             </div>
 
             <!-- Grid 3 cột giới thiệu tính năng chính -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Tính năng 1 -->
-                <div class="bg-surface rounded-2xl hover:shadow-xl transition group overflow-hidden border border-[#2E5B76]/10">
-                    <div class="h-56 overflow-hidden">
-                        <img src="https://cbu01.alicdn.com/img/ibank/O1CN01D2zfiL1lOZlXqhpxb_!!2921024809-0-cib.jpg" 
-                             alt="Vải Nylon 210T kháng nước"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
+                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
+                    <img src="https://cbu01.alicdn.com/img/ibank/O1CN01D2zfiL1lOZlXqhpxb_!!2921024809-0-cib.jpg" alt="Tính năng 1"
+                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-1-image">
                     <div class="p-6">
-                        <h3 class="font-bold text-dark text-lg mb-3">Vải Nylon Phủ Bạc UV50+</h3>
-                        <p class="text-muted text-sm leading-relaxed mb-4">Sử dụng sợi Nylon 210T độ bền cao kết hợp lớp phủ bạc phản xạ nhiệt, ngăn chặn hơn 99% tia UV có hại, bảo vệ làn da của cả gia đình.</p>
-                        <div class="bg-white p-3 rounded-lg text-xs text-primary font-semibold border border-primary/10">Kháng nước 2000mm bảo vệ khỏi mưa giông</div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Vải Nylon Phủ Bạc Chống UV</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-4">Vải Nylon 210T cao cấp phủ lớp bạc cản hơn 99% bức xạ tia UV mặt trời và bảo vệ an toàn làn da.</p>
+                        <div class="bg-surface p-3 rounded-lg text-xs text-primary font-semibold">Chỉ số chống nắng UPF 50+ & Kháng nước 2000mm</div>
                     </div>
                 </div>
 
                 <!-- Tính năng 2 -->
-                <div class="bg-surface rounded-2xl hover:shadow-xl transition group overflow-hidden border border-[#2E5B76]/10">
-                    <div class="h-56 overflow-hidden">
-                        <img src="https://cbu01.alicdn.com/img/ibank/O1CN015JMtBZ1lOZlQq7CBy_!!2921024809-0-cib.jpg" 
-                             alt="Khung cột thép mạ kẽm chịu lực"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
+                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
+                    <img src="https://cbu01.alicdn.com/img/ibank/O1CN015JMtBZ1lOZlQq7CBy_!!2921024809-0-cib.jpg" alt="Tính năng 2"
+                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-2-image">
                     <div class="p-6">
-                        <h3 class="font-bold text-dark text-lg mb-3">Khung Thép Mạ Kẽm Chắc Chắn</h3>
-                        <p class="text-muted text-sm leading-relaxed mb-4">Cột đỡ làm bằng ống thép mạ kẽm chống rỉ sét dưới tác động của hơi muối biển. Thiết kế khớp nối linh hoạt, dễ lắp đặt và chịu gió bền bỉ.</p>
-                        <div class="bg-white p-3 rounded-lg text-xs text-primary font-semibold border border-primary/10">2 trụ đỡ cao 2.0m tạo không gian thoáng đãng</div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Khung Thép Mạ Kẽm Chịu Lực</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-4">Hai cột đỡ cao 2.0m bằng thép mạ kẽm bền bỉ, chống rỉ sét ăn mòn khi gặp nước biển mặn.</p>
+                        <div class="bg-surface p-3 rounded-lg text-xs text-primary font-semibold">Thiết kế thanh nối gập thông minh xếp gọn nhanh chóng</div>
                     </div>
                 </div>
 
                 <!-- Tính năng 3 -->
-                <div class="bg-surface rounded-2xl hover:shadow-xl transition group overflow-hidden border border-[#2E5B76]/10">
-                    <div class="h-56 overflow-hidden">
-                        <img src="https://cbu01.alicdn.com/img/ibank/O1CN01Ucg5PP1lOZlXMy56M_!!2921024809-0-cib.jpg" 
-                             alt="Thiết kế neo túi cát bãi biển"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
+                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
+                    <img src="https://cbu01.alicdn.com/img/ibank/O1CN01Ucg5PP1lOZlXMy56M_!!2921024809-0-cib.jpg" alt="Tính năng 3"
+                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-3-image">
                     <div class="p-6">
-                        <h3 class="font-bold text-dark text-lg mb-3">Hệ Thống Neo Túi Cát Tiện Lợi</h3>
-                        <p class="text-muted text-sm leading-relaxed mb-4">Không cần khoan đục phức tạp, tận dụng chính nguồn cát bãi biển lấp đầy 4 túi neo ở các góc tấm che giúp tạo ra lực giữ vững chắc trước mọi cơn gió biển.</p>
-                        <div class="bg-white p-3 rounded-lg text-xs text-primary font-semibold border border-primary/10">Bao gồm cọc cắm cỏ dã ngoại đa năng</div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Cơ Chế Neo Bằng Túi Cát</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-4">Không cần cắm cọc đóng cọc phức tạp, dùng chính cát bãi biển lấp đầy 4 túi neo ở các góc tạo độ cân bằng chống gió.</p>
+                        <div class="bg-surface p-3 rounded-lg text-xs text-primary font-semibold">Tặng kèm cọc cắm cỏ thép dã ngoại đa dụng</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: THÔNG SỐ & CAM KẾT -->
-    <section id="specs" class="py-16 md:py-24 bg-surface">
+    <!-- SECTION: THÔNG SỐ & CAM KẾT BÁN HÀNG -->
+    <section id="specs" class="py-16 md:py-24 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 
                 <!-- Bảng Thông Số Kỹ Thuật -->
                 <div>
-                    <h2 class="serif-font text-3xl font-bold text-dark mb-8">Thông Số Kỹ Thuật</h2>
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#2E5B76]/10">
-                        <table class="w-full">
+                    <h2 class="text-3xl font-extrabold text-dark mb-8">Thông Số Kỹ Thuật</h2>
+                    <div class="bg-surface rounded-2xl overflow-hidden shadow-sm">
+                        <table class="w-full text-sm">
                             <tbody>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 w-2/5 text-sm">Chất liệu</td>
-                                    <td class="px-6 py-4 text-muted text-sm">Vải Nylon 210T độ bền cao, phủ bạc phản nhiệt</td>
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 w-2/5">Chất liệu vải</td>
+                                    <td class="px-6 py-4 text-muted">Vải sợi Nylon 210T phủ bạc cản nhiệt chống rách</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 text-sm">Chỉ số chống nắng</td>
-                                    <td class="px-6 py-4 text-muted text-sm">UPF 50+ (Cản 99% tia cực tím UV)</td>
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Khung cột nâng</td>
+                                    <td class="px-6 py-4 text-muted">Ống thép mạ kẽm cao 2.0m chống rỉ sét</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 text-sm">Độ kháng nước</td>
-                                    <td class="px-6 py-4 text-muted text-sm">PU2000mm (chống mưa giông tốt)</td>
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Kích cỡ tấm che</td>
+                                    <td class="px-6 py-4 text-muted">300*280cm (Standard) hoặc 500*300cm (Premium)</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 text-sm">Kích thước lều</td>
-                                    <td class="px-6 py-4 text-muted text-sm">Standard (300x280cm) hoặc Premium (500x300cm)</td>
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Khả năng chống UV</td>
+                                    <td class="px-6 py-4 text-muted">UPF 50+ (Ngăn chặn 99% tia cực tím UV)</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 text-sm">Khung đỡ</td>
-                                    <td class="px-6 py-4 text-muted text-sm">2 cột thép mạ kẽm (chiều cao 2.0m)</td>
-                                </tr>
-                                <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 text-sm">Trọng lượng</td>
-                                    <td class="px-6 py-4 text-muted text-sm">Toàn bộ bộ lều ~2.0kg</td>
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Độ kháng nước</td>
+                                    <td class="px-6 py-4 text-muted">PU2000mm vượt trội dưới mưa giông</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 text-sm">Phụ kiện bao gồm</td>
-                                    <td class="px-6 py-4 text-muted text-sm">1 tấm che, 2 cột dựng, 4 neo cọc thép, 4 dây căng gió, 1 túi đựng</td>
+                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Bộ phụ kiện</td>
+                                    <td class="px-6 py-4 text-muted">1 Tấm che, 2 Cột sắt, 4 Neo cọc thép, 4 Dây căng, 1 Túi đựng</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Cột lý do chọn mua -->
+                <!-- Lợi ích bán hàng -->
                 <div>
-                    <img src="https://cbu01.alicdn.com/img/ibank/O1CN01Ucg5PP1lOZlXMy56M_!!2921024809-0-cib.jpg" 
-                         alt="Phong cách dã ngoại bãi biển"
-                         class="w-full h-64 object-cover rounded-2xl shadow-md mb-8 border border-white">
+                    <img src="https://cbu01.alicdn.com/img/ibank/O1CN01Ucg5PP1lOZlXMy56M_!!2921024809-0-cib.jpg" alt="Ảnh lều che nắng"
+                         class="w-full h-56 object-cover rounded-2xl shadow-md mb-8" id="specs-image">
                     
-                    <h2 class="serif-font text-3xl font-bold text-dark mb-8">Trọn vẹn từng chuyến đi</h2>
+                    <h2 class="text-3xl font-extrabold text-dark mb-8">Tại Sao Nên Chọn Tấm Che One Trip One Bite?</h2>
                     
-                    <div class="space-y-6">
+                    <div class="space-y-6 text-sm">
                         <!-- Lý do 1 -->
                         <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 text-primary">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            <div class="w-12 h-12 gradient-cta rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-dark text-base mb-1">Bảo vệ sức khỏe tối đa</h3>
-                                <p class="text-muted text-sm">Khả năng cản nắng và giảm nhiệt hiệu quả giúp trẻ em và gia đình bạn thoải mái chơi đùa dưới cát mà không bị sốc nhiệt hay bỏng nắng.</p>
+                                <h3 class="font-bold text-dark text-base mb-1">Thiết lập linh hoạt, an toàn cho da</h3>
+                                <p class="text-muted">Cản phá tối đa tia tử ngoại giúp trẻ nhỏ và cả gia đình thoải mái tham gia vui chơi dọc bãi cát mà không lo cháy nắng.</p>
                             </div>
                         </div>
 
                         <!-- Lý do 2 -->
                         <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 text-primary">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <div class="w-12 h-12 gradient-cta rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-dark text-base mb-1">Xếp gọn và mang vác linh hoạt</h3>
-                                <p class="text-muted text-sm">Không còn cảnh vác cồng kềnh những bộ ô dù hay lều nặng 10kg. Bộ sản phẩm xếp gọn gàng chỉ bằng kích thước chiếc túi cầm tay, sẵn sàng theo bạn đi muôn nơi.</p>
+                                <h3 class="font-bold text-dark text-base mb-1">Đứng vững chắc chắn trước gió mạnh</h3>
+                                <p class="text-muted">Tận dụng chính trọng lượng cát biển tại chỗ nén chặt vào túi neo tạo ra thế bám vững chắc mà ô dù thường không thể làm được.</p>
                             </div>
                         </div>
                     </div>
@@ -370,76 +335,76 @@
     </section>
 
     <!-- SECTION: ĐỐI TƯỢNG SỬ DỤNG PHÙ HỢP -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-16 md:py-24 bg-surface">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="serif-font text-3xl md:text-4xl font-bold text-dark mb-4">Sản Phẩm Này Dành Cho Ai?</h2>
-                <p class="text-muted max-w-xl mx-auto">Thiết kế đa dụng tối ưu cho các hoạt động ngoài trời.</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Sản Phẩm Này Dành Cho Ai?</h2>
+                <p class="text-lg text-muted">Sự lựa chọn hoàn hảo cho các hoạt động ngoài trời.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Đối tượng 1 -->
-                <div class="bg-surface p-8 rounded-2xl text-center border border-[#2E5B76]/10 hover:shadow-lg transition">
-                    <div class="text-5xl mb-4">🏖️</div>
-                    <h3 class="font-bold text-dark mb-2">Gia Đình Đi Biển Dã Ngoại</h3>
-                    <p class="text-muted text-sm">Không gian rộng lớn đủ cho 4-8 người ngồi thư giãn, ăn uống bên bờ cát mà không lo ánh nắng chiếu trực tiếp.</p>
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                    <div class="text-4xl mb-4">🏖️</div>
+                    <h3 class="font-bold text-dark mb-2">Gia Đình Đi Du Lịch Biển</h3>
+                    <p class="text-muted text-sm">Nơi trú nắng râm mát, rộng rãi cho gia đình 4-8 người ngồi nghỉ chân ăn uống trò chuyện dọc bờ biển cát mịn.</p>
                 </div>
                 
                 <!-- Đối tượng 2 -->
-                <div class="bg-surface p-8 rounded-2xl text-center border border-[#2E5B76]/10 hover:shadow-lg transition">
-                    <div class="text-5xl mb-4">⛺</div>
-                    <h3 class="font-bold text-dark mb-2">Cắm Trại, Picnic Ngoài Trời</h3>
-                    <p class="text-muted text-sm">Dùng làm tấm tăng dã ngoại chống mưa chống sương đêm hoàn hảo ở các vùng thảo nguyên, rừng cây dã ngoại.</p>
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                    <div class="text-4xl mb-4">⛺</div>
+                    <h3 class="font-bold text-dark mb-2">Hội Bạn Đi Cắm Trại Dã Ngoại</h3>
+                    <p class="text-muted text-sm">Che sương che gió, làm tấm bạt mái tăng che mưa cực tốt cho các hoạt động dã ngoại ngoài thảo nguyên bãi cỏ.</p>
                 </div>
 
                 <!-- Đối tượng 3 -->
-                <div class="bg-surface p-8 rounded-2xl text-center border border-[#2E5B76]/10 hover:shadow-lg transition">
-                    <div class="text-5xl mb-4">🎣</div>
-                    <h3 class="font-bold text-dark mb-2">Cần Thủ Câu Cá Bờ Biển</h3>
-                    <p class="text-muted text-sm">Tấm chắn bảo vệ cần thủ khỏi ánh nắng gắt kéo dài nhiều giờ liền trên bờ biển, nâng cao hiệu suất buổi câu.</p>
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                    <div class="text-4xl mb-4">🎣</div>
+                    <h3 class="font-bold text-dark mb-2">Người Yêu Thích Câu Cá Biển</h3>
+                    <p class="text-muted text-sm">Cản nắng lâu dài bảo vệ cần thủ xuyên suốt buổi đi câu hàng giờ liền dưới thời tiết khắc nghiệt.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECTION: CÂU HỎI THƯỜNG GẶP (FAQ) -->
-    <section id="faq" class="py-16 md:py-24 bg-surface">
+    <section id="faq" class="py-16 md:py-24 bg-white">
         <div class="max-w-3xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="serif-font text-3xl md:text-4xl font-bold text-dark mb-4">Câu Hỏi Thường Gặp</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Câu Hỏi Thường Gặp</h2>
             </div>
 
             <div class="space-y-4">
                 <!-- Câu hỏi 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-[#2E5B76]/5">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left focus:outline-none">
-                        <span class="font-semibold text-dark text-base md:text-lg">Tấm che này có khó lắp đặt không?</span>
+                <div class="bg-surface rounded-xl shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-dark text-base md:text-lg">Việc lắp đặt tấm che có mất nhiều thời gian?</span>
                         <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div class="faq-content hidden px-6 pb-6 border-t border-gray-50 pt-4">
-                        <p class="text-muted text-sm leading-relaxed">Cực kỳ đơn giản! Chỉ cần trải tấm che ra trên cát, đổ cát vào đầy 4 túi neo ở 4 góc của tấm che, dựng 2 cột đỡ đứng thẳng ở mép trước và kéo căng dây gió buộc cố định. Một người cũng chỉ mất 3-5 phút để lắp xong.</p>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-muted leading-relaxed">
+                        Chỉ mất từ 3-5 phút! Bạn chỉ cần trải phẳng tấm che ra cát, xúc cát lấp đầy vào 4 túi neo ở 4 góc, dựng cột đỡ mạ kẽm lên và căng dây cột cố định là hoàn thành. Ai cũng tự làm được dễ dàng.
                     </div>
                 </div>
 
                 <!-- Câu hỏi 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-[#2E5B76]/5">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left focus:outline-none">
-                        <span class="font-semibold text-dark text-base md:text-lg">Gió biển lớn có làm lật tấm che không?</span>
+                <div class="bg-surface rounded-xl shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-dark text-base md:text-lg">Tấm che có bị đổ khi có gió giông mạnh thổi qua?</span>
                         <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div class="faq-content hidden px-6 pb-6 border-t border-gray-50 pt-4">
-                        <p class="text-muted text-sm leading-relaxed">Nhờ cơ chế túi cát chịu lực nén từ trọng lượng cát bãi biển cực lớn ở 4 góc kết hợp dây căng khí động học, tấm che bãi biển này có khả năng chịu lực cản gió cực tốt, không bị lật đổ hay biến dạng trước các luồng gió biển vừa và mạnh.</p>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-muted leading-relaxed">
+                        Nhờ thiết kế túi cát chịu lực nén cực mạnh ở 4 góc kết hợp dây tăng gió căng chịu lực, tấm che của chúng tôi chịu sức cản gió vượt trội so với các loại ô dù truyền thống, đảm bảo không bị giật lật trước gió biển.
                     </div>
                 </div>
 
                 <!-- Câu hỏi 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-[#2E5B76]/5">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left focus:outline-none">
-                        <span class="font-semibold text-dark text-base md:text-lg">Tôi có thể mua thêm thảm bãi biển đồng bộ màu không?</span>
+                <div class="bg-surface rounded-xl shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-dark text-base md:text-lg">Tôi có thể chọn mua thảm dã ngoại cùng màu không?</span>
                         <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div class="faq-content hidden px-6 pb-6 border-t border-gray-50 pt-4">
-                        <p class="text-muted text-sm leading-relaxed">Có. One Trip One Bite cung cấp thêm tùy chọn mua kèm thảm dã ngoại chống cát cùng tone màu (xanh dương xám hoặc xanh hồ phối xanh đậm) với 2 kích cỡ 140*200cm và 210*200cm để gia đình bạn có bộ set nghỉ dưỡng bãi biển đồng bộ nhất.</p>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-muted leading-relaxed">
+                        Có. Chúng tôi cung cấp thêm tùy chọn mua kèm thảm dã ngoại chống cát cùng phối màu (xanh dương xám hoặc xanh hồ phối xanh đậm) với 2 kích thước 140*200cm và 210*200cm để hoàn thiện combo dã ngoại bãi biển của bạn.
                     </div>
                 </div>
             </div>
@@ -447,59 +412,46 @@
     </section>
 
     <!-- FINAL CALL TO ACTION (CTA) -->
-    <section class="py-16 md:py-24 bg-[#2E5B76] text-white relative">
-        <div class="max-w-3xl mx-auto px-4 text-center relative z-10">
-            <h2 class="serif-font text-3xl md:text-4xl font-bold mb-6">Trải Nghiệm Kỳ Nghỉ Mát Hè Này Cùng Gia Đình</h2>
-            <p class="text-lg text-gray-200 mb-8 max-w-xl mx-auto">Số lượng ưu đãi có hạn. Hãy nhanh tay đăng ký sở hữu ngay bộ tấm che nắng chuyên dụng hôm nay.</p>
+    <section id="payment" class="py-16 md:py-24 gradient-hero text-white">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Trải Nghiệm Kỳ Nghỉ Mát Hè Hoàn Hảo Cùng Gia Đình</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-xl mx-auto">Đăng ký đặt hàng ngay hôm nay để nhận ưu đãi giảm giá 35% và miễn phí vận chuyển toàn quốc.</p>
 
-            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 mb-8 max-w-md mx-auto border border-white/20">
-                <div class="text-sm text-accent font-semibold mb-2">Ưu đãi độc quyền hè 2026</div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 max-w-md mx-auto border border-white/20">
+                <div class="text-sm text-cyan-300 font-semibold mb-2">Ưu đãi độc quyền đợt này</div>
                 <div class="flex items-baseline justify-center gap-3 mb-2">
-                    <span class="text-4xl md:text-5xl font-extrabold text-white">590.000đ</span>
+                    <span class="text-5xl font-extrabold text-white">590.000đ</span>
                 </div>
                 <div class="flex items-center justify-center gap-2 mb-6">
-                    <span class="text-lg text-gray-400 line-through">890.000đ</span>
-                    <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">-34%</span>
+                    <span class="text-lg text-gray-500 line-through">890.000đ</span>
+                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-34%</span>
                 </div>
 
-                <button onclick="showPaymentModal()" class="w-full bg-accent hover:bg-[#b26839] text-white font-bold py-4 px-8 rounded-xl text-lg transition shadow-lg shadow-accent/30 text-center">
+                <button onclick="showPaymentModal()" class="w-full gradient-cta text-white font-bold py-4 px-8 rounded-xl text-xl hover:opacity-90 transition shadow-lg shadow-blue-500/30">
                     Đặt Hàng Ngay
                 </button>
+
+                <p class="text-xs text-gray-400 mt-4">Cam kết kiểm hàng trước khi thanh toán &bull; Bảo hành 7 ngày đổi mới</p>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-dark text-gray-400 py-12 border-t border-[#2E5B76]/10">
-        <div class="max-w-6xl mx-auto px-4 text-center md:text-left">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
-                <div class="flex items-center gap-3">
-                    <img src="assets/logo_transparent.png" alt="One Trip One Bite Logo" class="h-10 w-auto bg-white/5 p-1 rounded">
-                    <span class="serif-font font-bold text-white text-base md:text-lg tracking-wider uppercase">One Trip One Bite</span>
-                </div>
-                <p class="text-xs text-gray-500">Hỗ trợ khách hàng: <a href="https://zalo.me/0973332823" target="_blank" class="text-accent hover:underline">Nhắn Zalo hỗ trợ</a> &middot; Hotline: 0973.332.823</p>
-            </div>
-            <hr class="border-gray-800 my-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
-                <p>&copy; 2026 One Trip One Bite. Bảo lưu mọi quyền.</p>
-                <div class="flex gap-4">
-                    <a href="https://youtube.com" class="hover:underline" target="_blank">YouTube</a>
-                    <a href="https://facebook.com" class="hover:underline" target="_blank">Facebook</a>
-                    <a href="https://instagram.com" class="hover:underline" target="_blank">Instagram</a>
-                    <a href="https://tiktok.com" class="hover:underline" target="_blank">TikTok</a>
-                </div>
-            </div>
+    <footer class="bg-dark text-gray-400 py-8 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm">Hỗ trợ đặt hàng: <a href="https://zalo.me/0973332823" target="_blank" class="text-accent hover:underline">Nhắn Zalo hỗ trợ</a></p>
+            <p class="text-xs mt-2 text-gray-600">&copy; 2026 One Trip One Bite Shop. Bảo lưu mọi quyền.</p>
         </div>
     </footer>
 
     <!-- STICKY MOBILE CTA -->
-    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 bg-[#F7F4EE] border-t border-[#2E5B76]/10 shadow-2xl z-50 p-3 md:hidden translate-y-full transition-transform duration-300">
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-50 p-3 md:hidden translate-y-full transition-transform duration-300">
         <div class="flex items-center justify-between gap-3">
             <div>
-                <div class="font-bold text-dark text-lg">590.000đ</div>
-                <div class="text-xs text-green-600 font-semibold">Freeship Toàn Quốc</div>
+                <div class="font-bold text-dark">590.000đ</div>
+                <div class="text-xs text-green-600 font-semibold">Miễn phí vận chuyển</div>
             </div>
-            <button onclick="showPaymentModal()" class="bg-accent hover:bg-[#b26839] text-white font-bold py-3 px-6 rounded-xl transition flex-1 text-center text-sm shadow-md">
+            <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-3 px-6 rounded-xl hover:opacity-90 transition flex-1 text-center">
                 Đặt Hàng Ngay
             </button>
         </div>
@@ -508,23 +460,23 @@
     <!-- HỘP THOẠI ĐẶT HÀNG & THANH TOÁN (PAYMENT MODAL) -->
     <div id="payment-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center">
         <div class="modal-overlay absolute inset-0" onclick="hidePaymentModal()"></div>
-        <div class="relative bg-[#F7F4EE] rounded-2xl p-6 md:p-8 max-w-md w-[95%] mx-4 shadow-2xl z-10 max-h-[90vh] overflow-y-auto border border-[#2E5B76]/10">
+        <div class="relative bg-white rounded-2xl p-6 md:p-8 max-w-md w-[92%] mx-4 shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
             <button onclick="hidePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold leading-none">&times;</button>
 
             <!-- BƯỚC 1: ĐIỀN THÔNG TIN ĐƠN HÀNG -->
             <div id="step-form">
                 <div class="text-center mb-6">
-                    <h3 class="serif-font text-2xl font-bold text-dark mb-1">Đặt Hàng</h3>
-                    <p class="text-muted text-xs">Vui lòng chọn tùy chọn và điền địa chỉ giao hàng</p>
+                    <h3 class="text-2xl font-bold text-dark mb-1">Đặt Hàng</h3>
+                    <p class="text-muted text-xs">Vui lòng chọn các tùy chọn và điền địa chỉ giao hàng</p>
                 </div>
 
-                <!-- LỰA CHỌN GÓI SẢN PHẨM CHÍNH (TẤM CHE) -->
+                <!-- LỰA CHỌN KÍCH CỠ TẤM CHE NẮNG CHÍNH -->
                 <div class="space-y-3 mb-4">
                     <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">1. Chọn kích thước tấm che nắng:</span>
                     
                     <!-- Lều 3m -->
                     <label class="block cursor-pointer" onclick="selectPackage('tent_300_280')">
-                        <div id="pkg-tent_300_280" class="border-2 border-primary bg-white rounded-xl p-4 transition relative">
+                        <div id="pkg-tent_300_280" class="border-2 border-primary bg-blue-50 rounded-xl p-4 transition relative">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-3">
                                     <div id="radio-tent_300_280" class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
@@ -532,12 +484,12 @@
                                     </div>
                                     <div>
                                         <div class="font-bold text-dark text-sm">Gói Standard (300*280cm)</div>
-                                        <div class="text-xs text-[#2E5B76] font-semibold mt-0.5">Phù hợp 3-4 người</div>
+                                        <div class="text-xs text-primary font-semibold mt-0.5">Phù hợp 3-4 người</div>
                                     </div>
                                 </div>
                                 <div class="text-right">
                                     <div class="font-bold text-primary text-base">590.000đ</div>
-                                    <div class="text-xs text-muted line-through">890.000đ</div>
+                                    <div class="text-xs text-muted line-through text-[11px]">890.000đ</div>
                                 </div>
                             </div>
                             <div id="stock-badge-tent_300_280" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded hidden">Hết hàng</div>
@@ -547,7 +499,7 @@
                     <!-- Lều 5m -->
                     <label class="block cursor-pointer" onclick="selectPackage('tent_500_300')">
                         <div id="pkg-tent_500_300" class="border-2 border-gray-200 bg-white hover:border-primary rounded-xl p-4 transition relative">
-                            <div class="absolute top-0 right-0 bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg">HOT</div>
+                            <div class="absolute top-0 right-0 bg-red-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg">HOT</div>
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-3">
                                     <div id="radio-tent_500_300" class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center">
@@ -555,12 +507,12 @@
                                     </div>
                                     <div>
                                         <div class="font-bold text-dark text-sm">Gói Premium (500*300cm)</div>
-                                        <div class="text-xs text-[#2E5B76] font-semibold mt-0.5">Phù hợp 6-8 người</div>
+                                        <div class="text-xs text-primary font-semibold mt-0.5">Phù hợp 6-8 người</div>
                                     </div>
                                 </div>
                                 <div class="text-right">
                                     <div class="font-bold text-primary text-base">690.000đ</div>
-                                    <div class="text-xs text-muted line-through">1.090.000đ</div>
+                                    <div class="text-xs text-muted line-through text-[11px]">1.090.000đ</div>
                                 </div>
                             </div>
                             <div id="stock-badge-tent_500_300" class="absolute top-1 right-8 bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded hidden">Hết hàng</div>
@@ -569,11 +521,11 @@
                 </div>
 
                 <!-- LỰA CHỌN MUA KÈM THẢM (MUA THÊM) -->
-                <div class="bg-white border border-[#2E5B76]/10 rounded-xl p-4 mb-4">
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-4">
                     <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">2. Chọn mua kèm thảm bãi biển chống cát (tùy chọn):</span>
                     
                     <div class="space-y-2 text-xs">
-                        <label class="flex items-center gap-2.5 p-2 bg-[#F7F4EE]/50 hover:bg-[#F7F4EE] rounded-lg cursor-pointer border border-[#2E5B76]/5 relative">
+                        <label class="flex items-center gap-2.5 p-2 bg-white hover:bg-blue-50/20 rounded-lg cursor-pointer border border-gray-100 relative">
                             <input type="checkbox" id="add-mat-140" onchange="updatePriceAndOptions()" class="w-4 h-4 rounded text-primary focus:ring-primary">
                             <div class="flex justify-between w-full">
                                 <span>Thêm Thảm bãi biển 140*200cm</span>
@@ -582,7 +534,7 @@
                             <div id="stock-badge-mat_140" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[9px] font-bold px-1 py-0.5 rounded hidden">Hết hàng</div>
                         </label>
                         
-                        <label class="flex items-center gap-2.5 p-2 bg-[#F7F4EE]/50 hover:bg-[#F7F4EE] rounded-lg cursor-pointer border border-[#2E5B76]/5 relative">
+                        <label class="flex items-center gap-2.5 p-2 bg-white hover:bg-blue-50/20 rounded-lg cursor-pointer border border-gray-100 relative">
                             <input type="checkbox" id="add-mat-210" onchange="updatePriceAndOptions()" class="w-4 h-4 rounded text-primary focus:ring-primary">
                             <div class="flex justify-between w-full">
                                 <span>Thêm Thảm bãi biển 210*200cm</span>
@@ -594,7 +546,7 @@
                         <!-- Dropdown chọn màu thảm (chỉ hiển thị khi check thảm) -->
                         <div id="mat-color-wrapper" class="hidden mt-3 pt-2 border-t border-gray-100">
                             <label class="block text-[11px] font-semibold text-dark mb-1">Màu sắc thảm dã ngoại:</label>
-                            <select id="mat-color" class="w-full bg-white border border-[#2E5B76]/20 rounded-lg p-2 text-xs focus:outline-none focus:border-primary">
+                            <select id="mat-color" class="w-full bg-white border border-gray-300 rounded-lg p-2 text-xs focus:outline-none focus:border-primary">
                                 <option value="Xanh Dương Xám">Xanh Dương phối Xám (Khuyên dùng)</option>
                                 <option value="Xanh Hồ">Xanh Hồ phối Xanh Đậm</option>
                             </select>
@@ -603,7 +555,7 @@
                 </div>
 
                 <!-- TÓM TẮT ĐƠN HÀNG TẠM TÍNH -->
-                <div class="bg-primary/5 border border-primary/20 rounded-xl p-3 mb-4 text-xs">
+                <div class="bg-blue-50/40 border border-blue-100 rounded-xl p-3 mb-4 text-xs">
                     <div class="flex justify-between font-semibold text-dark mb-1">
                         <span>Đơn hàng tạm tính:</span>
                         <span id="order-summary-txt">Gói Standard</span>
@@ -643,7 +595,7 @@
                     </div>
                 </div>
 
-                <button onclick="goToPayment()" id="btn-submit-details" class="w-full bg-accent hover:bg-[#b26839] text-white font-bold py-3.5 px-6 rounded-xl text-base transition shadow-md">
+                <button onclick="goToPayment()" id="btn-submit-details" class="w-full gradient-cta text-white font-bold py-3.5 px-6 rounded-xl text-base transition shadow-md">
                     Tiếp tục thanh toán PayPal
                 </button>
 
@@ -653,12 +605,12 @@
             <!-- BƯỚC 2: QUÉT / THANH TOÁN QUA CỔNG PAYPAL -->
             <div id="step-payment" class="hidden">
                 <div class="text-center mb-6">
-                    <h3 class="serif-font text-2xl font-bold text-dark mb-1">Thanh Toán</h3>
+                    <h3 class="text-2xl font-bold text-dark mb-1">Thanh Toán</h3>
                     <p class="text-muted text-xs">Thanh toán bảo mật qua cổng PayPal</p>
                 </div>
 
                 <!-- Tóm tắt đơn hàng ngắn -->
-                <div class="bg-primary/5 rounded-xl p-4 mb-6 text-xs">
+                <div class="bg-blue-50/30 rounded-xl p-4 mb-6 text-xs border border-blue-100">
                     <div class="flex justify-between py-1 border-b border-gray-100">
                         <span class="font-semibold text-dark">Sản phẩm chọn:</span>
                         <span class="text-muted" id="pay-summary">Gói Standard</span>
@@ -674,7 +626,7 @@
                 </div>
 
                 <!-- Khung PayPal Smart Buttons -->
-                <div class="p-2 bg-white rounded-xl border border-[#2E5B76]/10 mb-4">
+                <div class="p-2 bg-white rounded-xl border border-gray-200 mb-4">
                     <div id="paypal-button-container" class="w-full"></div>
                 </div>
 
@@ -690,10 +642,10 @@
                 <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 </div>
-                <h3 class="serif-font text-2xl font-bold text-dark mb-2">Đặt Hàng Thành Công!</h3>
+                <h3 class="text-2xl font-bold text-dark mb-2">Đặt Hàng Thành Công!</h3>
                 <p class="text-muted text-sm mb-4">Đơn hàng của bạn đã được thanh toán và lưu nhận trên hệ thống.</p>
 
-                <div class="bg-white border border-[#2E5B76]/10 rounded-xl p-4 text-xs text-left mb-6">
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-left mb-6">
                     <p class="font-bold text-dark mb-2">Trạng thái đơn hàng:</p>
                     <div class="space-y-2">
                         <div class="flex gap-2">
@@ -702,13 +654,13 @@
                         </div>
                         <div class="flex gap-2">
                             <span class="text-primary font-bold">●</span>
-                            <span class="text-dark font-semibold">One Trip One Bite đang chuẩn bị đóng gói & vận chuyển</span>
+                            <span class="text-dark font-semibold">Shop đang chuẩn bị đóng gói & vận chuyển</span>
                         </div>
                     </div>
                 </div>
 
                 <a href="https://zalo.me/0973332823" target="_blank"
-                   class="inline-flex items-center gap-2 bg-[#2E5B76] hover:bg-primary text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md w-full justify-center text-sm mb-3">
+                   class="inline-flex items-center gap-2 gradient-cta text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md w-full justify-center text-sm mb-3">
                     Kết nối Zalo để tra cứu đơn hàng
                 </a>
 
@@ -836,14 +788,14 @@
                 const radio = document.getElementById(`radio-${id}`);
 
                 if (id === pkgId) {
-                    borderDiv.classList.add('border-primary', 'bg-white');
-                    borderDiv.classList.remove('border-gray-200');
+                    borderDiv.classList.add('border-primary', 'bg-blue-50');
+                    borderDiv.classList.remove('border-gray-200', 'bg-white');
                     dot.classList.remove('hidden');
                     radio.classList.add('border-primary');
                     radio.classList.remove('border-gray-300');
                 } else {
-                    borderDiv.classList.remove('border-primary', 'bg-white');
-                    borderDiv.classList.add('border-gray-200');
+                    borderDiv.classList.remove('border-primary', 'bg-blue-50');
+                    borderDiv.classList.add('border-gray-200', 'bg-white');
                     dot.classList.add('hidden');
                     radio.classList.remove('border-primary');
                     radio.classList.add('border-gray-300');
