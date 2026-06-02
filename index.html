@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tấm Che Nắng Bãi Biển Cao Cấp | One Trip One Bite Shop</title>
-    <meta name="description" content="Tấm che nắng bãi biển dã ngoại ngoài trời chất liệu nylon 210T siêu nhẹ, chống UV 99%, chống nước 2000mm. Đi kèm khung thép mạ kẽm vững chãi, cọc neo cát chuyên dụng.">
+    <title>Premium Beach Sunshade Canopy | One Trip One Bite Shop</title>
+    <meta name="description" content="High-quality beach sunshade canopy made of lightweight 210T nylon, UPF 50+ UV protection, 2000mm waterproof. Sturdy galvanized steel poles and sand bag anchors included.">
     <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
     <link rel="apple-touch-icon" href="assets/favicon.png?v=2">
 
@@ -12,35 +12,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Cấu hình Theme & Colors hiện đại dạng Landing Template -->
+    <!-- Tailwind Theme & Colors Config matching the main page -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563EB',      // Xanh dương chính (Blue 600)
-                        accent: '#0EA5E9',       // Xanh nhấn (Sky 500)
-                        dark: '#0F172A',         // Màu chữ chính / nền tối (Slate 900)
-                        surface: '#F8FAFC',      // Nền phụ (Slate 50)
-                        muted: '#64748B',        // Màu chữ phụ (Slate 500)
-                        sale: '#DC2626'          // Màu đỏ khuyến mãi
+                        primary: '#2E5B76',      // Ocean Blue
+                        accent: '#C77D4A',       // Sun/Sand Gold
+                        dark: '#1F2933',         // Main text
+                        surface: '#F7F4EE',      // Sand-beige background
+                        muted: '#52606D',        // Muted gray text
+                        border: 'rgba(46, 91, 118, 0.12)',
+                        white: '#ffffff',
+                        sale: '#C77D4A'          // Sale accent
                     },
                     fontFamily: {
-                        sans: ['Be Vietnam Pro', 'sans-serif']
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif']
                     }
                 }
             }
         }
     </script>
 
-    <!-- Custom CSS Animations & Transitions -->
+    <!-- Custom CSS Animations & Styles -->
     <style>
-        body { font-family: 'Be Vietnam Pro', sans-serif; }
-        .gradient-hero { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
-        .gradient-cta { background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%); }
-        .feature-glow { box-shadow: 0 0 40px rgba(37, 99, 235, 0.08); }
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .feature-glow { box-shadow: 0 10px 30px rgba(46, 91, 118, 0.04); }
         
         .pulse-dot { animation: pulse-dot 2s infinite; }
         @keyframes pulse-dot {
@@ -51,21 +53,20 @@
         .float { animation: float 6s ease-in-out infinite; }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
         
-        .modal-overlay { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        .modal-overlay { background: rgba(31, 41, 51, 0.5); backdrop-filter: blur(4px); }
         html { scroll-behavior: smooth; }
         
         .sale-badge { animation: pulse-sale 1.5s infinite; }
         @keyframes pulse-sale {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
 
-        /* Styles cho phần checkout giống trang chính */
         .btn-submit {
-            background: #2563EB;
+            background: #2E5B76;
             color: #ffffff;
             font-weight: 700;
             border-radius: 8px;
@@ -74,7 +75,7 @@
             border: none;
         }
         .btn-submit:hover {
-            background: #1d4ed8;
+            background: #204359;
         }
         .form-input {
             width: 100%;
@@ -82,13 +83,13 @@
             border: 1.5px solid rgba(46, 91, 118, 0.12);
             border-radius: 8px;
             font-size: 0.9rem;
-            color: #0F172A;
+            color: #1F2933;
             background: #ffffff;
             transition: all 0.2s ease;
         }
         .form-input:focus {
             outline: none;
-            border-color: #2563EB;
+            border-color: #2E5B76;
         }
         .form-group {
             margin-bottom: 16px;
@@ -98,20 +99,28 @@
             display: block;
             font-size: 0.8rem;
             font-weight: 600;
-            color: #0F172A;
+            color: #52606D;
             margin-bottom: 6px;
         }
+        .checkout-step-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1F2933;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         .payment-details-panel {
-            display: none;
             background: #ffffff;
             border: 1px solid rgba(46, 91, 118, 0.12);
             border-radius: 12px;
-            padding: 24px;
+            padding: 20px;
             margin-top: 16px;
         }
         .success-panel {
             display: none;
             text-align: center;
+            padding: 30px 10px;
         }
         .success-icon {
             font-size: 3rem;
@@ -119,267 +128,373 @@
         }
     </style>
 </head>
-<body class="bg-white text-dark pt-16">
+<body class="bg-surface text-dark pt-16">
 
-    <!-- STICKY NAVBAR -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <!-- STICKY NAVBAR (Aligned with main site logo and brand) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#F7F4EE]/95 backdrop-blur-md border-b border-[#e2dcd0] shadow-sm">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <!-- Logo / Icon -->
-                <div class="w-8 h-8 gradient-cta rounded-lg flex items-center justify-center">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                </div>
-                <span class="font-bold text-dark text-sm md:text-base">One Trip One Bite Shop</span>
+            <a href="#" class="flex items-center gap-3">
+                <img src="assets/logo_transparent.png" alt="One Trip One Bite Logo" style="height: 48px; border-radius: 0;">
+                <span class="flex flex-col leading-none">
+                    <span class="font-serif font-extrabold text-[#2E5B76] text-sm md:text-[1.05rem] tracking-wider uppercase">ONE TRIP</span>
+                    <span class="font-serif font-extrabold text-[#C77D4A] text-[0.7rem] md:text-[0.75rem] tracking-widest uppercase mt-0.5">ONE BITE</span>
+                </span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider text-muted">
+                <a href="#features" class="hover:text-primary transition">Features</a>
+                <a href="#packages" class="hover:text-primary transition">Pricing</a>
+                <a href="#specs" class="hover:text-primary transition">Specs</a>
+                <a href="#faq" class="hover:text-primary transition">FAQ</a>
+                <a href="mailto:support@onetriponebite.com" class="hover:text-primary transition">Support</a>
             </div>
 
-            <!-- Menu desktop -->
-            <div class="hidden md:flex items-center gap-6 text-sm text-muted">
-                <a href="#features" class="hover:text-primary transition">Tính năng</a>
-                <a href="#specs" class="hover:text-primary transition">Thông số</a>
-                <a href="#faq" class="hover:text-primary transition">Hỏi đáp</a>
-                <a href="mailto:support@onetriponebite.com" class="hover:text-primary transition">Contact Support</a>
-            </div>
-
-            <!-- Nút mua nhanh trên header -->
-            <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-2 px-5 rounded-lg text-sm hover:opacity-90 transition shadow-md">
-                Đặt Mua
+            <!-- Header Purchase Button -->
+            <button onclick="showPaymentModal()" class="bg-[#C77D4A] hover:bg-[#b26839] text-white font-bold text-xs uppercase tracking-wider py-2.5 px-5 rounded-lg transition shadow-md">
+                Buy Now
             </button>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="gradient-hero text-white overflow-hidden">
+    <!-- HERO SECTION (Light Summer Theme) -->
+    <section class="bg-surface overflow-hidden border-b border-gray-200/50">
         <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Cột thông tin khuyến mãi & tiêu đề -->
+                <!-- Promo & Copy -->
                 <div>
-                    <div class="inline-flex items-center gap-2 bg-red-500/20 text-red-300 text-sm font-semibold px-4 py-2 rounded-full mb-6 sale-badge">
-                        <span class="w-2 h-2 bg-red-400 rounded-full pulse-dot"></span>
-                        Giảm giá khởi động hè 35% duy nhất hôm nay
+                    <div class="inline-flex items-center gap-2 bg-[#C77D4A]/10 text-[#C77D4A] text-xs font-bold px-4 py-2 rounded-full mb-6 sale-badge">
+                        <span class="w-2 h-2 bg-[#C77D4A] rounded-full pulse-dot"></span>
+                        SUMMER LAUNCH SALE — 35% OFF TODAY
                     </div>
 
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
-                        Tấm Che Nắng Dã Ngoại
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300"> Bãi Biển Cao Cấp</span>
+                    <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-primary mb-4">
+                        Premium Beach
+                        <span class="text-accent">Sunshade Canopy</span>
                     </h1>
 
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-lg">
-                        Thỏa sức tận hưởng làn gió mát lành bên bờ đại dương mà không lo nắng gắt. Chất liệu vải Nylon 210T siêu nhẹ, chống UV 99% & chống nước 2000mm.
+                    <p class="text-base md:text-lg text-muted leading-relaxed mb-8 max-w-lg">
+                        Enjoy the cool ocean breeze without the sunburn. Made of ultra-lightweight 210T silver-coated nylon, blocking 99% of UV rays. Stable in high winds using natural sandbag anchors.
                     </p>
 
-                    <!-- Giá bán nổi bật -->
+                    <!-- Main Pricing Display -->
                     <div class="flex items-baseline gap-4 mb-3">
-                        <span class="text-5xl font-extrabold text-white">590.000đ</span>
-                        <span class="text-2xl text-gray-500 line-through">890.000đ</span>
-                        <span class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">-34%</span>
+                        <span class="text-5xl font-extrabold text-primary">$24.00</span>
+                        <span class="text-2xl text-gray-400 line-through">$37.00</span>
+                        <span class="bg-[#C77D4A] text-white text-xs font-bold px-2.5 py-1 rounded-full">-35%</span>
                     </div>
-                    <p class="text-sm text-cyan-300 mb-8">Tiết kiệm 300.000đ so với giá gốc</p>
+                    <p class="text-xs text-accent font-semibold mb-8">Save $13.00 + Free Shipping on your first order</p>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-4 px-8 rounded-xl text-lg hover:opacity-90 transition shadow-lg shadow-blue-500/30">
-                            Đặt Hàng Ngay
+                        <button onclick="showPaymentModal()" class="bg-[#2E5B76] hover:bg-[#204359] text-white font-bold py-4 px-8 rounded-xl text-lg transition shadow-lg shadow-blue-900/10">
+                            Get Yours Now
                         </button>
-                        <a href="#features" class="border-2 border-white/30 text-white font-semibold py-4 px-8 rounded-xl text-lg hover:bg-white/10 transition text-center">
-                            Xem chi tiết
+                        <a href="#packages" class="border-2 border-primary/20 text-primary font-semibold py-4 px-8 rounded-xl text-lg hover:bg-primary/5 transition text-center">
+                            View Pricing
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-6 mt-8 text-sm text-gray-400">
+                    <div class="flex items-center gap-6 mt-8 text-xs text-muted">
                         <span class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            Giao hàng toàn quốc
+                            <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Free Worldwide Shipping Eligible
                         </span>
                         <span class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            Đổi mới nếu lỗi trong 7 ngày
+                            <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            7-Day Money-Back Guarantee
                         </span>
                     </div>
                 </div>
 
-                <!-- Cột hình ảnh sản phẩm (Hiệu ứng trôi lơ lửng) -->
+                <!-- Product Hero Image (Clean, No Text) -->
                 <div class="relative flex justify-center">
-                    <div class="absolute w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
-                    <img src="assets/tent-hero.jpg"
-                         alt="Tấm Che Nắng Bãi Biển"
-                         class="relative z-10 w-full max-w-md float rounded-2xl shadow-2xl border border-white/10"
+                    <div class="absolute w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+                    <img src="assets/tent-hero-clean.jpg"
+                         alt="Beach Sunshade Canopy"
+                         class="relative z-10 w-full max-w-lg rounded-2xl shadow-xl border border-white/50"
                          id="hero-image">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TRUST BADGES (Các chứng nhận / Cam kết bán hàng) -->
-    <section class="bg-surface border-y border-gray-200">
-        <div class="max-w-6xl mx-auto px-4 py-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div class="flex flex-col items-center gap-2 py-3">
+    <!-- TRUST BADGES SECTION -->
+    <section class="bg-white border-b border-gray-200/50">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="flex flex-col items-center gap-2 py-2">
                     <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <span class="font-semibold text-sm">Giao hàng siêu tốc</span>
+                    <span class="font-bold text-primary text-sm">Express Shipping</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 py-3">
-                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                    <span class="font-semibold text-sm">Bảo hành chính hãng</span>
+                <div class="flex flex-col items-center gap-2 py-2">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    <span class="font-bold text-primary text-sm">1-Year Product Warranty</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 py-3">
-                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                    <span class="font-semibold text-sm">Đóng gói chuẩn xuất khẩu</span>
+                <div class="flex flex-col items-center gap-2 py-2">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                    <span class="font-bold text-primary text-sm">Premium Storage Bag</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 py-3">
+                <div class="flex flex-col items-center gap-2 py-2">
                     <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    <span class="font-semibold text-sm">Hỗ trợ kỹ thuật trọn đời</span>
+                    <span class="font-bold text-primary text-sm">24/7 Email Support</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: NỖI ĐAU KHÁCH HÀNG & GIẢI PHÁP -->
-    <section class="py-16 md:py-20 bg-white">
+    <!-- PROBLEM & SOLUTION SECTION -->
+    <section class="py-16 md:py-20 bg-surface">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Bạn Đã Quá Mệt Mỏi Với Những Lều Kín Bí Bách Nóng Nực?</h2>
+                <h2 class="font-serif text-3xl md:text-4xl font-extrabold text-primary mb-4">Escape The Stuffy, Overheating Closed Beach Tents</h2>
             </div>
 
-            <!-- Ảnh mô tả vấn đề -->
+            <!-- Clean Cropped Lifestyle Image -->
             <div class="mb-10">
-                <img src="assets/tent-folding.jpg" alt="So sánh trước và sau"
+                <img src="assets/tent-folding-clean.jpg" alt="Enjoying Beach Canopy"
                      class="w-full max-w-2xl mx-auto rounded-2xl shadow-md" id="before-after-image">
             </div>
 
-            <!-- Bảng so sánh 2 cột -->
+            <!-- Comparison Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                <div class="bg-red-50 border border-red-200 p-6 rounded-2xl">
-                    <div class="text-red-500 font-bold text-lg mb-3">Khi không có Tấm che nắng:</div>
+                <div class="bg-red-50/60 border border-red-100 p-6 rounded-2xl">
+                    <div class="text-red-700 font-bold text-lg mb-3">Closed Tents & Umbrellas:</div>
                     <ul class="space-y-3 text-muted text-sm">
-                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> Lều thường kín như bưng, hấp hơi nóng bức ngột ngạt khó chịu.</li>
-                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> Ô dù nhỏ dễ bị gió thổi bay lật khi có gió biển thổi mạnh.</li>
-                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">✗</span> Nặng nề cồng kềnh khó di chuyển bằng xe máy hay vali du lịch.</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">✗</span> Traditional tents trap heat, becoming stuffy and hot like an oven.</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">✗</span> Heavy sea breezes easily flip umbrellas or blow them down the beach.</li>
+                        <li class="flex items-start gap-2"><span class="text-red-500 mt-1">✗</span> Bulk and weight make them difficult to carry in small bags or suitcases.</li>
                     </ul>
                 </div>
-                <div class="bg-green-50 border border-green-200 p-6 rounded-2xl">
-                    <div class="text-green-600 font-bold text-lg mb-3">Khi sở hữu Tấm che nắng One Trip One Bite:</div>
+                <div class="bg-[#2E5B76]/5 border border-primary/10 p-6 rounded-2xl">
+                    <div class="text-primary font-bold text-lg mb-3">One Trip One Bite Canopy:</div>
                     <ul class="space-y-3 text-muted text-sm">
-                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> Không gian mở thoáng mát đón gió biển tự nhiên từ 4 phía.</li>
-                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> Neo giữ bằng túi cát siêu nặng kết hợp dây kéo căng cực kì vững chãi.</li>
-                        <li class="flex items-start gap-2"><span class="text-green-500 mt-1">✓</span> Trọng lượng siêu nhẹ ~2.0kg xếp gọn gàng trong túi xách mini.</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> 360-degree open design allows sea breeze to flow freely.</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Heavy sandbag anchor pockets keep the tent stable in strong winds.</li>
+                        <li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Weighs only ~4 lbs (2.0kg) and folds into a small travel pouch.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: 3 TÍNH NĂNG CHÍNH / USP -->
-    <section id="features" class="py-16 md:py-24 bg-surface">
+    <!-- FEATURES / USP SECTION -->
+    <section id="features" class="py-16 md:py-24 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Các Tính Năng Nổi Bật</h2>
-                <p class="text-lg text-muted max-w-2xl mx-auto">Thiết kế đột phá dựa trên công nghệ và trải nghiệm người dùng thực tế trên các bãi biển.</p>
+                <h2 class="font-serif text-3xl md:text-4xl font-extrabold text-primary mb-4">Engineered For The Beach</h2>
+                <p class="text-base text-muted max-w-2xl mx-auto">Smart materials and simple mechanics designed to keep your family comfortable in the sun.</p>
             </div>
 
-            <!-- Grid 3 cột giới thiệu tính năng chính -->
+            <!-- Features Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Tính năng 1 -->
-                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
-                    <img src="assets/tent-fabric.jpg" alt="Tính năng 1"
+                <!-- Feature 1 -->
+                <div class="bg-surface rounded-2xl feature-glow hover:shadow-md transition group overflow-hidden">
+                    <img src="assets/tent-fabric-clean.jpg" alt="Silver Coated Fabric"
                          class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-1-image">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-3">Vải Nylon Phủ Bạc Chống UV</h3>
-                        <p class="text-muted text-sm leading-relaxed mb-4">Vải Nylon 210T cao cấp phủ lớp bạc cản hơn 99% bức xạ tia UV mặt trời và bảo vệ an toàn làn da.</p>
-                        <div class="bg-surface p-3 rounded-lg text-xs text-primary font-semibold">Chỉ số chống nắng UPF 50+ & Kháng nước 2000mm</div>
+                        <h3 class="font-serif text-xl font-bold text-primary mb-3">UPF 50+ UV Sun Protection</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-4">High-density silver-coated nylon blocks over 99% of harmful UV rays, protecting you and your kids' skin from sunburns.</p>
+                        <div class="bg-white p-3 rounded-lg text-xs text-accent font-semibold border border-primary/5">UPF 50+ Certified & PU2000mm Waterproof</div>
                     </div>
                 </div>
 
-                <!-- Tính năng 2 -->
-                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
-                    <img src="assets/tent-detail.jpg" alt="Tính năng 2"
+                <!-- Feature 2 -->
+                <div class="bg-surface rounded-2xl feature-glow hover:shadow-md transition group overflow-hidden">
+                    <img src="assets/tent-detail-clean.jpg" alt="Galvanized Support Poles"
                          class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-2-image">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-3">Khung Thép Mạ Kẽm Chịu Lực</h3>
-                        <p class="text-muted text-sm leading-relaxed mb-4">Hai cột đỡ cao 2.0m bằng thép mạ kẽm bền bỉ, chống rỉ sét ăn mòn khi gặp nước biển mặn.</p>
-                        <div class="bg-surface p-3 rounded-lg text-xs text-primary font-semibold">Thiết kế thanh nối gập thông minh xếp gọn nhanh chóng</div>
+                        <h3 class="font-serif text-xl font-bold text-primary mb-3">Sturdy Support Poles</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-4">Two lightweight 6.5ft (2.0m) galvanized steel tubes provide high headroom clearance and resist salty rust or corrosion.</p>
+                        <div class="bg-white p-3 rounded-lg text-xs text-accent font-semibold border border-primary/5">Folding cord design locks instantly in place</div>
                     </div>
                 </div>
 
-                <!-- Tính năng 3 -->
-                <div class="bg-white rounded-2xl feature-glow hover:shadow-xl transition group overflow-hidden">
-                    <img src="assets/tent-lifestyle.jpg" alt="Tính năng 3"
+                <!-- Feature 3 -->
+                <div class="bg-surface rounded-2xl feature-glow hover:shadow-md transition group overflow-hidden">
+                    <img src="assets/tent-lifestyle.jpg" alt="Sand Anchor System"
                          class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" id="feature-3-image">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-3">Cơ Chế Neo Bằng Túi Cát</h3>
-                        <p class="text-muted text-sm leading-relaxed mb-4">Không cần cắm cọc đóng cọc phức tạp, dùng chính cát bãi biển lấp đầy 4 túi neo ở các góc tạo độ cân bằng chống gió.</p>
-                        <div class="bg-surface p-3 rounded-lg text-xs text-primary font-semibold">Tặng kèm cọc cắm cỏ thép dã ngoại đa dụng</div>
+                        <h3 class="font-serif text-xl font-bold text-primary mb-3">Heavy Sand Anchor Pockets</h3>
+                        <p class="text-muted text-sm leading-relaxed mb-4">No stakes needed. Simply fill the corner bags with sand, stretch the canopy tightly, and stand the poles to establish anchor.</p>
+                        <div class="bg-white p-3 rounded-lg text-xs text-accent font-semibold border border-primary/5">Includes ground stakes for grass lawn setups</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: THÔNG SỐ & CAM KẾT BÁN HÀNG -->
+    <!-- NEW: VISUAL PRODUCT VARIANT CATALOG SECTION (Thiếu rất nhiều hình ảnh) -->
+    <section id="packages" class="py-16 md:py-24 bg-surface border-t border-b border-gray-200/50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold text-accent uppercase tracking-widest block mb-2">Product Catalog</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-extrabold text-primary mb-4">Choose Your Summer Setup</h2>
+                <p class="text-base text-muted max-w-xl mx-auto">Select a canopy size and matching beach mats below. Click select to purchase via our checkout modal.</p>
+            </div>
+
+            <!-- Tent Packages Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+                <!-- Standard Pack -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200/70 overflow-hidden flex flex-col justify-between hover:shadow-md transition duration-300">
+                    <div>
+                        <div class="relative">
+                            <img src="assets/tent-blue-grey-clean.jpg" alt="Standard Tent (300*280cm)" class="w-full h-64 object-cover">
+                            <span class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">Standard Size</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-serif text-2xl font-bold text-primary mb-2">Standard Sunshade Canopy</h3>
+                            <p class="text-xs text-muted mb-4">Ideal size for couples and small families.</p>
+                            
+                            <ul class="space-y-2 text-xs text-muted mb-6">
+                                <li class="flex items-center gap-2">✓ Dimensions: 300 x 280 cm (10' x 9')</li>
+                                <li class="flex items-center gap-2">✓ Fits 3 to 4 people comfortably</li>
+                                <li class="flex items-center gap-2">✓ 2x Folding galvanized steel poles</li>
+                                <li class="flex items-center gap-2">✓ Package weight: 4.4 lbs (2.0 kg)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 pt-0 border-t border-gray-50 flex items-center justify-between">
+                        <div>
+                            <span class="text-2xl font-extrabold text-primary">$24.00</span>
+                            <span class="text-xs text-gray-400 line-through block">$37.00</span>
+                        </div>
+                        <button onclick="showPaymentModal('tent_300_280')" class="bg-[#2E5B76] hover:bg-[#204359] text-white font-bold py-2.5 px-6 rounded-lg text-xs uppercase tracking-wider transition">
+                            Select Standard
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Premium Pack -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200/70 overflow-hidden flex flex-col justify-between hover:shadow-md transition duration-300 relative">
+                    <span class="absolute top-4 right-4 z-20 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">Popular</span>
+                    <div>
+                        <div class="relative">
+                            <img src="assets/tent-lake-blue-clean.jpg" alt="Premium Tent (500*300cm)" class="w-full h-64 object-cover">
+                            <span class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">Premium Extra-Large</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-serif text-2xl font-bold text-primary mb-2">Premium Sunshade Canopy</h3>
+                            <p class="text-xs text-muted mb-4">Huge shaded space for larger groups and gatherings.</p>
+                            
+                            <ul class="space-y-2 text-xs text-muted mb-6">
+                                <li class="flex items-center gap-2">✓ Dimensions: 500 x 300 cm (16' x 10')</li>
+                                <li class="flex items-center gap-2">✓ Fits 6 to 8 people comfortably</li>
+                                <li class="flex items-center gap-2">✓ 2x Heavy-duty support poles</li>
+                                <li class="flex items-center gap-2">✓ Package weight: 6.2 lbs (2.8 kg)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 pt-0 border-t border-gray-50 flex items-center justify-between">
+                        <div>
+                            <span class="text-2xl font-extrabold text-primary">$28.00</span>
+                            <span class="text-xs text-gray-400 line-through block">$43.00</span>
+                        </div>
+                        <button onclick="showPaymentModal('tent_500_300')" class="bg-[#2E5B76] hover:bg-[#204359] text-white font-bold py-2.5 px-6 rounded-lg text-xs uppercase tracking-wider transition">
+                            Select Premium
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optional Beach Mats Grid -->
+            <div class="max-w-4xl mx-auto">
+                <h3 class="font-serif text-xl font-bold text-primary text-center mb-6">Optional Add-On: Beach Mats</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-xl border border-gray-200/50 flex justify-between items-center hover:shadow-sm transition">
+                        <div>
+                            <h4 class="font-semibold text-primary text-sm">Beach Picnic Mat (140x200cm)</h4>
+                            <p class="text-xs text-muted">Compact sandproof mat for standard setup.</p>
+                            <span class="font-bold text-accent text-sm mt-1 block">+$5.00</span>
+                        </div>
+                        <button onclick="showPaymentModal(null, true, false)" class="border border-primary/20 text-primary hover:bg-primary/5 font-bold py-2 px-4 rounded-lg text-xs transition">
+                            Add to Order
+                        </button>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-gray-200/50 flex justify-between items-center hover:shadow-sm transition">
+                        <div>
+                            <h4 class="font-semibold text-primary text-sm">Beach Picnic Mat (210x200cm)</h4>
+                            <p class="text-xs text-muted">Large family mat with anchoring stakes.</p>
+                            <span class="font-bold text-accent text-sm mt-1 block">+$6.00</span>
+                        </div>
+                        <button onclick="showPaymentModal(null, false, true)" class="border border-primary/20 text-primary hover:bg-primary/5 font-bold py-2 px-4 rounded-lg text-xs transition">
+                            Add to Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: SPECIFICATIONS -->
     <section id="specs" class="py-16 md:py-24 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 
-                <!-- Bảng Thông Số Kỹ Thuật -->
+                <!-- Specs Table -->
                 <div>
-                    <h2 class="text-3xl font-extrabold text-dark mb-8">Thông Số Kỹ Thuật</h2>
-                    <div class="bg-surface rounded-2xl overflow-hidden shadow-sm">
+                    <h2 class="font-serif text-3xl font-extrabold text-primary mb-8">Technical Specifications</h2>
+                    <div class="bg-surface rounded-2xl overflow-hidden shadow-sm border border-gray-200/30">
                         <table class="w-full text-sm">
                             <tbody>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50 w-2/5">Chất liệu vải</td>
-                                    <td class="px-6 py-4 text-muted">Vải sợi Nylon 210T độ bền cao, phủ bạc cản nhiệt chống rách</td>
+                                    <td class="px-6 py-4 font-semibold text-primary bg-[#F7F4EE]/40 w-2/5">Material</td>
+                                    <td class="px-6 py-4 text-muted">210T ripstop silver-coated nylon fabric</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Khung cột nâng</td>
-                                    <td class="px-6 py-4 text-muted">Ống thép mạ kẽm cao 2.0m chống rỉ sét</td>
+                                    <td class="px-6 py-4 font-semibold text-primary bg-[#F7F4EE]/40">Support Poles</td>
+                                    <td class="px-6 py-4 text-muted">6.5ft (2.0m) rust-resistant galvanized steel tubes</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Kích cỡ tấm che</td>
-                                    <td class="px-6 py-4 text-muted">300*280cm (Standard) hoặc 500*300cm (Premium)</td>
+                                    <td class="px-6 py-4 font-semibold text-primary bg-[#F7F4EE]/40">Canopy Size</td>
+                                    <td class="px-6 py-4 text-muted">300*280cm (Standard) or 500*300cm (Premium)</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Khả năng chống UV</td>
-                                    <td class="px-6 py-4 text-muted">UPF 50+ (Ngăn chặn 99% tia cực tím UV)</td>
+                                    <td class="px-6 py-4 font-semibold text-primary bg-[#F7F4EE]/40">UV Protection</td>
+                                    <td class="px-6 py-4 text-muted">UPF 50+ (Blocks 99% of UV rays)</td>
                                 </tr>
                                 <tr class="border-b border-gray-100">
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Độ kháng nước</td>
-                                    <td class="px-6 py-4 text-muted">PU2000mm vượt trội dưới mưa giông</td>
+                                    <td class="px-6 py-4 font-semibold text-primary bg-[#F7F4EE]/40">Waterproof Rating</td>
+                                    <td class="px-6 py-4 text-muted">PU2000mm hydrostatic head rating</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-6 py-4 font-semibold text-dark bg-gray-50">Bộ phụ kiện</td>
-                                    <td class="px-6 py-4 text-muted">1 Tấm che, 2 Cột sắt, 4 Neo cọc thép, 4 Dây căng, 1 Túi đựng</td>
+                                    <td class="px-6 py-4 font-semibold text-primary bg-[#F7F4EE]/40">Package Contents</td>
+                                    <td class="px-6 py-4 text-muted">1x Canopy, 2x Poles, 4x Grass stakes, 4x Wind cords, 1x Storage bag</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Lợi ích bán hàng -->
+                <!-- Customer satisfaction list -->
                 <div>
-                    <img src="assets/tent-folding.jpg" alt="Ảnh lều che nắng"
+                    <img src="assets/tent-folding-clean.jpg" alt="Setting Up Canopy"
                          class="w-full h-56 object-cover rounded-2xl shadow-md mb-8" id="specs-image">
                     
-                    <h2 class="text-3xl font-extrabold text-dark mb-8">Tại Sao Nên Chọn Tấm Che One Trip One Bite?</h2>
+                    <h2 class="font-serif text-3xl font-extrabold text-primary mb-8">Why Choose One Trip One Bite?</h2>
                     
                     <div class="space-y-6 text-sm">
-                        <!-- Lý do 1 -->
+                        <!-- Bullet 1 -->
                         <div class="flex gap-4">
-                            <div class="w-12 h-12 gradient-cta rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 text-primary">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-dark text-base mb-1">Thiết lập linh hoạt, an toàn cho da</h3>
-                                <p class="text-muted">Cản phá tối đa tia tử ngoại giúp trẻ nhỏ và cả gia đình thoải mái tham gia vui chơi dọc bãi cát mà không lo cháy nắng.</p>
+                                <h3 class="font-bold text-primary text-base mb-1">Excellent Wind Resistance</h3>
+                                <p class="text-muted">By packing local sand into the deep anchor pockets, the canopy anchors adapt to the wind direction, providing strong stability that standard umbrellas can't match.</p>
                             </div>
                         </div>
 
-                        <!-- Lý do 2 -->
+                        <!-- Bullet 2 -->
                         <div class="flex gap-4">
-                            <div class="w-12 h-12 gradient-cta rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 text-primary">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-dark text-base mb-1">Đứng vững chắc chắn trước gió mạnh</h3>
-                                <p class="text-muted">Tận dụng chính trọng lượng cát biển tại chỗ nén chặt vào túi neo tạo ra thế bám vững chắc mà ô dù thường không thể làm được.</p>
+                                <h3 class="font-bold text-primary text-base mb-1">Durable & Rust-Resistant</h3>
+                                <p class="text-muted">High-density ripstop nylon combined with galvanized steel tubes prevents fabric tears and protects the frames from corrosive salty air.</p>
                             </div>
                         </div>
                     </div>
@@ -389,113 +504,163 @@
         </div>
     </section>
 
-    <!-- SECTION: ĐỐI TƯỢNG SỬ DỤNG PHÙ HỢP -->
-    <section class="py-16 md:py-24 bg-surface">
+    <!-- SECTION: AUDIENCE -->
+    <section class="py-16 md:py-24 bg-surface border-t border-gray-200/50">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Sản Phẩm Này Dành Cho Ai?</h2>
-                <p class="text-lg text-muted">Sự lựa chọn hoàn hảo cho các hoạt động ngoài trời.</p>
+                <h2 class="font-serif text-3xl md:text-4xl font-extrabold text-primary mb-4">Who Is This Canopy For?</h2>
+                <p class="text-base text-muted max-w-xl mx-auto">The ultimate sun shade accessory for any outdoor scenario.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Đối tượng 1 -->
-                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-sm transition">
                     <div class="text-4xl mb-4">🏖️</div>
-                    <h3 class="font-bold text-dark mb-2">Gia Đình Đi Du Lịch Biển</h3>
-                    <p class="text-muted text-sm">Nơi trú nắng râm mát, rộng rãi cho gia đình 4-8 người ngồi nghỉ chân ăn uống trò chuyện dọc bờ biển cát mịn.</p>
+                    <h3 class="font-bold text-primary mb-2">Beach-Loving Families</h3>
+                    <p class="text-muted text-sm">Provides an open, breezy shade spot for children to play safely out of the hot sun without sweating.</p>
                 </div>
                 
-                <!-- Đối tượng 2 -->
-                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-sm transition">
                     <div class="text-4xl mb-4">⛺</div>
-                    <h3 class="font-bold text-dark mb-2">Hội Bạn Đi Cắm Trại Dã Ngoại</h3>
-                    <p class="text-muted text-sm">Che sương che gió, làm tấm bạt mái tăng che mưa cực tốt cho các hoạt động dã ngoại ngoài thảo nguyên bãi cỏ.</p>
+                    <h3 class="font-bold text-primary mb-2">Campers & Picnickers</h3>
+                    <p class="text-muted text-sm">Lightweight to throw in a pack and quick to pitch over lawns, grass fields, and forest camping spots.</p>
                 </div>
 
-                <!-- Đối tượng 3 -->
-                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-lg transition">
+                <div class="bg-white p-6 rounded-2xl text-center hover:shadow-sm transition">
                     <div class="text-4xl mb-4">🎣</div>
-                    <h3 class="font-bold text-dark mb-2">Người Yêu Thích Câu Cá Biển</h3>
-                    <p class="text-muted text-sm">Cản nắng lâu dài bảo vệ cần thủ xuyên suốt buổi đi câu hàng giờ liền dưới thời tiết khắc nghiệt.</p>
+                    <h3 class="font-bold text-primary mb-2">Coastal Anglers</h3>
+                    <p class="text-muted text-sm">Perfect for beach casting, keeping you cool and shaded for long fishing hours on the shore.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: CÂU HỎI THƯỜNG GẶP (FAQ) -->
+    <!-- FAQ SECTION -->
     <section id="faq" class="py-16 md:py-24 bg-white">
         <div class="max-w-3xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Câu Hỏi Thường Gặp</h2>
+                <h2 class="font-serif text-3xl md:text-4xl font-extrabold text-primary mb-4">Frequently Asked Questions</h2>
             </div>
 
             <div class="space-y-4">
-                <!-- Câu hỏi 1 -->
-                <div class="bg-surface rounded-xl shadow-sm">
+                <div class="bg-surface rounded-xl shadow-sm border border-gray-100">
                     <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-dark text-base md:text-lg">Việc lắp đặt tấm che có mất nhiều thời gian?</span>
+                        <span class="font-semibold text-primary text-base md:text-lg">Does assembly take a long time?</span>
                         <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-content hidden px-6 pb-6 text-sm text-muted leading-relaxed">
-                        Chỉ mất từ 3-5 phút! Bạn chỉ cần trải phẳng tấm che ra cát, xúc cát lấp đầy vào 4 túi neo ở 4 góc, dựng cột đỡ mạ kẽm lên và căng dây cột cố định là hoàn thành. Ai cũng tự làm được dễ dàng.
+                        Setting it up takes only 3 to 5 minutes! Simply lay the canopy flat, fill the corner sandbags completely, erect the support poles under the fabric, and pull the tension ropes to lock it. One person can easily pitch it.
                     </div>
                 </div>
 
-                <!-- Câu hỏi 2 -->
-                <div class="bg-surface rounded-xl shadow-sm">
+                <div class="bg-surface rounded-xl shadow-sm border border-gray-100">
                     <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-dark text-base md:text-lg">Tấm che có bị đổ khi có gió giông mạnh thổi qua?</span>
+                        <span class="font-semibold text-primary text-base md:text-lg">Does it hold up during heavy beach winds?</span>
                         <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-content hidden px-6 pb-6 text-sm text-muted leading-relaxed">
-                        Nhờ thiết kế túi cát chịu lực nén cực mạnh ở 4 góc kết hợp dây tăng gió căng chịu lực, tấm che của chúng tôi chịu sức cản gió vượt trội so với các loại ô dù truyền thống, đảm bảo không bị giật lật trước gió biển.
+                        Yes! The sandbag weights combined with wind cords lock the tent frame in place. The open 360-degree structure lets strong gusts of wind blow right through rather than hitting a solid tent wall, preventing lift-offs.
                     </div>
                 </div>
 
-                <!-- Câu hỏi 3 -->
-                <div class="bg-surface rounded-xl shadow-sm">
+                <div class="bg-surface rounded-xl shadow-sm border border-gray-100">
                     <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-dark text-base md:text-lg">Tôi có thể chọn mua thảm dã ngoại cùng màu không?</span>
+                        <span class="font-semibold text-primary text-base md:text-lg">Can I order matching beach mats?</span>
                         <svg class="w-6 h-6 text-muted transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-content hidden px-6 pb-6 text-sm text-muted leading-relaxed">
-                        Có. Chúng tôi cung cấp thêm tùy chọn mua kèm thảm dã ngoại chống cát cùng phối màu (xanh dương xám hoặc xanh hồ phối xanh đậm) với 2 kích thước 140*200cm và 210*200cm để hoàn thiện combo dã ngoại bãi biển của bạn.
+                        Yes. We offer matching outdoor picnic beach mats in both Blue-Grey and Lake-Blue colors in 140*200cm and 210*200cm sizes. You can add them to your order during the checkout selection step.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FINAL CALL TO ACTION (CTA) -->
-    <section id="payment" class="py-16 md:py-24 gradient-hero text-white">
+    <!-- FINAL CTA -->
+    <section id="payment" class="py-16 md:py-24 bg-primary text-white">
         <div class="max-w-3xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Trải Nghiệm Kỳ Nghỉ Mát Hè Hoàn Hảo Cùng Gia Đình</h2>
-            <p class="text-xl text-gray-300 mb-8 max-w-xl mx-auto">Đăng ký đặt hàng ngay hôm nay để nhận ưu đãi giảm giá 35% và miễn phí vận chuyển toàn quốc.</p>
+            <h2 class="font-serif text-3xl md:text-4xl font-extrabold mb-6">Enjoy Summer In The Shade</h2>
+            <p class="text-lg text-gray-200 mb-8 max-w-xl mx-auto">Get 35% off the launch edition beach canopy + free worldwide shipping on your first checkout. Buy now while supplies last.</p>
 
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 max-w-md mx-auto border border-white/20">
-                <div class="text-sm text-cyan-300 font-semibold mb-2">Ưu đãi độc quyền đợt này</div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 max-w-md mx-auto border border-white/25">
+                <div class="text-xs text-accent font-semibold mb-2 uppercase tracking-wider">Summer Launch Promo</div>
                 <div class="flex items-baseline justify-center gap-3 mb-2">
-                    <span class="text-5xl font-extrabold text-white">590.000đ</span>
+                    <span class="text-5xl font-extrabold text-white">$24.00</span>
                 </div>
                 <div class="flex items-center justify-center gap-2 mb-6">
-                    <span class="text-lg text-gray-500 line-through">890.000đ</span>
-                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-34%</span>
+                    <span class="text-sm text-gray-300 line-through">$37.00</span>
+                    <span class="bg-accent text-white text-xs font-bold px-2 py-0.5 rounded-full">-35%</span>
                 </div>
 
-                <button onclick="showPaymentModal()" class="w-full gradient-cta text-white font-bold py-4 px-8 rounded-xl text-xl hover:opacity-90 transition shadow-lg shadow-blue-500/30">
-                    Đặt Hàng Ngay
+                <button onclick="showPaymentModal()" class="w-full bg-[#C77D4A] hover:bg-[#b26839] text-white font-bold py-4 px-8 rounded-xl text-lg transition shadow-lg">
+                    Order Yours Now
                 </button>
 
-                <p class="text-xs text-gray-400 mt-4">Cam kết kiểm hàng trước khi thanh toán &bull; Bảo hành 7 ngày đổi mới</p>
+                <p class="text-xs text-gray-300 mt-4">Free Shipping &bull; Secured Checkout &bull; 7-Day Money-Back Guarantee</p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-dark text-gray-400 py-8 border-t border-white/5">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <p class="text-sm">Hỗ trợ đặt hàng: <a href="mailto:support@onetriponebite.com" class="text-accent hover:underline">support@onetriponebite.com</a></p>
-            <p class="text-xs mt-2 text-gray-600">&copy; 2026 One Trip One Bite Shop. Bảo lưu mọi quyền.</p>
+    <!-- FOOTER (Aligned with the main site exactly) -->
+    <footer class="bg-[#F7F4EE] text-[#1F2933] py-12 border-t border-[#e2dcd0]">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Branding -->
+                <div>
+                    <div class="footer-logo mb-4">
+                        <img src="assets/logo.jpg" alt="One Trip One Bite Logo" style="height: 40px; mix-blend-mode: multiply; border-radius: 4px;">
+                    </div>
+                    <p class="text-sm font-semibold text-primary mb-1">Cast &middot; Taste &middot; Explore</p>
+                    <p class="text-xs text-muted leading-relaxed mb-6">Stories worth telling from the Gulf Coast and beyond.</p>
+                    
+                    <!-- Featured Partners (Matched exactly) -->
+                    <div class="mt-4">
+                        <div class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Featured Partners</div>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <img src="assets/partner_swim_school.png" alt="Swim School of Slidell" class="h-6 object-contain opacity-70 hover:opacity-100 transition">
+                            <img src="assets/partner_oak_harbor.png" alt="Oak Harbor Nail Spa" class="h-6 object-contain opacity-70 hover:opacity-100 transition rounded">
+                            <img src="assets/partner_matrix_shad.png" alt="Matrix Shad" class="h-6 object-contain opacity-70 hover:opacity-100 transition">
+                            <a href="mailto:partners@onetriponebite.com?subject=Partner%20Logos%20%26%20Advertising%20Inquiry" class="text-xs text-accent hover:underline font-bold">+ Your Logo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Nav Links -->
+                <div class="flex flex-col md:items-center">
+                    <div>
+                        <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-4">Navigation</span>
+                        <div class="flex flex-col gap-2.5 text-xs text-muted">
+                            <a href="#" class="hover:text-primary transition">Home</a>
+                            <a href="#features" class="hover:text-primary transition">Features</a>
+                            <a href="#packages" class="hover:text-primary transition">Pricing</a>
+                            <a href="#specs" class="hover:text-primary transition">Specifications</a>
+                            <a href="#faq" class="hover:text-primary transition">FAQ</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Legal & Socials -->
+                <div class="flex flex-col md:items-end">
+                    <div class="w-full md:w-auto">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-4 md:text-right">Legal & Contact</span>
+                        <div class="flex flex-col gap-2.5 text-xs text-muted md:items-end mb-6">
+                            <a href="#" onclick="openModal('modal-privacy');return false;" class="hover:text-primary transition">Privacy Policy</a>
+                            <a href="#" onclick="openModal('modal-terms');return false;" class="hover:text-primary transition">Terms of Service</a>
+                            <a href="mailto:support@onetriponebite.com" class="hover:text-primary transition font-semibold">Contact Support</a>
+                        </div>
+                        
+                        <div class="flex gap-4 md:justify-end">
+                            <a href="https://youtube.com" target="_blank" class="text-xs text-muted hover:text-primary font-bold uppercase tracking-wider transition">YouTube</a>
+                            <a href="https://facebook.com" target="_blank" class="text-xs text-muted hover:text-primary font-bold uppercase tracking-wider transition">Facebook</a>
+                            <a href="https://instagram.com" target="_blank" class="text-xs text-muted hover:text-primary font-bold uppercase tracking-wider transition">Instagram</a>
+                            <a href="https://tiktok.com" target="_blank" class="text-xs text-muted hover:text-primary font-bold uppercase tracking-wider transition">TikTok</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-[#e2dcd0] pt-6 text-center">
+                <p class="text-xs text-muted">&copy; 2026 One Trip One Bite. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -503,11 +668,11 @@
     <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-50 p-3 md:hidden translate-y-full transition-transform duration-300">
         <div class="flex items-center justify-between gap-3">
             <div>
-                <div class="font-bold text-dark">590.000đ</div>
-                <div class="text-xs text-green-600 font-semibold">Miễn phí vận chuyển</div>
+                <div class="font-bold text-primary" id="sticky-price">$24.00</div>
+                <div class="text-[10px] text-green-600 font-semibold uppercase tracking-wider">Free Shipping eligible</div>
             </div>
-            <button onclick="showPaymentModal()" class="gradient-cta text-white font-bold py-3 px-6 rounded-xl hover:opacity-90 transition flex-1 text-center">
-                Đặt Hàng Ngay
+            <button onclick="showPaymentModal()" class="bg-[#2E5B76] text-white font-bold py-3 px-6 rounded-xl text-xs uppercase tracking-wider hover:bg-[#204359] transition flex-1 text-center">
+                Buy Now
             </button>
         </div>
     </div>
@@ -521,105 +686,105 @@
             <!-- BƯỚC 1: ĐIỀN THÔNG TIN ĐƠN HÀNG -->
             <form id="checkout-details-form" onsubmit="event.preventDefault(); goToPayment();">
                 <div class="text-center mb-6">
-                    <h2 class="text-2xl font-bold text-dark mb-1">🛒 Secure Checkout</h2>
-                    <p class="text-muted text-xs">Vui lòng điền thông tin chi tiết và chọn gói sản phẩm</p>
+                    <h2 class="text-2xl font-bold text-primary mb-1 font-serif">🛒 Secure Checkout</h2>
+                    <p class="text-muted text-xs">Fill in your shipping details and select packages</p>
                 </div>
 
                 <!-- LỰA CHỌN KÍCH CỠ TẤM CHE NẮNG CHÍNH -->
                 <div class="space-y-3 mb-4">
-                    <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">1. Chọn kích thước tấm che nắng:</span>
+                    <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">1. Select Canopy Size:</span>
                     
                     <!-- Lều 3m -->
                     <label class="block cursor-pointer" onclick="selectPackage('tent_300_280')">
-                        <div id="pkg-tent_300_280" class="border-2 border-primary bg-blue-50 rounded-xl p-4 transition relative">
+                        <div id="pkg-tent_300_280" class="border-2 border-primary bg-[#e6eff5] rounded-xl p-4 transition relative">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-3">
                                     <div id="radio-tent_300_280" class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
                                         <div class="w-3 h-3 rounded-full bg-primary" id="dot-tent_300_280"></div>
                                     </div>
                                     <div>
-                                        <div class="font-bold text-dark text-sm">Gói Standard (300*280cm)</div>
-                                        <div class="text-xs text-primary font-semibold mt-0.5">Phù hợp 3-4 người</div>
+                                        <div class="font-bold text-dark text-sm">Standard Canopy (300*280cm)</div>
+                                        <div class="text-xs text-primary font-semibold mt-0.5">Fits 3-4 People</div>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-bold text-primary text-base">590.000đ</div>
-                                    <div class="text-xs text-muted line-through text-[11px]">890.000đ</div>
+                                    <div class="font-bold text-primary text-base">$24.00</div>
+                                    <div class="text-xs text-muted line-through text-[11px]">$37.00</div>
                                 </div>
                             </div>
-                            <div id="stock-badge-tent_300_280" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded hidden">Hết hàng</div>
+                            <div id="stock-badge-tent_300_280" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded hidden">Out of Stock</div>
                         </div>
                     </label>
 
                     <!-- Lều 5m -->
                     <label class="block cursor-pointer" onclick="selectPackage('tent_500_300')">
                         <div id="pkg-tent_500_300" class="border-2 border-gray-200 bg-white hover:border-primary rounded-xl p-4 transition relative">
-                            <div class="absolute top-0 right-0 bg-red-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg">HOT</div>
+                            <div class="absolute top-0 right-0 bg-[#C77D4A] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg rounded-tr-lg">HOT</div>
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-3">
                                     <div id="radio-tent_500_300" class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center">
                                         <div class="w-3 h-3 rounded-full bg-primary hidden" id="dot-tent_500_300"></div>
                                     </div>
                                     <div>
-                                        <div class="font-bold text-dark text-sm">Gói Premium (500*300cm)</div>
-                                        <div class="text-xs text-primary font-semibold mt-0.5">Phù hợp 6-8 người</div>
+                                        <div class="font-bold text-dark text-sm">Premium Canopy (500*300cm)</div>
+                                        <div class="text-xs text-primary font-semibold mt-0.5">Fits 6-8 People</div>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-bold text-primary text-base">690.000đ</div>
-                                    <div class="text-xs text-muted line-through text-[11px]">1.090.000đ</div>
+                                    <div class="font-bold text-primary text-base">$28.00</div>
+                                    <div class="text-xs text-muted line-through text-[11px]">$43.00</div>
                                 </div>
                             </div>
-                            <div id="stock-badge-tent_500_300" class="absolute top-1 right-8 bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded hidden">Hết hàng</div>
+                            <div id="stock-badge-tent_500_300" class="absolute top-1 right-8 bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded hidden">Out of Stock</div>
                         </div>
                     </label>
                 </div>
 
                 <!-- LỰA CHỌN MUA KÈM THẢM (MUA THÊM) -->
-                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-4">
-                    <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">2. Chọn mua kèm thảm bãi biển chống cát (tùy chọn):</span>
+                <div class="bg-surface border border-gray-200 rounded-xl p-4 mb-4">
+                    <span class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">2. Add Picnic Sandproof Mat (Optional):</span>
                     
                     <div class="space-y-2 text-xs">
-                        <label class="flex items-center gap-2.5 p-2 bg-white hover:bg-blue-50/20 rounded-lg cursor-pointer border border-gray-100 relative">
+                        <label class="flex items-center gap-2.5 p-2 bg-white hover:bg-primary/5 rounded-lg cursor-pointer border border-gray-100 relative">
                             <input type="checkbox" id="add-mat-140" onchange="updatePriceAndOptions()" class="w-4 h-4 rounded text-primary focus:ring-primary">
                             <div class="flex justify-between w-full">
-                                <span>Thêm Thảm bãi biển 140*200cm</span>
-                                <span class="font-bold text-primary">+120.000đ</span>
+                                <span>Add Picnic Mat 140*200cm</span>
+                                <span class="font-bold text-primary">+$5.00</span>
                             </div>
-                            <div id="stock-badge-mat_140" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[9px] font-bold px-1 py-0.5 rounded hidden">Hết hàng</div>
+                            <div id="stock-badge-mat_140" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[9px] font-bold px-1 py-0.5 rounded hidden">Out of Stock</div>
                         </label>
                         
-                        <label class="flex items-center gap-2.5 p-2 bg-white hover:bg-blue-50/20 rounded-lg cursor-pointer border border-gray-100 relative">
+                        <label class="flex items-center gap-2.5 p-2 bg-white hover:bg-primary/5 rounded-lg cursor-pointer border border-gray-100 relative">
                             <input type="checkbox" id="add-mat-210" onchange="updatePriceAndOptions()" class="w-4 h-4 rounded text-primary focus:ring-primary">
                             <div class="flex justify-between w-full">
-                                <span>Thêm Thảm bãi biển 210*200cm</span>
-                                <span class="font-bold text-primary">+150.000đ</span>
+                                <span>Add Picnic Mat 210*200cm</span>
+                                <span class="font-bold text-primary">+$6.00</span>
                             </div>
-                            <div id="stock-badge-mat_210" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[9px] font-bold px-1 py-0.5 rounded hidden">Hết hàng</div>
+                            <div id="stock-badge-mat_210" class="absolute top-1 right-2 bg-red-100 text-red-700 text-[9px] font-bold px-1 py-0.5 rounded hidden">Out of Stock</div>
                         </label>
 
                         <!-- Dropdown chọn màu thảm -->
                         <div id="mat-color-wrapper" class="hidden mt-3 pt-2 border-t border-gray-100">
-                            <label class="block text-[11px] font-semibold text-dark mb-1">Màu sắc thảm dã ngoại:</label>
+                            <label class="block text-[11px] font-semibold text-dark mb-1">Picnic Mat Color Option:</label>
                             <select id="mat-color" class="w-full bg-white border border-gray-300 rounded-lg p-2 text-xs focus:outline-none focus:border-primary">
-                                <option value="Xanh Dương Xám">Xanh Dương phối Xám</option>
-                                <option value="Xanh Hồ">Xanh Hồ phối Xanh Đậm</option>
+                                <option value="Blue Grey">Blue Grey Color</option>
+                                <option value="Lake Blue">Lake Blue Color</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- TÓM TẮT ĐƠN HÀNG TẠM TÍNH GIỐNG TRANG CHÍNH -->
-                <p id="checkout-product-summary" style="font-size: 0.85rem; margin-bottom: 20px; color: #64748B; border: 1px solid rgba(46, 91, 118, 0.12); border-radius: 8px; padding: 12px 14px; background: #F8FAFC; text-align: left;">
-                    <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Items</span><span id="co-prod-name" style="font-weight:600; color:#0F172A;">Standard</span></span>
+                <!-- TÓM TẮT ĐƠN HÀNG TẠM TÍNH -->
+                <p id="checkout-product-summary" style="font-size: 0.85rem; margin-bottom: 20px; color: #52606D; border: 1px solid rgba(46, 91, 118, 0.12); border-radius: 8px; padding: 12px 14px; background: #F8FAFC; text-align: left;">
+                    <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Items</span><span id="co-prod-name" style="font-weight:600; color:#1F2933;">Standard</span></span>
                     <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Subtotal</span><span id="co-prod-price">$24.00</span></span>
                     <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Shipping</span><span id="co-shipping-display">$7.00</span></span>
-                    <span style="display:flex; justify-content:space-between; padding-top:8px; margin-top:4px; border-top:1px solid rgba(46, 91, 118, 0.12); font-weight:700; color:#0F172A;"><span>Total</span><span id="co-total-display">$31.00</span></span>
+                    <span style="display:flex; justify-content:space-between; padding-top:8px; margin-top:4px; border-top:1px solid rgba(46, 91, 118, 0.12); font-weight:700; color:#1F2933;"><span>Total</span><span id="co-total-display">$31.00</span></span>
                 </p>
 
                 <!-- FORM ĐIỀN THÔNG TIN KHÁCH HÀNG -->
                 <div class="space-y-4 mb-6 text-left">
-                    <div class="checkout-step-title" style="font-size: 1rem; font-weight: 600; margin-bottom: 16px; border-bottom: 1px solid rgba(46, 91, 118, 0.12); padding-bottom: 8px; color: #2563EB;">Your Details</div>
+                    <div class="checkout-step-title" style="font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid rgba(46, 91, 118, 0.12); padding-bottom: 6px; color: #2E5B76;">Your Details</div>
                     <div class="form-group">
                         <label>Full Name *</label>
                         <input type="text" id="co-name" class="form-input" placeholder="e.g. John Doe" required>
@@ -630,37 +795,37 @@
                     </div>
                     <div class="form-group">
                         <label>Phone Number (optional)</label>
-                        <input type="tel" id="co-phone" class="form-input" placeholder="e.g. +84 912345678">
+                        <input type="tel" id="co-phone" class="form-input" placeholder="e.g. +1 (555) 000-0000">
                     </div>
                     <div class="form-group">
                         <label>Delivery Address *</label>
-                        <textarea id="co-address" class="form-input" rows="2" placeholder="e.g. Số nhà, tên đường, xã, huyện, tỉnh..." required style="resize: none;"></textarea>
+                        <textarea id="co-address" class="form-input" rows="2" placeholder="e.g. Street Name, Building No, ZIP, City, Country" required style="resize: none;"></textarea>
                     </div>
 
                     <!-- Đầu lọc giảm giá đơn đầu tiên -->
                     <div class="form-group" id="co-first-order-container" style="display: none; margin-top: 15px; margin-bottom: 15px;">
-                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; font-size: 0.9rem; color: #0F172A;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; font-size: 0.85rem; color: #1F2933;">
                             <input type="checkbox" id="co-first-order-chk" style="width: 16px; height: 16px; cursor: pointer;">
                             This is my first order — apply free shipping
                         </label>
-                        <div style="font-size: 11px; color: #64748B; margin-top: 4px; padding-left: 24px;">One-time offer for new customers. Valid on first order only.</div>
+                        <div style="font-size: 11px; color: #52606D; margin-top: 4px; padding-left: 24px;">One-time offer for new customers. Valid on first order only.</div>
                     </div>
-                    <div id="co-returning-msg" style="display: none; font-size: 0.82rem; color: #64748B; margin: 15px 0; font-style: italic;">
+                    <div id="co-returning-msg" style="display: none; font-size: 0.82rem; color: #52606D; margin: 15px 0; font-style: italic;">
                         Free shipping applied to your first order — thank you for coming back!
                     </div>
                 </div>
 
                 <!-- Khung Promo Code -->
                 <div style="margin: 8px 0; text-align: right;" class="mb-4">
-                    <a href="javascript:void(0)" id="cart-promo-toggle" style="font-size: 0.78rem; color: #2563EB; text-decoration: none; font-weight: 500;">Have a promo code? Enter it here</a>
+                    <a href="javascript:void(0)" id="cart-promo-toggle" style="font-size: 0.78rem; color: #2E5B76; text-decoration: none; font-weight: 500;">Have a promo code? Enter it here</a>
                     <div id="cart-promo-container" style="display: none; margin-top: 8px; align-items: center; justify-content: flex-end; gap: 8px;">
                         <input type="text" id="cart-promo-input" placeholder="Promo Code" style="padding: 6px 10px; border: 1px solid rgba(46, 91, 118, 0.12); border-radius: 4px; font-size: 0.8rem; max-width: 150px; text-transform: uppercase;">
-                        <button type="button" id="cart-promo-apply-btn" style="padding: 6px 12px; background: #2563EB; color: #fff; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">Apply</button>
+                        <button type="button" id="cart-promo-apply-btn" style="padding: 6px 12px; background: #2E5B76; color: #fff; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">Apply</button>
                     </div>
                     <div id="cart-promo-msg" style="display:none; font-size: 0.8rem; margin-top: 6px; text-align: right;"></div>
                 </div>
 
-                <button type="submit" id="co-submit-btn" class="btn-submit" style="width: 100%; padding: 14px;">
+                <button type="submit" id="co-submit-btn" class="w-full bg-[#2E5B76] hover:bg-[#204359] text-white font-bold py-3.5 px-6 rounded-lg transition uppercase tracking-wider text-sm shadow-md">
                     Proceed to Payment →
                 </button>
 
@@ -668,15 +833,15 @@
             </form>
 
             <!-- BƯỚC 2: THANH TOÁN QUA CỔNG PAYPAL (GIỐNG TRANG CHÍNH) -->
-            <div class="payment-details-panel" id="co-paypal-panel">
-                <h3 style="font-size: 1.1rem; margin-bottom: 12px; font-weight: 700; text-align: left;">🔒 Complete Payment via PayPal</h3>
-                <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 16px; text-align: left;">
+            <div class="payment-details-panel" id="co-paypal-panel" style="display: none;">
+                <h3 style="font-size: 1.1rem; margin-bottom: 12px; font-weight: 700; text-align: left;" class="text-primary font-serif">🔒 Complete Payment via PayPal</h3>
+                <p style="font-size: 0.85rem; color: #52606D; margin-bottom: 16px; text-align: left;">
                     Pay securely with PayPal or any debit/credit card — card details never touch this site.
                 </p>
 
                 <!-- Biểu tượng các thẻ chấp nhận -->
                 <div style="border-top: 1px solid rgba(46, 91, 118, 0.12); padding-top: 16px; margin-top: 16px; text-align: center; margin-bottom: 16px;">
-                    <div style="font-size: 11px; color: #64748B; display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap;">
+                    <div style="font-size: 11px; color: #52606D; display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap;">
                         <span>We accept:</span>
                         <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-weight: 500; font-family: monospace;">Visa</span>
                         <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-weight: 500; font-family: monospace;">Mastercard</span>
@@ -689,91 +854,113 @@
                 <!-- PayPal Button Container -->
                 <div id="paypal-button-container" style="margin-bottom: 16px;"></div>
                 
-                <p style="color: #64748B; font-size: 0.8rem; margin-top: 14px; text-align: center; margin-bottom: 16px;">
+                <p style="color: #52606D; font-size: 0.8rem; margin-top: 14px; text-align: center; margin-bottom: 16px;">
                     🔒 Secured by PayPal &middot; All major cards accepted &middot; No PayPal account required
                 </p>
 
                 <!-- Lỗi PayPal -->
                 <div id="co-paypal-error" style="display:none; padding:10px 14px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:6px; color:#ef4444; font-size:.8rem; margin-bottom: 16px;"></div>
                 
-                <button type="button" onclick="goBackToForm()" class="w-full text-muted text-xs text-center hover:text-dark transition py-2 block">
-                    ← Quay lại sửa thông tin giao hàng
+                <button type="button" onclick="goBackToForm()" class="w-full text-muted text-xs text-center hover:text-dark transition py-2 block border-t border-gray-100 mt-2">
+                    ← Back to Order Form
                 </button>
             </div>
 
-            <!-- BƯỚC 3: XÁC NHẬN HOÀN TẤT & THÀNH CÔNG (GIỐNG TRANG CHÍNH) -->
+            <!-- BƯỚC 3: XÁC NHẬN HOÀT TẤT & THÀNH CÔNG -->
             <div class="success-panel" id="co-success-panel">
                 <div class="success-icon">🎉</div>
-                <h3 style="font-size: 1.4rem; margin-bottom: 8px; font-weight: 700;">Order Confirmed!</h3>
-                <p style="font-size: 0.9rem; color: #64748B; margin-bottom: 20px;">Thank you for your purchase. We have sent a confirmation email to <strong id="co-success-email"></strong>.</p>
-                <button class="w-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white font-bold py-3 px-6 rounded-lg transition" onclick="closeModal()">Return to Site</button>
+                <h3 style="font-size: 1.4rem; margin-bottom: 8px; font-weight: 700;" class="text-primary font-serif">Order Confirmed!</h3>
+                <p style="font-size: 0.9rem; color: #52606D; margin-bottom: 20px;">Thank you for your purchase. We have sent a confirmation email to <strong id="co-success-email"></strong>.</p>
+                <button class="w-full bg-[#2E5B76] hover:bg-[#204359] text-white font-bold py-3 px-6 rounded-lg transition" onclick="closeModal()">Return to Site</button>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Xử Lý Logic Giao Diện, Tồn Kho & PayPal -->
-    
-    <!-- Tải PayPal SDK với Client ID sản xuất -->
+    <!-- MODAL: PRIVACY POLICY (Aligned with main site) -->
+    <div id="modal-privacy" class="hidden fixed inset-0 z-[60] flex items-center justify-center">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+        <div class="relative bg-white rounded-2xl p-8 max-w-lg w-[92%] mx-4 shadow-2xl z-10 max-h-[80vh] overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold leading-none">&times;</button>
+            <h2 class="text-2xl font-bold text-primary mb-4 font-serif">🔒 Privacy Policy</h2>
+            <div class="text-xs text-muted space-y-4 leading-relaxed text-left">
+                <p><strong>1. Information Collection</strong><br>We collect your name, email address, and optionally your phone number when you place an order. This information is used solely to process your order, deliver products, and send order notifications.</p>
+                <p><strong>2. Use of Information</strong><br>We use your contact details to communicate about shipping status, process PayPal details securely, and manage inventory. We never share or sell your details with third parties for promotional purposes.</p>
+                <p><strong>3. Payment Data Security</strong><br>All payments are securely processed through PayPal. We do not collect or store credit card details or bank routing information on our servers.</p>
+                <p><strong>4. Contact Information</strong><br>For any concerns or queries regarding your user details, email us directly at <a href="mailto:support@onetriponebite.com" class="text-accent underline">support@onetriponebite.com</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: TERMS OF SERVICE (Aligned with main site) -->
+    <div id="modal-terms" class="hidden fixed inset-0 z-[60] flex items-center justify-center">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+        <div class="relative bg-white rounded-2xl p-8 max-w-lg w-[92%] mx-4 shadow-2xl z-10 max-h-[80vh] overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold leading-none">&times;</button>
+            <h2 class="text-2xl font-bold text-primary mb-4 font-serif">📋 Terms of Service</h2>
+            <div class="text-xs text-muted space-y-4 leading-relaxed text-left">
+                <p><strong>1. Product Fulfillments</strong><br>All Beach Canopy packages are dispatched within 2-3 business days. Delivery times vary by location, typically taking 5-7 business days.</p>
+                <p><strong>2. Returns & Refunds</strong><br>We stand behind the quality of our gear. We offer a 7-day money-back guarantee. If you are not satisfied with your sun canopy, contact us at <a href="mailto:support@onetriponebite.com" class="text-accent underline">support@onetriponebite.com</a> for return procedures.</p>
+                <p><strong>3. Correct Use & Safety</strong><br>Ensure the sunshade canopy is securely anchored with sand before extending support poles. Do not set up in dangerous weather conditions or thunderstorms.</p>
+                <p><strong>4. Copyright Information</strong><br>All brand descriptions, images, graphics, and logos on onetriponebite.com are owned by One Trip One Bite. Unauthorized commercial reproduction is prohibited.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Handling UI, Stock & PayPal (Completely Translated & Updated) -->
     <script src="https://www.paypal.com/sdk/js?client-id=AUNTBl05LDBkX9NNyrerEG_iCig9UjtRXa3zex3Z2s7kx4e8tyW1ZffW9a6iht5IDqocMIOana3I0MDC&currency=USD&components=buttons&disable-funding=venmo,paylater"></script>
 
     <script>
         // ============================================================
-        // 1. BIẾN TOÀN CỤC CẤU HÌNH ĐƠN HÀNG
+        // 1. GLOBAL VARIABLES & ORDER CONFIGURATION
         // ============================================================
         let activePackageId = 'tent_300_280';
         let stockMap = {};
         let isPromoApplied = false;
         let registeredEmail = '';
 
-        // Định nghĩa cấu hình giá tiền và các lựa chọn
+        // Unified Pricing values in USD (mapped to Notion SKUs)
         const PRICING = {
             tent_300_280: {
-                name: "Tấm Che Bãi Biển Standard (300*280cm)",
-                priceVND: 590000,
+                name: "Beach Sunshade Canopy Standard (300*280cm)",
                 priceUSD: 24.00
             },
             tent_500_300: {
-                name: "Tấm Che Bãi Biển Premium (500*300cm)",
-                priceVND: 690000,
+                name: "Beach Sunshade Canopy Premium (500*300cm)",
                 priceUSD: 28.00
             },
             mat_140: {
-                name: "Thảm Bãi Biển 140*200cm",
-                priceVND: 120000,
+                name: "Beach Picnic Mat 140*200cm",
                 priceUSD: 5.00
             },
             mat_210: {
-                name: "Thảm Bãi Biển 210*200cm",
-                priceVND: 150000,
+                name: "Beach Picnic Mat 210*200cm",
                 priceUSD: 6.00
             }
         };
 
-        // Biến toàn cục lưu giữ thông tin đơn hàng hiện tại
+        // State tracker for current active selection
         let currentOrder = {
             tentSKU: 'tent_300_280',
             addMat140: false,
             addMat210: false,
-            matColor: 'Xanh Dương Xám',
+            matColor: 'Blue Grey',
             subtotalUSD: 24.00,
             shippingUSD: 7.00,
             totalUSD: 31.00,
             currentTotalUSD: 31.00,
-            description: "Tấm Che Bãi Biển Standard (300*280cm)",
-            name: "Tấm Che Bãi Biển Standard (300*280cm)"
+            description: "Beach Sunshade Canopy Standard (300*280cm)",
+            name: "Beach Sunshade Canopy Standard (300*280cm)"
         };
 
-        // Biến hỗ trợ PayPal
         let paypalInited = false;
         let _ppName = '', _ppEmail = '', _ppPhone = '', _ppAddress = '';
 
-        // Tải trang: Lấy thông tin tồn kho
         window.addEventListener('DOMContentLoaded', () => {
             fetchStock();
             updatePriceAndOptions();
         });
 
-        // Lấy dữ liệu tồn kho từ Notion
+        // Pull active inventory numbers from Notion DB via proxy
         async function fetchStock() {
             try {
                 const response = await fetch('/api/get-stock');
@@ -781,11 +968,11 @@
                 stockMap = await response.json();
                 updateStockUI();
             } catch (err) {
-                console.error("Lỗi lấy tồn kho:", err);
+                console.error("Failed to retrieve inventory:", err);
             }
         }
 
-        // Cập nhật giao diện tồn kho dựa trên Notion DB
+        // Apply visual out-of-stock badges based on Notion DB values
         function updateStockUI() {
             const stockTent3m = stockMap['tent_300_280'] !== undefined ? stockMap['tent_300_280'] : 999;
             if (stockTent3m <= 0) {
@@ -816,27 +1003,26 @@
             }
         }
 
-        // Xử lý chuyển đổi gói lều
+        // Pre-select options inside checkout modal
         function selectPackage(pkgId) {
             if (stockMap[pkgId] !== undefined && stockMap[pkgId] <= 0) return;
 
             activePackageId = pkgId;
             currentOrder.tentSKU = pkgId;
 
-            // Update radio UI
             ['tent_300_280', 'tent_500_300'].forEach(id => {
                 const borderDiv = document.getElementById(`pkg-${id}`);
                 const dot = document.getElementById(`dot-${id}`);
                 const radio = document.getElementById(`radio-${id}`);
 
                 if (id === pkgId) {
-                    borderDiv.classList.add('border-primary', 'bg-blue-50');
+                    borderDiv.classList.add('border-primary', 'bg-[#e6eff5]');
                     borderDiv.classList.remove('border-gray-200', 'bg-white');
                     dot.classList.remove('hidden');
                     radio.classList.add('border-primary');
                     radio.classList.remove('border-gray-300');
                 } else {
-                    borderDiv.classList.remove('border-primary', 'bg-blue-50');
+                    borderDiv.classList.remove('border-primary', 'bg-[#e6eff5]');
                     borderDiv.classList.add('border-gray-200', 'bg-white');
                     dot.classList.add('hidden');
                     radio.classList.remove('border-primary');
@@ -847,12 +1033,11 @@
             updatePriceAndOptions();
         }
 
-        // Cập nhật giá tổng cộng và mô tả đơn hàng khi tùy chọn thay đổi
+        // Keep local state in sync and recalculate checkout panel pricing
         function updatePriceAndOptions() {
             const addMat140 = document.getElementById('add-mat-140').checked;
             const addMat210 = document.getElementById('add-mat-210').checked;
 
-            // Xử lý ẩn hiện chọn màu thảm
             const colorWrapper = document.getElementById('mat-color-wrapper');
             if (addMat140 || addMat210) {
                 colorWrapper.classList.remove('hidden');
@@ -860,25 +1045,23 @@
                 colorWrapper.classList.add('hidden');
             }
 
-            // Tính toán giá tiền
             let baseUSD = PRICING[activePackageId].priceUSD;
             let desc = PRICING[activePackageId].name;
 
             if (addMat140) {
                 baseUSD += PRICING.mat_140.priceUSD;
-                desc += " + Thảm 140*200cm";
+                desc += " + Mat 140*200cm";
             }
             if (addMat210) {
                 baseUSD += PRICING.mat_210.priceUSD;
-                desc += " + Thảm 210*200cm";
+                desc += " + Mat 210*200cm";
             }
 
             const matColor = document.getElementById('mat-color').value;
             if (addMat140 || addMat210) {
-                desc += ` (Màu ${matColor})`;
+                desc += ` (${matColor})`;
             }
 
-            // Ghi nhận đơn hàng
             currentOrder.addMat140 = addMat140;
             currentOrder.addMat210 = addMat210;
             currentOrder.matColor = matColor;
@@ -886,7 +1069,6 @@
             currentOrder.description = desc;
             currentOrder.name = desc;
 
-            // Hiển thị lên UI modal
             document.getElementById('co-prod-name').textContent = desc;
             document.getElementById('co-prod-price').textContent = "$" + baseUSD.toFixed(2);
 
@@ -894,27 +1076,43 @@
             updateCheckoutPricing();
         }
 
-        // Đổ thông tin màu thảm vào mô tả khi đổi dropdown
         document.getElementById('mat-color').addEventListener('change', updatePriceAndOptions);
 
         // ============================================================
-        // 2. logic ĐIỀU HƯỚNG BƯỚC ĐƠN HÀNG & MODAL
+        // 2. MODAL & NAVIGATION STATE HANDLERS
         // ============================================================
-        function showPaymentModal() {
+        function showPaymentModal(pkgId = null, selectMat140 = null, selectMat210 = null) {
             document.getElementById('payment-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             
-            // Reset modal state
             document.getElementById('checkout-details-form').style.display = 'block';
             document.getElementById('co-paypal-panel').style.display = 'none';
             document.getElementById('co-success-panel').style.display = 'none';
             document.getElementById('co-form-msg').style.display = 'none';
             document.getElementById('co-submit-btn').disabled = false;
+
+            if (pkgId) {
+                selectPackage(pkgId);
+            }
+            if (selectMat140 !== null) {
+                document.getElementById('add-mat-140').checked = selectMat140;
+            }
+            if (selectMat210 !== null) {
+                document.getElementById('add-mat-210').checked = selectMat210;
+            }
+            updatePriceAndOptions();
         }
 
         function closeModal() {
             document.getElementById('payment-modal').classList.add('hidden');
+            document.getElementById('modal-privacy').classList.add('hidden');
+            document.getElementById('modal-terms').classList.add('hidden');
             document.body.style.overflow = '';
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
 
         function toggleFaq(btn) {
@@ -930,10 +1128,10 @@
             }
         }
 
-        // Xử lý hiển thị Sticky Bottom Bar khi cuộn qua Hero
         const stickyCta = document.getElementById('sticky-cta');
+        const stickyPrice = document.getElementById('sticky-price');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
+            if (window.scrollY > 450) {
                 stickyCta.classList.remove('translate-y-full');
             } else {
                 stickyCta.classList.add('translate-y-full');
@@ -941,52 +1139,22 @@
         });
 
         // ============================================================
-        // 3. FINGERPRINT & FIRST ORDER DISCOUNT LOGIC (GIỐNG TRANG CHÍNH)
+        // 3. FIRST ORDER RULES & PRICING INUSD
         // ============================================================
-        function saveFingerprint(email, phone, address) {
-            const cleanEmail = email.trim().toLowerCase();
-            const cleanPhone = phone.trim().replace(/\D/g, '');
-            const cleanAddress = address.trim().toLowerCase().substring(0, 10);
-            
-            const fingerprint = `${cleanEmail}|${cleanPhone}|${cleanAddress}`;
-            
-            let used = [];
-            try {
-                const stored = localStorage.getItem('otob_used_fingerprints');
-                if (stored) used = JSON.parse(stored);
-            } catch (e) {
-                console.error(e);
-            }
-            
-            if (!used.includes(fingerprint)) {
-                used.push(fingerprint);
-                localStorage.setItem('otob_used_fingerprints', JSON.stringify(used));
-            }
-        }
-
-        function checkFirstOrderEligibility() {
+        async function checkFirstOrderEligibility() {
             const email = document.getElementById('co-email').value.trim().toLowerCase();
-            const phone = document.getElementById('co-phone').value.trim().replace(/\D/g, '');
+            const phone = document.getElementById('co-phone').value.trim();
+            const address = document.getElementById('co-address').value.trim();
             
             let isEligible = true;
             
             try {
-                const stored = localStorage.getItem('otob_used_fingerprints');
+                const stored = localStorage.getItem('otob_checkout_fingerprint');
                 if (stored) {
-                    const used = JSON.parse(stored);
-                    for (const f of used) {
-                        const parts = f.split('|');
-                        const storedEmail = parts[0];
-                        const storedPhone = parts[1];
-                        
-                        if (email && storedEmail && email === storedEmail) {
-                            isEligible = false;
-                            break;
-                        }
-                        if (phone && storedPhone && phone === storedPhone) {
-                            isEligible = false;
-                            break;
-                        }
+                    const parts = stored.split('|');
+                    const storedEmail = parts[0];
+                    if (email && storedEmail && email === storedEmail) {
+                        isEligible = false;
                     }
                 }
             } catch (e) {
@@ -1037,13 +1205,13 @@
             
             if (coShippingEl) {
                 if (isFirstOrderDiscount) {
-                    coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (first order) 🎁</span>';
+                    coShippingEl.innerHTML = '<span style="color: #C77D4A; font-weight: 600;">FREE (first order) 🎁</span>';
                 } else if (shipping === 0) {
                     if (isPromoApplied) {
-                        coShippingEl.innerHTML = '<span style="color: #10b981; font-weight: 600;">FREE (promo applied) 🎁</span>';
+                        coShippingEl.innerHTML = '<span style="color: #C77D4A; font-weight: 600;">FREE (promo applied) 🎁</span>';
                     } else {
                         coShippingEl.textContent = 'FREE 🎉';
-                        coShippingEl.style.color = '#10B981';
+                        coShippingEl.style.color = '#C77D4A';
                         coShippingEl.style.fontWeight = '700';
                     }
                 } else {
@@ -1056,16 +1224,17 @@
             if (coTotalEl) {
                 coTotalEl.textContent = `$${total.toFixed(2)}`;
             }
+            if (stickyPrice) {
+                stickyPrice.textContent = `$${total.toFixed(2)}`;
+            }
             
             currentOrder.currentTotalUSD = total.toFixed(2);
         }
 
-        // Đăng ký lắng nghe sự kiện thay đổi form
         document.getElementById('co-email').addEventListener('input', checkFirstOrderEligibility);
         document.getElementById('co-phone').addEventListener('input', checkFirstOrderEligibility);
         document.getElementById('co-first-order-chk').addEventListener('change', updateCheckoutPricing);
 
-        // Xử lý mã Promo Code giống trang chính
         const promoToggle = document.getElementById('cart-promo-toggle');
         const promoContainer = document.getElementById('cart-promo-container');
         const promoInput = document.getElementById('cart-promo-input');
@@ -1082,7 +1251,7 @@
             if (code === 'FREESHIP1') {
                 isPromoApplied = true;
                 promoMsg.style.display = 'block';
-                promoMsg.style.color = '#10b981';
+                promoMsg.style.color = '#C77D4A';
                 promoMsg.textContent = '✅ Code FREESHIP1 applied successfully! Free shipping active.';
                 promoInput.disabled = true;
                 promoApplyBtn.disabled = true;
@@ -1094,8 +1263,20 @@
             }
         });
 
+        function saveFingerprint(email, phone, address) {
+            try {
+                const cleanEmail = email.trim().toLowerCase();
+                const cleanPhone = phone.trim();
+                const cleanAddress = address.trim();
+                const fingerprint = `${cleanEmail}|${cleanPhone}|${cleanAddress}`;
+                localStorage.setItem('otob_checkout_fingerprint', fingerprint);
+            } catch (e) {
+                console.error("Local storage save fingerprint failed:", e);
+            }
+        }
+
         // ============================================================
-        // 4. PAYPAL INTEGRATION & ORDERS POSTING
+        // 4. PAYPAL INTEGRATION & ORDER DATABASE FULFILLMENT
         // ============================================================
         async function goToPayment() {
             const name = document.getElementById('co-name').value.trim();
@@ -1115,7 +1296,7 @@
             _ppAddress = address;
 
             try {
-                // Submit details to database proxy `/api/register`
+                // Post records to GAS database proxy
                 const res = await fetch('/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1162,7 +1343,7 @@
             el.style.border = '1px solid rgba(239, 68, 68, 0.2)';
         }
 
-        // Cài đặt PayPal Smart Buttons
+        // Initialize PayPal SDK Smart Buttons panel
         function initPayPal() {
             if (paypalInited) return;
             paypalInited = true;
