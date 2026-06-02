@@ -57,6 +57,7 @@
       scroll-behavior: smooth;
       background-color: var(--bg);
       scroll-padding-top: 90px;
+      overflow-x: hidden;
     }
 
     body {
@@ -66,6 +67,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      width: 100%;
     }
 
     /* TYPOGRAPHY */
@@ -271,7 +273,7 @@
         flex-direction: column;
         position: fixed;
         top: 0;
-        right: -100%;
+        right: -300px;
         width: 300px;
         height: 100vh;
         background: var(--bg);
@@ -3309,7 +3311,24 @@
             </div>
           </div>
           
+<<<<<<< Updated upstream
           ${purchaseSectionHTML}
+=======
+          <div class="product-card-purchase">
+            <div class="product-card-price">
+              <span class="price-usd">$${initialPriceUSD}</span>
+            </div>
+            <div style="display: flex; gap: 8px; flex: 1; justify-content: flex-end;">
+              <button class="btn-card-add-to-cart" style="flex:1;" onclick="addToCart('${color.id}')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 5px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                Add to Cart
+              </button>
+              <button class="btn-card-buy-now" onclick="buyCardVariant('${color.id}')" title="Buy Now">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+          </div>
+>>>>>>> Stashed changes
           <div class="card-trust-bar">🔒 Secure checkout &nbsp;&middot;&nbsp; ↩ 7-day guarantee &nbsp;&middot;&nbsp; 📦 Free shipping over $99</div>
         </div>
         `;
@@ -3550,7 +3569,7 @@
             <div class="product-card-price">
               <span class="price-usd jig-price-display">$${JIG_PACK_SIZES['5'].priceUSD}</span>
             </div>
-            <div style="display: flex; gap: 8px;">
+            <div style="display: flex; gap: 8px; flex: 1; justify-content: flex-end;">
               <button class="btn-card-add-to-cart" style="flex:1;" onclick="addJigToCart('${series.id}')">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:5px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                 Add to Cart
