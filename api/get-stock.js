@@ -106,6 +106,8 @@ exports.handler = async (event, context) => {
         "glow_50": 0, // Mock: Out of Stock
         "limbo_slice_8": 20,
         "limbo_slice_50": 0, // Mock: Out of Stock
+        
+        // Goldeneye Series (Out of Stock)
         "jig_goldeneye_1_16_5": 0,
         "jig_goldeneye_1_16_50": 0,
         "jig_goldeneye_1_8_5": 0,
@@ -118,7 +120,44 @@ exports.handler = async (event, context) => {
         "jig_goldeneye_3_8_50": 0,
         "jig_goldeneye_1_2_5": 0,
         "jig_goldeneye_1_2_50": 0,
-        "jig_black_platinum_3_8_50": 0, // Mock: Out of Stock
+
+        // Black Platinum Series (Out of Stock)
+        "jig_black_platinum_1_16_5": 0,
+        "jig_black_platinum_1_16_50": 0,
+        "jig_black_platinum_1_8_5": 0,
+        "jig_black_platinum_1_8_50": 0,
+        "jig_black_platinum_1_4_5": 0,
+        "jig_black_platinum_1_4_50": 0,
+        "jig_black_platinum_5_16_5": 0,
+        "jig_black_platinum_5_16_50": 0,
+        "jig_black_platinum_3_8_5": 0,
+        "jig_black_platinum_3_8_50": 0,
+        "jig_black_platinum_1_2_5": 0,
+        "jig_black_platinum_1_2_50": 0,
+
+        // Bullseye Series (Out of Stock)
+        "jig_bullseye_1_16_5": 0,
+        "jig_bullseye_1_16_50": 0,
+        "jig_bullseye_1_8_5": 0,
+        "jig_bullseye_1_8_50": 0,
+        "jig_bullseye_1_4_5": 0,
+        "jig_bullseye_1_4_50": 0,
+        "jig_bullseye_5_16_5": 0,
+        "jig_bullseye_5_16_50": 0,
+        "jig_bullseye_3_8_5": 0,
+        "jig_bullseye_3_8_50": 0,
+        "jig_bullseye_1_2_5": 0,
+        "jig_bullseye_1_2_50": 0,
+
+        // Matrix Shad Colors (Out of Stock)
+        "avocado_8": 0,
+        "avocado_50": 0,
+        "ultra_violet_8": 0,
+        "ultra_violet_50": 0,
+        "lemon_head_8": 0,
+        "lemon_head_50": 0,
+
+        // Beach Tent & Mats (Still in Stock)
         "tent_300_280": 25,
         "tent_500_300": 18,
         "mat_blue_grey_140": 50,
