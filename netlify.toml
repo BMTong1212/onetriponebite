@@ -12,11 +12,11 @@
 [[redirects]]
   from = "https://shop.onetriponebite.com/"
   to = "/shop.html"
-  status = 200
+  status = 302
   force = true
 
 [[redirects]]
   from = "https://shop.onetriponebite.com/index.html"
   to = "/shop.html"
-  status = 200
+  status = 302
   force = true

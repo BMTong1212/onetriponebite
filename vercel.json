@@ -24,7 +24,7 @@
   ],
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
       "has": [
@@ -33,7 +33,8 @@
           "value": "shop.onetriponebite.com"
         }
       ],
-      "destination": "/shop.html"
+      "destination": "/shop.html",
+      "permanent": false
     },
     {
       "source": "/index.html",
@@ -43,7 +44,8 @@
           "value": "shop.onetriponebite.com"
         }
       ],
-      "destination": "/shop.html"
+      "destination": "/shop.html",
+      "permanent": false
     }
   ]
 }
