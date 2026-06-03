@@ -218,7 +218,7 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "public, max-age=60" // Cache responses for 60 seconds
+        "Cache-Control": "no-cache, no-store, must-revalidate"
       },
       body: JSON.stringify(stockMap)
     };
