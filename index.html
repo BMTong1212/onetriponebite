@@ -3274,7 +3274,7 @@
           const isSelected = (sizeKey === firstAvailableSizeValue);
           
           selectOptions += `
-            <option value="${sizeKey}" ${isOutOfStock ? 'disabled' : ''} ${isSelected ? 'selected' : ''}>
+            <option value="${sizeKey}" ${isOutOfStock ? 'disabled' : ''} ${isSelected ? 'selected' : ''} style="${isOutOfStock ? 'color:#e74c3c;' : ''}">
               ${label} — $${price}${isOutOfStock ? ' (Out of Stock)' : ''}
             </option>
           `;
@@ -3285,7 +3285,7 @@
         
         let badgeHTML = `<span class="product-card-badge badge-tag">${color.badge}</span>`;
         if (allOutOfStock) {
-          badgeHTML = `<span class="product-card-badge badge-tag" style="background:var(--muted);color:#fff;">Sold Out</span>`;
+          badgeHTML = `<span class="product-card-badge badge-tag" style="background:#e74c3c;color:#fff;">Sold Out</span>`;
         }
 
         let purchaseSectionHTML = '';
@@ -3296,7 +3296,7 @@
                 <span class="price-usd" style="color:var(--muted);">$${initialPriceUSD}</span>
               </div>
               <div style="display: flex; gap: 8px; flex: 1; justify-content: flex-end;">
-                <button class="btn-card-add-to-cart" style="flex:1; background:var(--muted); border-color:var(--muted); cursor:not-allowed;" disabled>
+                <button class="btn-card-add-to-cart" style="flex:1; background:#fdf2f2; border-color:#e74c3c; color:#e74c3c; cursor:not-allowed;" disabled>
                   Out of Stock
                 </button>
               </div>
@@ -3445,14 +3445,16 @@
         if (addToCartBtn) {
           addToCartBtn.disabled = true;
           addToCartBtn.innerHTML = 'Out of Stock';
-          addToCartBtn.style.background = 'var(--muted)';
-          addToCartBtn.style.borderColor = 'var(--muted)';
+          addToCartBtn.style.background = '#fdf2f2';
+          addToCartBtn.style.borderColor = '#e74c3c';
+          addToCartBtn.style.color = '#e74c3c';
           addToCartBtn.style.cursor = 'not-allowed';
         }
         if (buyNowBtn) {
           buyNowBtn.disabled = true;
-          buyNowBtn.style.background = 'var(--muted)';
-          buyNowBtn.style.borderColor = 'var(--muted)';
+          buyNowBtn.style.background = '#fdf2f2';
+          buyNowBtn.style.borderColor = '#e74c3c';
+          buyNowBtn.style.color = '#e74c3c';
           buyNowBtn.style.cursor = 'not-allowed';
         }
       } else {
@@ -3464,12 +3466,14 @@
           `;
           addToCartBtn.style.background = '';
           addToCartBtn.style.borderColor = '';
+          addToCartBtn.style.color = '';
           addToCartBtn.style.cursor = '';
         }
         if (buyNowBtn) {
           buyNowBtn.disabled = false;
           buyNowBtn.style.background = '';
           buyNowBtn.style.borderColor = '';
+          buyNowBtn.style.color = '';
           buyNowBtn.style.cursor = '';
         }
       }
@@ -3529,6 +3533,21 @@
 
       let html = '';
       JIG_SERIES.forEach(series => {
+        let jigAllOutOfStock = true;
+        JIG_WEIGHTS.forEach(w => {
+          Object.keys(JIG_PACK_SIZES).forEach(packKey => {
+            const sku = `jig_${series.id}_${w.key}_${packKey}`;
+            if (stockInventory[sku] === undefined || stockInventory[sku] > 0) {
+              jigAllOutOfStock = false;
+            }
+          });
+        });
+
+        let badgeHTML = `<span class="product-card-badge badge-tag" style="position:absolute;top:12px;left:12px;z-index:2;">${series.badge}</span>`;
+        if (jigAllOutOfStock) {
+          badgeHTML = `<span class="product-card-badge badge-tag" style="position:absolute;top:12px;left:12px;z-index:2;background:#e74c3c;color:#fff;">Sold Out</span>`;
+        }
+
         let weightOptions = JIG_WEIGHTS.map(w =>
           `<option value="${w.key}">${w.label}</option>`
         ).join('');
@@ -3545,7 +3564,7 @@
         html += `
         <div class="jig-card fade-up-trigger" data-series="${series.id}">
           <div class="jig-card-gallery">
-            <span class="product-card-badge badge-tag" style="position:absolute;top:12px;left:12px;z-index:2;">${series.badge}</span>
+            ${badgeHTML}
             <img src="${series.img}" alt="${series.name}" onclick="zoomProductImage(this)">
           </div>
 
@@ -3567,7 +3586,7 @@
             <div class="jig-select-group">
               <label>Weight</label>
               <div class="select-wrapper">
-                <select class="product-size-select jig-weight-select" onchange="updateJigPrice(this.closest('.jig-card'))">
+                <select class="product-size-select jig-weight-select" ${jigAllOutOfStock ? 'disabled' : ''} onchange="updateJigPrice(this.closest('.jig-card'))">
                   ${weightOptions}
                 </select>
               </div>
@@ -3575,7 +3594,7 @@
             <div class="jig-select-group">
               <label>Pack Size</label>
               <div class="select-wrapper">
-                <select class="product-size-select jig-pack-select" onchange="updateJigPrice(this.closest('.jig-card'))">
+                <select class="product-size-select jig-pack-select" ${jigAllOutOfStock ? 'disabled' : ''} onchange="updateJigPrice(this.closest('.jig-card'))">
                   ${packOptions}
                 </select>
               </div>
