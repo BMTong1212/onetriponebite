@@ -103,9 +103,7 @@ exports.handler = async (event, context) => {
       },
       body: JSON.stringify({
         "glow_8": 15,
-        "glow_50": 0, // Mock: Out of Stock
         "limbo_slice_8": 20,
-        "limbo_slice_50": 0, // Mock: Out of Stock
         
         // Goldeneye Series (Out of Stock)
         "jig_goldeneye_1_16_5": 0,
@@ -151,11 +149,8 @@ exports.handler = async (event, context) => {
 
         // Matrix Shad Colors (Out of Stock)
         "avocado_8": 0,
-        "avocado_50": 0,
         "ultra_violet_8": 0,
-        "ultra_violet_50": 0,
         "lemon_head_8": 0,
-        "lemon_head_50": 0,
 
         // Beach Tent & Mats (Still in Stock)
         "tent_300_280": 25,
